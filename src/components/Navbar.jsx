@@ -1,21 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import {
-    AppBar,
-    Toolbar,
-    Container,
-    Box,
-    IconButton,
-    Button,
-    Drawer,
-    List,
-    ListItem,
-    ListItemText,
-    Collapse,
-    Divider,
-    useScrollTrigger,
-    Typography
-} from "@mui/material";
+import { AppBar, Toolbar, Container, Box, IconButton, Button, Drawer, List, ListItem, ListItemText, Collapse, Divider, useScrollTrigger, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -82,11 +67,13 @@ const ElevationScroll = (props) => {
     });
 };
 
+const ITEMS_PER_COLUMN = window.innerWidth < 1000 ? 3 : 4;
+
+
 const Navbar = (props) => {
     const location = useLocation();
     const [mobileOpen, setMobileOpen] = useState(false);
     const dropDownRef = useRef(null);
-    const closeTimeoutRef = useRef(null);
     const [activeDropdown, setActiveDropdown] = useState(null);
     const [openDropdown, setOpenDropdown] = useState(null);
 
@@ -166,6 +153,7 @@ const Navbar = (props) => {
         setOpenDropdown(openDropdown === page ? null : page);
     };
 
+    const [hoveredPage, setHoveredPage] = useState("");  
 
     return (
         <>
@@ -181,7 +169,7 @@ const Navbar = (props) => {
                                 position: "relative",
                             }}
                         >
-                            {/* Logo (Left Side) */}
+                            {/* Logo  */}
                             <Box sx={{ position: "absolute", left: 20 }}>
                                 <Link to="/">
                                     <img src={logoImg} alt="Logo" style={{ height: "50px" }} />
@@ -197,7 +185,6 @@ const Navbar = (props) => {
                                     position: "absolute",
                                     left: "51.3%",
                                     transform: "translateX(-52.5%)",
-
                                 }}
                             >
                                 {pages
@@ -215,6 +202,7 @@ const Navbar = (props) => {
                                                 <Button
                                                     disableRipple
                                                     className="nav-item"
+
                                                     sx={{
                                                         color: "white",
                                                         fontWeight: isActive ? "bold" : "normal",
@@ -258,130 +246,83 @@ const Navbar = (props) => {
                                                             boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
                                                             padding: "18px",
                                                             display: "grid",
-                                                            gridTemplateColumns: "0.9fr 1px 1.3fr",
+                                                            gridTemplateColumns: `repeat(${Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN))}, 1fr)`,
                                                             gap: "20px",
                                                             zIndex: 1000,
                                                             border: "1px solid rgba(255, 255, 255, 0.1)",
                                                             marginTop: "10px",
                                                         }}
-
                                                     >
-                                                        {/* Left Side - Core Section */}
-                                                        <Box sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                                                            <Typography
-                                                                sx={{
-                                                                    color: "rgba(255, 255, 255, 0.6)",
-                                                                    fontSize: "14px",
-                                                                    fontWeight: "600",
-                                                                    textTransform: "uppercase",
-                                                                }}
-                                                            >
-                                                                Services
-                                                            </Typography>
-                                                            {subLinks[page].slice(0, 4).map((subLink) => (
-                                                                <NavLink
-                                                                    to={subLink.path}
-                                                                    style={{
-                                                                        textDecoration: "none",
-                                                                        display: "block",
-                                                                        color: "rgba(255, 255, 255, 0.9)",
-                                                                        fontSize: "15px",
-                                                                        fontWeight: "500",
-                                                                    }}
-                                                                    className="dropdown-item"
-                                                                >
-                                                                    <Box
-                                                                        key={subLink.path}
-                                                                        sx={{
-                                                                            display: "flex",
-                                                                            flexDirection: "column",
-                                                                            justifyContent: "center",
-                                                                            padding: "8px 12px",
-                                                                            borderRadius: "6px",
-                                                                            minHeight: "60px",
-                                                                            transition: "all 0.2s ease-in-out",
-                                                                            "&:hover": {
-                                                                                backgroundColor: "rgba(0, 255, 150, 0.15)",
-                                                                                boxShadow: "0px 4px 10px rgba(0, 255, 150, 0.3)",
-                                                                            },
-                                                                        }}
-                                                                    >
-                                                                        {subLink.name}
-                                                                        <Typography sx={{ fontSize: "13px", color: "rgba(255, 255, 255, 0.6)", marginTop: "2px" }}>
-                                                                            {subLink.description}
-                                                                        </Typography>
-                                                                    </Box>
-                                                                </NavLink>
-                                                            ))}
-                                                        </Box>
 
-                                                        {/* Divider */}
-                                                        <Box sx={{ width: "1px", backgroundColor: "rgba(255, 255, 255, 0.2)", height: "100%", alignSelf: "stretch" }} />
-
-                                                        {/* Right Side - More Section */}
-                                                        <Box
+                                                        <Typography
                                                             sx={{
-                                                                display: subLinks[page].slice(4).length < 4 ? "flex" : "grid",
-                                                                flexDirection: subLinks[page].slice(4).length < 4 ? "column" : "unset",
-                                                                gridTemplateColumns: subLinks[page].slice(4).length >= 5 ? "repeat(2, 1fr)" : "1fr",
-                                                                gap: "12px",
-                                                                paddingX: "12px",
+                                                                color: "rgba(255, 255, 255, 0.9)",
+                                                                fontSize: "16px",
+                                                                fontWeight: "700",
+                                                                textTransform: "uppercase",
+                                                                paddingBottom: "6px",
+                                                                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                                                                gridColumn: `span ${Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN))}`,
+                                                                textAlign: "center",
                                                             }}
                                                         >
-                                                            <Typography
+                                                            {hoveredPage || page} 
+                                                        </Typography>
+
+                                                        {Array.from({ length: Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN)) }).map((_, colIndex) => (
+                                                            <Box
+                                                                key={colIndex}
                                                                 sx={{
-                                                                    color: "rgba(255, 255, 255, 0.6)",
-                                                                    fontSize: "14px",
-                                                                    fontWeight: "600",
-                                                                    textTransform: "uppercase",
-                                                                    gridColumn: subLinks[page].slice(4).length >= 5 ? "span 2" : "span 1",
-                                                                    paddingBottom: "6px",
-                                                                    borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                                                                    display: "flex",
+                                                                    flexDirection: "column",
+                                                                    gap: "10px",
+                                                                    paddingRight: colIndex !== Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN)) - 1 ? "20px" : "0px",
+                                                                    borderRight: colIndex !== Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN)) - 1 ? "1px solid rgba(255, 255, 255, 0.2)" : "none",
                                                                 }}
                                                             >
-                                                                More
-                                                            </Typography>
-
-                                                            {subLinks[page].slice(4).map((subLink) => (
-                                                                <NavLink
-                                                                    to={subLink.path}
-                                                                    style={{
-                                                                        textDecoration: "none",
-                                                                        display: "block",
-                                                                        color: "rgba(255, 255, 255, 0.9)",
-                                                                        fontSize: "15px",
-                                                                        fontWeight: "500",
-                                                                    }}
-                                                                    className="dropdown-item"
-                                                                >
-                                                                    <Box
-                                                                        key={subLink.path}
-                                                                        sx={{
-                                                                            display: "flex",
-                                                                            flexDirection: "column",
-                                                                            justifyContent: "center",
-                                                                            padding: "8px 12px",
-                                                                            borderRadius: "6px",
-                                                                            minHeight: subLinks[page].slice(4).length < 4 ? "45px" : "60px",
-                                                                            transition: "all 0.2s ease-in-out",
-                                                                            "&:hover": {
-                                                                                backgroundColor: "rgba(0, 255, 150, 0.15)",
-                                                                                boxShadow: "0px 4px 10px rgba(0, 255, 150, 0.3)",
-                                                                            },
-                                                                        }}
-                                                                    >
-                                                                        {subLink.name}
-                                                                        <Typography sx={{ fontSize: "13px", color: "rgba(255, 255, 255, 0.6)", marginTop: "2px" }}>
-                                                                            {subLink.description}
-                                                                        </Typography>
-                                                                    </Box>
-                                                                </NavLink>
-                                                            ))}
-                                                        </Box>
-
+                                                                {subLinks[page]
+                                                                    .slice(colIndex * ITEMS_PER_COLUMN, (colIndex + 1) * ITEMS_PER_COLUMN)
+                                                                    .map((subLink) => (
+                                                                        <NavLink
+                                                                            key={subLink.path}
+                                                                            to={subLink.path}
+                                                                            style={{
+                                                                                textDecoration: "none",
+                                                                                color: "rgba(255, 255, 255, 0.9)",
+                                                                                fontSize: "15px",
+                                                                                fontWeight: "500",
+                                                                            }}
+                                                                            className="dropdown-item"
+                                                                        >
+                                                                            <Box
+                                                                                sx={{
+                                                                                    padding: "8px 12px",
+                                                                                    borderRadius: "6px",
+                                                                                    minHeight: "50px",
+                                                                                    transition: "all 0.2s ease-in-out",
+                                                                                    "&:hover": {
+                                                                                        backgroundColor: "rgba(0, 255, 150, 0.15)",
+                                                                                        boxShadow: "0px 4px 10px rgba(0, 255, 150, 0.3)",
+                                                                                    },
+                                                                                }}
+                                                                            >
+                                                                                {subLink.name}
+                                                                                <Typography
+                                                                                    sx={{
+                                                                                        fontSize: "13px",
+                                                                                        color: "rgba(255, 255, 255, 0.6)",
+                                                                                        marginTop: "2px",
+                                                                                    }}
+                                                                                >
+                                                                                    {subLink.description}
+                                                                                </Typography>
+                                                                            </Box>
+                                                                        </NavLink>
+                                                                    ))}
+                                                            </Box>
+                                                        ))}
                                                     </Box>
                                                 )}
-
                                             </Box>
                                         ) : (
                                             <NavLink

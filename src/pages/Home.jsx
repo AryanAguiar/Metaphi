@@ -693,7 +693,6 @@ const Home = () => {
                     boxShadow: "0px 10px 40px rgba(255, 255, 255, 0.3)",
                   },
                 }}
-
               >
                 <CardContent>
                   <img src={service.icon} alt={service.title} style={{ width: "50px", height: "50px", marginBottom: "20px" }} />
@@ -703,7 +702,6 @@ const Home = () => {
                   <Typography variant="body2" sx={{ color: "#ddd", mt: 1 }}>
                     {service.description}
                   </Typography>
-
                 </CardContent>
               </Card>
 
@@ -733,7 +731,6 @@ const Home = () => {
                     boxShadow: "0px 10px 40px rgba(255, 255, 255, 0.3)",
                   },
                 }}
-
               >
                 <CardContent
                   sx={{
@@ -795,7 +792,6 @@ const Home = () => {
                     </Button>
                   </Link>
                 </CardContent>
-
               </Card>
             </Box>
           ))}
