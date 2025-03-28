@@ -490,32 +490,45 @@ const Home = () => {
               Leading Mobile App Development, Software Development & IT Consulting Company
 
             </Typography>
-
-            <Box sx={{ flex: 1, maxWidth: "600px" }} >
-              <Typography variant="body1" sx={{ flex: 1, color: "#ddd", lineHeight: 1.8, fontSize: { xs: "20px", sm: "22px", md: "16px", lg: "21px", xl: "24px" }, mt: 2 }}>
-                Founded in 2025, Metaphi Innovations is a leading Mobile App, Software Development, and Web Development company, driving digital transformation for businesses worldwide. As a trusted technology partner, we empower startups and enterprises alike to innovate, scale, and lead in their industries.
-              </Typography>
-              <Button
-                variant="outlined"
+            <Box sx={{ flex: 1, maxWidth: "600px" }}>
+              <Typography
+                variant="body1"
                 sx={{
-                  borderRadius: "30px",
-                  color: "#fff",
-                  borderColor: "rgba(0, 26, 255, 0.87)",
-                  display: "flex",
-                  alignItems: "center",
-                  mt: 3,
-                  gap: 1,
-                  "&:hover": {
-                    backgroundColor: "rgba(0, 26, 255, 0.87)",
-                    color: "#fff",
-                  },
+                  flex: 1,
+                  color: "#ddd",
+                  lineHeight: 1.8,
+                  fontSize: { xs: "20px", sm: "22px", md: "16px", lg: "21px", xl: "24px" },
+                  mt: 2,
                 }}
               >
-                Learn More <FontAwesomeIcon icon={faArrowRight} />
-              </Button>
+                Founded in 2025, Metaphi Innovations is a leading Mobile App, Software Development, and Web Development company, driving digital transformation for businesses worldwide. As a trusted technology partner, we empower startups and enterprises alike to innovate, scale, and lead in their industries.
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: { xs: "center", md: "flex-start" },
+                  mt: 3,
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  sx={{
+                    borderRadius: "30px",
+                    color: "#fff",
+                    borderColor: "rgba(0, 26, 255, 0.87)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    "&:hover": {
+                      backgroundColor: "rgba(0, 26, 255, 0.87)",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  Learn More <FontAwesomeIcon icon={faArrowRight} />
+                </Button>
+              </Box>
             </Box>
-
-
           </Box>
 
           {/* Line */}
@@ -557,25 +570,33 @@ const Home = () => {
                 Unlock growth opportunities with robust software solutions, system modernization, and next-gen technologies—powered by a leading development company.
               </Typography>
 
-              <Button
-                variant="outlined"
+              <Box
                 sx={{
-                  borderRadius: "30px",
-                  color: "#fff",
-                  borderColor: "rgba(0, 255, 0, 0.69)",
                   display: "flex",
-                  alignItems: "center",
-                  gap: 1,
+                  justifyContent: { xs: "center", md: "flex-start" },
                   mt: 3,
-                  "&:hover": {
-                    backgroundColor: "rgba(0, 255, 0, 0.69)",
-                    color: "#fff",
-                  },
-
                 }}
               >
-                Services <FontAwesomeIcon icon={faArrowRight} />
-              </Button>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    borderRadius: "30px",
+                    color: "#fff",
+                    borderColor: "rgba(0, 255, 0, 0.69)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    mt: 3,
+                    "&:hover": {
+                      backgroundColor: "rgba(0, 255, 0, 0.69)",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  Services <FontAwesomeIcon icon={faArrowRight} />
+                </Button>
+              </Box>
+
             </Box>
 
             <Typography
