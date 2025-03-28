@@ -223,9 +223,9 @@ const Home = () => {
 
   const handleFlip = (index) => {
     if (flippedCard === index) {
-      setFlippedCard(null); 
+      setFlippedCard(null);
     } else {
-      setFlippedCard(index);  
+      setFlippedCard(index);
     }
   };
 
@@ -235,7 +235,7 @@ const Home = () => {
 
       if (card) {
         gsap.to(card, {
-          rotationY: flippedCard === index ? 180 : 0,  
+          rotationY: flippedCard === index ? 180 : 0,
           duration: 0.6,
           ease: "power3.out",
         });
@@ -684,7 +684,7 @@ const Home = () => {
                   textAlign: "center",
                   cursor: "pointer",
                   borderRadius: "20px",
-                  boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)", 
+                  boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
                   background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
                   backdropFilter: "blur(10px)",
                   border: "1px solid rgba(255, 255, 255, 0.1)",
@@ -696,7 +696,7 @@ const Home = () => {
 
               >
                 <CardContent>
-                  <img src={service.icon} alt={service.title} style={{ width: "50px", height: "50px" }} />
+                  <img src={service.icon} alt={service.title} style={{ width: "50px", height: "50px", marginBottom: "20px" }} />
                   <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>
                     {service.title}
                   </Typography>
@@ -710,6 +710,7 @@ const Home = () => {
               {/* Back Side */}
               <Card
                 sx={{
+                  right: "0.5px",
                   position: "absolute",
                   width: "100%",
                   height: "100%",
@@ -734,21 +735,47 @@ const Home = () => {
                 }}
 
               >
-                <CardContent>
-                  <img src={service.icon} alt={`icon for ${service.title}`} style={{ width: "50px", height: "50px" }} />
-                  <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                    gap: 2,
+                  }}
+                >
+                  <img
+                    src={service.icon}
+                    alt={`icon for ${service.title}`}
+                    style={{ width: "40px", height: "40px", maxWidth: "100%", objectFit: "contain", }}
+                  />
+
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: "bold",
+                      fontSize: { xs: "16px", sm: "18px", md: "20px" },
+                    }}
+                  >
                     {service.title} Features
                   </Typography>
-                  <Typography sx={{ fontSize: "14px", mt: 1 }}>
+
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "12px", sm: "14px", md: "16px" },
+                    }}
+                  >
                     {service.description}
                   </Typography>
+
                   <Link to="/about">
                     <Button
                       sx={{
-                        mt: 5,
-                        px: 3,
-                        py: 1.5,
-                        fontSize: "14px",
+                        mt: 1,
+                        px: { xs: 2, sm: 3, md: 4 },
+                        py: { xs: 1, sm: 1.5, md: 2 },
+                        fontSize: { xs: "12px", sm: "14px", md: "16px" },
                         fontWeight: "bold",
                         borderRadius: "12px",
                         background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
@@ -766,18 +793,15 @@ const Home = () => {
                     >
                       Learn More
                     </Button>
-
                   </Link>
                 </CardContent>
+
               </Card>
             </Box>
           ))}
         </Box>
       </Container>
-
     </>
-
-
   );
 };
 
