@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, CardActions } from "@mui/material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton } from "@mui/material";
 import { gsap } from "gsap";
 import heroImg1 from "../images/webdev.png";
 import partner1 from "../images/partner-2.png";
@@ -24,6 +24,7 @@ import serviceicon4 from "../images/ecommerce.svg";
 import serviceicon5 from "../images/aiml.svg";
 import serviceicon6 from "../images/iot.svg";
 import serviceicon7 from "../images/devops.svg";
+import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
 gsap.registerPlugin(ScrollTrigger);
 
 const slides = [
@@ -117,6 +118,49 @@ const services = [
   }
 ];
 
+//strategic execution features
+const features = [
+  {
+    title: "Dedicated Development Team",
+    description: "Our dedicated development team brings years of expertise to every project, ensuring optimal results by maximizing their skills to meet your development needs.",
+    img: "https://via.placeholder.com/100/3B2ED0/FFFFFF?text=Team" // Replace with actual image
+  },
+  {
+    title: "Excellent Support",
+    description: "We are always available to assist our clients, ensuring their expectations and requirements are met with exceptional service.",
+    img: "https://via.placeholder.com/100/F27935/FFFFFF?text=Support"
+  },
+  {
+    title: "Client-Centric Development",
+    description: "We tailor solutions for web, mobile, and blockchain, meticulously aligning them with client needs to enhance performance and innovation.",
+    img: "https://via.placeholder.com/100/00B16A/FFFFFF?text=Client"
+  },
+  {
+    title: "Agile Development",
+    description: "We adhere to the Agile development process, ensuring reliable, scalable, and efficient project delivery.",
+    img: "https://via.placeholder.com/100/F5D76E/FFFFFF?text=Agile"
+  },
+  {
+    title: "Enhancement",
+    description: "Our technical team is always ready to incorporate your suggestions and refinements, ensuring solutions that exceed expectations.",
+    img: "https://via.placeholder.com/100/D64541/FFFFFF?text=Enhance"
+  },
+  {
+    title: "Quality Deliverance",
+    description: "We are committed to delivering high-quality products, leveraging our expertise to create exceptional solutions for our clients.",
+    img: "https://via.placeholder.com/100/9B59B6/FFFFFF?text=Quality"
+  },
+  {
+    title: "Data Protection",
+    description: "We implement industry-leading security measures to safeguard your data, ensuring confidentiality and the uniqueness of your project.",
+    img: "https://via.placeholder.com/100/2ECC71/FFFFFF?text=Security"
+  },
+  {
+    title: "Data Backups",
+    description: "We securely maintain project backups, minimizing the risk of data loss and ensuring seamless recovery when needed.",
+    img: "https://via.placeholder.com/100/E67E22/FFFFFF?text=Backup"
+  }
+];
 
 
 
@@ -136,6 +180,7 @@ const Home = () => {
     }
   };
   const lineRef = useRef(null);
+
 
   useEffect(() => {
 
@@ -252,6 +297,24 @@ const Home = () => {
     });
   }, [flippedCard]);
 
+
+  //strategic execution section
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const visibleItems = 3;
+  const middleIndex = Math.floor(visibleItems / 2);
+
+  const handleNext = () => {
+    setSelectedIndex((prev) => (prev + 1) % features.length);
+  };
+
+  const handlePrev = () => {
+    setSelectedIndex((prev) => (prev - 1 + features.length) % features.length);
+  };
+
+  const wrappedFeatures = [];
+  for (let i = -middleIndex; i <= middleIndex; i++) {
+    wrappedFeatures.push(features[(selectedIndex + i + features.length) % features.length]);
+  }
   return (
     <>
       {/* Hero section */}
@@ -772,7 +835,7 @@ const Home = () => {
                     gap: 2,
                   }}
                 >
-                  <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: {xs: 1, md: 1.5, lg:2} }}>
+                  <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: { xs: 1, md: 1.5, lg: 2 } }}>
                     <img
                       src={service.icon}
                       alt={`icon for ${service.title}`}
@@ -783,7 +846,7 @@ const Home = () => {
                       variant="h6"
                       sx={{
                         fontWeight: "bold",
-                        fontSize: { xs: "14px", sm: "15px", md: "16px", lg:"20px" },
+                        fontSize: { xs: "14px", sm: "15px", md: "16px", lg: "20px" },
                       }}
                     >
                       {service.title}
@@ -828,6 +891,173 @@ const Home = () => {
             </Box>
           ))}
         </Box>
+      </Container>
+
+      {/* Strategic execution setion */}
+      <Container maxWidth={"xl"} disableGutters sx={{ px: 6, py: 9, position: "relative", width: "100%" }}>
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
+
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "bold",
+            mb: 2,
+            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            padding: "20px",
+            textAlign: "center"
+          }}
+        >
+          Strategic Execution
+        </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            maxWidth: "1400px",
+            margin: "auto",
+            mt: 5,
+            flexDirection: { xs: "column-reverse", md: "row" },
+            gap: { xs: 4, md: 8 },
+          }}
+        >
+          {/* Left Side - Image Navigation */}
+          <Box sx={{
+            maxWidth: "400px",
+
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 1,
+            boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+            background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            transition: "all 0.4s ease",
+            borderRadius: "20px"
+          }}>
+            {/* Up Arrow Button */}
+            <IconButton sx={{ color: "white" }} onClick={handlePrev}>
+              <ArrowUpward />
+            </IconButton>
+
+            {/* Feature List */}
+            <Box
+              sx={{
+                overflow: "hidden",
+                height: 300,
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: { xs: 2, md: 2 }, 
+                position: "relative", 
+              }}
+            >
+              {wrappedFeatures.map((feature, index) => (
+                <Box
+                  key={(selectedIndex + index - middleIndex + features.length) % features.length}
+                  sx={{
+                    cursor: "pointer",
+                    border: index === middleIndex ? "1px solid #3B2ED0" : "1px solid rgba(255, 255, 255, 0.1)",
+                    borderRadius: "25px",
+                    transition: "all 0.3s ease-in-out",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    padding: { xs: "10px 14px", md: "12px 18px" },
+                    maxWidth: "320px",
+                    width: "100%",
+                    background: index === middleIndex
+                      ? "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 0.9))"  
+                      : "transparent",
+                    backdropFilter: index === middleIndex ? "blur(10px)" : "none",
+                    "&:hover": {
+                      background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 0.9))",
+                      backdropFilter: "blur(10px)",
+                      border: "1px solid #3B2ED0",
+                    },
+                  }}
+                  onClick={() => setSelectedIndex((selectedIndex + index - middleIndex + features.length) % features.length)}
+                >
+                  <img
+                    src={feature.img}
+                    alt={feature.title}
+                    style={{
+                      width: 60,
+                      height: 60,
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <Typography
+                    variant="body1"
+                    fontWeight={index === middleIndex ? "bold" : "normal"}
+                    sx={{
+                      fontSize: { xs: "14px", md: "16px" },
+                      textAlign: "center",
+                      color: "white", 
+                    }}
+                  >
+                    {feature.title}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+
+
+            {/* Down Arrow Button */}
+            <IconButton sx={{ color: "white" }} onClick={handleNext}>
+              <ArrowDownward />
+            </IconButton>
+          </Box>
+
+          {/* Right Side - Feature Description */}
+          <Card
+            sx={{
+              maxWidth: "800px",
+              width: "100%",
+              minHeight: 200,
+              padding: 3,
+              boxShadow: 3,
+              borderRadius: "20px",
+              background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
+              boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+              backdropFilter: "blur(10px)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              color: "#fff",
+            }}
+          >
+            <CardContent>
+              <Typography variant="h5" color="primary" sx={{ mb: 2 }}>
+                {features[selectedIndex].title}
+              </Typography>
+              <Typography sx={{ lineHeight: 1.6 }}>
+                {features[selectedIndex].description}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
+
+
       </Container>
     </>
   );
