@@ -26,6 +26,14 @@ import serviceicon6 from "../images/iot.svg";
 import serviceicon7 from "../images/devops.svg";
 import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
 gsap.registerPlugin(ScrollTrigger);
+import dedicatedIcon from "../images/Dedicated.svg";
+import supportIcon from "../images/customersupport.svg";
+import clientCentricIcon from "../images/clientcetric.svg";
+import agileIcon from "../images/agiledev.svg";
+import enhancementIcon from "../images/enhancement.svg";
+import qualityIcon from "../images/quality.svg";
+import dataProtectionIcon from "../images/dataprotec.svg";
+import dataBackupIcon from "../images/databackup.svg";
 
 const slides = [
   {
@@ -123,45 +131,44 @@ const features = [
   {
     title: "Dedicated Development Team",
     description: "Our dedicated development team brings years of expertise to every project, ensuring optimal results by maximizing their skills to meet your development needs.",
-    img: "https://via.placeholder.com/100/3B2ED0/FFFFFF?text=Team" // Replace with actual image
+    img: dedicatedIcon,
   },
   {
     title: "Excellent Support",
     description: "We are always available to assist our clients, ensuring their expectations and requirements are met with exceptional service.",
-    img: "https://via.placeholder.com/100/F27935/FFFFFF?text=Support"
+    img: supportIcon,
   },
   {
     title: "Client-Centric Development",
     description: "We tailor solutions for web, mobile, and blockchain, meticulously aligning them with client needs to enhance performance and innovation.",
-    img: "https://via.placeholder.com/100/00B16A/FFFFFF?text=Client"
+    img: clientCentricIcon,
   },
   {
     title: "Agile Development",
     description: "We adhere to the Agile development process, ensuring reliable, scalable, and efficient project delivery.",
-    img: "https://via.placeholder.com/100/F5D76E/FFFFFF?text=Agile"
+    img: agileIcon,
   },
   {
     title: "Enhancement",
     description: "Our technical team is always ready to incorporate your suggestions and refinements, ensuring solutions that exceed expectations.",
-    img: "https://via.placeholder.com/100/D64541/FFFFFF?text=Enhance"
+    img: enhancementIcon,
   },
   {
     title: "Quality Deliverance",
     description: "We are committed to delivering high-quality products, leveraging our expertise to create exceptional solutions for our clients.",
-    img: "https://via.placeholder.com/100/9B59B6/FFFFFF?text=Quality"
+    img: qualityIcon,
   },
   {
     title: "Data Protection",
     description: "We implement industry-leading security measures to safeguard your data, ensuring confidentiality and the uniqueness of your project.",
-    img: "https://via.placeholder.com/100/2ECC71/FFFFFF?text=Security"
+    img: dataProtectionIcon,
   },
   {
     title: "Data Backups",
     description: "We securely maintain project backups, minimizing the risk of data loss and ensuring seamless recovery when needed.",
-    img: "https://via.placeholder.com/100/E67E22/FFFFFF?text=Backup"
+    img: dataBackupIcon,
   }
 ];
-
 
 
 const Home = () => {
@@ -300,21 +307,21 @@ const Home = () => {
 
   //strategic execution section
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const swiperRef = useRef(null);
   const visibleItems = 3;
-  const middleIndex = Math.floor(visibleItems / 2);
-
-  const handleNext = () => {
-    setSelectedIndex((prev) => (prev + 1) % features.length);
-  };
 
   const handlePrev = () => {
-    setSelectedIndex((prev) => (prev - 1 + features.length) % features.length);
+    if (swiperRef.current) {
+      swiperRef.current.slidePrev();
+    }
   };
 
-  const wrappedFeatures = [];
-  for (let i = -middleIndex; i <= middleIndex; i++) {
-    wrappedFeatures.push(features[(selectedIndex + i + features.length) % features.length]);
-  }
+  const handleNext = () => {
+    if (swiperRef.current) {
+      swiperRef.current.slideNext();
+    }
+  };
+
   return (
     <>
       {/* Hero section */}
@@ -933,96 +940,106 @@ const Home = () => {
             maxWidth: "1400px",
             margin: "auto",
             mt: 5,
-            flexDirection: { xs: "column-reverse", md: "row" },
+            flexDirection: { xs: "column", md: "row" },
             gap: { xs: 4, md: 8 },
           }}
         >
           {/* Left Side - Image Navigation */}
-          <Box sx={{
-            maxWidth: "400px",
-
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 1,
-            boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-            background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-            backdropFilter: "blur(10px)",
-            border: "1px solid rgba(255, 255, 255, 0.1)",
-            transition: "all 0.4s ease",
-            borderRadius: "20px"
-          }}>
+          <Box
+            sx={{
+              maxWidth: { xs: "300px", sm: "400px" },
+              width: "100%",
+              minWidth: "240px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 1,
+              boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+              background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+              backdropFilter: "blur(10px)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              transition: "all 0.4s ease",
+              borderRadius: "20px",
+              padding: 2,
+            }}
+          >
             {/* Up Arrow Button */}
             <IconButton sx={{ color: "white" }} onClick={handlePrev}>
               <ArrowUpward />
             </IconButton>
 
-            {/* Feature List */}
-            <Box
-              sx={{
-                overflow: "hidden",
+            {/* Swiper Feature List */}
+            <Swiper
+              direction="vertical"
+              slidesPerView={visibleItems}
+              spaceBetween={10}
+              loop
+              centeredSlides={true}  
+              allowTouchMove={false}  
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
+              onSlideChange={(swiper) => setSelectedIndex(swiper.realIndex)}
+              style={{
                 height: 300,
                 width: "100%",
+                maxWidth: "400px",
                 display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
+                alignItems: "center", 
                 justifyContent: "center",
-                gap: { xs: 2, md: 2 }, 
-                position: "relative", 
+ 
               }}
             >
-              {wrappedFeatures.map((feature, index) => (
-                <Box
-                  key={(selectedIndex + index - middleIndex + features.length) % features.length}
-                  sx={{
-                    cursor: "pointer",
-                    border: index === middleIndex ? "1px solid #3B2ED0" : "1px solid rgba(255, 255, 255, 0.1)",
-                    borderRadius: "25px",
-                    transition: "all 0.3s ease-in-out",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                    padding: { xs: "10px 14px", md: "12px 18px" },
-                    maxWidth: "320px",
-                    width: "100%",
-                    background: index === middleIndex
-                      ? "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 0.9))"  
-                      : "transparent",
-                    backdropFilter: index === middleIndex ? "blur(10px)" : "none",
-                    "&:hover": {
-                      background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 0.9))",
-                      backdropFilter: "blur(10px)",
-                      border: "1px solid #3B2ED0",
-                    },
-                  }}
-                  onClick={() => setSelectedIndex((selectedIndex + index - middleIndex + features.length) % features.length)}
-                >
-                  <img
-                    src={feature.img}
-                    alt={feature.title}
-                    style={{
-                      width: 60,
-                      height: 60,
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <Typography
-                    variant="body1"
-                    fontWeight={index === middleIndex ? "bold" : "normal"}
+
+              {features.map((feature, index) => (
+                <SwiperSlide key={index} style={{ display: "flex", justifyContent: "center" }}>
+                  <Box
                     sx={{
-                      fontSize: { xs: "14px", md: "16px" },
-                      textAlign: "center",
-                      color: "white", 
+                      cursor: "pointer",
+                      border: index === selectedIndex ? "1px solid #3B2ED0" : "1px solid rgba(255, 255, 255, 0.1)",
+                      borderRadius: "25px",
+                      transition: "all 0.3s ease-in-out",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 2,
+                      padding: { xs: "10px 14px", md: "12px 18px" },
+                      maxWidth: {xs: "198px" ,sm: "280px", md:"250px", lg: "270px"},
+                      margin: "auto",
+                      width: "100%",
+                      background: index === selectedIndex
+                        ? "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 0.9))"
+                        : "transparent",
+                      backdropFilter: index === selectedIndex ? "blur(10px)" : "none",
+                      transform: index === selectedIndex ? "scale(1.05)" : "scale(1)",
+                      opacity: index === selectedIndex ? 1 : 0.8,
+                      transition: "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
+                      
                     }}
                   >
-                    {feature.title}
-                  </Typography>
-                </Box>
+                    <img
+                      src={feature.img}
+                      alt={feature.title}
+                      style={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <Typography
+                      variant="body1"
+                      fontWeight={index === selectedIndex ? "bold" : "normal"}
+                      sx={{
+                        fontSize: { xs: "12px", md: "16px" },
+                        textAlign: "center",
+                        color: "white",
+                      }}
+                    >
+                      {feature.title}
+                    </Typography>
+                  </Box>
+                </SwiperSlide>
               ))}
-            </Box>
-
+            </Swiper>
 
             {/* Down Arrow Button */}
             <IconButton sx={{ color: "white" }} onClick={handleNext}>
@@ -1044,9 +1061,11 @@ const Home = () => {
               backdropFilter: "blur(10px)",
               border: "1px solid rgba(255, 255, 255, 0.1)",
               color: "#fff",
+              textAlign: {xs: "center", md: "left"}
             }}
           >
             <CardContent>
+              <img style={{height: 50, width: 50}} src={features[selectedIndex].img} alt="" />
               <Typography variant="h5" color="primary" sx={{ mb: 2 }}>
                 {features[selectedIndex].title}
               </Typography>
