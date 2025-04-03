@@ -56,55 +56,64 @@ const services = [
     id: "game-dev",
     title: "Game Development",
     icon: serviceicon1,
-    description: "Transform your game ideas into high-quality, immersive 2D & 3D gaming experiences."
+    description: "Transform your game ideas into high-quality, immersive 2D & 3D gaming experiences.",
+    mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
   },
   {
     id: "mobile-app",
     title: "Mobile App Development",
     icon: serviceicon2,
-    description: "Empowering businesses with cutting-edge mobile solutions tailored to diverse industries."
+    description: "Empowering businesses with cutting-edge mobile solutions tailored to diverse industries.",
+    mainDescription: "We craft intuitive, high-performance apps that enhance user experience, drive engagement, and deliver lasting value."
   },
   {
     id: "web-dev",
     title: "Web Development",
     icon: serviceicon3,
-    description: "Enhance your digital presence with cutting-edge web development solutions."
+    description: "Enhance your digital presence with cutting-edge web development solutions.",
+    mainDescription: " We craft dynamic, high-performance websites and applications that captivate audiences and deliver seamless user experiences."
   },
   {
     id: "ecommerce",
     title: "E-commerce Development",
     icon: serviceicon4,
-    description: "Build seamless, secure, and high-performance eCommerce solutions."
+    description: "Build seamless, secure, and high-performance eCommerce solutions.",
+    mainDescription: "Our expertise ensures a smooth shopping experience with robust integrations that drive sales and enhance user engagement."
   },
   {
     id: "blockchain",
     title: "Blockchain Development",
     icon: "https://cdn-icons-png.flaticon.com/128/4881/4881901.png",
-    description: "Empower your business with decentralized, secure, and innovative blockchain solutions."
+    description: "Empower your business with decentralized, secure, and innovative blockchain solutions.",
+    mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
   },
   {
     id: "salesforce",
     title: "Salesforce Solutions",
     icon: "https://cdn-icons-png.flaticon.com/128/889/889648.png",
-    description: "Maximize the power of Salesforce to optimize operations and drive intelligent decision-making."
+    description: "Maximize the power of Salesforce to optimize operations and drive intelligent decision-making.",
+    mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
   },
   {
     id: "ai-ml",
     title: "AI & ML Solutions",
     icon: serviceicon5,
-    description: "Harness the power of Artificial Intelligence and Machine Learning."
+    description: "Harness the power of Artificial Intelligence and Machine Learning.",
+    mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
   },
   {
     id: "iot",
     title: "IoT & Embedded Solutions",
     icon: serviceicon6,
-    description: "Transform your business with smart, connected devices and IoT infrastructure."
+    description: "Transform your business with smart, connected devices and IoT infrastructure.",
+    mainDescription: " Our custom IoT solutions enhance efficiency, drive automation, and enable seamless data-driven decision-making."
   },
   {
     id: "devops",
     title: "DevOps Solutions",
     icon: serviceicon7,
-    description: "Streamline workflows, automate processes, and optimize infrastructure."
+    description: "Streamline workflows, automate processes, and optimize infrastructure.",
+    mainDescription: "We streamline workflows, automate processes, and optimize infrastructure for high-performance, scalable, and secure applications."
   }
 ];
 
@@ -557,7 +566,7 @@ const Home = () => {
             ref={addToRefs}
             sx={{
               display: 'flex',
-              flexDirection: { xs: "column-reverse", md: "row" },
+              flexDirection: { xs: "column", md: "row" },
               alignItems: "center",
               gap: { xs: 4, md: 6 },
               py: { xs: 4, md: 6 },
@@ -565,6 +574,21 @@ const Home = () => {
               mt: 2
             }}
           >
+            <Typography
+              variant="h3"
+              sx={{
+                flex: 1,
+                minWidth: "300px",
+                fontWeight: "bold",
+                background: "linear-gradient(90deg, #00FF7F,rgb(5, 107, 47))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                fontSize: { xs: "24px", sm: "30px", md: "36px", lg: "42px", xl: "50px" }
+              }}
+            >
+              Accelerating Business Growth with Intelligent Solutions
+            </Typography>
+
             <Box sx={{ flex: 1, maxWidth: "600px" }} >
               <Typography variant="body1" sx={{ flex: 1, color: "#ddd", lineHeight: 1.8, fontSize: { xs: "20px", sm: "22px", md: "16px", lg: "21px", xl: "24px" } }}>
                 Unlock growth opportunities with robust software solutions, system modernization, and next-gen technologies—powered by a leading development company.
@@ -598,21 +622,6 @@ const Home = () => {
               </Box>
 
             </Box>
-
-            <Typography
-              variant="h3"
-              sx={{
-                flex: 1,
-                minWidth: "300px",
-                fontWeight: "bold",
-                background: "linear-gradient(90deg, #00FF7F,rgb(5, 107, 47))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                fontSize: { xs: "24px", sm: "30px", md: "36px", lg: "42px", xl: "50px" }
-              }}
-            >
-              Accelerating Business Growth with Intelligent Solutions
-            </Typography>
 
           </Box>
 
@@ -763,28 +772,30 @@ const Home = () => {
                     gap: 2,
                   }}
                 >
-                  <img
-                    src={service.icon}
-                    alt={`icon for ${service.title}`}
-                    style={{ width: "40px", height: "40px", maxWidth: "100%", objectFit: "contain", }}
-                  />
+                  <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: {xs: 1, md: 1.5, lg:2} }}>
+                    <img
+                      src={service.icon}
+                      alt={`icon for ${service.title}`}
+                      style={{ width: "40px", height: "40px", maxWidth: "100%", objectFit: "contain", }}
+                    />
 
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: "bold",
-                      fontSize: { xs: "16px", sm: "18px", md: "20px" },
-                    }}
-                  >
-                    {service.title} Features
-                  </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: "bold",
+                        fontSize: { xs: "14px", sm: "15px", md: "16px", lg:"20px" },
+                      }}
+                    >
+                      {service.title}
+                    </Typography>
+                  </Box>
 
                   <Typography
                     sx={{
                       fontSize: { xs: "12px", sm: "14px", md: "16px" },
                     }}
                   >
-                    {service.description}
+                    {service.mainDescription}
                   </Typography>
 
                   <Link to="/about">
