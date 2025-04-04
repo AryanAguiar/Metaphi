@@ -1180,132 +1180,145 @@ const Home = () => {
       </Container>
 
       {/* Design steps section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
-  {/* Soft Background Blur */}
-  <Box
-    sx={{
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      backgroundColor: {
-        xs: "rgba(0, 255, 170, 0.1)",
-        md: "rgba(0, 255, 170, 0.07)",
-      },
-      zIndex: -10,
-      filter: {
-        xs: "blur(15px)",
-        sm: "blur(30px)",
-        md: "blur(60px)",
-      },
-    }}
-  />
-  <Typography
-    ref={headerRef}
-    variant="h4"
-    className="heading"
-    sx={{
-      fontWeight: "bold",
-      mb: 2,
-      background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-      textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-      fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-      padding: "20px",
-      textAlign: "center",
-    }}
-  >
-    Our Design Process
-  </Typography>
-
-  {/* Scroll Container */}
-  <Box
-    ref={wrapperRef}
-    sx={{
-      position: "relative",  // Change position to 'relative'
-      top: 0,
-      width: "100vw",
-      overflow: "hidden",
-      height: "100dvh",  // Using dynamic viewport height for better handling on mobile
-      zIndex: 1,  // Ensuring it stays above other content
-    }}
-  >
-    {bubbles.map((bubble, i) => (
-      <Box
-        key={i}
-        sx={{
-          position: "absolute",
-          top: bubble.top,
-          left: bubble.left,
-          width: `${bubble.size}px`,
-          height: `${bubble.size}px`,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(0,255,127,0.2), transparent 70%)",
-          animation: `floatBubble ${bubble.duration}s ease-in-out infinite`,
-          animationDelay: `${bubble.delay}s`,
-          zIndex: -1,
-          filter: "blur(4px)",
-        }}
-      />
-    ))}
-
-    <Box
-      ref={scrollRef}
-      sx={{
-        display: "flex",
-        width: `${designT.length * 100}vw`,
-        height: "100%",  // Ensure the scroll section takes up full height of the container
-      }}
-    >
-      {designT.map((step) => (
+      <Container
+        maxWidth={false}
+        disableGutters
+        sx={{ px: 0, py: 9, position: "relative", width: "100%" }}
+      >
+        {/* Soft Background Blur */}
         <Box
-          key={step.id}
-          className="slide"
           sx={{
-            width: "100vw",
-            height: "100%",  // Ensuring each slide occupies full height of the wrapper
-            flexShrink: 0,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            backdropFilter: {
-              xs: "none",
-              md: "blur(4px)",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: {
+              xs: "rgba(0, 255, 170, 0.1)",
+              md: "rgba(0, 255, 170, 0.07)",
             },
+            zIndex: -10,
+            filter: {
+              xs: "blur(15px)",
+              sm: "blur(30px)",
+              md: "blur(60px)",
+            },
+          }}
+        />
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "bold",
+            mb: 2,
+            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            fontSize: {
+              xs: "20px",
+              sm: "24px",
+              md: "29px",
+              lg: "36px",
+              xl: "46px",
+            },
+            padding: "20px",
             textAlign: "center",
-            paddingRight: 6,
           }}
         >
-          <Typography
-            variant="h4"
+          Our Design Process
+        </Typography>
+
+        {/* Scroll Container */}
+        <Box
+          ref={wrapperRef}
+          sx={{
+            position: "relative",
+            top: 0,
+            width: "100vw",
+            overflowX: "scroll", // enable horizontal scrolling
+            overflowY: "hidden",
+            height: "100dvh",
+            zIndex: 1,
+            scrollSnapType: "x mandatory", // enable scroll snapping on x-axis
+            WebkitOverflowScrolling: "touch", // smooth scrolling on iOS
+          }}
+        >
+          {bubbles.map((bubble, i) => (
+            <Box
+              key={i}
+              sx={{
+                position: "absolute",
+                top: bubble.top,
+                left: bubble.left,
+                width: `${bubble.size}px`,
+                height: `${bubble.size}px`,
+                borderRadius: "50%",
+                background:
+                  "radial-gradient(circle, rgba(0,255,127,0.2), transparent 70%)",
+                animation: `floatBubble ${bubble.duration}s ease-in-out infinite`,
+                animationDelay: `${bubble.delay}s`,
+                zIndex: -1,
+                filter: "blur(4px)",
+              }}
+            />
+          ))}
+
+          <Box
+            ref={scrollRef}
             sx={{
-              color: "#007FFF",
-              fontWeight: 600,
-              mb: 2,
-              animation: "pulseGlow 3s infinite",
+              display: "flex",
+              width: `${designT.length * 100}vw`,
+              height: "100%",
             }}
           >
-            {step.title}
-          </Typography>
-          <Box sx={{ mb: 2 }}>{step.svg}</Box>
-          <Typography
-            sx={{
-              maxWidth: "600px",
-              color: "#00FF7F",
-              fontSize: "1.1rem",
-              lineHeight: 1.7,
-            }}
-          >
-            {step.description}
-          </Typography>
+            {designT.map((step) => (
+              <Box
+                key={step.id}
+                className="slide"
+                sx={{
+                  width: "100vw",
+                  height: "100%",
+                  flexShrink: 0,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  backdropFilter: { xs: "none", md: "blur(4px)" },
+                  textAlign: "center",
+                  paddingRight: 6,
+                  scrollSnapAlign: "start", // ensure each slide snaps to the start
+                }}
+              >
+                <Typography
+                  variant="h4"
+                  sx={{
+                    color: "#007FFF",
+                    fontWeight: 600,
+                    mb: 2,
+                    animation: "pulseGlow 3s infinite",
+                  }}
+                >
+                  {step.title}
+                </Typography>
+                <Box sx={{ mb: 2 }}>{step.svg}</Box>
+                <Typography
+                  sx={{
+                    maxWidth: "600px",
+                    color: "#00FF7F",
+                    fontSize: "1.1rem",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {step.description}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
         </Box>
-      ))}
-    </Box>
-  </Box>
-</Container>
+      </Container>
+
 
     </>
   );
