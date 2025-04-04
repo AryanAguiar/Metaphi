@@ -1195,13 +1195,12 @@ const Home = () => {
             },
             zIndex: -10,
             filter: {
-              xs: "blur(30px)",    
-              md: "blur(60px)",   
-            },
+              xs: "blur(15px)",    
+              sm: "blur(30px)",    
+              md: "blur(60px)",    
+            }
           }}
         />
-
-
         <Typography
           ref={headerRef}
           variant="h4"
