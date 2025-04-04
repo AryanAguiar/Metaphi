@@ -1190,7 +1190,7 @@ const Home = () => {
             width: "100%",
             height: "100%",
             background: "linear-gradient(45deg, rgba(0,255,127,0.05), rgba(0,191,255,0.05))",
-            zIndex: -1,
+            zIndex: -10,
             filter: "blur(60px)",
           }}
         />
