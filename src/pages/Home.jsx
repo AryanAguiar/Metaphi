@@ -1236,7 +1236,11 @@ const Home = () => {
                 animation: `floatBubble ${bubble.duration}s ease-in-out infinite`,
                 animationDelay: `${bubble.delay}s`,
                 zIndex: -1,
-                filter: "blur(4px)",
+                filter: {
+                  xs: "blur(15px)",   
+                  sm: "blur(30px)",     
+                  md: "blur(60px)",   
+                }
               }}
             />
           ))}
