@@ -1261,7 +1261,10 @@ const Home = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                  backdropFilter: "blur(4px)",
+                  backdropFilter: {
+                    xs: "none",   
+                    md: "blur(4px)",
+                  },
                   textAlign: "center",
                   paddingRight: 6
                 }}
