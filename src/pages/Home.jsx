@@ -1226,7 +1226,7 @@ const Home = () => {
 
         {/* Scroll Container */}
         <Box ref={wrapperRef} sx={{ width: "100vw", overflow: "hidden" }}>
-          {bubbles.map((bubble, i) => (
+          {/* {bubbles.map((bubble, i) => (
             <Box
               key={i}
               sx={{
@@ -1243,7 +1243,7 @@ const Home = () => {
                 filter: "blur(4px)",
               }}
             />
-          ))}
+          ))} */}
 
           <Box
             ref={scrollRef}
