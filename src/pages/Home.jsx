@@ -1237,12 +1237,17 @@ const Home = () => {
             position: "relative",
             top: 0,
             width: "100vw",
-            overflowX: "scroll", // enable horizontal scrolling
+            overflowX: "scroll",
             overflowY: "hidden",
             height: "100dvh",
             zIndex: 1,
-            scrollSnapType: "x mandatory", // enable scroll snapping on x-axis
-            WebkitOverflowScrolling: "touch", // smooth scrolling on iOS
+            scrollSnapType: "x mandatory",
+            WebkitOverflowScrolling: "touch",
+            touchAction: "pan-y", // restrict horizontal momentum
+            /* Hide scrollbar for WebKit, Firefox, and IE */
+            "&::-webkit-scrollbar": { display: "none" },
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
           }}
         >
           {bubbles.map((bubble, i) => (
@@ -1288,7 +1293,8 @@ const Home = () => {
                   backdropFilter: { xs: "none", md: "blur(4px)" },
                   textAlign: "center",
                   paddingRight: 6,
-                  scrollSnapAlign: "start", // ensure each slide snaps to the start
+                  scrollSnapAlign: "start",
+                  scrollSnapStop: "always", // enforce hard snapping on each slide
                 }}
               >
                 <Typography
@@ -1318,6 +1324,7 @@ const Home = () => {
           </Box>
         </Box>
       </Container>
+
 
 
     </>
