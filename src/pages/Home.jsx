@@ -1190,11 +1190,11 @@ const Home = () => {
             width: "100%",
             height: "100%",
             background: {
-              xs: "linear-gradient(45deg, rgba(0,255,127,0.2), rgba(0,191,255,0.2))", // vibrant for mobile
-              md: "linear-gradient(45deg, rgba(0,255,127,0.1), rgba(0,191,255,0.1))", // subtle for desktop
+              xs: "linear-gradient(45deg, rgba(0,255,127,0.2), rgba(0,191,255,0.2))",  
+              md: "linear-gradient(45deg, rgba(0,255,127,0.1), rgba(0,191,255,0.1))",  
             },
             zIndex: -10,
-            // filter: "blur(60px)",
+            filter: "blur(60px)",
           }}
         />
 
