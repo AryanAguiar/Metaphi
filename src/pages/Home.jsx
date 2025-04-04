@@ -1180,9 +1180,7 @@ const Home = () => {
       </Container>
 
       {/* Design steps section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
-        {/* Soft Background Blur */}
-        <Box
+      <Box
           sx={{
             position: "absolute",
             top: 0,
@@ -1197,6 +1195,9 @@ const Home = () => {
             filter: "blur(60px)",
           }}
         />
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+        {/* Soft Background Blur */}
+       
 
         <Typography
           ref={headerRef}
