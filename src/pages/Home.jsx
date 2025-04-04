@@ -1190,14 +1190,14 @@ const Home = () => {
             width: "100%",
             height: "100%",
             backgroundColor: {
-              xs: "rgba(0, 255, 170, 0.1)",  
-              md: "rgba(0, 255, 170, 0.07)",  
+              xs: "rgba(0, 255, 170, 0.1)",
+              md: "rgba(0, 255, 170, 0.07)",
             },
             zIndex: -10,
             filter: {
-              xs: "blur(15px)",    
-              sm: "blur(30px)",    
-              md: "blur(60px)",    
+              xs: "blur(15px)",
+              sm: "blur(30px)",
+              md: "blur(60px)",
             }
           }}
         />
@@ -1221,7 +1221,15 @@ const Home = () => {
         </Typography>
 
         {/* Scroll Container */}
-        <Box ref={wrapperRef} sx={{ width: "100vw", overflow: "hidden" }}>
+        <Box
+          ref={wrapperRef}
+          sx={{
+            top: 0,
+            width: "100vw",
+            overflow: "hidden",
+            height: "100vh",
+            zIndex: 1,
+          }}>
           {bubbles.map((bubble, i) => (
             <Box
               key={i}
@@ -1236,11 +1244,7 @@ const Home = () => {
                 animation: `floatBubble ${bubble.duration}s ease-in-out infinite`,
                 animationDelay: `${bubble.delay}s`,
                 zIndex: -1,
-                filter: {
-                  xs: "blur(15px)",   
-                  sm: "blur(30px)",     
-                  md: "blur(60px)",   
-                }
+                filter: "blur(4px)",
               }}
             />
           ))}
@@ -1266,7 +1270,7 @@ const Home = () => {
                   alignItems: "center",
                   flexDirection: "column",
                   backdropFilter: {
-                    xs: "none",   
+                    xs: "none",
                     md: "blur(4px)",
                   },
                   textAlign: "center",
