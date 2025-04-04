@@ -986,7 +986,7 @@ const Home = () => {
                 display: "flex",
                 alignItems: "center", 
                 justifyContent: "center",
- 
+                pointerEvents: "none"
               }}
             >
 
@@ -1054,7 +1054,6 @@ const Home = () => {
               width: "100%",
               minHeight: 200,
               padding: 3,
-              boxShadow: 3,
               borderRadius: "20px",
               background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
               boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
