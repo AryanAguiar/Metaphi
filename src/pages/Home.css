@@ -1,7 +1,3 @@
-* {
-    touch-action: none;
-}
-
 .marquee-swiper .swiper-wrapper {
     transition-timing-function: linear !important;
 }
