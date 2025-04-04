@@ -1180,24 +1180,22 @@ const Home = () => {
       </Container>
 
       {/* Design steps section */}
-      <Box
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+        {/* Soft Background Blur */}
+        <Box
           sx={{
             position: "absolute",
             top: 0,
             left: 0,
             width: "100%",
             height: "100%",
-            background: {
-              xs: "linear-gradient(45deg, rgba(0,255,127,0.2), rgba(0,191,255,0.2))",  
-              md: "linear-gradient(45deg, rgba(0,255,127,0.1), rgba(0,191,255,0.1))",  
-            },
+            backgroundColor: "rgba(0, 255, 170, 0.07)",
+            backgroundBlendMode: "overlay",
             zIndex: -10,
             filter: "blur(60px)",
           }}
         />
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
-        {/* Soft Background Blur */}
-       
+
 
         <Typography
           ref={headerRef}
