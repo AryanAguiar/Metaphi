@@ -403,7 +403,6 @@ const Home = () => {
   useEffect(() => {
     const sections = gsap.utils.toArray(".slide");
 
-    // Initialize GSAP scroll animation
     gsap.to(sections, {
       xPercent: -100 * (sections.length - 1),
       ease: "none",
@@ -413,13 +412,17 @@ const Home = () => {
         scrub: 1,
         start: "top top",
         end: () => `+=${scrollRef.current.scrollWidth - window.innerWidth}`,
-        onUpdate: (self) => {
-          // Optionally add smooth scrolling on update
-          gsap.to(scrollRef.current, {
-            scrollLeft: self.progress * (scrollRef.current.scrollWidth - window.innerWidth),
-            ease: "none",
-          });
-        },
+      },
+    });
+
+    // Pin the typography element to ensure it stays in place
+    gsap.to(headerRef.current, {
+      scrollTrigger: {
+        trigger: wrapperRef.current,
+        start: "top top",
+        end: () => `+=${scrollRef.current.scrollWidth - window.innerWidth}`,
+        pin: true,
+        pinSpacing: false, // Pin without extra space being added
       },
     });
 
@@ -427,6 +430,7 @@ const Home = () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
+
 
 
 
