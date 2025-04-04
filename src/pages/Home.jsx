@@ -1250,7 +1250,7 @@ const Home = () => {
             sx={{
               display: "flex",
               width: `${designT.length * 100}vw`,
-              height: "100dvh",
+              height: "100vh",
             }}
           >
             {designT.map((step) => (
@@ -1259,7 +1259,7 @@ const Home = () => {
                 className="slide"
                 sx={{
                   width: "100vw",
-                  height: "100dvh",
+                  height: "100vh",
                   flexShrink: 0,
                   display: "flex",
                   justifyContent: "center",
