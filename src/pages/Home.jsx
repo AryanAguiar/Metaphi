@@ -403,6 +403,7 @@ const Home = () => {
   useEffect(() => {
     const sections = gsap.utils.toArray(".slide");
 
+    // Initialize GSAP scroll animation
     gsap.to(sections, {
       xPercent: -100 * (sections.length - 1),
       ease: "none",
@@ -412,15 +413,21 @@ const Home = () => {
         scrub: 1,
         start: "top top",
         end: () => `+=${scrollRef.current.scrollWidth - window.innerWidth}`,
+        onUpdate: (self) => {
+          // Optionally add smooth scrolling on update
+          gsap.to(scrollRef.current, {
+            scrollLeft: self.progress * (scrollRef.current.scrollWidth - window.innerWidth),
+            ease: "none",
+          });
+        },
       },
     });
-
-
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
+
 
 
   return (
@@ -1190,14 +1197,14 @@ const Home = () => {
             width: "100%",
             height: "100%",
             backgroundColor: {
-              xs: "rgba(0, 255, 170, 0.1)",  
-              md: "rgba(0, 255, 170, 0.07)",  
+              xs: "rgba(0, 255, 170, 0.1)",
+              md: "rgba(0, 255, 170, 0.07)",
             },
             zIndex: -10,
             filter: {
-              xs: "blur(15px)",    
-              sm: "blur(30px)",    
-              md: "blur(60px)",    
+              xs: "blur(15px)",
+              sm: "blur(30px)",
+              md: "blur(60px)",
             }
           }}
         />
@@ -1262,7 +1269,7 @@ const Home = () => {
                   alignItems: "center",
                   flexDirection: "column",
                   backdropFilter: {
-                    xs: "none",   
+                    xs: "none",
                     md: "blur(4px)",
                   },
                   textAlign: "center",
