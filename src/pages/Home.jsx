@@ -402,19 +402,16 @@ const Home = () => {
 
   useEffect(() => {
     const sections = gsap.utils.toArray(".slide");
-
-    // Initialize GSAP scroll animation
     gsap.to(sections, {
       xPercent: -100 * (sections.length - 1),
       ease: "none",
       scrollTrigger: {
         trigger: wrapperRef.current,
-        pin: false,
+        pin: true,
         scrub: 1,
         start: "top top",
         end: () => `+=${scrollRef.current.scrollWidth - window.innerWidth}`,
         onUpdate: (self) => {
-          // Optionally add smooth scrolling on update
           gsap.to(scrollRef.current, {
             scrollLeft: self.progress * (scrollRef.current.scrollWidth - window.innerWidth),
             ease: "none",
