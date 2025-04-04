@@ -34,6 +34,7 @@ import enhancementIcon from "../images/enhancement.svg";
 import qualityIcon from "../images/quality.svg";
 import dataProtectionIcon from "../images/dataprotec.svg";
 import dataBackupIcon from "../images/databackup.svg";
+import { useMemo } from "react";
 
 const slides = [
   {
@@ -170,6 +171,69 @@ const features = [
   }
 ];
 
+//design process
+const designT = [
+  {
+    id: 1,
+    title: "01 - Ideation",
+    description:
+      "Brainstorm and refine creative ideas, transforming them into a well-structured plan for a smart, successful solution.",
+    svg: (
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32 4C21.402 4 12.8 12.602 12.8 23.2C12.8 29.38 16.054 35.165 21.333 38.146C22.077 38.58 22.533 39.395 22.533 40.278V42.8C22.533 45.091 24.442 47 26.733 47H37.267C39.558 47 41.467 45.091 41.467 42.8V40.278C41.467 39.395 41.923 38.58 42.667 38.146C47.946 35.165 51.2 29.38 51.2 23.2C51.2 12.602 42.598 4 32 4Z" stroke="#00FF7F" strokeWidth="2" fill="rgba(0,255,127,0.05)" /><path d="M26 28C26 25.239 28.239 23 31 23C33.761 23 36 25.239 36 28" stroke="#007FFF" strokeWidth="2" strokeLinecap="round" /><rect x="26" y="47" width="12" height="4" rx="1" fill="#007FFF" /><rect x="27" y="51" width="10" height="3" rx="1" fill="#00FF7F" /><rect x="28" y="54" width="8" height="3" rx="1" fill="#007FFF" /><circle cx="32" cy="60" r="2" fill="#00FF7F" /></svg>
+    ),
+  },
+  {
+    id: 2,
+    title: "02 - Plan",
+    description:
+      "Define project objectives, establish a timeline with key milestones, and assemble a skilled team tailored to your development needs.",
+    svg: (
+      <svg width="64" height="64" fill="none" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="14" width="44" height="36" rx="4" stroke="#007FFF" strokeWidth="2" /><rect x="10" y="14" width="44" height="8" fill="#007FFF" /><line x1="18" y1="10" x2="18" y2="18" stroke="#00FF7F" strokeWidth="2" /><line x1="46" y1="10" x2="46" y2="18" stroke="#00FF7F" strokeWidth="2" /><path d="M18 26h6M28 26h6M38 26h6M18 34h6M28 34h6M38 34h6M18 42h6M28 42h6M38 42h6" stroke="#00FF7F" strokeWidth="2" /></svg>
+    ),
+  },
+  {
+    id: 3,
+    title: "03 - Design",
+    description:
+      "Create interactive prototypes using wireframes and sketches, providing a clear visual representation of the solution's interface and user experience.",
+    svg: (
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="10" stroke="#007FFF" strokeWidth="2" /><path d="M28 30c0-1 1-2 2-2s2 1 2 2c0-1 1-2 2-2s2 1 2 2c0 1-1 2-2 2h-4c-1 0-2-1-2-2z" fill="#00FF7F" /><g stroke="#00FF7F" strokeWidth="2"><path d="M32 10v6" /><path d="M32 48v6" /><path d="M10 32h6" /><path d="M48 32h6" /><path d="M19 19l4 4" /><path d="M45 45l-4-4" /><path d="M19 45l4-4" /><path d="M45 19l-4 4" /></g></svg>
+    ),
+  },
+  {
+    id: 4,
+    title: "04 - Implement",
+    description:
+      "Select the most suitable tools and technologies to develop the product, adhering to the defined timeline, project scope, and requirements.",
+    svg: (
+      <svg width="64" height="64" fill="none" viewBox="0 0 64 64"><circle cx="44" cy="20" r="6" stroke="#007FFF" strokeWidth="2" /><path d="M20 44l12-12m-4 16l12-12" stroke="#00FF7F" strokeWidth="2" /><path d="M16 48a8 8 0 0 1 11.3-11.3l7.4 7.4a8 8 0 0 1-11.3 11.3l-7.4-7.4z" stroke="#007FFF" strokeWidth="2" /></svg>
+    ),
+  },
+  {
+    id: 5,
+    title: "05 - Test",
+    description:
+      "Conduct rigorous manual and automated testing to ensure a thoroughly tested, high-quality, and bug-free solution.",
+    svg: (
+      <svg width="64" height="64" fill="none" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="24" stroke="#007FFF" strokeWidth="2" />
+        <path d="M24 32l6 6 10-14" stroke="#00FF7F" strokeWidth="2" />
+      </svg>
+    ),
+  },
+  {
+    id: 6,
+    title: "06 - Deploy",
+    description:
+      "Launch the product, ensuring it meets all predefined standards and is seamlessly accessible to the target audience.",
+    svg: (
+      <svg width="64" height="64" fill="none" viewBox="0 0 64 64"><path d="M32 4c6 4 12 18 12 26s-6 20-12 20-12-12-12-20 6-22 12-26z" stroke="#007FFF" strokeWidth="2" /><path d="M24 50l-6 10 10-6 4 6 4-6 10 6-6-10" stroke="#00FF7F" strokeWidth="2" /><circle cx="32" cy="26" r="4" stroke="#00FF7F" strokeWidth="2" /><path d="M20 28c-4 4-6 8-6 12 0 2 2 2 4 2 4 0 8-2 12-6" stroke="#007FFF" strokeWidth="2" /><path d="M44 28c4 4 6 8 6 12 0 2-2 2-4 2-4 0-8-2-12-6" stroke="#007FFF" strokeWidth="2" /></svg>
+    ),
+  },
+];
+
+
+
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -188,6 +252,16 @@ const Home = () => {
   };
   const lineRef = useRef(null);
 
+
+  const bubbles = useMemo(() => {
+    return [...Array(25)].map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      size: 10 + Math.random() * 20,
+      duration: 5 + Math.random() * 5,
+      delay: Math.random() * 10,
+    }));
+  }, []);
 
   useEffect(() => {
 
@@ -321,6 +395,33 @@ const Home = () => {
       swiperRef.current.slideNext();
     }
   };
+
+  //design process animation
+  const wrapperRef = useRef(null);
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const sections = gsap.utils.toArray(".slide");
+
+    gsap.to(sections, {
+      xPercent: -100 * (sections.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: wrapperRef.current,
+        pin: true,
+        scrub: 1,
+        start: "top top",
+        end: () => `+=${scrollRef.current.scrollWidth - window.innerWidth}`,
+      },
+    });
+
+
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, []);
+
 
   return (
     <>
@@ -901,7 +1002,7 @@ const Home = () => {
       </Container>
 
       {/* Strategic execution setion */}
-      <Container maxWidth={"xl"} disableGutters sx={{ px: 6, py: 9, position: "relative", width: "100%" }}>
+      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 9, position: "relative", width: "100%" }}>
         <Box sx={{
           position: "absolute",
           top: 0,
@@ -975,8 +1076,8 @@ const Home = () => {
               slidesPerView={visibleItems}
               spaceBetween={10}
               loop
-              centeredSlides={true}  
-              allowTouchMove={false}  
+              centeredSlides={true}
+              allowTouchMove={false}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
               onSlideChange={(swiper) => setSelectedIndex(swiper.realIndex)}
               style={{
@@ -984,7 +1085,7 @@ const Home = () => {
                 width: "100%",
                 maxWidth: "400px",
                 display: "flex",
-                alignItems: "center", 
+                alignItems: "center",
                 justifyContent: "center",
                 pointerEvents: "none"
               }}
@@ -1002,7 +1103,7 @@ const Home = () => {
                       alignItems: "center",
                       gap: 2,
                       padding: { xs: "10px 14px", md: "12px 18px" },
-                      maxWidth: {xs: "198px" ,sm: "280px", md:"250px", lg: "270px"},
+                      maxWidth: { xs: "198px", sm: "280px", md: "250px", lg: "270px" },
                       margin: "auto",
                       width: "100%",
                       background: index === selectedIndex
@@ -1012,7 +1113,7 @@ const Home = () => {
                       transform: index === selectedIndex ? "scale(1.05)" : "scale(1)",
                       opacity: index === selectedIndex ? 1 : 0.8,
                       transition: "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
-                      
+
                     }}
                   >
                     <img
@@ -1060,11 +1161,11 @@ const Home = () => {
               backdropFilter: "blur(10px)",
               border: "1px solid rgba(255, 255, 255, 0.1)",
               color: "#fff",
-              textAlign: {xs: "center", md: "left"}
+              textAlign: { xs: "center", md: "left" }
             }}
           >
             <CardContent>
-              <img style={{height: 50, width: 50}} src={features[selectedIndex].img} alt="" />
+              <img style={{ height: 50, width: 50 }} src={features[selectedIndex].img} alt="" />
               <Typography variant="h5" color="primary" sx={{ mb: 2 }}>
                 {features[selectedIndex].title}
               </Typography>
@@ -1076,6 +1177,115 @@ const Home = () => {
         </Box>
 
 
+      </Container>
+
+      {/* Design steps section */}
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+        {/* Soft Background Blur */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "linear-gradient(45deg, rgba(0,255,127,0.05), rgba(0,191,255,0.05))",
+            zIndex: -1,
+            filter: "blur(60px)",
+          }}
+        />
+
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "bold",
+            mb: 2,
+            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            padding: "20px",
+            textAlign: "center"
+          }}
+        >
+          Our Design Process
+        </Typography>
+
+        {/* Scroll Container */}
+        <Box ref={wrapperRef} sx={{ width: "100vw", overflow: "hidden" }}>
+          {bubbles.map((bubble, i) => (
+            <Box
+              key={i}
+              sx={{
+                position: "absolute",
+                top: bubble.top,
+                left: bubble.left,
+                width: `${bubble.size}px`,
+                height: `${bubble.size}px`,
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(0,255,127,0.2), transparent 70%)",
+                animation: `floatBubble ${bubble.duration}s ease-in-out infinite`,
+                animationDelay: `${bubble.delay}s`,
+                zIndex: -1,
+                filter: "blur(4px)",
+              }}
+            />
+          ))}
+
+          <Box
+            ref={scrollRef}
+            sx={{
+              display: "flex",
+              width: `${designT.length * 100}vw`,
+              height: "100dvh",
+            }}
+          >
+            {designT.map((step) => (
+              <Box
+                key={step.id}
+                className="slide"
+                sx={{
+                  width: "100vw",
+                  height: "100dvh",
+                  flexShrink: 0,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  backdropFilter: "blur(4px)",
+                  textAlign: "center",
+                  paddingRight: 6
+                }}
+              >
+                <Typography
+                  variant="h4"
+                  sx={{
+                    color: "#007FFF",
+                    fontWeight: 600,
+                    mb: 2,
+                    animation: "pulseGlow 3s infinite",
+                  }}
+                >
+                  {step.title}
+                </Typography>
+                <Box sx={{ mb: 2 }}>{step.svg}</Box>
+                <Typography
+                  sx={{
+                    maxWidth: "600px",
+                    color: "#00FF7F",
+                    fontSize: "1.1rem",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {step.description}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
       </Container>
     </>
   );
