@@ -1189,10 +1189,15 @@ const Home = () => {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 255, 170, 0.07)",
-            backgroundBlendMode: "overlay",
+            backgroundColor: {
+              xs: "rgba(0, 255, 170, 0.3)",  
+              md: "rgba(0, 255, 170, 0.10)",  
+            },
             zIndex: -10,
-            filter: "blur(60px)",
+            filter: {
+              xs: "blur(30px)",    
+              md: "blur(60px)",   
+            },
           }}
         />
 
