@@ -1180,11 +1180,7 @@ const Home = () => {
       </Container>
 
       {/* Design steps section */}
-      <Container
-        maxWidth={false}
-        disableGutters
-        sx={{ px: 0, py: 9, position: "relative", width: "100%" }}
-      >
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
         {/* Soft Background Blur */}
         <Box
           sx={{
@@ -1194,15 +1190,15 @@ const Home = () => {
             width: "100%",
             height: "100%",
             backgroundColor: {
-              xs: "rgba(0, 255, 170, 0.1)",
-              md: "rgba(0, 255, 170, 0.07)",
+              xs: "rgba(0, 255, 170, 0.1)",  
+              md: "rgba(0, 255, 170, 0.07)",  
             },
             zIndex: -10,
             filter: {
-              xs: "blur(15px)",
-              sm: "blur(30px)",
-              md: "blur(60px)",
-            },
+              xs: "blur(15px)",    
+              sm: "blur(30px)",    
+              md: "blur(60px)",    
+            }
           }}
         />
         <Typography
@@ -1216,40 +1212,16 @@ const Home = () => {
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: {
-              xs: "20px",
-              sm: "24px",
-              md: "29px",
-              lg: "36px",
-              xl: "46px",
-            },
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
             padding: "20px",
-            textAlign: "center",
+            textAlign: "center"
           }}
         >
           Our Design Process
         </Typography>
 
         {/* Scroll Container */}
-        <Box
-          ref={wrapperRef}
-          sx={{
-            position: "relative",
-            top: 0,
-            width: "100vw",
-            overflowX: "scroll",
-            overflowY: "hidden",
-            height: "100dvh",
-            zIndex: 1,
-            scrollSnapType: "x mandatory",
-            WebkitOverflowScrolling: "touch",
-            touchAction: "pan-y", // restrict horizontal momentum
-            /* Hide scrollbar for WebKit, Firefox, and IE */
-            "&::-webkit-scrollbar": { display: "none" },
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-          }}
-        >
+        <Box ref={wrapperRef} sx={{ width: "100vw", overflow: "hidden" }}>
           {bubbles.map((bubble, i) => (
             <Box
               key={i}
@@ -1260,8 +1232,7 @@ const Home = () => {
                 width: `${bubble.size}px`,
                 height: `${bubble.size}px`,
                 borderRadius: "50%",
-                background:
-                  "radial-gradient(circle, rgba(0,255,127,0.2), transparent 70%)",
+                background: "radial-gradient(circle, rgba(0,255,127,0.2), transparent 70%)",
                 animation: `floatBubble ${bubble.duration}s ease-in-out infinite`,
                 animationDelay: `${bubble.delay}s`,
                 zIndex: -1,
@@ -1275,7 +1246,7 @@ const Home = () => {
             sx={{
               display: "flex",
               width: `${designT.length * 100}vw`,
-              height: "100%",
+              height: "100dvh",
             }}
           >
             {designT.map((step) => (
@@ -1284,17 +1255,18 @@ const Home = () => {
                 className="slide"
                 sx={{
                   width: "100vw",
-                  height: "100%",
+                  height: "100dvh",
                   flexShrink: 0,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                  backdropFilter: { xs: "none", md: "blur(4px)" },
+                  backdropFilter: {
+                    xs: "none",   
+                    md: "blur(4px)",
+                  },
                   textAlign: "center",
-                  paddingRight: 6,
-                  scrollSnapAlign: "start",
-                  scrollSnapStop: "always", // enforce hard snapping on each slide
+                  paddingRight: 6
                 }}
               >
                 <Typography
@@ -1324,9 +1296,6 @@ const Home = () => {
           </Box>
         </Box>
       </Container>
-
-
-
     </>
   );
 };
