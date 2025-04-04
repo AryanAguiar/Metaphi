@@ -1251,6 +1251,7 @@ const Home = () => {
               display: "flex",
               width: `${designT.length * 100}vw`,
               height: "100vh",
+              scrollSnapType: "x mandatory",
               willChange: "scroll-position", 
             }}
           >
