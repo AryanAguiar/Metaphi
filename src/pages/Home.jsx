@@ -1225,7 +1225,7 @@ const Home = () => {
         </Typography>
 
         {/* Scroll Container */}
-        <Box ref={wrapperRef} sx={{ width: "100vw", overflow: "hidden" }}>
+        <Box ref={wrapperRef} sx={{ width: "100vw", overflow: "hidden", willChange: "transform" }}>
           {bubbles.map((bubble, i) => (
             <Box
               key={i}
@@ -1251,6 +1251,7 @@ const Home = () => {
               display: "flex",
               width: `${designT.length * 100}vw`,
               height: "100vh",
+              willChange: "scroll-position", 
             }}
           >
             {designT.map((step) => (
