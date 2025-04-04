@@ -1190,8 +1190,8 @@ const Home = () => {
             width: "100%",
             height: "100%",
             backgroundColor: {
-              xs: "rgba(0, 255, 170, 0.2)",  
-              md: "rgba(0, 255, 170, 0.10)",  
+              xs: "rgba(0, 255, 170, 0.1)",  
+              md: "rgba(0, 255, 170, 0.07)",  
             },
             zIndex: -10,
             filter: {
