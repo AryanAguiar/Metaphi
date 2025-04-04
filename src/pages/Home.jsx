@@ -1228,7 +1228,6 @@ const Home = () => {
             width: "100vw",
             overflow: "hidden",
             height: "100vh",
-            zIndex: 1,
           }}>
           {bubbles.map((bubble, i) => (
             <Box
