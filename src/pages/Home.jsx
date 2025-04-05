@@ -1249,7 +1249,7 @@ const Home = () => {
             ref={scrollRef}
             sx={{
               display: "flex",
-              width: "100%",
+              width: `${designT.length * 100}vw`,
               height: "100vh",
               scrollSnapType: "x mandatory",
               willChange: "scroll-position", 
@@ -1261,7 +1261,7 @@ const Home = () => {
                 className="slide"
                 sx={{
                   width: "100vw",
-                  height: "400px",
+                  height: "100vh",
                   flexShrink: 0,
                   display: "flex",
                   justifyContent: "center",
