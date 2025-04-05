@@ -1,4 +1,14 @@
-<Box ref={wrapperRef} sx={{ width: "100vw", overflow: "hidden", willChange: "transform" }}>
+import React from 'react'
+
+const About = () => {
+  return (
+    <div>About</div>
+  )
+}
+
+export default About
+
+{/* <Box ref={wrapperRef} sx={{ width: "100vw", overflow: "hidden", willChange: "transform" }}>
   {bubbles.map((bubble, i) => (
     <Box
       key={i}
@@ -75,4 +85,4 @@
       </Box>
     ))}
   </Box>
-</Box>
+</Box> */}

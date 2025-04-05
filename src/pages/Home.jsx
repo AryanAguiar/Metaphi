@@ -425,6 +425,36 @@ const Home = () => {
     };
   }, []);
 
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray(".slide").forEach((slide) => {
+        gsap.fromTo(
+          slide,
+          {
+            autoAlpha: 0,
+            y: 100,
+            scale: 0.95,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: slide,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
 
   return (
@@ -1184,7 +1214,7 @@ const Home = () => {
       </Container>
 
       {/* Design steps section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+      <Container ref={containerRef} maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
         {/* Soft Background Blur */}
         <Box
           sx={{
