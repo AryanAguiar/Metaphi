@@ -86,3 +86,22 @@ export default About
     ))}
   </Box>
 </Box> */}
+
+// {bubbles.map((bubble, i) => (
+//             <Box
+//               key={i}
+//               sx={{
+//                 position: "absolute",
+//                 top: bubble.top,
+//                 left: bubble.left,
+//                 width: `${bubble.size}px`,
+//                 height: `${bubble.size}px`,
+//                 borderRadius: "50%",
+//                 background: "radial-gradient(circle, rgba(0,255,127,0.2), transparent 70%)",
+//                 animation: `floatBubble ${bubble.duration}s ease-in-out infinite`,
+//                 animationDelay: `${bubble.delay}s`,
+//                 zIndex: -1,
+//                 filter: "blur(4px)",
+//               }}
+//             />
+//           ))}

@@ -425,36 +425,6 @@ const Home = () => {
     };
   }, []);
 
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray(".slide").forEach((slide) => {
-        gsap.fromTo(
-          slide,
-          {
-            autoAlpha: 0,
-            y: 100,
-            scale: 0.95,
-          },
-          {
-            autoAlpha: 1,
-            y: 0,
-            scale: 1,
-            duration: 1.2,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: slide,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
 
 
   return (
@@ -1214,7 +1184,7 @@ const Home = () => {
       </Container>
 
       {/* Design steps section */}
-      <Container ref={containerRef} maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
         {/* Soft Background Blur */}
         <Box
           sx={{
@@ -1279,7 +1249,7 @@ const Home = () => {
             ref={scrollRef}
             sx={{
               display: "flex",
-              width: `${designT.length * 100}vw`,
+              width: `${designT.length * 100}px`,
               height: "100vh",
               scrollSnapType: "x mandatory",
               willChange: "scroll-position", 
@@ -1290,8 +1260,8 @@ const Home = () => {
                 key={step.id}
                 className="slide"
                 sx={{
-                  width: "100vw",
-                  height: "100vh",
+                  width: "400px",
+                  height: "400px",
                   flexShrink: 0,
                   display: "flex",
                   justifyContent: "center",
