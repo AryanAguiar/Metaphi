@@ -252,14 +252,6 @@ const Home = () => {
   };
   const lineRef = useRef(null);
 
-  const addToRefs2 = (el) => {
-    if (el && !sectionRef.current.includes(el)) {
-      sectionRef.current.push(el);
-    }
-  };
- 
-
-
   const bubbles = useMemo(() => {
     return [...Array(25)].map(() => ({
       top: `${Math.random() * 100}%`,
@@ -717,7 +709,7 @@ const Home = () => {
 
           {/* second section */}
           <Box
-            ref={addToRefs2}
+            ref={addToRefs}
             sx={{
               display: 'flex',
               flexDirection: { xs: "column", md: "row" },
