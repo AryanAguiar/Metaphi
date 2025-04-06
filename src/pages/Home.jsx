@@ -396,7 +396,7 @@ const Home = () => {
   };
 
   //design process animation
-  
+
 
   return (
     <>
@@ -1196,27 +1196,40 @@ const Home = () => {
           Our Design Process
         </Typography>
 
-        {/* Scroll Container */}
-        <Box sx={{ width: "100vw", overflow: "hidden", willChange: "transform" }}>
-          {bubbles.map((bubble, i) => (
-            <Box
-              key={i}
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 4,
+            justifyContent: "center",
+            mt: 4,
+          }}
+        >
+          {designT.map((step) => (
+            <Card
+              key={step.id}
+              elevation={3}
               sx={{
-                position: "absolute",
-                top: bubble.top,
-                left: bubble.left,
-                width: `${bubble.size}px`,
-                height: `${bubble.size}px`,
-                borderRadius: "50%",
-                background: "radial-gradient(circle, rgba(0,255,127,0.2), transparent 70%)",
-                animation: `floatBubble ${bubble.duration}s ease-in-out infinite`,
-                animationDelay: `${bubble.delay}s`,
-                zIndex: -1,
-                filter: "blur(4px)",
+                width: { xs: "100%", sm: "45%", md: "30%" },
+                borderRadius: 3,
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                p: 2,
               }}
-            />
+            >
+              <Box mb={2}>{step.svg}</Box>
+              <CardContent>
+                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                  {step.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {step.description}
+                </Typography>
+              </CardContent>
+            </Card>
           ))}
-
         </Box>
       </Container>
     </>
