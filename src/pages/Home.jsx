@@ -252,6 +252,13 @@ const Home = () => {
   };
   const lineRef = useRef(null);
 
+  const addToRefs2 = (el) => {
+    if (el && !sectionRef.current.includes(el)) {
+      sectionRef.current.push(el);
+    }
+  };
+ 
+
 
   const bubbles = useMemo(() => {
     return [...Array(25)].map(() => ({
@@ -710,7 +717,7 @@ const Home = () => {
 
           {/* second section */}
           <Box
-            ref={addToRefs}
+            ref={addToRefs2}
             sx={{
               display: 'flex',
               flexDirection: { xs: "column", md: "row" },
@@ -861,7 +868,6 @@ const Home = () => {
                   textAlign: "center",
                   cursor: "pointer",
                   borderRadius: "20px",
-                  willChange: "transform",           
                   boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
                   background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
                   backdropFilter: "blur(10px)",
@@ -892,6 +898,7 @@ const Home = () => {
                   height: "100%",
                   backfaceVisibility: "hidden",
                   transform: "rotateY(180deg)",
+                  willChange: "transform",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
@@ -1197,6 +1204,28 @@ const Home = () => {
           Our Design Process
         </Typography>
 
+        {/* Scroll Container */}
+        <Box sx={{ width: "100vw", overflow: "hidden", willChange: "transform" }}>
+          {bubbles.map((bubble, i) => (
+            <Box
+              key={i}
+              sx={{
+                position: "absolute",
+                top: bubble.top,
+                left: bubble.left,
+                width: `${bubble.size}px`,
+                height: `${bubble.size}px`,
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(0,255,127,0.2), transparent 70%)",
+                animation: `floatBubble ${bubble.duration}s ease-in-out infinite`,
+                animationDelay: `${bubble.delay}s`,
+                zIndex: -1,
+                filter: "blur(4px)",
+              }}
+            />
+          ))}
+
+        </Box>
       </Container>
     </>
   );
