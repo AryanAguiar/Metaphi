@@ -861,6 +861,7 @@ const Home = () => {
                   textAlign: "center",
                   cursor: "pointer",
                   borderRadius: "20px",
+                  willChange: "transform",           
                   boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
                   background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
                   backdropFilter: "blur(10px)",
