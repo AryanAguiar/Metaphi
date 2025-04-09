@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton, Chip, } from "@mui/material";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton, Chip, CardMedia } from "@mui/material";
 import { gsap } from "gsap";
 import heroImg1 from "../images/webdev.png";
 import partner1 from "../images/partner-2.png";
@@ -290,25 +289,21 @@ const industries = [
 //projects
 const projects = [
   {
-    title: "Road Safety Quiz",
+    title: "Road Safety App",
     image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
-    categories: ["App", "Technology"],
   },
   {
-    title: "Loho",
+    title: "House Renting App",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-    categories: ["Website", "Real Estate"],
   },
   {
-    title: "Loho",
+    title: "House Renting App",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-    categories: ["Website", "Real Estate"],
-  }, 
+  },
   {
-    title: "Loho",
+    title: "House Renting App",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-    categories: ["Website", "Real Estate"],
-  }, 
+  },
 ];
 
 
@@ -500,6 +495,10 @@ const Home = () => {
   const nextRef = useRef(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  //projects section
+  const prevRefProj = useRef(null);
+  const nextRefProj = useRef(null);
 
   return (
     <>
@@ -1583,91 +1582,150 @@ const Home = () => {
           Our Work
         </Typography>
 
-        <Box sx={{ px: 2, py: 6, maxWidth: "1450px", margin: "auto" }}>
-          {/* Header */}
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
-            <Typography variant="h5" fontWeight={600}>Recent projects</Typography>
-            <Typography
-              variant="body2"
+        <Box sx={{ px: { xs: 2, sm: 5, md: 6, lg: 6, xl: 7 }, py: 8, color: "white", maxWidth: "1448px", margin: "auto" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: { md: "flex-end", lg: "center" },
+              gap: 2,
+              mb: 2,
+            }}
+          >
+            <IconButton
+              ref={prevRefProj}
               sx={{
-                color: "orange",
-                fontWeight: 500,
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                color: "#fff",
+                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                opacity: 1,
                 cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: 0.5,
+                "&:hover": {
+                  background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
+                },
               }}
             >
-              View All <FontAwesomeIcon icon={faArrowRight} />
-            </Typography>
+              <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+            </IconButton>
+
+            <IconButton
+              ref={nextRefProj}
+
+              sx={{
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                color: "#fff",
+                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                opacity: 1,
+                cursor: "pointer",
+                "&:hover": {
+                  background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
+                },
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowRight} size="lg" />
+            </IconButton>
+
           </Box>
-
-          {/* Project Slider */}
-          <Swiper spaceBetween={24} slidesPerView={1.2} breakpoints={{
-            600: { slidesPerView: 2 },
-            1000: { slidesPerView: 3 },
-          }}>
-            {projects.map((project, i) => (
-              <SwiperSlide key={i}>
-                <Box sx={{ position: "relative", borderRadius: 6, overflow: "hidden" }}>
-                  <Box
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={24}
+            slidesPerView={1}
+            navigation={{
+              prevEl: prevRefProj.current,
+              nextEl: nextRefProj.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRefProj.current;
+              swiper.params.navigation.nextEl = nextRefProj.current;
+            }}
+            pagination={{ clickable: true }}
+            loop={true}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            style={{ paddingBottom: "40px" }}
+          >
+            {projects.map((project, index) => (
+              <SwiperSlide key={index}>
+                <Card
+                  sx={{
+                    background: "linear-gradient(135deg, rgba(219, 220, 226, 0.29), rgba(36, 36, 36, 0.9))",
+                    backdropFilter: "blur(10px)",
+                    borderRadius: 4,
+                    overflow: "hidden",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                    transition: "0.3s",
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                    "&:hover": {
+                      borderColor: "#00ffff",
+                    },
+                  }}
+                >
+                  <CardMedia
                     component="img"
-                    src={project.image}
+                    image={project.image}
                     alt={project.title}
-                    sx={{
-                      width: "100%",
-                      height: 250,
-                      objectFit: "cover",
-                      borderRadius: 4,
-                    }}
+                    sx={{ height: 180, objectFit: "cover" }}
                   />
-
-                  {/* Categories */}
-                  <Box sx={{ position: "absolute", top: 16, left: 16, display: "flex", flexWrap: "wrap", gap: 1 }}>
-                    {project.categories.map((cat, index) => (
-                      <Chip
-                        key={index}
-                        label={cat}
-                        sx={{
-                          fontSize: "0.7rem",
-                          bgcolor: "#fff",
-                          color: "#000",
-                          borderRadius: "16px",
-                          px: 1.5,
-                          py: 0.5,
-                          boxShadow: 1,
-                        }}
-                      />
-                    ))}
-                  </Box>
-
-                  {/* Floating Arrow Button */}
-                  <IconButton
-                    sx={{
-                      position: "absolute",
-                      bottom: 16,
-                      right: 16,
-                      width: 40,
-                      height: 40,
-                      borderRadius: "50%",
-                      bgcolor: "#000",
-                      color: "#fff",
-                      boxShadow: 3,
-                      "&:hover": { bgcolor: "#333" },
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faArrowRight} />
-                  </IconButton>
-                </Box>
-
-                {/* Title */}
-                <Typography variant="subtitle1" sx={{ mt: 2, fontWeight: 500 }}>
-                  {project.title}
-                </Typography>
+                  <CardContent sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flexGrow: 1 }}>
+                    <Typography variant="h6" fontWeight={600} sx={{ color: "white", marginBottom: 2 }}>
+                      {project.title}
+                    </Typography>
+                    <Button
+                      sx={{
+                        alignSelf: "flex-start",
+                        marginTop: "auto",
+                        background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                        color: "#fff",
+                        "&:hover": {
+                          backgroundColor: "#00b2e6",
+                        },
+                      }}
+                    >
+                      View Details
+                    </Button>
+                  </CardContent>
+                </Card>
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* View More Button */}
+          <Box sx={{ textAlign: "center", marginTop: 3 }}>
+            <Button
+              sx={{
+                background: "linear-gradient(135deg, rgba(0, 183, 255, 0.3), rgba(36, 36, 36, 0.9))",
+                color: "#fff",
+                borderRadius: 4,
+                padding: "8px 16px",
+                boxShadow: "0px 4px 10px rgba(0, 183, 255, 0.2)",
+                transition: "0.3s",
+                "&:hover": {
+                  boxShadow: "0px 8px 20px rgba(0, 183, 255, 0.4)",
+                },
+              }}
+            >
+              View More
+            </Button>
+
+          </Box>
         </Box>
+
+
       </Container>
     </>
   );
