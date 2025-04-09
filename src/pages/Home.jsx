@@ -1569,17 +1569,33 @@ const Home = () => {
           className="heading"
           sx={{
             fontWeight: "bold",
-            mb: 2,
             background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
             fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            padding: "20px",
+            padding: "10px",
             textAlign: "center"
           }}
         >
           Our Work
+        </Typography>
+
+        <Typography 
+          sx={{
+            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            fontSize: { xs: "15px", sm: "20px", md: "20px", lg: "24px", xl: "25px" },
+            padding: "10px 40px",
+            textAlign: "center",
+            maxWidth: "1420px",
+            margin:"auto"
+          }}
+        >
+          A Glimpse of the Solutions We’ve Delivered to Global Clients
+          As a leading IT company, we specialize in crafting innovative and customized solutions tailored to diverse business needs."
         </Typography>
 
         <Box sx={{ px: { xs: 2, sm: 5, md: 6, lg: 6, xl: 7 }, py: 8, color: "white", maxWidth: "1448px", margin: "auto" }}>
