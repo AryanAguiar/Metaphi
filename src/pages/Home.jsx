@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton, Stack, } from "@mui/material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton, Chip, } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { gsap } from "gsap";
 import heroImg1 from "../images/webdev.png";
@@ -286,6 +286,21 @@ const industries = [
     image: 'https://images.unsplash.com/photo-1615837371267-9ae27f32ae83?auto=format&fit=crop&w=800&q=80',
   },
 ];
+
+//projects
+const projects = [
+  {
+    title: "Road Safety Quiz",
+    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
+    categories: ["App", "Technology"],
+  },
+  {
+    title: "Loho",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    categories: ["Website", "Real Estate"],
+  },
+];
+
 
 
 const Home = () => {
@@ -1354,7 +1369,7 @@ const Home = () => {
           <Box
             sx={{
               display: "flex",
-              justifyContent: {md:"flex-end", lg:"center"},
+              justifyContent: { md: "flex-end", lg: "center" },
               gap: 2,
               mb: 2,
             }}
@@ -1522,15 +1537,127 @@ const Home = () => {
                   </CardContent>
                 </Card>
               </SwiperSlide>
-
             ))}
           </Swiper>
-
         </Box>
+      </Container>
 
+      {/* Projects section */}
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "bold",
+            mb: 2,
+            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            padding: "20px",
+            textAlign: "center"
+          }}
+        >
+          Our Work
+        </Typography>
 
+        <Box sx={{ px: 2, py: 6, maxWidth: "1450px", margin: "auto" }}>
+          {/* Header */}
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
+            <Typography variant="h5" fontWeight={600}>Recent projects</Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "orange",
+                fontWeight: 500,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: 0.5,
+              }}
+            >
+              View All <FontAwesomeIcon icon={faArrowRight} />
+            </Typography>
+          </Box>
 
+          {/* Project Slider */}
+          <Swiper spaceBetween={24} slidesPerView={1.2} breakpoints={{
+            600: { slidesPerView: 2 },
+            1000: { slidesPerView: 3 },
+          }}>
+            {projects.map((project, i) => (
+              <SwiperSlide key={i}>
+                <Box sx={{ position: "relative", borderRadius: 6, overflow: "hidden" }}>
+                  <Box
+                    component="img"
+                    src={project.image}
+                    alt={project.title}
+                    sx={{
+                      width: "100%",
+                      height: 250,
+                      objectFit: "cover",
+                      borderRadius: 4,
+                    }}
+                  />
 
+                  {/* Categories */}
+                  <Box sx={{ position: "absolute", top: 16, left: 16, display: "flex", flexWrap: "wrap", gap: 1 }}>
+                    {project.categories.map((cat, index) => (
+                      <Chip
+                        key={index}
+                        label={cat}
+                        sx={{
+                          fontSize: "0.7rem",
+                          bgcolor: "#fff",
+                          color: "#000",
+                          borderRadius: "16px",
+                          px: 1.5,
+                          py: 0.5,
+                          boxShadow: 1,
+                        }}
+                      />
+                    ))}
+                  </Box>
+
+                  {/* Floating Arrow Button */}
+                  <IconButton
+                    sx={{
+                      position: "absolute",
+                      bottom: 16,
+                      right: 16,
+                      width: 40,
+                      height: 40,
+                      borderRadius: "50%",
+                      bgcolor: "#000",
+                      color: "#fff",
+                      boxShadow: 3,
+                      "&:hover": { bgcolor: "#333" },
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faArrowRight} />
+                  </IconButton>
+                </Box>
+
+                {/* Title */}
+                <Typography variant="subtitle1" sx={{ mt: 2, fontWeight: 500 }}>
+                  {project.title}
+                </Typography>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Box>
       </Container>
     </>
   );
