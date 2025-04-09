@@ -1595,7 +1595,7 @@ const Home = () => {
           }}
         >
           A Glimpse of the Solutions We’ve Delivered to Global Clients
-          As a leading IT company, we specialize in crafting innovative and customized solutions tailored to diverse business needs."
+          As a leading IT company, we specialize in crafting innovative and customized solutions tailored to diverse business needs.
         </Typography>
 
         <Box sx={{ px: { xs: 2, sm: 5, md: 6, lg: 6, xl: 7 }, py: 8, color: "white", maxWidth: "1448px", margin: "auto" }}>
