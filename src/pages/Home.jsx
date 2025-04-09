@@ -303,7 +303,7 @@ const projects = [
     title: "Loho",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
     categories: ["Website", "Real Estate"],
-  },
+  }, 
 ];
 
 
