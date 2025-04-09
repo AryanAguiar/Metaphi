@@ -206,7 +206,7 @@ const designT = [
     description:
       "Select the most suitable tools and technologies to develop the product, adhering to the defined timeline, project scope, and requirements.",
     svg: (
-      <svg width="64" height="64" fill="none" viewBox="0 0 64 64"><circle cx="44" cy="20" r="6" stroke="#007FFF" strokeWidth="2" /><path d="M20 44l12-12m-4 16l12-12" stroke="#00FF7F" strokeWidth="2" /><path d="M16 48a8 8 0 0 1 11.3-11.3l7.4 7.4a8 8 0 0 1-11.3 11.3l-7.4-7.4z" stroke="#007FFF" strokeWidth="2" /></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 78.188 78.188" fill="none"><g><path d="M75.006,12.39c-1.104-0.208-2.229,0.218-2.918,1.101c-0.084,0.106-0.17,0.21-0.266,0.306L66,19.619c-1.256,1.255-3.442,1.255-4.698,0l-2.731-2.731c-1.295-1.296-1.297-3.404,0-4.699l5.826-5.828c0.096-0.095,0.197-0.179,0.301-0.26c0.885-0.691,1.309-1.816,1.102-2.918s-1.012-1.997-2.086-2.319c-1.899-0.57-3.871-0.859-5.858-0.859c-5.429,0-10.534,2.114-14.375,5.953c-4.843,4.842-6.892,11.75-5.557,18.391L24.346,37.925c-1.319-0.265-2.663-0.398-4.014-0.398c-5.429,0-10.534,2.114-14.375,5.954c-5.296,5.297-7.249,13.05-5.096,20.232c0.322,1.073,1.216,1.879,2.318,2.087c1.101,0.209,2.228-0.217,2.919-1.102c0.086-0.109,0.176-0.217,0.265-0.306l5.825-5.822c1.255-1.254,3.442-1.255,4.698,0.001l2.731,2.731c1.295,1.296,1.295,3.403,0,4.698l-5.833,5.832c-0.093,0.095-0.194,0.176-0.296,0.256c-0.884,0.689-1.309,1.814-1.101,2.918c0.208,1.103,1.012,1.997,2.086,2.318c1.9,0.569,3.873,0.858,5.861,0.858l0,0c5.43,0,10.534-2.114,14.372-5.953c4.844-4.843,6.894-11.75,5.557-18.392l13.578-13.576c1.317,0.265,2.663,0.398,4.015,0.398c5.43,0,10.534-2.115,14.374-5.955c5.298-5.297,7.249-13.05,5.097-20.233C77.002,13.402,76.11,12.598,75.006,12.39z" stroke="#007FFF" strokeWidth="2" fill="none" /><path d="M67.989,30.467c-2.707,2.706-6.306,4.196-10.133,4.196c-1.388,0-2.763-0.199-4.088-0.592c-1.057-0.311-2.195-0.022-2.975,0.755L34.824,50.794c-0.778,0.777-1.068,1.92-0.755,2.975c1.497,5.052,0.116,10.501-3.605,14.221c-2.305,2.307-5.258,3.729-8.448,4.101l1.843-1.845c3.635-3.635,3.635-9.549,0-13.184l-2.731-2.73c-1.761-1.763-4.103-2.732-6.593-2.731c-2.49,0-4.832,0.97-6.591,2.729l-1.845,1.845c0.372-3.145,1.781-6.132,4.1-8.449c2.707-2.709,6.305-4.199,10.132-4.199c1.387,0,2.762,0.199,4.087,0.592c1.055,0.314,2.195,0.022,2.974-0.754l15.97-15.97c0.777-0.777,1.066-1.918,0.756-2.973c-1.496-5.053-0.115-10.502,3.604-14.222c2.307-2.305,5.26-3.729,8.449-4.099l-1.844,1.844c-3.635,3.633-3.635,9.548,0,13.186l2.732,2.73c1.762,1.761,4.102,2.731,6.592,2.731c2.49,0,4.832-0.97,6.592-2.73l1.844-1.843C71.715,25.162,70.306,28.148,67.989,30.467z" stroke="#00FF7F" strokeWidth="2" fill="none" /></g></svg>
     ),
   },
   {
@@ -396,6 +396,25 @@ const Home = () => {
   };
 
   //design process animation
+  const designRef = useRef([]);
+  useEffect(() => {
+    if (typeof window === "undefined" || !designRef.current) return;
+
+    gsap.to(designRef.current, {
+      opacity: 1,
+      duration: 2,
+      y: -20,
+      ease: "power2.out",
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: designRef.current[0]?.parentNode,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    return () => ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+  }, []);
 
 
   return (
@@ -1089,7 +1108,6 @@ const Home = () => {
                       transform: index === selectedIndex ? "scale(1.05)" : "scale(1)",
                       opacity: index === selectedIndex ? 1 : 0.8,
                       transition: "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
-
                     }}
                   >
                     <img
@@ -1157,7 +1175,7 @@ const Home = () => {
 
       {/* Design steps section */}
       <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
-        {/* Soft Background Blur */}
+
         <Box
           sx={{
             position: "absolute",
@@ -1196,41 +1214,42 @@ const Home = () => {
           Our Design Process
         </Typography>
 
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 4,
-            justifyContent: "center",
-            mt: 4,
-          }}
-        >
-          {designT.map((step) => (
-            <Card
-              key={step.id}
-              elevation={3}
-              sx={{
-                width: { xs: "100%", sm: "45%", md: "30%" },
-                borderRadius: 3,
-                textAlign: "center",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                p: 2,
-              }}
-            >
-              <Box mb={2}>{step.svg}</Box>
-              <CardContent>
+        <Box sx={{ maxWidth: 'xl', mx: 'auto' }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 8,
+              justifyContent: "center",
+              mt: 6,
+            }}
+          >
+            {designT.map((step, index) => (
+              <Box
+                key={step.id}
+                ref={(el) => (designRef.current[index] = el)}
+                sx={{
+                  width: { xs: "100%", sm: "30%", md: "25%" },
+                  textAlign: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  color: "white",
+                  opacity: 0
+                }}
+              >
+                <Box mb={2}>{step.svg}</Box>
                 <Typography variant="h6" fontWeight="bold" gutterBottom>
                   {step.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" sx={{ opacity: 0.8 }}>
                   {step.description}
                 </Typography>
-              </CardContent>
-            </Card>
-          ))}
+              </Box>
+            ))}
+          </Box>
         </Box>
+
       </Container>
     </>
   );
