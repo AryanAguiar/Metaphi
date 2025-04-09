@@ -290,7 +290,7 @@ const industries = [
 //projects
 const projects = [
   {
-    title: "Road  Safety Quiz",
+    title: "Road Safety Quiz",
     image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
     categories: ["App", "Technology"],
   },
