@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton } from "@mui/material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton, Stack, } from "@mui/material";
+import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { gsap } from "gsap";
 import heroImg1 from "../images/webdev.png";
 import partner1 from "../images/partner-2.png";
@@ -7,7 +8,7 @@ import "./Home.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
-import { Autoplay, FreeMode } from "swiper/modules";
+import { Autoplay, FreeMode, Pagination, Navigation } from "swiper/modules";
 import { ScrollTrigger } from "gsap/all";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
@@ -15,7 +16,7 @@ import svg1 from "../images/folder.png";
 import svg2 from "../images/handshake.svg";
 import svg3 from "../images/award.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import serviceicon1 from "../images/gamedev.svg";
 import serviceicon2 from "../images/appdev.svg";
@@ -232,7 +233,59 @@ const designT = [
   },
 ];
 
-
+//industries we serve
+const industries = [
+  {
+    title: 'Retail & E-commerce',
+    description: 'Empower your retail business with scalable, future-ready digital solutions.',
+    image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    title: 'Education & E-Learning',
+    description: 'Enhance learning experiences with tech-driven solutions for global learners.',
+    image: 'https://images.unsplash.com/photo-1559070164-7e9e8389b38c?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    title: 'Healthcare & Fitness',
+    description: 'Leverage AI, ML, and IoT to transform healthcare services and outcomes.',
+    image: 'https://images.unsplash.com/photo-1588776814546-ec7e5f67a0c4?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    title: 'Logistics & Distribution',
+    description: 'Optimize logistics with customer-centric, industry-specific solutions.',
+    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abb41?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    title: 'Social Networking',
+    description: 'Build engaging, seamless social media applications.',
+    image: 'https://images.unsplash.com/photo-1629927988423-d734f58f7b6c?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    title: 'Real Estate',
+    description: 'Implement cutting-edge real estate solutions for your unique needs.',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    title: 'Travel & Hospitality',
+    description: 'Deliver intuitive digital travel experiences with feature-rich platforms.',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    title: 'Food & Restaurant',
+    description: 'Drive growth in food & restaurant industry with innovative solutions.',
+    image: 'https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    title: 'On-Demand Solutions',
+    description: 'Craft intelligent, high-performance on-demand platforms.',
+    image: 'https://images.unsplash.com/photo-1580910051074-d106f8e3d2b7?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    title: 'Gaming',
+    description: 'Create immersive, interactive gaming experiences with the latest tech.',
+    image: 'https://images.unsplash.com/photo-1615837371267-9ae27f32ae83?auto=format&fit=crop&w=800&q=80',
+  },
+];
 
 
 const Home = () => {
@@ -417,6 +470,12 @@ const Home = () => {
   }, []);
 
 
+  //industries animation
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
   return (
     <>
       {/* Hero section */}
@@ -568,54 +627,71 @@ const Home = () => {
       </Container>
 
       {/* Partners section */}
-      <Container maxWidth={"xl"} disableGutters sx={{ px: 6, py: 9 }}>
-        <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
-          sx={{
-            fontWeight: "bold",
-            mb: 2,
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            padding: "20px",
-            textAlign: "center"
-          }}
-        >
-          Official Partners Of
-        </Typography>
+      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 9, position: "relative", width: "100%" }}>
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
 
-        <Swiper
-          modules={[Autoplay, FreeMode]}
-          slidesPerView="auto"
-          loop={true}
-          autoplay={{
-            delay: 0,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: false,
-          }}
-          speed={2000}
-          allowTouchMove={true}
-          breakpoints={{
-            200: { slidesPerView: 2, spaceBetween: 50 },
-            450: { slidesPerView: 3, spaceBetween: 50 },
-            620: { slidesPerView: 3, },
-            768: { slidesPerView: 4, },
-            1024: { slidesPerView: 5, },
-          }}
-          className="marquee-swiper"
-        >
-          {/* Duplicate logos to ensure smooth looping */}
-          {logos.concat(logos).map((logo, index) => (
-            <SwiperSlide key={index} className="marquee-slide">
-              <img src={logo} alt={`Logo ${index + 1}`} className="marquee-logo" />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <Box sx={{
+          maxWidth: "1454px",
+          width: "100%",
+          margin: "0 auto",
+          display: "block",
+        }}>
+          <Typography
+            ref={headerRef}
+            variant="h4"
+            className="heading"
+            sx={{
+              fontWeight: "bold",
+              mb: 2,
+              background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+              fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+              padding: "20px",
+              textAlign: "center"
+            }}
+          >
+            Official Partners Of
+          </Typography>
 
+          <Swiper
+            modules={[Autoplay, FreeMode]}
+            slidesPerView="auto"
+            loop={true}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: false,
+            }}
+            speed={2000}
+            allowTouchMove={true}
+            breakpoints={{
+              200: { slidesPerView: 2, spaceBetween: 50 },
+              450: { slidesPerView: 3, spaceBetween: 50 },
+              620: { slidesPerView: 3, },
+              768: { slidesPerView: 4, },
+              1024: { slidesPerView: 5, },
+            }}
+            className="marquee-swiper"
+          >
+            {/* Duplicate logos to ensure smooth looping */}
+            {logos.concat(logos).map((logo, index) => (
+              <SwiperSlide key={index} className="marquee-slide">
+                <img src={logo} alt={`Logo ${index + 1}`} className="marquee-logo" />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Box>
       </Container>
 
       {/* description section */}
@@ -1175,26 +1251,16 @@ const Home = () => {
 
       {/* Design steps section */}
       <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
-
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: {
-              xs: "rgba(0, 255, 170, 0.1)",
-              md: "rgba(0, 255, 170, 0.07)",
-            },
-            zIndex: -10,
-            filter: {
-              xs: "blur(15px)",
-              sm: "blur(30px)",
-              md: "blur(60px)",
-            }
-          }}
-        />
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
         <Typography
           ref={headerRef}
           variant="h4"
@@ -1214,11 +1280,12 @@ const Home = () => {
           Our Design Process
         </Typography>
 
-        <Box sx={{ maxWidth: 'xl', mx: 'auto' }}>
+        <Box sx={{ maxWidth: 'xl', mx: 'auto', pr: { xs: null, lg: 1.5 } }}>
           <Box
             sx={{
               display: "flex",
               flexWrap: "wrap",
+              padding: 3,
               gap: 8,
               justifyContent: "center",
               mt: 6,
@@ -1249,6 +1316,220 @@ const Home = () => {
             ))}
           </Box>
         </Box>
+
+      </Container>
+
+      {/* industries we serve */}
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "bold",
+            mb: 2,
+            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            padding: "20px",
+            textAlign: "center"
+          }}
+        >
+          Industries We Serve
+        </Typography>
+
+        <Box sx={{ maxWidth: "1450px", px: 2, py: 4, margin: "auto", position: "relative" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: {md:"flex-end", lg:"center"},
+              gap: 2,
+              mb: 2,
+            }}
+          >
+            <IconButton
+              ref={prevRef}
+              disabled={isBeginning}
+              sx={{
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                color: "#fff",
+                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                opacity: isBeginning ? 0.5 : 1,
+                cursor: isBeginning ? "not-allowed" : "pointer",
+                "&:hover": {
+                  background: isBeginning
+                    ? "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))"
+                    : "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
+                },
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+            </IconButton>
+
+            <IconButton
+              ref={nextRef}
+              disabled={isEnd}
+              sx={{
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                color: "#fff",
+                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                opacity: isEnd ? 0.5 : 1,
+                cursor: isEnd ? "not-allowed" : "pointer",
+                "&:hover": {
+                  background: isEnd
+                    ? "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))"
+                    : "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
+                },
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowRight} size="lg" />
+            </IconButton>
+
+          </Box>
+
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={20}
+            slidesPerView={1}
+            onSwiper={(swiper) => {
+              // Save initial state
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+            onSlideChange={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }}
+            pagination={{ clickable: true }}
+            breakpoints={{
+              600: { slidesPerView: 2 },
+              900: { slidesPerView: 3 },
+              1200: { slidesPerView: 4 },
+            }}
+          >
+            {industries.map((industry, index) => (
+              <SwiperSlide key={index}>
+                <Card
+                  sx={{
+                    backgroundImage: `url(${industry.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    borderRadius: 4,
+                    minHeight: 240,
+                    height: "100%",
+                    position: "relative",
+                    color: "#fff",
+                    boxShadow: 3,
+                    transition: "transform 0.3s ease",
+                    overflow: "hidden",
+
+                  }}
+                >
+                  {/* Overlay */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))",
+                      backdropFilter: "blur(3px)",
+                      zIndex: 1,
+                    }}
+                  />
+
+                  <CardContent
+                    sx={{
+                      position: "relative",
+                      zIndex: 2,
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "flex-end",
+                      p: { xs: 2, sm: 3 },
+                    }}
+                  >
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: 600,
+                        mb: 1,
+                        color: "#fff",
+                        textShadow: "0 2px 4px rgba(0,0,0,0.5)",
+                      }}
+                    >
+                      {industry.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "#e0e0e0",
+                        fontSize: { xs: "0.85rem", sm: "0.9rem" },
+                        textShadow: "0 1px 2px rgba(0,0,0,0.5)",
+                      }}
+                    >
+                      {industry.description}
+                    </Typography>
+
+                    <Button
+                      sx={{
+                        mt: 10,
+                        color: "#fff",
+                        background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                        boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                        backdropFilter: "blur(10px)",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
+                        borderRadius: "40px",
+                        textTransform: "none",
+                        px: 3,
+                        py: 1.5,
+                        "&:hover": {
+                          background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
+                        },
+                      }}
+                    >
+                      Learn More
+                    </Button>
+
+                  </CardContent>
+                </Card>
+              </SwiperSlide>
+
+            ))}
+          </Swiper>
+
+        </Box>
+
+
+
 
       </Container>
     </>
