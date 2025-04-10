@@ -24,7 +24,7 @@ import serviceicon4 from "../images/ecommerce.svg";
 import serviceicon5 from "../images/aiml.svg";
 import serviceicon6 from "../images/iot.svg";
 import serviceicon7 from "../images/devops.svg";
-import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward, ArrowLeft} from "@mui/icons-material";
+import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward, ArrowLeft } from "@mui/icons-material";
 gsap.registerPlugin(ScrollTrigger);
 import dedicatedIcon from "../images/Dedicated.svg";
 import supportIcon from "../images/customersupport.svg";
@@ -306,6 +306,26 @@ const projects = [
   },
 ];
 
+//business section
+const businessTypes = [
+  {
+    title: "Startups",
+    desc: "Operating on a tight budget with limited resources? Our experts provide the essential tech support to transform your vision into reality.",
+  },
+  {
+    title: "Small Business",
+    desc: "Build a strong brand identity with our experienced professionals, seamlessly aligning development expertise with your unique business needs.",
+  },
+  {
+    title: "Enterprise Business",
+    desc: "Empower your enterprise with cutting-edge technology to expand your reach, optimize operations, and drive innovation.",
+  },
+  {
+    title: "Agency Business",
+    desc: "Enhance your service offerings by leveraging our expertise and the latest technological advancements to stay ahead in the industry.",
+  },
+];
+
 
 
 const Home = () => {
@@ -481,7 +501,7 @@ const Home = () => {
       stagger: 0.2,
       scrollTrigger: {
         trigger: designRef.current[0]?.parentNode,
-        start: "top 80%",
+        start: "top 75%",
         toggleActions: "play none none reverse",
       },
     });
@@ -499,6 +519,74 @@ const Home = () => {
   //projects section
   const prevRefProj = useRef(null);
   const nextRefProj = useRef(null);
+
+
+  //why choose us section
+  const leftRef = useRef(null);
+  const rightRef = useRef(null);
+
+  useEffect(() => {
+    // Left box 
+    gsap.fromTo(
+      leftRef.current,
+      { x: -50, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1.3,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: leftRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    // Right box
+    gsap.fromTo(
+      rightRef.current,
+      { x: 50, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1.3,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: rightRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+  }, []);
+
+  //business types section
+  const businessRef = useRef(null);
+  const itemRefs = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray(".business-item").forEach((item, i) => {
+        gsap.from(item, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          delay: i * 0.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+    }, businessRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <>
@@ -1398,7 +1486,7 @@ const Home = () => {
                 },
               }}
             >
-              <ArrowBack/>
+              <ArrowBack />
             </IconButton>
 
             <IconButton
@@ -1422,7 +1510,7 @@ const Home = () => {
                 },
               }}
             >
-              <ArrowForward/>
+              <ArrowForward />
             </IconButton>
 
           </Box>
@@ -1619,7 +1707,7 @@ const Home = () => {
                 },
               }}
             >
-              <ArrowBack/>
+              <ArrowBack />
             </IconButton>
 
             <IconButton
@@ -1641,7 +1729,7 @@ const Home = () => {
                 },
               }}
             >
-              <ArrowForward/>
+              <ArrowForward />
             </IconButton>
 
           </Box>
@@ -1717,7 +1805,7 @@ const Home = () => {
           {/* View More Button */}
           <Box sx={{ textAlign: "center", marginTop: 3 }}>
             <Button
-               sx={{
+              sx={{
                 alignSelf: "flex-start",
                 mt: "auto",
                 border: "1px solid #00eaff",
@@ -1736,6 +1824,219 @@ const Home = () => {
             >
               View More
             </Button>
+          </Box>
+        </Box>
+      </Container>
+
+      {/* Why choose us section */}
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
+
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "bold",
+            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            padding: "10px",
+            textAlign: "center"
+          }}
+        >
+          Why Choose Us?
+        </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: "stretch",
+            justifyContent: "space-between",
+            gap: 4,
+            px: { xs: 4, sm: 7, md: 6 },
+            py: { xs: 6, md: 10 },
+            maxWidth: "1440px",
+            margin: "auto",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {/* Left */}
+          <Box ref={leftRef} sx={{ flex: 1, textAlign: { xs: "center", md: "left" } }}>
+            <Typography
+              fontWeight="bold"
+              gutterBottom
+              sx={{
+                fontSize: {
+                  xs: "22px",
+                  sm: "26px",
+                  md: "30px",
+                  lg: "36px",
+                  xl: "40px",
+                },
+                color: "white",
+              }}
+            >
+              Building Smarter Businesses with Advanced Technology
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", sm: "16px", md: "17px", lg: "18px" },
+                color: "white",
+              }}
+            >
+              As a leading app development company in India,{" "}
+              <strong>Metaphi Innovations</strong> has collaborated with 100+ businesses,
+              from startups to enterprises, delivering top-tier solutions across industries.
+              We offer a comprehensive range of IT consulting services tailored to meet diverse business needs.
+            </Typography>
+          </Box>
+
+          {/* Right */}
+          <Box
+            ref={rightRef}
+            sx={{
+              flex: 1,
+              backgroundColor: "rgba(255, 255, 255, 0.03)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              borderRadius: 4,
+              padding: 4,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              textAlign: { xs: "center", md: "left" },
+            }}
+          >
+            <Typography
+              fontWeight="bold"
+              gutterBottom
+              sx={{
+                fontSize: {
+                  xs: "20px",
+                  sm: "24px",
+                  md: "26px",
+                  lg: "30px",
+                },
+                color: "white",
+              }}
+            >
+              Innovate with Us!
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", sm: "16px", md: "17px", lg: "18px" },
+                color: "white",
+              }}
+              gutterBottom
+            >
+              Connect with our expert IT transformation team and take the next step toward
+              groundbreaking innovation for your business.
+            </Typography>
+            <Button
+              variant="contained"
+              href="#contact"
+              sx={{
+                alignSelf: { xs: "center", md: "flex-start" },
+                mt: 3,
+                px: 4,
+                py: 1.5,
+                borderRadius: 3,
+                textTransform: "none",
+                fontWeight: 500,
+                background: "linear-gradient(to right, #00c3ff, #004aad)",
+                "&:hover": {
+                  background: "linear-gradient(to right, #00eaff, #0066ff)",
+                },
+              }}
+            >
+              DROP QUERIES
+            </Button>
+          </Box>
+        </Box>
+
+        <Box
+          ref={businessRef}
+          sx={{
+            py: { xs: 6, md: 10 },
+            px: { xs: 3, sm: 5, md: 6 },
+            maxWidth: "1440px",
+            mx: "auto",
+          }}
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              textAlign: "center",
+              fontWeight: "bold",
+              mb: 6,
+              fontSize: { xs: "24px", sm: "30px", md: "36px" },
+              color: "white",
+            }}
+          >
+            Tailored Solutions for Every Business Type
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 4,
+            }}
+          >
+            {businessTypes.map((item, idx) => (
+              <Box
+                key={idx}
+                ref={(el) => (itemRefs.current[idx] = el)}
+                className="business-item"
+                sx={{
+                  flex: {
+                    xs: "1 1 100%",
+                    md: "1 1 calc(40% - 16px)",
+                    lg: "1 1 calc(35% - 18px)",
+                  },
+                  minHeight: "120px",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  backdropFilter: "blur(15px)",
+                  borderRadius: 3,
+                  px: { xs: 3, sm: 5 },
+                  py: { xs: 4, sm: 5 },
+                  color: "white",
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: { xs: "18px", sm: "20px" },
+                    mb: 1,
+                  }}
+                >
+                  {item.title}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "14px", sm: "16px" },
+                    color: "#ddd",
+                  }}
+                >
+                  {item.desc}
+                </Typography>
+              </Box>
+            ))}
           </Box>
         </Box>
       </Container>
