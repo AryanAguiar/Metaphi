@@ -722,35 +722,55 @@ const Home = () => {
       {/* Hero section */}
       <Container
         maxWidth={false}
+        disableGutters
         sx={{
           width: "100%",
-          maxWidth: "none",
           minHeight: "100%",
-          padding: "20px",
+          px: 3,
+          py: 4,
           color: "white",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
-        <Box sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
-          zIndex: -1,
-          filter: "blur(60px)",
-        }} />
-        <Box sx={{
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "auto",
-          maxWidth: "1485px",
-          paddingTop: 7,
-        }}>
-          {/* Left Side - Text Content */}
-          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: "20px", maxWidth: "900px" }}>
+        {/* Blurred Gradient Background */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+            zIndex: -1,
+            filter: "blur(60px)",
+          }}
+        />
+
+        {/* Main Content */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "auto",
+            maxWidth: "1485px",
+            width: "100%",
+            paddingTop: 7,
+            gap: 6,
+          }}
+        >
+          {/* Text Section */}
+          <Box
+            sx={{
+              flex: 1,
+              textAlign: { xs: "center", md: "left" },
+              padding: "20px",
+              maxWidth: "900px",
+              width: "100%",
+            }}
+          >
             <Typography
               ref={textRef}
               variant="h3"
@@ -758,11 +778,11 @@ const Home = () => {
               sx={{
                 fontWeight: "bold",
                 mb: 2,
-                background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+                background: "linear-gradient(90deg, #007bff, #00c28b)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-                fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "40px" },
+                fontSize: { xs: "24px", sm: "28px", md: "32px", lg: "38px", xl: "42px" },
               }}
             >
               {slides[currentIndex].title}
@@ -774,11 +794,11 @@ const Home = () => {
               className="desc"
               sx={{
                 mb: 4,
-                background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+                background: "linear-gradient(90deg, #007bff, #00c28b)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-                fontSize: { xs: "20px", sm: "24px", md: "19px", lg: "24px", xl: "28px" },
+                fontSize: { xs: "18px", sm: "22px", md: "20px", lg: "24px", xl: "28px" },
               }}
             >
               {slides[currentIndex].subtitle}
@@ -790,15 +810,15 @@ const Home = () => {
               sx={{
                 fontSize: "1rem",
                 borderRadius: "30px",
-                padding: "10px 20px",
-                background: "linear-gradient(145deg, #b8b8b8, #ffffff, #7e7e7e)",
-                border: "1px solid #999",
-                boxShadow: "inset 2px 2px 3px rgba(255,255,255,0.5), inset -2px -2px 3px rgba(0,0,0,0.3), 3px 3px 5px rgba(0,0,0,0.3)",
-                color: "#000",
+                padding: "10px 24px",
+                background: "linear-gradient(90deg, #007bff, #00c28b)",
+                border: "1px solid #00c8ff",
+                boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)",
+                color: "white",
                 textTransform: "uppercase",
                 "&:hover": {
-                  background: "linear-gradient(145deg, #ffffff, #d1d1d1, #a3a3a3)",
-                  boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.6)",
+                  background: "linear-gradient(90deg, #005bb5, #00a07a)",
+                  boxShadow: "0px 0px 10px rgba(0, 200, 255, 0.6)",
                 },
               }}
             >
@@ -806,15 +826,18 @@ const Home = () => {
             </Button>
           </Box>
 
-          {/* Right Side - Changing Image */}
+          {/* Image Section */}
           <Box
             ref={imageRef}
             sx={{
               flex: 1,
               display: "flex",
-              justifyContent: { xs: "center", md: "flex-end" },
+              justifyContent: "center",
               alignItems: "center",
               padding: "20px",
+              width: "100%",
+              maxWidth: "100%",
+              overflow: "hidden",
             }}
           >
             <Box
@@ -822,63 +845,15 @@ const Home = () => {
               src={slides[currentIndex].image}
               alt="Slide Image"
               sx={{
-                width: { xs: "300px", sm: "400px", md: "500px", lg: "600px" },
-                height: { xs: "300px", sm: "350px", md: "400px", lg: "450px" },
-                objectFit: "cover",
+                width: "100%",
+                maxWidth: { xs: "300px", sm: "400px", md: "500px", lg: "600px" },
+                height: "auto",
+                objectFit: "contain",
                 borderRadius: 2,
               }}
             />
           </Box>
         </Box>
-
-        {/* stats section */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 6,
-            textAlign: "center",
-            py: 7,
-            flexWrap: "wrap",
-          }}
-        >
-          {counters.map((counter, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.3 }}
-              viewport={{ once: true }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  backgroundColor: "rgba(37, 4, 255, 0.29)",
-                  padding: "15px 25px",
-                  borderRadius: "50px",
-                  width: "250px"
-                }}
-              >
-
-                <Typography variant="h4" sx={{ fontSize: 40 }}>
-                  <img style={{ width: "40px" }} src={counter.icon} alt="" />
-                </Typography>
-
-                <Box sx={{ textAlign: "left" }}>
-                  <Typography variant="h4" sx={{ fontWeight: "bold", }}>
-                    <CountUp start={0} end={counter.value} duration={4} />+
-                  </Typography>
-                  <Typography variant="body1">{counter.label}</Typography>
-                </Box>
-              </Box>
-            </motion.div>
-          ))}
-        </Box>
-
       </Container>
 
       {/* Partners section */}
