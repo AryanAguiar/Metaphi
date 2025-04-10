@@ -28,7 +28,7 @@ import serviceicon6 from "../images/iot.svg";
 import serviceicon7 from "../images/devops.svg";
 import serviceicon8 from "../images/salesforce-svgrepo-com 1.svg";
 import serviceicon9 from "../images/block chain development.svg";
-import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward,} from "@mui/icons-material";
+import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward, } from "@mui/icons-material";
 gsap.registerPlugin(ScrollTrigger);
 
 //strategic execution images
@@ -561,6 +561,7 @@ const Home = () => {
   const nextRef = useRef(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   //projects section
   const prevRefProj = useRef(null);
@@ -1383,7 +1384,7 @@ const Home = () => {
                       style={{
                         width: 60,
                         height: 60,
-                       
+
                         objectFit: "cover",
                       }}
                     />
@@ -1605,7 +1606,6 @@ const Home = () => {
             spaceBetween={20}
             slidesPerView={1}
             onSwiper={(swiper) => {
-              // Save initial state
               setIsBeginning(swiper.isBeginning);
               setIsEnd(swiper.isEnd);
             }}
@@ -1632,9 +1632,6 @@ const Home = () => {
               <SwiperSlide key={index}>
                 <Card
                   sx={{
-                    backgroundImage: `url(${industry.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
                     borderRadius: 4,
                     minHeight: 240,
                     height: "100%",
@@ -1643,10 +1640,26 @@ const Home = () => {
                     boxShadow: 3,
                     transition: "transform 0.3s ease",
                     overflow: "hidden",
-
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
                   }}
                 >
-                  {/* Overlay */}
+                  <Box
+                    component="img"
+                    src={industry.image}
+                    loading="lazy"
+                    alt={industry.title}
+                    sx={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      zIndex: 0,
+                    }}
+                  />
+
                   <Box
                     sx={{
                       position: "absolute",
@@ -1689,7 +1702,6 @@ const Home = () => {
                     >
                       {industry.description}
                     </Typography>
-
                     <Button
                       sx={{
                         mt: 10,
@@ -1709,9 +1721,9 @@ const Home = () => {
                     >
                       Learn More
                     </Button>
-
                   </CardContent>
                 </Card>
+
               </SwiperSlide>
             ))}
           </Swiper>
@@ -2073,7 +2085,7 @@ const Home = () => {
               fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
               padding: "10px",
               textAlign: "center",
-              mb:5
+              mb: 5
             }}
           >
             Tailored Solutions for Every Business Type
