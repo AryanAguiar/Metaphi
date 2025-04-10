@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton, Chip, CardMedia } from "@mui/material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia } from "@mui/material";
 import { gsap } from "gsap";
 import heroImg1 from "../images/webdev.png";
 import partner1 from "../images/partner-2.png";
@@ -15,7 +15,7 @@ import svg1 from "../images/folder.png";
 import svg2 from "../images/handshake.svg";
 import svg3 from "../images/award.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faArrowLeft, faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import serviceicon1 from "../images/gamedev.svg";
 import serviceicon2 from "../images/appdev.svg";
@@ -35,6 +35,7 @@ import qualityIcon from "../images/quality.svg";
 import dataProtectionIcon from "../images/dataprotec.svg";
 import dataBackupIcon from "../images/databackup.svg";
 import { useMemo } from "react";
+import clutchlogo from "../images/clutchlogo.png";
 
 const slides = [
   {
@@ -326,6 +327,33 @@ const businessTypes = [
   },
 ];
 
+//testimonials section
+const testimonials = [
+  {
+    title: "Lorem ipsum dolor sit amet",
+    review:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+    logo: clutchlogo,
+  },
+  {
+    title: "Consectetur adipiscing elit",
+    review:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    logo: clutchlogo,
+  },
+  {
+    title: "Sed ut perspiciatis unde",
+    review:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+    logo: clutchlogo,
+  },
+  {
+    title: "Nemo enim ipsam voluptatem",
+    review:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
+    logo: clutchlogo,
+  },
+];
 
 
 const Home = () => {
@@ -587,6 +615,45 @@ const Home = () => {
 
     return () => ctx.revert();
   }, []);
+
+
+  //testimonial animation
+  gsap.registerPlugin(ScrollTrigger);
+
+  const testimonialCards = useRef([]);
+
+  useEffect(() => {
+
+    gsap.set(".swiper-slide", { opacity: 0 });
+
+    ScrollTrigger.batch(".swiper-slide", {
+      start: "top 100%",
+      once: true,
+      onEnter: (batch) => {
+        gsap.to(batch, {
+          opacity: 1,
+          duration: 1.5,
+          stagger: 0.2,
+          ease: "power2.out",
+        });
+      },
+    });
+
+    return () => ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  }, []);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedTestimonial, setSelectedTestimonial] = useState(null);
+
+  const handleOpenModal = (testimonial) => {
+    setSelectedTestimonial(testimonial);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setSelectedTestimonial(null);
+  };
 
   return (
     <>
@@ -1877,11 +1944,10 @@ const Home = () => {
           {/* Left */}
           <Box ref={leftRef} sx={{ flex: 1, textAlign: { xs: "center", md: "left" } }}>
             <Typography
-              fontWeight="bold"
               gutterBottom
               sx={{
                 fontSize: {
-                  xs: "22px",
+                  xs: "17px",
                   sm: "26px",
                   md: "30px",
                   lg: "36px",
@@ -1899,7 +1965,7 @@ const Home = () => {
               }}
             >
               As a leading app development company in India,{" "}
-              <strong>Metaphi Innovations</strong> has collaborated with 100+ businesses,
+              <strong>Metaphi Innovations</strong> has collaborated with many businesses,
               from startups to enterprises, delivering top-tier solutions across industries.
               We offer a comprehensive range of IT consulting services tailored to meet diverse business needs.
             </Typography>
@@ -1977,13 +2043,19 @@ const Home = () => {
           }}
         >
           <Typography
+            ref={headerRef}
             variant="h4"
+            className="heading"
             sx={{
-              textAlign: "center",
               fontWeight: "bold",
-              mb: 6,
-              fontSize: { xs: "24px", sm: "30px", md: "36px" },
-              color: "white",
+              background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+              fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+              padding: "10px",
+              textAlign: "center",
+              mb:5
             }}
           >
             Tailored Solutions for Every Business Type
@@ -2040,6 +2112,218 @@ const Home = () => {
           </Box>
         </Box>
       </Container>
+
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
+
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "bold",
+            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            paddingTop: "80px",
+            textAlign: "center"
+          }}
+        >
+          What Our Clients Say
+        </Typography>
+
+        <Box
+          sx={{
+            py: 9,
+            px: { xs: "auto", sm: 3, md: 4, lg: 3, xl: 15 },
+            textAlign: "center",
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 2,
+            mb: { sx: "auto", md: "50px" }
+          }}
+        >
+          {/* Navigation Arrow for Desktop */}
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <FontAwesomeIcon icon={faArrowLeft} size="2x" className="prev-button" color="#00C8FF" style={{ cursor: "pointer" }} />
+          </Box>
+
+          {/* Swiper Container */}
+          <Box sx={{ width: "90%", maxWidth: "1480px", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              navigation={{
+                prevEl: ".prev-button",
+                nextEl: ".next-button",
+              }}
+              autoplay={{ delay: 2500, disableOnInteraction: false }}
+              loop={true}
+              speed={1000}
+              spaceBetween={20}
+              slidesPerView={1}
+              centeredSlides={true}
+              breakpoints={{
+                1000: { slidesPerView: 1, centeredSlides: true },
+                1024: { slidesPerView: 3, centeredSlides: false, spaceBetween: 10 },
+                1340: { slidesPerView: 3, centeredSlides: false, spaceBetween: 15 },
+                1440: { slidesPerView: 3, centeredSlides: false, spaceBetween: 15 },
+              }}
+              style={{ margin: "auto", overflow: "hidden", width: "100%" }}
+            >
+              {testimonials.map((item, index) => (
+                <SwiperSlide key={index} style={{ willChange: "opacity" }}>
+                  <Box
+                    ref={(el) => (testimonialCards.current[index] = el)}
+                    onClick={() => handleOpenModal(item)}
+                    sx={{
+                      background: "linear-gradient(135deg, #00C853, #0D47A1)",
+                      backgroundSize: "400% 400%",
+                      animation: "moveGradient 6s infinite alternate ease-in-out",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      color: "white",
+                      textAlign: "left",
+                      maxWidth: "450px",
+                      maxHeight: "200px",
+                      mx: "auto",
+                      transition: "all 0.4s ease-in-out",
+                      overflow: "hidden",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {/* Rating Stars */}
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                      {[...Array(5)].map((_, i) => (
+                        <FontAwesomeIcon key={i} icon={faStar} color="#00C8FF" />
+                      ))}
+                    </Box>
+
+                    <Typography sx={{ fontWeight: "bold", mt: 1, fontSize: { xs: "12px", md: "14px" } }}>{item.title}</Typography>
+                    <Typography
+                      sx={{
+                        mt: 1,
+                        fontSize: { xs: "10px", md: "14px" },
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        WebkitLineClamp: 3,
+                        overflow: "hidden",
+                      }}
+                    >
+                      {item.review}
+                    </Typography>
+
+                    <Box sx={{ display: "flex", alignItems: "center", mt: 3 }}>
+                      <img
+                        src={item.logo}
+                        alt="Logo"
+                        style={{ height: "70px", width: "70px", objectFit: "contain" }}
+                      />
+                    </Box>
+                  </Box>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            {/* Navigation Arrows */}
+            <Box
+              sx={{
+                display: { xs: "flex", md: "none" },
+                justifyContent: "center",
+                gap: 3,
+                mt: 3,
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} size="2x" className="prev-button" color="#00C8FF" style={{ cursor: "pointer" }} />
+              <FontAwesomeIcon icon={faArrowRight} size="2x" className="next-button" color="#00C8FF" style={{ cursor: "pointer" }} />
+            </Box>
+
+          </Box>
+
+          {/* Navigation Arrow for Desktop */}
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <FontAwesomeIcon icon={faArrowRight} size="2x" className="next-button" color="#00C8FF" style={{ cursor: "pointer" }} />
+          </Box>
+          {/* Modal */}
+          <Modal open={openModal} onClose={handleCloseModal} disableScrollLock sx={{ margin: 4 }}>
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                bgcolor: "#111212",
+
+                color: "white",
+                borderRadius: "10px",
+                padding: { xs: "20px", sm: "30px", md: "40px" },
+                width: { xs: "90%", sm: "70%", md: "50%" },
+                maxHeight: "80vh",
+                overflowY: "auto",
+                boxShadow: 24,
+              }}
+            >
+              {/* Close Button */}
+              <IconButton
+                onClick={handleCloseModal}
+                sx={{
+                  position: "absolute",
+                  top: 10,
+                  right: 10,
+                  color: "white",
+                }}
+              >
+                <FontAwesomeIcon icon={faTimes} />
+              </IconButton>
+
+              {selectedTestimonial && (
+                <>
+                  {/* Rating Stars */}
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    {[...Array(5)].map((_, i) => (
+                      <FontAwesomeIcon key={i} icon={faStar} color="#00C8FF" />
+                    ))}
+                  </Box>
+
+                  {/* Title */}
+                  <Typography sx={{ fontWeight: "bold", mt: 2, fontSize: "22px" }}>
+                    {selectedTestimonial.title}
+                  </Typography>
+
+                  {/* Full Review */}
+                  <Typography sx={{ mt: 2, fontSize: "16px", lineHeight: 1.5 }}>
+                    {selectedTestimonial.review}
+                  </Typography>
+
+                  {/* Logo */}
+                  <Box sx={{ display: "flex", alignItems: "center", mt: 3 }}>
+                    <img
+                      src={selectedTestimonial.logo}
+                      alt="Logo"
+                      style={{ height: "70px", width: "70px", objectFit: "contain" }}
+                    />
+                  </Box>
+
+                </>
+              )}
+            </Box>
+          </Modal>
+
+        </Box>
+      </Container>
+
     </>
   );
 };
