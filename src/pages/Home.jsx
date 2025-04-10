@@ -3,9 +3,9 @@ import { Container, Box, Button, Typography, Card, CardContent, IconButton, Moda
 import { gsap } from "gsap";
 
 //hero section
-import heroImg1 from "../images/mobile application development.png";
+import heroImg1 from "../images/mobile application development.webp";
 import heroImg2 from "../images/webdev.png";
-import heroImg3 from "../images/Blockchain.png";
+import heroImg3 from "../images/Blockchain.webp";
 import partner1 from "../images/partner-2.png";
 import "./Home.css";
 
@@ -807,17 +807,30 @@ const Home = () => {
           </Box>
 
           {/* Right Side - Changing Image */}
-          <Box ref={imageRef} sx={{ flex: 1, display: "flex", justifyContent: "right", padding: "20px" }}>
-            <img
+          <Box
+            ref={imageRef}
+            sx={{
+              flex: 1,
+              display: "flex",
+              justifyContent: { xs: "center", md: "flex-end" },
+              alignItems: "center",
+              padding: "20px",
+            }}
+          >
+            <Box
+              component="img"
               src={slides[currentIndex].image}
               alt="Slide Image"
-              style={{
-                width: "100%",
-                maxWidth: "800px",
-                height: "500px",
+              sx={{
+                width: { xs: "300px", sm: "400px", md: "500px", lg: "600px" },
+                height: { xs: "300px", sm: "350px", md: "400px", lg: "450px" },
+                objectFit: "cover",
+                borderRadius: 2,
               }}
             />
           </Box>
+
+
         </Box>
 
         {/* stats section */}
@@ -2399,59 +2412,82 @@ const Home = () => {
       </Container>
 
       {/* Contact us section */}
-      <Container
-        ref={containerRef}
-        maxWidth={false}
-        disableGutters
-        sx={{ px: 0, py: 0, position: "relative", width: "100%" }}
-      >
-        {/* Background Glow */}
+
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
         <Box sx={{
           position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
           height: "100%",
-          background: "linear-gradient(135deg, rgba(0,200,255,0.15), rgba(144,19,254,0.15))",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
           zIndex: -1,
-          filter: "blur(80px)",
+          filter: "blur(60px)",
         }} />
 
         <Box
           sx={{
             display: "flex",
+            maxWidth: "1480px",
             flexDirection: { xs: "column", md: "row" },
-            flexWrap: "wrap",
-            py: 10,
-            px: { xs: 3, md: 10, lg: 16 },
+            py: { xs: 6, md: 10 },
+            px: { xs: 0, md: 6, lg: 6, xl: 3 },
             gap: { xs: 5, md: 8 },
+            justifyContent: "center",
+            alignItems: "center",
+            overflowX: "hidden",
+            boxSizing: "border-box",
+            margin: "auto"
           }}
         >
           {/* Left Info */}
-          <Box ref={leftRef} sx={{ flex: 1, minWidth: "250px", color: "white", textAlign: { xs: "center", md: "left" } }}>
-            <Typography variant="h3" fontWeight="bold">
+          <Box
+            ref={leftRef}
+            sx={{
+              flex: 1,
+              minWidth: { xs: "100%", md: "300px" },
+              color: "white",
+              textAlign: { xs: "center", md: "left" },
+            }}
+          >
+            <Typography variant="h3" fontWeight="bold" fontSize={{ xs: "2rem", sm: "2.5rem", md: "3rem" }}>
               Let’s Build Something{" "}
-              <span style={{ background: "linear-gradient(45deg, #00C8FF, #9013FE)", WebkitBackgroundClip: "text", color: "transparent" }}>
+              <span
+                style={{
+                  background: "linear-gradient(45deg, #00C8FF, #9013FE)",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
+                }}
+              >
                 Extraordinary
               </span>{" "}
               Together!
             </Typography>
-            <Typography sx={{ mt: 2, color: "#BBBBBB" }}>
+            <Typography sx={{ mt: 2, color: "#BBBBBB", fontSize: { xs: "0.95rem", md: "1rem" } }}>
               Share your project details and take the first step toward success.
             </Typography>
 
-            {/* Contact Info Items */}
             {[{
               icon: faEnvelope,
               label: "Email",
-              value: "contact@test.com"
+              value: "contact@test.com",
             }, {
               icon: faCalendar,
               label: "Schedule a Call",
-              value: "Free Consultation"
+              value: "Free Consultation",
             }].map(({ icon, label, value }, i) => (
-              <Box key={i} sx={{ display: "flex", alignItems: "center", mt: 4 }}>
-                <Box sx={{ width: 50, height: 50, backgroundColor: "#0E2A3A", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: 2 }}>
+              <Box key={i} sx={{ display: "flex", alignItems: "center", mt: 4, justifyContent: { xs: "center", md: "flex-start" } }}>
+                <Box
+                  sx={{
+                    width: 50,
+                    height: 50,
+                    backgroundColor: "#0E2A3A",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 2,
+                  }}
+                >
                   <FontAwesomeIcon icon={icon} color="#00C8FF" size="lg" />
                 </Box>
                 <Box sx={{ ml: 2 }}>
@@ -2463,22 +2499,26 @@ const Home = () => {
           </Box>
 
           {/* Contact Form */}
-          <Box ref={rightRef} sx={{
-            flex: 1,
-            minWidth: "300px",
-            background: "rgba(17, 17, 17, 0.8)",
-            backdropFilter: "blur(12px)",
-            p: 5,
-            borderRadius: 3,
-            boxShadow: "0 0 30px rgba(0,200,255,0.1)",
-          }}>
+          <Box
+            ref={rightRef}
+            sx={{
+              flex: 1,
+              width: "100%",
+              maxWidth: { xs: "250px", sm: "500px" },
+              minWidth: 0,
+              background: "rgba(17, 17, 17, 0.85)",
+              backdropFilter: "blur(12px)",
+              p: { xs: 2, sm: 3, md: 4 },
+              borderRadius: 3,
+              boxShadow: "0 0 30px rgba(0,200,255,0.1)",
+              margin: "auto",
+            }}
+          >
             <Formik
-              initialValues={{ email: "", jobTitle: "", service: "", budget: "", message: "" }}
+              initialValues={{ email: "", jobTitle: "", message: "" }}
               validationSchema={Yup.object({
                 email: Yup.string().email("Invalid email").required("Email is required"),
                 jobTitle: Yup.string().required("Job title is required"),
-                service: Yup.string().required("Please select a service"),
-                budget: Yup.string().required("Please select a budget"),
                 message: Yup.string().required("Message is required"),
               })}
               onSubmit={(values, { setSubmitting }) => {
@@ -2492,24 +2532,13 @@ const Home = () => {
                   {[
                     { name: "email", label: "Email*", type: "text" },
                     { name: "jobTitle", label: "Job Title*", type: "text" },
-                    {
-                      name: "service", label: "Service*", type: "select", options: [
-                        "Business Solution", "Software Development", "Consulting"
-                      ]
-                    },
-                    {
-                      name: "budget", label: "Budget*", type: "select", options: [
-                        "$0-$7k", "$7k-$20k", "$20k+"
-                      ]
-                    },
                     { name: "message", label: "Message*", type: "textarea" },
-                  ].map(({ name, label, type, options }) => (
+                  ].map(({ name, label, type }) => (
                     <FastField key={name} name={name}>
                       {({ field, meta }) => (
                         <TextField
                           {...field}
                           fullWidth
-                          select={type === "select"}
                           multiline={type === "textarea"}
                           rows={type === "textarea" ? 4 : undefined}
                           label={label}
@@ -2527,18 +2556,8 @@ const Home = () => {
                               "&:hover fieldset": { borderColor: "#00C8FF" },
                               "&.Mui-focused fieldset": { borderColor: "#00C8FF" },
                             },
-                            "& .MuiSelect-select": {
-                              color: "white",
-                              backgroundColor: "#111",
-                            },
                           }}
-                        >
-                          {options && options.map(opt => (
-                            <MenuItem key={opt} value={opt} sx={{ backgroundColor: "#111", color: "white" }}>
-                              {opt}
-                            </MenuItem>
-                          ))}
-                        </TextField>
+                        />
                       )}
                     </FastField>
                   ))}
@@ -2553,6 +2572,7 @@ const Home = () => {
                       py: 1.5,
                       mt: 2,
                       borderRadius: 2,
+                      fontSize: { xs: "1rem", md: "1.1rem" },
                       "&:hover": {
                         background: "linear-gradient(90deg, #0099CC, #7E1BFE)",
                       },
@@ -2564,8 +2584,10 @@ const Home = () => {
               )}
             </Formik>
           </Box>
+
         </Box>
       </Container>
+
     </>
   );
 };
