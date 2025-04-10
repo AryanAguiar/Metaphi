@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia } from "@mui/material";
 import { gsap } from "gsap";
-import heroImg1 from "../images/webdev.png";
+import heroImg1 from "../images/mobile application development.png";
+import heroImg2 from "../images/webdev.png";
+import heroImg3 from "../images/Blockchain.png";
+
 import partner1 from "../images/partner-2.png";
 import "./Home.css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -69,7 +72,7 @@ const slides = [
   {
     title: "Blockchain Development Company",
     subtitle: " Rated #1 Blockchain Development Company in India.",
-    image: heroImg1,
+    image: heroImg3,
   },
 ];
 
@@ -771,7 +774,7 @@ const Home = () => {
               style={{
                 width: "100%",
                 maxWidth: "800px",
-                height: "auto",
+                height: "500px",
               }}
             />
           </Box>
