@@ -814,7 +814,7 @@ const Home = () => {
               display: "flex",
               justifyContent: { xs: "center", md: "flex-end" },
               alignItems: "center",
-              padding: "20px",
+ 
             }}
           >
             <Box
