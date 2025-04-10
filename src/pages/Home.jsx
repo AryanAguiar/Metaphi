@@ -829,8 +829,6 @@ const Home = () => {
               }}
             />
           </Box>
-
-
         </Box>
 
         {/* stats section */}
@@ -2454,7 +2452,7 @@ const Home = () => {
               Let’s Build Something{" "}
               <span
                 style={{
-                  background: "linear-gradient(45deg, #00C8FF, #9013FE)",
+                  background: "linear-gradient(90deg, #00C8FF, #00E5B2, #00FF94)",
                   WebkitBackgroundClip: "text",
                   color: "transparent",
                 }}
@@ -2566,16 +2564,13 @@ const Home = () => {
                     type="submit"
                     fullWidth
                     sx={{
-                      background: "linear-gradient(90deg, #00C8FF, #9013FE)",
+                      background: "linear-gradient(90deg, #00C8FF, #00E5B2, #00FF94)",
                       color: "white",
                       fontWeight: "bold",
                       py: 1.5,
                       mt: 2,
                       borderRadius: 2,
                       fontSize: { xs: "1rem", md: "1.1rem" },
-                      "&:hover": {
-                        background: "linear-gradient(90deg, #0099CC, #7E1BFE)",
-                      },
                     }}
                   >
                     Send Message
