@@ -807,14 +807,25 @@ const Home = () => {
           </Box>
 
           {/* Right Side - Changing Image */}
-          <Box ref={imageRef} sx={{ flex: 1, display: "flex", justifyContent: "right", padding: "20px" }}>
-            <img
+          <Box
+            ref={imageRef}
+            sx={{
+              flex: 1,
+              display: "flex",
+              justifyContent: { xs: "center", md: "flex-end" },
+              alignItems: "center",
+              padding: "20px",
+            }}
+          >
+            <Box
+              component="img"
               src={slides[currentIndex].image}
               alt="Slide Image"
-              style={{
-                width: "100%",
-                maxWidth: "800px",
-                height: "500px",
+              sx={{
+                width: { xs: "300px", sm: "400px", md: "500px", lg: "600px" },
+                height: { xs: "300px", sm: "350px", md: "400px", lg: "450px" },
+                objectFit: "cover",
+                borderRadius: 2,
               }}
             />
           </Box>
@@ -2441,7 +2452,7 @@ const Home = () => {
               Let’s Build Something{" "}
               <span
                 style={{
-                  background: "linear-gradient(45deg, #00C8FF, #9013FE)",
+                  background: "linear-gradient(90deg, #00C8FF, #00E5B2, #00FF94)",
                   WebkitBackgroundClip: "text",
                   color: "transparent",
                 }}
@@ -2553,16 +2564,13 @@ const Home = () => {
                     type="submit"
                     fullWidth
                     sx={{
-                      background: "linear-gradient(90deg, #00C8FF, #9013FE)",
+                      background: "linear-gradient(90deg, #00C8FF, #00E5B2, #00FF94)",
                       color: "white",
                       fontWeight: "bold",
                       py: 1.5,
                       mt: 2,
                       borderRadius: 2,
                       fontSize: { xs: "1rem", md: "1.1rem" },
-                      "&:hover": {
-                        background: "linear-gradient(90deg, #0099CC, #7E1BFE)",
-                      },
                     }}
                   >
                     Send Message
