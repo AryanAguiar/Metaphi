@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia } from "@mui/material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, MenuItem } from "@mui/material";
 import { gsap } from "gsap";
+
+//hero section
 import heroImg1 from "../images/mobile application development.png";
 import heroImg2 from "../images/webdev.png";
 import heroImg3 from "../images/Blockchain.png";
-
 import partner1 from "../images/partner-2.png";
 import "./Home.css";
+
+//swiper and countup 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -18,7 +21,7 @@ import svg1 from "../images/folder.png";
 import svg2 from "../images/handshake.svg";
 import svg3 from "../images/award.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faArrowLeft, faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faArrowLeft, faStar, faTimes, faEnvelope, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 //service cards
@@ -57,6 +60,10 @@ import fitness from "../images/fitness.jpg";
 import food from "../images/food and restaurant.jpg";
 import elearning from "../images/E Learning.jpg";
 import elearning2 from "../images/E Learning 2 image.jpg";
+
+//form components
+import { FastField, Formik, Form, } from "formik";
+import * as Yup from "yup";
 
 const slides = [
   {
@@ -676,6 +683,39 @@ const Home = () => {
     setOpenModal(false);
     setSelectedTestimonial(null);
   };
+
+
+  //contact form
+  const containerRef = useRef();
+  const leftContactRef = useRef();
+  const righContactRef = useRef();
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(leftContactRef.current, {
+        x: -50,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+        },
+      });
+
+      gsap.from(righContactRef.current, {
+        x: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.2,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <>
@@ -2146,6 +2186,7 @@ const Home = () => {
         </Box>
       </Container>
 
+      {/* Testimonial section */}
       <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
         <Box sx={{
           position: "absolute",
@@ -2230,7 +2271,7 @@ const Home = () => {
                       color: "white",
                       textAlign: "left",
                       maxWidth: "450px",
-                      maxHeight: "200px",
+                      height: "200px",
                       mx: "auto",
                       transition: "all 0.4s ease-in-out",
                       overflow: "hidden",
@@ -2357,6 +2398,174 @@ const Home = () => {
         </Box>
       </Container>
 
+      {/* Contact us section */}
+      <Container
+        ref={containerRef}
+        maxWidth={false}
+        disableGutters
+        sx={{ px: 0, py: 0, position: "relative", width: "100%" }}
+      >
+        {/* Background Glow */}
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(135deg, rgba(0,200,255,0.15), rgba(144,19,254,0.15))",
+          zIndex: -1,
+          filter: "blur(80px)",
+        }} />
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            flexWrap: "wrap",
+            py: 10,
+            px: { xs: 3, md: 10, lg: 16 },
+            gap: { xs: 5, md: 8 },
+          }}
+        >
+          {/* Left Info */}
+          <Box ref={leftRef} sx={{ flex: 1, minWidth: "250px", color: "white", textAlign: { xs: "center", md: "left" } }}>
+            <Typography variant="h3" fontWeight="bold">
+              Let’s Build Something{" "}
+              <span style={{ background: "linear-gradient(45deg, #00C8FF, #9013FE)", WebkitBackgroundClip: "text", color: "transparent" }}>
+                Extraordinary
+              </span>{" "}
+              Together!
+            </Typography>
+            <Typography sx={{ mt: 2, color: "#BBBBBB" }}>
+              Share your project details and take the first step toward success.
+            </Typography>
+
+            {/* Contact Info Items */}
+            {[{
+              icon: faEnvelope,
+              label: "Email",
+              value: "contact@test.com"
+            }, {
+              icon: faCalendar,
+              label: "Schedule a Call",
+              value: "Free Consultation"
+            }].map(({ icon, label, value }, i) => (
+              <Box key={i} sx={{ display: "flex", alignItems: "center", mt: 4 }}>
+                <Box sx={{ width: 50, height: 50, backgroundColor: "#0E2A3A", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: 2 }}>
+                  <FontAwesomeIcon icon={icon} color="#00C8FF" size="lg" />
+                </Box>
+                <Box sx={{ ml: 2 }}>
+                  <Typography variant="body2" sx={{ color: "#AAAAAA" }}>{label}</Typography>
+                  <Typography variant="body1" fontWeight="bold">{value}</Typography>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+
+          {/* Contact Form */}
+          <Box ref={rightRef} sx={{
+            flex: 1,
+            minWidth: "300px",
+            background: "rgba(17, 17, 17, 0.8)",
+            backdropFilter: "blur(12px)",
+            p: 5,
+            borderRadius: 3,
+            boxShadow: "0 0 30px rgba(0,200,255,0.1)",
+          }}>
+            <Formik
+              initialValues={{ email: "", jobTitle: "", service: "", budget: "", message: "" }}
+              validationSchema={Yup.object({
+                email: Yup.string().email("Invalid email").required("Email is required"),
+                jobTitle: Yup.string().required("Job title is required"),
+                service: Yup.string().required("Please select a service"),
+                budget: Yup.string().required("Please select a budget"),
+                message: Yup.string().required("Message is required"),
+              })}
+              onSubmit={(values, { setSubmitting }) => {
+                console.log("Form Data:", values);
+                alert("Message Sent Successfully!");
+                setSubmitting(false);
+              }}
+            >
+              {({ handleSubmit }) => (
+                <Form onSubmit={handleSubmit}>
+                  {[
+                    { name: "email", label: "Email*", type: "text" },
+                    { name: "jobTitle", label: "Job Title*", type: "text" },
+                    {
+                      name: "service", label: "Service*", type: "select", options: [
+                        "Business Solution", "Software Development", "Consulting"
+                      ]
+                    },
+                    {
+                      name: "budget", label: "Budget*", type: "select", options: [
+                        "$0-$7k", "$7k-$20k", "$20k+"
+                      ]
+                    },
+                    { name: "message", label: "Message*", type: "textarea" },
+                  ].map(({ name, label, type, options }) => (
+                    <FastField key={name} name={name}>
+                      {({ field, meta }) => (
+                        <TextField
+                          {...field}
+                          fullWidth
+                          select={type === "select"}
+                          multiline={type === "textarea"}
+                          rows={type === "textarea" ? 4 : undefined}
+                          label={label}
+                          variant="outlined"
+                          error={meta.touched && Boolean(meta.error)}
+                          helperText={meta.touched && meta.error}
+                          sx={{
+                            mb: 3,
+                            backgroundColor: "#222",
+                            borderRadius: 1,
+                            "& .MuiInputBase-input": { color: "white" },
+                            "& .MuiInputLabel-root": { color: "#ccc" },
+                            "& .MuiOutlinedInput-root": {
+                              "& fieldset": { borderColor: "#444" },
+                              "&:hover fieldset": { borderColor: "#00C8FF" },
+                              "&.Mui-focused fieldset": { borderColor: "#00C8FF" },
+                            },
+                            "& .MuiSelect-select": {
+                              color: "white",
+                              backgroundColor: "#111",
+                            },
+                          }}
+                        >
+                          {options && options.map(opt => (
+                            <MenuItem key={opt} value={opt} sx={{ backgroundColor: "#111", color: "white" }}>
+                              {opt}
+                            </MenuItem>
+                          ))}
+                        </TextField>
+                      )}
+                    </FastField>
+                  ))}
+
+                  <Button
+                    type="submit"
+                    fullWidth
+                    sx={{
+                      background: "linear-gradient(90deg, #00C8FF, #9013FE)",
+                      color: "white",
+                      fontWeight: "bold",
+                      py: 1.5,
+                      mt: 2,
+                      borderRadius: 2,
+                      "&:hover": {
+                        background: "linear-gradient(90deg, #0099CC, #7E1BFE)",
+                      },
+                    }}
+                  >
+                    Send Message
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+          </Box>
+        </Box>
+      </Container>
     </>
   );
 };
