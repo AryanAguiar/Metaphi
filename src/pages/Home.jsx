@@ -720,7 +720,155 @@ const Home = () => {
   return (
     <>
       {/* Hero section */}
-     
+      <Container
+        maxWidth={false}
+        sx={{
+          width: "100%",
+          maxWidth: "none",
+          minHeight: "100%",
+          padding: "20px",
+          color: "white",
+        }}
+      >
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
+        <Box sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          justifyContent: "space-between",
+          margin: "auto",
+          maxWidth: "1485px",
+          paddingTop: 7,
+        }}>
+          {/* Left Side - Text Content */}
+          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: "20px", maxWidth: "900px" }}>
+            <Typography
+              ref={textRef}
+              variant="h3"
+              className="heading"
+              sx={{
+                fontWeight: "bold",
+                mb: 2,
+                background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+                fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "40px" },
+              }}
+            >
+              {slides[currentIndex].title}
+            </Typography>
+
+            <Typography
+              ref={subTextRef}
+              variant="h6"
+              className="desc"
+              sx={{
+                mb: 4,
+                background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
+                fontSize: { xs: "20px", sm: "24px", md: "19px", lg: "24px", xl: "28px" },
+              }}
+            >
+              {slides[currentIndex].subtitle}
+            </Typography>
+
+            <Button
+              ref={buttonRef}
+              variant="contained"
+              sx={{
+                fontSize: "1rem",
+                borderRadius: "30px",
+                padding: "10px 20px",
+                background: "linear-gradient(145deg, #b8b8b8, #ffffff, #7e7e7e)",
+                border: "1px solid #999",
+                boxShadow: "inset 2px 2px 3px rgba(255,255,255,0.5), inset -2px -2px 3px rgba(0,0,0,0.3), 3px 3px 5px rgba(0,0,0,0.3)",
+                color: "#000",
+                textTransform: "uppercase",
+                "&:hover": {
+                  background: "linear-gradient(145deg, #ffffff, #d1d1d1, #a3a3a3)",
+                  boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.6)",
+                },
+              }}
+            >
+              Get Started
+            </Button>
+          </Box>
+
+          {/* Right Side - Changing Image */}
+          <Box ref={imageRef} sx={{ flex: 1, display: "flex", justifyContent: "right", padding: "20px" }}>
+            <img
+              src={slides[currentIndex].image}
+              alt="Slide Image"
+              style={{
+                width: "100%",
+                maxWidth: "800px",
+                height: "500px",
+              }}
+            />
+          </Box>
+        </Box>
+
+        {/* stats section */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 6,
+            textAlign: "center",
+            py: 7,
+            flexWrap: "wrap",
+          }}
+        >
+          {counters.map((counter, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.3 }}
+              viewport={{ once: true }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  backgroundColor: "rgba(37, 4, 255, 0.29)",
+                  padding: "15px 25px",
+                  borderRadius: "50px",
+                  width: "250px"
+                }}
+              >
+
+                <Typography variant="h4" sx={{ fontSize: 40 }}>
+                  <img style={{ width: "40px" }} src={counter.icon} alt="" />
+                </Typography>
+
+                <Box sx={{ textAlign: "left" }}>
+                  <Typography variant="h4" sx={{ fontWeight: "bold", }}>
+                    <CountUp start={0} end={counter.value} duration={4} />+
+                  </Typography>
+                  <Typography variant="body1">{counter.label}</Typography>
+                </Box>
+              </Box>
+            </motion.div>
+          ))}
+        </Box>
+
+      </Container>
 
       {/* Partners section */}
       <Container maxWidth={false} disableGutters sx={{ px: 6, py: 9, position: "relative", width: "100%" }}>
@@ -2293,7 +2441,7 @@ const Home = () => {
               Let’s Build Something{" "}
               <span
                 style={{
-                  background: "linear-gradient(90deg, #00C8FF, #00E5B2, #00FF94)",
+                  background: "linear-gradient(45deg, #00C8FF, #9013FE)",
                   WebkitBackgroundClip: "text",
                   color: "transparent",
                 }}
@@ -2405,13 +2553,16 @@ const Home = () => {
                     type="submit"
                     fullWidth
                     sx={{
-                      background: "linear-gradient(90deg, #00C8FF, #00E5B2, #00FF94)",
+                      background: "linear-gradient(90deg, #00C8FF, #9013FE)",
                       color: "white",
                       fontWeight: "bold",
                       py: 1.5,
                       mt: 2,
                       borderRadius: 2,
                       fontSize: { xs: "1rem", md: "1.1rem" },
+                      "&:hover": {
+                        background: "linear-gradient(90deg, #0099CC, #7E1BFE)",
+                      },
                     }}
                   >
                     Send Message
