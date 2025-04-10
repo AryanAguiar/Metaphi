@@ -24,7 +24,7 @@ import serviceicon4 from "../images/ecommerce.svg";
 import serviceicon5 from "../images/aiml.svg";
 import serviceicon6 from "../images/iot.svg";
 import serviceicon7 from "../images/devops.svg";
-import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
+import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward, ArrowLeft} from "@mui/icons-material";
 gsap.registerPlugin(ScrollTrigger);
 import dedicatedIcon from "../images/Dedicated.svg";
 import supportIcon from "../images/customersupport.svg";
@@ -508,18 +508,21 @@ const Home = () => {
         sx={{
           width: "100%",
           maxWidth: "none",
-          backgroundImage: `
-          linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.9) 100%),
-          linear-gradient(90deg, rgba(8,10,19,1) 5%, rgba(0,51,102,0.9) 50%, rgba(0,102,51,0.7) 90%, rgba(0,0,0,0) 100%)
-        `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "100% 100%",
-          backgroundPosition: "center",
           minHeight: "100%",
           padding: "20px",
           color: "white",
         }}
       >
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
         <Box sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
@@ -853,12 +856,10 @@ const Home = () => {
             >
               Accelerating Business Growth with Intelligent Solutions
             </Typography>
-
             <Box sx={{ flex: 1, maxWidth: "600px" }} >
               <Typography variant="body1" sx={{ flex: 1, color: "#ddd", lineHeight: 1.8, fontSize: { xs: "20px", sm: "22px", md: "16px", lg: "21px", xl: "24px" } }}>
                 Unlock growth opportunities with robust software solutions, system modernization, and next-gen technologies—powered by a leading development company.
               </Typography>
-
               <Box
                 sx={{
                   display: "flex",
@@ -885,11 +886,8 @@ const Home = () => {
                   Services <FontAwesomeIcon icon={faArrowRight} />
                 </Button>
               </Box>
-
             </Box>
-
           </Box>
-
           <Box
             ref={addToRefs}
             sx={{
@@ -899,12 +897,8 @@ const Home = () => {
               width: "100%",
             }}
           >
-
           </Box>
         </Box>
-
-
-
       </Container>
 
       {/* services section */}
@@ -1404,7 +1398,7 @@ const Home = () => {
                 },
               }}
             >
-              <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+              <ArrowBack/>
             </IconButton>
 
             <IconButton
@@ -1428,7 +1422,7 @@ const Home = () => {
                 },
               }}
             >
-              <FontAwesomeIcon icon={faArrowRight} size="lg" />
+              <ArrowForward/>
             </IconButton>
 
           </Box>
@@ -1581,7 +1575,7 @@ const Home = () => {
           Our Work
         </Typography>
 
-        <Typography 
+        <Typography
           sx={{
             background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
             WebkitBackgroundClip: "text",
@@ -1591,7 +1585,7 @@ const Home = () => {
             padding: "10px 40px",
             textAlign: "center",
             maxWidth: "1420px",
-            margin:"auto"
+            margin: "auto"
           }}
         >
           A Glimpse of the Solutions We’ve Delivered to Global Clients
@@ -1625,7 +1619,7 @@ const Home = () => {
                 },
               }}
             >
-              <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+              <ArrowBack/>
             </IconButton>
 
             <IconButton
@@ -1647,7 +1641,7 @@ const Home = () => {
                 },
               }}
             >
-              <FontAwesomeIcon icon={faArrowRight} size="lg" />
+              <ArrowForward/>
             </IconButton>
 
           </Box>
@@ -1723,25 +1717,27 @@ const Home = () => {
           {/* View More Button */}
           <Box sx={{ textAlign: "center", marginTop: 3 }}>
             <Button
-              sx={{
-                background: "linear-gradient(135deg, rgba(0, 183, 255, 0.3), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                borderRadius: 4,
-                padding: "8px 16px",
-                boxShadow: "0px 4px 10px rgba(0, 183, 255, 0.2)",
-                transition: "0.3s",
+               sx={{
+                alignSelf: "flex-start",
+                mt: "auto",
+                border: "1px solid #00eaff",
+                color: "#00eaff",
+                fontWeight: 500,
+                textTransform: "none",
+                fontSize: "1rem",
+                transition: "all 0.3s ease",
                 "&:hover": {
-                  boxShadow: "0px 8px 20px rgba(0, 183, 255, 0.4)",
+                  backgroundColor: "rgba(0, 234, 255, 0.1)",
+                  borderColor: "#00eaff",
+                  color: "#00f7ff",
+                  boxShadow: "0 0 8px #00f7ff",
                 },
               }}
             >
               View More
             </Button>
-
           </Box>
         </Box>
-
-
       </Container>
     </>
   );
