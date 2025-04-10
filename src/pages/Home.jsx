@@ -807,7 +807,40 @@ const Home = () => {
           </Box>
 
           {/* Right Side - Changing Image */}
-         
+          <Box
+            ref={imageRef}
+            sx={{
+              flex: 1,
+              display: "flex",
+              justifyContent: { xs: "center", md: "flex-end" },
+              alignItems: "center",
+              padding: "20px",
+            }}
+          >
+            <Box
+              sx={{
+                width: { xs: "300px", sm: "400px", md: "500px", lg: "600px" },
+                height: { xs: "300px", sm: "350px", md: "400px", lg: "450px" },
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 2,
+              }}
+            >
+              <Box
+                component="img"
+                src={slides[currentIndex].image}
+                alt="Slide Image"
+                sx={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
+            </Box>
+          </Box>
+
 
         </Box>
 
