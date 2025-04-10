@@ -17,6 +17,8 @@ import svg3 from "../images/award.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft, faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+
+//service cards
 import serviceicon1 from "../images/gamedev.svg";
 import serviceicon2 from "../images/appdev.svg";
 import serviceicon3 from "../images/webdev.svg";
@@ -24,8 +26,12 @@ import serviceicon4 from "../images/ecommerce.svg";
 import serviceicon5 from "../images/aiml.svg";
 import serviceicon6 from "../images/iot.svg";
 import serviceicon7 from "../images/devops.svg";
-import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward, ArrowLeft } from "@mui/icons-material";
+import serviceicon8 from "../images/salesforce-svgrepo-com 1.svg";
+import serviceicon9 from "../images/block chain development.svg";
+import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward,} from "@mui/icons-material";
 gsap.registerPlugin(ScrollTrigger);
+
+//strategic execution images
 import dedicatedIcon from "../images/Dedicated.svg";
 import supportIcon from "../images/customersupport.svg";
 import clientCentricIcon from "../images/clientcetric.svg";
@@ -36,6 +42,18 @@ import dataProtectionIcon from "../images/dataprotec.svg";
 import dataBackupIcon from "../images/databackup.svg";
 import { useMemo } from "react";
 import clutchlogo from "../images/clutchlogo.png";
+
+//industries we serve
+import socialNetworking from "../images/Social networking.jpg";
+import travelandHospitality from "../images/travel and hospitality.jpg";
+import gaming from "../images/gaming software development.jpg";
+import logistics from "../images/logistic and dashboard.jpg";
+import realestate from "../images/real estate.jpg";
+import ecommerce from "../images/ecommerce retail.jpg";
+import fitness from "../images/fitness.jpg";
+import food from "../images/food and restaurant.jpg";
+import elearning from "../images/E Learning.jpg";
+import elearning2 from "../images/E Learning 2 image.jpg";
 
 const slides = [
   {
@@ -94,14 +112,14 @@ const services = [
   {
     id: "blockchain",
     title: "Blockchain Development",
-    icon: "https://cdn-icons-png.flaticon.com/128/4881/4881901.png",
+    icon: serviceicon9,
     description: "Empower your business with decentralized, secure, and innovative blockchain solutions.",
     mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
   },
   {
     id: "salesforce",
     title: "Salesforce Solutions",
-    icon: "https://cdn-icons-png.flaticon.com/128/889/889648.png",
+    icon: serviceicon8,
     description: "Maximize the power of Salesforce to optimize operations and drive intelligent decision-making.",
     mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
   },
@@ -238,52 +256,52 @@ const industries = [
   {
     title: 'Retail & E-commerce',
     description: 'Empower your retail business with scalable, future-ready digital solutions.',
-    image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=800&q=80',
+    image: ecommerce,
   },
   {
     title: 'Education & E-Learning',
     description: 'Enhance learning experiences with tech-driven solutions for global learners.',
-    image: 'https://images.unsplash.com/photo-1559070164-7e9e8389b38c?auto=format&fit=crop&w=800&q=80',
+    image: elearning,
   },
   {
     title: 'Healthcare & Fitness',
     description: 'Leverage AI, ML, and IoT to transform healthcare services and outcomes.',
-    image: 'https://images.unsplash.com/photo-1588776814546-ec7e5f67a0c4?auto=format&fit=crop&w=800&q=80',
+    image: fitness,
   },
   {
     title: 'Logistics & Distribution',
     description: 'Optimize logistics with customer-centric, industry-specific solutions.',
-    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abb41?auto=format&fit=crop&w=800&q=80',
+    image: logistics,
   },
   {
     title: 'Social Networking',
     description: 'Build engaging, seamless social media applications.',
-    image: 'https://images.unsplash.com/photo-1629927988423-d734f58f7b6c?auto=format&fit=crop&w=800&q=80',
+    image: socialNetworking,
   },
   {
     title: 'Real Estate',
     description: 'Implement cutting-edge real estate solutions for your unique needs.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+    image: realestate,
   },
   {
     title: 'Travel & Hospitality',
     description: 'Deliver intuitive digital travel experiences with feature-rich platforms.',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+    image: travelandHospitality,
   },
   {
     title: 'Food & Restaurant',
     description: 'Drive growth in food & restaurant industry with innovative solutions.',
-    image: 'https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?auto=format&fit=crop&w=800&q=80',
+    image: food,
   },
   {
     title: 'On-Demand Solutions',
     description: 'Craft intelligent, high-performance on-demand platforms.',
-    image: 'https://images.unsplash.com/photo-1580910051074-d106f8e3d2b7?auto=format&fit=crop&w=800&q=80',
+    image: elearning2,
   },
   {
     title: 'Gaming',
     description: 'Create immersive, interactive gaming experiences with the latest tech.',
-    image: 'https://images.unsplash.com/photo-1615837371267-9ae27f32ae83?auto=format&fit=crop&w=800&q=80',
+    image: gaming,
   },
 ];
 
@@ -1365,7 +1383,7 @@ const Home = () => {
                       style={{
                         width: 60,
                         height: 60,
-                        borderRadius: "50%",
+                       
                         objectFit: "cover",
                       }}
                     />
