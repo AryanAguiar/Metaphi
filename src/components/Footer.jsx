@@ -1,140 +1,201 @@
 import React from "react";
-import { Box, Typography, Link, IconButton } from "@mui/material";
-import { LinkedIn, Twitter, YouTube } from "@mui/icons-material";
+import { Box, Typography, IconButton, TextField, Button } from "@mui/material";
+import { Facebook, Twitter, LinkedIn, Instagram, YouTube } from "@mui/icons-material";
 import logoImg from "../images/logo.svg";
+import { Link } from "react-router-dom";
 
-const services = [
-  { name: "Virtual Reality", link: "/services/virtual-reality" },
-  { name: "Augmented Reality", link: "/services/augmented-reality" },
-  { name: "Spatial Computing", link: "/services/spatial-computing" },
-  { name: "Metaverse & Digital Twin", link: "/services/metaverse-digital-twin" },
-  { name: "WebXR / WebAR", link: "/services/webxr-webar" },
-  { name: "Intelligent XR", link: "/services/intelligent-xr" },
-  { name: "3D Modeling & Animation", link: "/services/3d-modeling-animation" },
-  { name: "Game Development", link: "/services/game-development" },
-  { name: "Staff Augmentation", link: "/services/staff-augmentation" },
-  { name: "AI & Machine Learning", link: "/services/ai-machine-learning" },
+const quickLinks = [
+  { name: "Blogs", path: "/resources/blogs" },
+  { name: "Articles", path: "/resources/articles" },
+  { name: "Contact Us", path: "/contact" },
+  { name: "Privacy Policy", path: "/privacy-policy" },
+  { name: "Cyber Security Policy", path: "/cyber-security-policy" },
+  { name: "Sitemap", path: "/sitemap" }
 ];
 
-const chunkArray = (array, chunkSize) => {
-  return Array.from({ length: Math.ceil(array.length / chunkSize) }, (_, index) =>
-    array.slice(index * chunkSize, index * chunkSize + chunkSize)
-  );
-};
+const companyLinks = [
+  { name: "About", path: "/about" },
+  { name: "Our Expertise", path: "/about/expertise" },
+  { name: "Why Choose Us", path: "/about/why-choose-us" },
+  { name: "Mission & Vision", path: "/about/mission-vision" },
+  { name: "Careers", path: "/about/careers" },
+  { name: "Industries", path: "/industries" },
+  { name: "Case Study", path: "/case-studies" },
+  { name: "Portfolio", path: "/portfolio" },
+  { name: "Sitemap", path: "/sitemap" },
+  { name: "Contact Us", path: "/contact" }
+];
+
+const serviceLinks = [
+  { name: "Game Development", path: "/services/game" },
+  { name: "Mobile App Development", path: "/services/mobile" },
+  { name: "Web and CMS Development", path: "/services/web" },
+  { name: "E-commerce Development", path: "/services/ecommerce" },
+  { name: "Blockchain Development", path: "/services/blockchain" },
+  { name: "Salesforce Solutions", path: "/services/salesforce" },
+  { name: "AI & Machine Learning", path: "/services/ai-ml" },
+  { name: "IoT & Embedded Systems", path: "/services/iot" },
+  { name: "DevOps Services", path: "/services/devops" }
+];
+
 
 const Footer = () => {
-  const serviceColumns = chunkArray(services, 10);
+  const handleLogoClick = (e) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    else {
+      navigate("/");
+    }
+  }
 
   return (
-    <>
+    <Box sx={{ maxWidth: "1480px", margin: "auto", pt: 8, pb: 4 }}>
       <hr />
+      {/* Top Section */}
       <Box
-        component="footer"
         sx={{
-          color: "white",
-          py: 6,
-          px: { xs: 3, sm: 6, md: 12 },
+          paddingTop: "50px",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
-          flexWrap: "wrap",
-          gap: 6,
-          justifyContent: { xs: "center", md: "space-between" },
-          alignItems: { xs: "center", md: "flex-start" },
-          textAlign: { xs: "center", md: "left" },
-          maxWidth: "1490px",
-          margin: "auto",
+          justifyContent: "space-between",
+          px: { xs: 3, sm: 6, md: 12 },
+          gap: 8,
         }}
       >
-        {/* Left Section - Logo */}
-        <Box sx={{ mb: { xs: 4, md: 0 }, flex: 1 }}>
-          <Typography sx={{ mb: 2 }}>
-            <img src={logoImg} alt="Metaphi logo" />
-          </Typography>
-          <Typography sx={{ fontSize: { xs: "0.75rem", sm: "0.85rem", md: "0.9rem" }, color: "#bbb" }}>
-            © 2024 Metaphi Innovations
-          </Typography>
-        </Box>
-
-        {/* Services Section */}
-        <Box sx={{ flex: 1, mb: { xs: 4, md: 0 } }}>
-          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2, fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-            Services
-          </Typography>
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: { xs: "center", md: "flex-start" } }}>
-            {serviceColumns.map((column, columnIndex) => (
-              <Box key={columnIndex} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                {column.map((service) => (
-                  <Link
-                    key={service.name}
-                    href={service.link}
-                    underline="none"
-                    sx={{
-                      color: "#bbb",
-                      cursor: "pointer",
-                      transition: "color 0.3s ease",
-                      "&:hover": { color: "white" },
-                      fontSize: { xs: "0.75rem", sm: "0.85rem", md: "0.9rem" },
-                    }}
-                  >
-                    {service.name}
-                  </Link>
-                ))}
-              </Box>
-            ))}
-          </Box>
-        </Box>
-
-        {/* Offices Section */}
-        <Box sx={{ flex: 1, mb: { xs: 4, md: 0 } }}>
-          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2, fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-            Offices
-          </Typography>
-          <Typography sx={{ fontWeight: "bold", fontSize: { xs: "0.75rem", sm: "0.85rem", md: "0.9rem" } }}>
-            India
-          </Typography>
-          <Typography sx={{ color: "#bbb", fontSize: { xs: "0.75rem", sm: "0.85rem", md: "0.9rem" } }}>
-            Mumbai, Maharashtra
-          </Typography>
-        </Box>
-
-        {/* Contact Section */}
-        <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
-          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2, fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-            Contact us
-          </Typography>
-          <Box sx={{ display: "flex", gap: 1, justifyContent: { xs: "center", md: "flex-start" } }}>
-            <IconButton sx={{ color: "#0077B5" }}>
-              <LinkedIn />
-            </IconButton>
-            <IconButton sx={{ color: "#1DA1F2" }}>
-              <Twitter />
-            </IconButton>
-            <IconButton sx={{ color: "#FF0000" }}>
-              <YouTube />
-            </IconButton>
-          </Box>
-          <Typography variant="h6" sx={{ fontWeight: "bold", mt: 3, fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-            Interested in working with us?
-          </Typography>
-          {["Careers", "Write to us →"].map((item) => (
-            <Link
-              key={item}
-              href="#"
-              underline="none"
-              sx={{
-                color: "#0FA3B1",
-                fontWeight: "bold",
-                fontSize: { xs: "0.85rem", sm: "1rem" },
-                "&:hover": { textDecoration: "underline" },
-              }}
-            >
-              {item}
+        {/* Left Column */}
+        <Box sx={{ flex: 1 }}>
+          <Box sx={{ position: "relative",}}>
+            <Link to="/" onClick={handleLogoClick}>
+              <img src={logoImg} alt="Logo" style={{ height: "50px" }} />
             </Link>
-          ))}
+          </Box>
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            Metaphi Innovations
+          </Typography>
+          <Typography sx={{ color: "#bbb", mt: 1 }}>
+            Leading IT Consulting Company Delivering Custom, Innovative Solutions.
+          </Typography>
+        </Box>
+
+        {/* Right Column - Social & Newsletter */}
+        <Box sx={{ flex: 1 }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            Stay Connected with Us!
+          </Typography>
+          <Typography sx={{ color: "#bbb", mt: 1 }}>
+            Follow us on social media and stay updated with our latest innovations and insights.
+          </Typography>
+          <Box sx={{ mt: 2, display: "flex", gap: 1 }}>
+            <IconButton sx={{ color: "#3b5998" }}><Facebook /></IconButton>
+            <IconButton sx={{ color: "#0077B5" }}><LinkedIn /></IconButton>
+            <IconButton sx={{ color: "#C13584" }}><Instagram /></IconButton>
+            <IconButton sx={{ color: "#FF0000" }}><YouTube /></IconButton>
+          </Box>
         </Box>
       </Box>
-    </>
 
+      {/* Nav Links Section */}
+      <Box sx={{ px: { xs: 3, sm: 6, md: 12 }, py: 6 }}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(4, 1fr)" },
+            gap: 4,
+          }}
+        >
+          {/* Quick Links */}
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+              Quick Links
+            </Typography>
+            {quickLinks.map(link => (
+              <Link
+                key={link.name}
+                to={link.path}
+                style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
+                onMouseEnter={e => (e.target.style.color = "#fff")}
+                onMouseLeave={e => (e.target.style.color = "#bbb")}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </Box>
+
+          {/* Main Nav */}
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+              Company
+            </Typography>
+            {companyLinks.map(link => (
+              <Link
+                key={link.name}
+                to={link.path}
+                style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
+                onMouseEnter={e => (e.target.style.color = "#fff")}
+                onMouseLeave={e => (e.target.style.color = "#bbb")}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </Box>
+
+          {/* Services Nav */}
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+              Services
+            </Typography>
+            {serviceLinks.map(link => (
+              <Link
+                key={link.name}
+                to={link.path}
+                style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
+                onMouseEnter={e => (e.target.style.color = "#fff")}
+                onMouseLeave={e => (e.target.style.color = "#bbb")}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </Box>
+
+          {/* Contact */}
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+              Contact Us
+            </Typography>
+            <Typography sx={{ color: "#bbb", mb: 2 }}>
+              Share your project details and take the first step toward success.
+            </Typography>
+            <Box sx={{ position: "absolute", display: { xs: "none", md: "block" } }}>
+              <Link to="/contact">
+                <Button
+                  variant="contained"
+                  sx={{
+                    background: "linear-gradient(90deg, #0D47A1, #00C853)",
+                    color: "white",
+                    borderRadius: "830px",
+                  }}
+                >
+                  Contact Us
+                </Button>
+              </Link>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+
+      <Box sx={{ textAlign: "center", px: { xs: 3, sm: 6 }, pb: 4 }}>
+        <Typography sx={{ fontWeight: "bold", mb: 1 }}>Our Offices</Typography>
+        <Typography sx={{ color: "#bbb" }}>India – Mumbai, Maharashtra</Typography>
+
+      </Box>
+
+      {/* Bottom Copyright */}
+      <Box sx={{ textAlign: "center", borderTop: "1px solid #333", pt: 3, fontSize: "0.85rem", color: "#999" }}>
+        ©2025 Metaphi Innovations | All Rights Reserved.
+      </Box>
+    </Box>
   );
 };
 
