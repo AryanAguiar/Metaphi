@@ -11,9 +11,9 @@ import gsap from "gsap";
 const pages = ["About", "Services", "Industries", "Resources", "Contact"];
 const subLinks = {
     About: [
-        { name: "Company Overview", path: "/about/overview", description: "Who we are and what we do." },
+        { name: "Company Overview", path: "/about#overview", description: "Who we are and what we do." },
         { name: "Our Team", path: "/about/team", description: "Meet the people behind our success." },
-        { name: "Our Expertise", path: "/about/expertise", description: "Our specialized skills and experience." },
+        { name: "Services We Offer", path: "/about#services", description: "Our specialized skills and experience." },
         { name: "Why Choose Us", path: "/about/why-choose-us", description: "What makes us stand out." },
         { name: "Mission & Vision", path: "/about/mission-vision", description: "Our goals and future aspirations." },
         { name: "Careers", path: "/about/careers", description: "Join our team and grow with us." },

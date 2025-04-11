@@ -2459,7 +2459,7 @@ const Home = () => {
         >
           {/* Left Info */}
           <Box
-            ref={leftRef}
+            ref={leftContactRef}
             sx={{
               flex: 1,
               minWidth: { xs: "100%", md: "300px" },
@@ -2517,7 +2517,7 @@ const Home = () => {
 
           {/* Contact Form */}
           <Box
-            ref={rightRef}
+            ref={righContactRef}
             sx={{
               flex: 1,
               width: "100%",
