@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AppBar, Toolbar, Container, Box, IconButton, Button, Drawer, List, ListItem, ListItemText, Collapse, Divider, useScrollTrigger, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -72,6 +72,7 @@ const ITEMS_PER_COLUMN = window.innerWidth < 1000 ? 3 : 4;
 
 const Navbar = (props) => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = useState(false);
     const dropDownRef = useRef(null);
     const [activeDropdown, setActiveDropdown] = useState(null);
@@ -84,6 +85,16 @@ const Navbar = (props) => {
     const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
     let closeTimeout;
+
+    const handleLogoClick = (e) => {
+        if(location.pathname==="/"){
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: "smooth"});
+        }
+        else{
+            navigate("/");
+        }
+    }
 
     const handleMouseEnter = (page) => {
         clearTimeout(closeTimeout);
@@ -171,7 +182,7 @@ const Navbar = (props) => {
                         >
                             {/* Logo  */}
                             <Box sx={{ position: "absolute", left: 20 }}>
-                                <Link to="/">
+                                <Link to="/" onClick={handleLogoClick}>
                                     <img src={logoImg} alt="Logo" style={{ height: "50px" }} />
                                 </Link>
                             </Box>

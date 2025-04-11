@@ -692,30 +692,35 @@ const Home = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(leftContactRef.current, {
-        x: -50,
-        opacity: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-        },
-      });
+      if (leftContactRef.current) {
+        gsap.from(leftContactRef.current, {
+          x: -50,
+          opacity: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+          },
+        });
+      }
 
-      gsap.from(righContactRef.current, {
-        x: 50,
-        opacity: 0,
-        duration: 1,
-        delay: 0.2,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-        },
-      });
+      if (righContactRef.current) {
+        gsap.from(righContactRef.current, {
+          x: 50,
+          opacity: 0,
+          duration: 1,
+          delay: 0.2,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+          },
+        });
+      }
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
+
 
   return (
     <>
@@ -783,7 +788,6 @@ const Home = () => {
             >
               {slides[currentIndex].subtitle}
             </Typography>
-
             <Button
               ref={buttonRef}
               variant="contained"
@@ -791,14 +795,12 @@ const Home = () => {
                 fontSize: "1rem",
                 borderRadius: "30px",
                 padding: "10px 20px",
-                background: "linear-gradient(145deg, #b8b8b8, #ffffff, #7e7e7e)",
-                border: "1px solid #999",
-                boxShadow: "inset 2px 2px 3px rgba(255,255,255,0.5), inset -2px -2px 3px rgba(0,0,0,0.3), 3px 3px 5px rgba(0,0,0,0.3)",
-                color: "#000",
+                background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
+                color: "white",
                 textTransform: "uppercase",
                 "&:hover": {
-                  background: "linear-gradient(145deg, #ffffff, #d1d1d1, #a3a3a3)",
-                  boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.6)",
+                  background: "linear-gradient(90deg, #0B3D91, #00796B, #00B248)",
+                  boxShadow: "0px 0px 10px #0B3D91",
                 },
               }}
             >
@@ -814,7 +816,7 @@ const Home = () => {
               display: "flex",
               justifyContent: { xs: "center", md: "flex-end" },
               alignItems: "center",
- 
+
             }}
           >
             <Box
@@ -895,7 +897,7 @@ const Home = () => {
       </Container>
 
       {/* Partners section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 9, position: "relative", width: "100%" }}>
+      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
         <Box sx={{
           position: "absolute",
           top: 0,
@@ -963,7 +965,7 @@ const Home = () => {
       </Container>
 
       {/* description section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 9, position: "relative", width: "100%" }}>
+      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
         <Box sx={{
           position: "absolute",
           top: 0,
@@ -1143,7 +1145,7 @@ const Home = () => {
       </Container>
 
       {/* services section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 9, position: "relative", width: "100%" }}>
+      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
         <Box sx={{
           position: "absolute",
           top: 0,
@@ -1194,6 +1196,7 @@ const Home = () => {
                 width: "100%",
                 height: "290px",
                 transformStyle: "preserve-3d",
+                transform: "translateZ(0)",
                 "&:hover": {
                   transform: "scale(1.05)",
                 },
@@ -1210,6 +1213,7 @@ const Home = () => {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
+                  willChange: "transform",
                   alignItems: "center",
                   textAlign: "center",
                   cursor: "pointer",
@@ -1218,21 +1222,32 @@ const Home = () => {
                   background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
                   backdropFilter: "blur(10px)",
                   border: "1px solid rgba(255, 255, 255, 0.1)",
-                  transition: "all 0.4s ease",
+                  backfaceVisibility: "hidden",
                   "&:hover": {
                     boxShadow: "0px 10px 40px rgba(255, 255, 255, 0.3)",
                   },
                 }}
               >
                 <CardContent>
-                  <img src={service.icon} alt={service.title} style={{ width: "50px", height: "50px", marginBottom: "20px" }} />
+                  <img src={service.icon} alt={service.title} style={{ width: "50px", height: "50px", marginBottom: "5px" }} />
                   <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>
                     {service.title}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: "#ddd", mt: 1 }}>
+                  <Typography variant="body2" sx={{ color: "#ddd", }}>
                     {service.description}
                   </Typography>
                 </CardContent>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: "#ccc",
+                    mt: 1,
+                    fontSize: "12px",
+                    opacity: 0.7,
+                  }}
+                >
+                  Click to flip →
+                </Typography>
               </Card>
 
               {/* Back Side */}
@@ -2119,7 +2134,8 @@ const Home = () => {
                 borderRadius: 3,
                 textTransform: "none",
                 fontWeight: 500,
-                background: "linear-gradient(to right, #00c3ff, #004aad)",
+                color: "white",
+                background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
                 "&:hover": {
                   background: "linear-gradient(to right, #00eaff, #0066ff)",
                 },
@@ -2465,7 +2481,7 @@ const Home = () => {
               Let’s Build Something{" "}
               <span
                 style={{
-                  background: "linear-gradient(90deg, #00C8FF, #00E5B2, #00FF94)",
+                  background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
                   WebkitBackgroundClip: "text",
                   color: "transparent",
                 }}
@@ -2577,7 +2593,7 @@ const Home = () => {
                     type="submit"
                     fullWidth
                     sx={{
-                      background: "linear-gradient(90deg, #00C8FF, #00E5B2, #00FF94)",
+                      background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
                       color: "white",
                       fontWeight: "bold",
                       py: 1.5,
