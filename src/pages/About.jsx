@@ -269,6 +269,23 @@ const About = () => {
     return () => ctx.revert();
   }, []);
 
+  //careers section animation
+  const sectionRef = useRef(null);
+
+  // useEffect(() => {
+  //   gsap.from(sectionRef.current, {
+  //     y: 50,
+  //     opacity: 0,
+  //     duration: 1,
+  //     ease: "power3.out",
+  //     scrollTrigger: {
+  //       trigger: sectionRef.current,
+  //       start: "top 80%",  
+  //       toggleActions: "play none none none",
+  //     },
+  //   });
+  // }, []);
+
   return (
     <>
       <Container
@@ -900,9 +917,94 @@ const About = () => {
             </Typography>
           </Box>
         </Box>
+      </Container>
 
+      {/* careers  */}
+      <Container id="careers" ref={sectionRef} maxWidth={false} disableGutters sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", px: 6, py: 7, position: "relative", width: "100%" }}>
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
+
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "bold",
+            mb: 2,
+            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            padding: "20px",
+            textAlign: "center"
+          }}
+        >
+          Careers at Metaphi
+        </Typography>
+
+
+        <Box sx={{ textAlign: "center" }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+              fontWeight: 700,
+              lineHeight: 1.2,
+              mb: 3,
+            }}
+          >
+            Join Us & Build the Future of Tech!
+          </Typography>
+
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: { xs: "1rem", sm: "1.125rem" },
+              color: "#bbb",
+              lineHeight: 1.8,
+              mb: 5,
+            }}
+          >
+            At{" "}
+            <Box component="span" sx={{ color: "#fff", fontWeight: 500 }}>
+              Metaphi Innovations
+            </Box>
+            , we don’t just build technology—we create experiences that shape the
+            digital world. If you’re passionate about{" "}
+            <Box component="span" sx={{ color: "#fff", fontWeight: 500 }}>
+              Web, App, and Custom Software Development
+            </Box>
+            , and next-gen innovations, this is where you belong.
+          </Typography>
+
+          <Button
+            variant="contained"
+            sx={{
+              background: "linear-gradient(90deg, #0D47A1, #00C853)",
+              color: "#fff",
+              fontWeight: 600,
+              px: 4,
+              py: 1.5,
+              fontSize: "1rem",
+              borderRadius: "999px",
+              textTransform: "none"
+            }}
+          >
+            Explore Careers
+          </Button>
+        </Box>
 
       </Container>
+
     </>
   )
 }

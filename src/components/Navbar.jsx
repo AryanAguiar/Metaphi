@@ -16,7 +16,7 @@ const subLinks = {
         { name: "Services We Offer", path: "/about#services", description: "Our specialized skills and experience." },
         { name: "Why Choose Us", path: "/about#why-choose-us", description: "What makes us stand out." },
         { name: "Mission & Vision", path: "/about#mission-vision", description: "Our goals and future aspirations." },
-        { name: "Careers", path: "/about/careers", description: "Join our team and grow with us." },
+        { name: "Careers", path: "/about#careers", description: "Join our team and grow with us." },
         // { name: "Events", path: "/about/events", description: "Stay updated on our latest events." }
     ],
 

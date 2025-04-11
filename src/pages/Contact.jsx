@@ -47,7 +47,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
+    <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
       <Box sx={{
         position: "absolute",
         top: 0,
