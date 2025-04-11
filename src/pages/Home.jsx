@@ -480,7 +480,6 @@ const Home = () => {
 
 
   //our partner slider
-
   const logos = [
     partner1,
     partner1,
@@ -561,7 +560,6 @@ const Home = () => {
   const nextRef = useRef(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
 
   //projects section
   const prevRefProj = useRef(null);
@@ -2113,26 +2111,28 @@ const Home = () => {
               Connect with our expert IT transformation team and take the next step toward
               groundbreaking innovation for your business.
             </Typography>
-            <Button
-              variant="contained"
-              href="#contact"
-              sx={{
-                alignSelf: { xs: "center", md: "flex-start" },
-                mt: 3,
-                px: 4,
-                py: 1.5,
-                borderRadius: 3,
-                textTransform: "none",
-                fontWeight: 500,
-                color: "white",
-                background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
-                "&:hover": {
-                  background: "linear-gradient(to right, #00eaff, #0066ff)",
-                },
-              }}
-            >
-              DROP QUERIES
-            </Button>
+            <Link to={"/contact"}>
+              <Button
+                variant="contained"
+                sx={{
+                  alignSelf: { xs: "center", md: "flex-start" },
+                  mt: 3,
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: 3,
+                  textTransform: "none",
+                  fontWeight: 500,
+                  color: "white",
+                  background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
+                  "&:hover": {
+                    background: "linear-gradient(to right, #00eaff, #0066ff)",
+                  },
+                }}
+              >
+                DROP QUERIES
+              </Button>
+            </Link>
+
           </Box>
         </Box>
 

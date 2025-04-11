@@ -3,6 +3,7 @@ import { Container, Box, Button, Typography, Card, CardContent, IconButton, Moda
 import { gsap } from "gsap";
 import { Link, useLocation } from "react-router-dom";
 import { ScrollTrigger } from "gsap/all";
+import { Lightbulb, Build, ViewInAr, SportsEsports, TrendingUp, CloudSync, Verified } from "@mui/icons-material";
 
 //service cards
 import serviceicon1 from "../images/gamedev.svg";
@@ -84,6 +85,47 @@ const services = [
   }
 ];
 
+const features = [
+  {
+    icon: <Lightbulb sx={{ fontSize: 40, color: "#FFEA00" }} />,
+    title: "Innovation-Driven Approach",
+    description:
+      "We integrate AI, IoT, and advanced stacks to future-proof your business.",
+  },
+  {
+    icon: <Build sx={{ fontSize: 40, color: "#00B0FF" }} />,
+    title: "Custom Solutions, Tailored for You",
+    description:
+      "Unique solutions for software, apps, web platforms, and integrations.",
+  },
+  {
+    icon: <SportsEsports sx={{ fontSize: 40, color: "#F50057" }} />,
+    title: "Game-Changing Development",
+    description:
+      "From games to 3D and animation—we create powerful, interactive content.",
+  },
+  {
+    icon: <TrendingUp sx={{ fontSize: 40, color: "#FF6F00" }} />,
+    title: "Startup-Friendly, Scalable Growth",
+    description:
+      "MVPs, staff augmentation, and growth strategies for all sizes.",
+  },
+  {
+    icon: <CloudSync sx={{ fontSize: 40, color: "#2979FF" }} />,
+    title: "Seamless Tech Integration",
+    description:
+      "Salesforce, DevOps, cloud, and embedded systems—smooth and scalable.",
+  },
+  {
+    icon: <Verified sx={{ fontSize: 40, color: "#76FF03" }} />,
+    title: "Proven Track Record",
+    description:
+      "Experience across healthcare, fintech, real estate, gaming, and more.",
+  },
+];
+
+
+
 const About = () => {
   const location = useLocation();
   const headerRef = useRef(null);
@@ -121,6 +163,74 @@ const About = () => {
       }
     });
   }, [flippedCard]);
+
+  //why choose us section animation
+  const leftRef = useRef(null);
+  const rightRef = useRef(null);
+
+  useEffect(() => {
+    // Left box 
+    gsap.fromTo(
+      leftRef.current,
+      { x: -50, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1.3,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: leftRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    // Right box
+    gsap.fromTo(
+      rightRef.current,
+      { x: 50, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1.3,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: rightRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+  }, []);
+
+  //business types section
+  const featureRefs = useRef(null);
+  const itemRefs = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray(".business-item").forEach((item, i) => {
+        gsap.from(item, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          delay: i * 0.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+    }, featureRefs);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <Container
@@ -387,7 +497,261 @@ const About = () => {
         </Box>
       </Container>
 
+      {/* why choose us section */}
+      <Container id="why-choose-us" maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
 
+        <Box textAlign="center" mb={6}>
+          <Typography variant="h4" fontWeight={700} color="#fff">
+            Why Choose Metaphi Innovations
+          </Typography>
+          <Typography color="#bbb" mt={2} maxWidth="700px" mx="auto">
+            At Metaphi Innovations, we don’t just build solutions—we craft experiences that redefine digital transformation.
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: "stretch",
+            justifyContent: "space-between",
+            gap: 4,
+            px: { xs: 4, sm: 7, md: 6 },
+            py: { xs: 6, md: 10 },
+            maxWidth: "1440px",
+            margin: "auto",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {/* Left */}
+          <Box ref={leftRef} sx={{ flex: 1, textAlign: { xs: "center", md: "left" } }}>
+            <Typography
+              gutterBottom
+              sx={{
+                fontSize: {
+                  xs: "17px",
+                  sm: "26px",
+                  md: "30px",
+                  lg: "36px",
+                  xl: "40px",
+                },
+                color: "white",
+              }}
+            >
+              Building Smarter Businesses with Advanced Technology
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", sm: "16px", md: "17px", lg: "18px" },
+                color: "white",
+              }}
+            >
+              As a leading app development company in India,{" "}
+              <strong>Metaphi Innovations</strong> has collaborated with many businesses,
+              from startups to enterprises, delivering top-tier solutions across industries.
+              We offer a comprehensive range of IT consulting services tailored to meet diverse business needs.
+            </Typography>
+          </Box>
+
+          {/* Right */}
+          <Box
+            ref={rightRef}
+            sx={{
+              flex: 1,
+              backgroundColor: "rgba(255, 255, 255, 0.03)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              borderRadius: 4,
+              padding: 4,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              textAlign: { xs: "center", md: "left" },
+            }}
+          >
+            <Typography
+              fontWeight="bold"
+              gutterBottom
+              sx={{
+                fontSize: {
+                  xs: "20px",
+                  sm: "24px",
+                  md: "26px",
+                  lg: "30px",
+                },
+                color: "white",
+              }}
+            >
+              Innovate with Us!
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", sm: "16px", md: "17px", lg: "18px" },
+                color: "white",
+              }}
+              gutterBottom
+            >
+              Connect with our expert IT transformation team and take the next step toward
+              groundbreaking innovation for your business.
+            </Typography>
+            <Link to={"/contact"}>
+              <Button
+                variant="contained"
+                sx={{
+                  alignSelf: { xs: "center", md: "flex-start" },
+                  mt: 3,
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: 3,
+                  textTransform: "none",
+                  fontWeight: 500,
+                  color: "white",
+                  background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
+                  "&:hover": {
+                    background: "linear-gradient(to right, #00eaff, #0066ff)",
+                  },
+                }}
+              >
+                DROP QUERIES
+              </Button>
+            </Link>
+
+          </Box>
+        </Box>
+
+        <Box
+          ref={featureRefs}
+          sx={{
+            py: { xs: 6, md: 10 },
+            px: { xs: 3, sm: 5, md: 6 },
+            maxWidth: "1440px",
+            mx: "auto",
+          }}
+        >
+          <Typography
+            ref={headerRef}
+            variant="h4"
+            className="heading"
+            sx={{
+              fontWeight: "bold",
+              background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+              fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+              padding: "10px",
+              textAlign: "center",
+              mb: 5
+            }}
+          >
+            Tailored Solutions for Every Business Type
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 4,
+            }}
+          >
+            {features.map((item, idx) => (
+              <Box
+                key={idx}
+                ref={(el) => (itemRefs.current[idx] = el)}
+                className="business-item"
+                sx={{
+                  flex: {
+                    xs: "1 1 100%",
+                    md: "1 1 calc(40% - 16px)",
+                    lg: "1 1 calc(35% - 18px)",
+                  },
+                  minHeight: "120px",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  backdropFilter: "blur(15px)",
+                  borderRadius: 3,
+                  px: { xs: 3, sm: 5 },
+                  py: { xs: 4, sm: 5 },
+                  color: "white",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: { xs: "14px", sm: "16px" },
+                    color: "#ddd",
+                  }}
+                >
+                  {item.icon}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: { xs: "18px", sm: "20px" },
+                    mb: 1,
+                  }}
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography
+                  sx={{
+                    fontSize: { xs: "14px", sm: "16px" },
+                    color: "#ddd",
+                  }}
+                >
+                  {item.description}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      </Container>
+
+      {/* mission and vision */}
+      <Container id="services" maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
+        <Box sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1))",
+          zIndex: -1,
+          filter: "blur(60px)",
+        }} />
+
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "bold",
+            mb: 2,
+            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            padding: "20px",
+            textAlign: "center"
+          }}
+        >
+          Solutions We Offer
+        </Typography>
+
+        
+      </Container>
     </>
   )
 }
