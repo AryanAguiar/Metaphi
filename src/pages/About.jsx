@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, MenuItem } from "@mui/material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, MenuItem, Divider } from "@mui/material";
 import { gsap } from "gsap";
 import { Link, useLocation } from "react-router-dom";
 import { ScrollTrigger } from "gsap/all";
@@ -227,6 +227,44 @@ const About = () => {
         });
       });
     }, featureRefs);
+
+    return () => ctx.revert();
+  }, []);
+
+  //mission and vision animation
+  const containerRef = useRef();
+  const missionRef = useRef(null);
+  const visionRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (missionRef.current) {
+        gsap.from(missionRef.current, {
+          x: -50,
+          opacity: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+
+      if (visionRef.current) {
+        gsap.from(visionRef.current, {
+          x: 50,
+          opacity: 0,
+          duration: 1,
+          delay: 0.2,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+    }, containerRef);
 
     return () => ctx.revert();
   }, []);
@@ -719,7 +757,7 @@ const About = () => {
       </Container>
 
       {/* mission and vision */}
-      <Container id="services" maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
+      <Container ref={containerRef} id="mission-vision" maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
         <Box sx={{
           position: "absolute",
           top: 0,
@@ -747,10 +785,123 @@ const About = () => {
             textAlign: "center"
           }}
         >
-          Solutions We Offer
+          Our Mission & Vision
         </Typography>
 
-        
+        <Box
+          sx={{
+            maxWidth: "1440px",
+            mx: "auto",
+            py: { xs: 6, sm: 10 },
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            gap: { xs: 10, md: 12 },
+            color: "#fff",
+          }}
+        >
+          {/* Mission */}
+          <Box ref={missionRef} sx={{ flex: 1, minWidth: "200px", textAlign: { xs: "center", md: "left" } }}>
+            <Typography
+              sx={{
+                color: "#f25c66",
+                fontSize: "0.75rem",
+                fontWeight: 500,
+                letterSpacing: 1,
+                textTransform: "uppercase",
+                mb: 1,
+                textAlign: "left"
+              }}
+            >
+              Metaphi Innovations // Our Mission
+            </Typography>
+
+            <Divider sx={{ backgroundColor: "#f25c66", width: "40px", mb: 4, }} />
+
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+                fontWeight: 700,
+                lineHeight: 1.1,
+                mb: 4,
+              }}
+            >
+              Mission
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                color: "#bbb",
+                lineHeight: 1.8,
+                fontSize: { xs: "1rem", sm: "1.125rem" },
+              }}
+            >
+              At{" "}
+              <Box component="span" sx={{ color: "#fff", fontWeight: 500 }}>
+                Metaphi Innovations
+              </Box>
+              , our mission is to empower businesses through cutting-edge digital
+              transformation. We engineer groundbreaking and scalable solutions in{" "}
+              <Box component="span" sx={{ color: "#fff", fontWeight: 500 }}>
+                AR, VR, AI, Spatial Computing, and Web3
+              </Box>
+              , enabling our clients to redefine experiences, enhance efficiency, and
+              unlock new opportunities for growth.
+            </Typography>
+          </Box>
+
+          {/* Vision */}
+          <Box ref={visionRef} sx={{ flex: 1, minWidth: "200px", textAlign: { xs: "center", md: "left" } }}>
+            <Typography
+              sx={{
+                color: "#f25c66",
+                fontSize: "0.75rem",
+                fontWeight: 500,
+                letterSpacing: 1,
+                textTransform: "uppercase",
+                mb: 1,
+                textAlign: "left"
+              }}
+            >
+              Metaphi Innovations // Our Vision
+            </Typography>
+
+            <Divider sx={{ backgroundColor: "#f25c66", width: "40px", mb: 4 }} />
+
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+                fontWeight: 700,
+                lineHeight: 1.1,
+                mb: 4,
+              }}
+            >
+              Vision
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                color: "#bbb",
+                lineHeight: 1.8,
+                fontSize: { xs: "1rem", sm: "1.125rem" },
+              }}
+            >
+              Our vision is to be a global leader in immersive technology and digital
+              innovation, pioneering next-gen solutions that transform industries. We
+              strive to push the boundaries of technology, creativity, and intelligence,
+              acting as a catalyst in the evolution of the{" "}
+              <Box component="span" sx={{ color: "#fff", fontWeight: 500 }}>
+                Metaverse, AI-driven ecosystems
+              </Box>
+              , and future-ready digital experiences.
+            </Typography>
+          </Box>
+        </Box>
+
+
       </Container>
     </>
   )

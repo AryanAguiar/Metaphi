@@ -688,6 +688,7 @@ const Home = () => {
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 80%",
+            toggleActions: "play none none reverse",
           },
         });
       }
@@ -701,6 +702,7 @@ const Home = () => {
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 80%",
+            toggleActions: "play none none reverse",
           },
         });
       }
@@ -2430,7 +2432,7 @@ const Home = () => {
 
       {/* Contact us section */}
 
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
+      <Container ref={containerRef} maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
         <Box sx={{
           position: "absolute",
           top: 0,
