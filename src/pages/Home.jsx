@@ -401,16 +401,6 @@ const Home = () => {
   };
   const lineRef = useRef(null);
 
-  const bubbles = useMemo(() => {
-    return [...Array(25)].map(() => ({
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      size: 10 + Math.random() * 20,
-      duration: 5 + Math.random() * 5,
-      delay: Math.random() * 10,
-    }));
-  }, []);
-
   useEffect(() => {
 
     //line animation
