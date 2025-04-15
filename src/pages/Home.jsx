@@ -400,6 +400,41 @@ const Home = () => {
     }
   };
   const lineRef = useRef(null);
+//hero section
+  useEffect(() => {
+    let timeoutId;
+
+    const animateElements = () => {
+      gsap.fromTo(
+        [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.2 }
+      );
+    };
+
+    const changeSlide = () => {
+      gsap.to(
+        [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
+        {
+          opacity: 0,
+          y: -30,
+          duration: 0.8,
+          ease: "power3.inOut",
+          onComplete: () => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+            animateElements();
+          },
+        }
+      );
+
+      timeoutId = setTimeout(changeSlide, 5000);  
+    };
+
+    animateElements();
+    timeoutId = setTimeout(changeSlide, 5000);
+
+    return () => clearTimeout(timeoutId);  
+  }, [currentIndex]);
 
   useEffect(() => {
 
@@ -440,42 +475,6 @@ const Home = () => {
         }
       );
     });
-
-    //hero animation
-    const animateElements = () => {
-      gsap.fromTo(
-        [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.2 }
-      );
-    };
-
-    animateElements();
-
-    //hero sec slide animation
-    const updateSlide = (timestamp) => {
-      const elapsed = timestamp - lastTimestamp.current;
-
-      if (elapsed >= 5000) {
-        gsap.to([textRef.current, subTextRef.current, buttonRef.current, imageRef.current], {
-          opacity: 0,
-          y: -30,
-          duration: 0.8,
-          ease: "power3.inOut",
-          onComplete: () => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-            animateElements();
-          },
-        });
-        lastTimestamp.current = timestamp;
-      }
-
-      animationFrame.current = requestAnimationFrame(updateSlide);
-    };
-
-    animationFrame.current = requestAnimationFrame(updateSlide);
-
-    return () => cancelAnimationFrame(animationFrame.current);
   }, []);
 
 
