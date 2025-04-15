@@ -21,19 +21,7 @@ const PageNotFount = () => {
                 }}
             >
                 {/* Blurred background glow */}
-                <Box
-                    sx={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        width: "100%",
-                        height: "100%",
-                        background: "radial-gradient(circle at center, rgba(0,191,255,0.15), transparent 60%)",
-                        filter: "blur(80px)",
-                        zIndex: -1,
-                    }}
-                />
+               
 
                 <Typography
                     variant="h1"
