@@ -390,8 +390,6 @@ const Home = () => {
   const subTextRef = useRef(null);
   const buttonRef = useRef(null);
   const imageRef = useRef(null);
-  const animationFrame = useRef(null);
-  const lastTimestamp = useRef(performance.now());
   const headerRef = useRef(null);
   const sectionRef = useRef([]);
   const addToRefs = (el) => {
@@ -401,8 +399,9 @@ const Home = () => {
   };
   const lineRef = useRef(null);
 
+  //hero section animation
   useEffect(() => {
-    let timeoutId;
+    let intervalId;
 
     const animateElements = () => {
       gsap.fromTo(
@@ -422,19 +421,30 @@ const Home = () => {
           ease: "power3.inOut",
           onComplete: () => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-            animateElements();
           },
         }
       );
-
-      timeoutId = setTimeout(changeSlide, 5000);
     };
 
-    animateElements();
-    timeoutId = setTimeout(changeSlide, 5000);
+    animateElements();  
 
-    return () => clearTimeout(timeoutId);
+    intervalId = setInterval(() => {
+      changeSlide();
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    if (!textRef.current || !imageRef.current) return;
+  
+    gsap.fromTo(
+      [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.2 }
+    );
   }, [currentIndex]);
+  
 
   useEffect(() => {
 
