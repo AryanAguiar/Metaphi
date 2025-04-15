@@ -21,8 +21,6 @@ const PageNotFount = () => {
                 }}
             >
                 {/* Blurred background glow */}
-               
-
                 <Typography
                     variant="h1"
                     sx={{
