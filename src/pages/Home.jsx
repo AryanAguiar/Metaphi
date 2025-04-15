@@ -490,29 +490,9 @@ const Home = () => {
 
   //cards
   const [flippedCard, setFlippedCard] = useState(null);
-  const cardRefs = useRef([]);
-
   const handleFlip = (index) => {
-    if (flippedCard === index) {
-      setFlippedCard(null);
-    } else {
-      setFlippedCard(index);
-    }
+    setFlippedCard(flippedCard === index ? null : index);
   };
-
-  useEffect(() => {
-    services.forEach((_, index) => {
-      const card = cardRefs.current[index];
-
-      if (card) {
-        gsap.to(card, {
-          rotationY: flippedCard === index ? 180 : 0,
-          duration: 0.6,
-          ease: "power3.out",
-        });
-      }
-    });
-  }, [flippedCard]);
 
 
   //strategic execution section
@@ -531,6 +511,38 @@ const Home = () => {
       swiperRef.current.slideNext();
     }
   };
+
+  useEffect(() => {
+    if (!swiperRef.current) return;
+
+    const swiperInstance = swiperRef.current;
+
+    const animateSlide = (index) => {
+      const currentSlide = swiperInstance.slides[index];
+      gsap.fromTo(
+        currentSlide,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+        }
+      );
+    };
+
+    // Initial animation
+    animateSlide(swiperInstance.activeIndex);
+
+    swiperInstance.on("slideChange", () => {
+      animateSlide(swiperInstance.activeIndex);
+    });
+
+    return () => {
+      swiperInstance.off("slideChange");
+    };
+  }, []);
+
 
   //design process animation
   const designRef = useRef([]);
@@ -670,7 +682,6 @@ const Home = () => {
     setOpenModal(false);
     setSelectedTestimonial(null);
   };
-
 
   //contact form
   const containerRef = useRef();
@@ -1133,159 +1144,124 @@ const Home = () => {
           {services.map((service, index) => (
             <Box
               key={service.id}
-              ref={(el) => (cardRefs.current[index] = el)}
+              onClick={() => handleFlip(index)}
               sx={{
-                perspective: "1000px",
-                position: "relative",
+                perspective: "1200px",
                 width: "100%",
                 height: "290px",
-                transformStyle: "preserve-3d",
-                transform: "translateZ(0)",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                },
               }}
-              onClick={() => handleFlip(index)}
             >
-              {/* Front Side */}
-              <Card
+              <Box
+                className={`flip-card-inner ${flippedCard === index ? "flipped" : ""}`}
                 sx={{
-                  position: "absolute",
+                  position: "relative",
                   width: "100%",
                   height: "100%",
-                  backfaceVisibility: "hidden",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  willChange: "transform",
-                  alignItems: "center",
-                  textAlign: "center",
-                  cursor: "pointer",
-                  borderRadius: "20px",
-                  boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                  background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  backfaceVisibility: "hidden",
-                  "&:hover": {
-                    boxShadow: "0px 10px 40px rgba(255, 255, 255, 0.3)",
-                  },
+                  transformStyle: "preserve-3d",
+                  transition: "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)",
                 }}
               >
-                <CardContent>
-                  <img src={service.icon} alt={service.title} style={{ width: "50px", height: "50px", marginBottom: "5px" }} />
-                  <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>
-                    {service.title}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "#ddd", }}>
-                    {service.description}
-                  </Typography>
-                </CardContent>
-                <Typography
-                  variant="caption"
+                {/* Front Side */}
+                <Card
+                  className="card-face front"
                   sx={{
-                    color: "#ccc",
-                    mt: 1,
-                    fontSize: "12px",
-                    opacity: 0.7,
-                  }}
-                >
-                  Click to flip →
-                </Typography>
-              </Card>
-
-              {/* Back Side */}
-              <Card
-                sx={{
-                  right: "0.5px",
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%",
-                  backfaceVisibility: "hidden",
-                  transform: "rotateY(180deg)",
-                  willChange: "transform",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  textAlign: "center",
-                  cursor: "pointer",
-                  borderRadius: "20px",
-                  background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
-                  boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  color: "#fff",
-                  transition: "all 0.4s ease",
-                  "&:hover": {
-                    boxShadow: "0px 10px 40px rgba(255, 255, 255, 0.3)",
-                  },
-                }}
-              >
-                <CardContent
-                  sx={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "center",
                     justifyContent: "center",
+                    alignItems: "center",
                     textAlign: "center",
-                    gap: 2,
+                    cursor: "pointer",
+                    borderRadius: "20px",
+                    boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                    background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    color: "#fff",
+                    transform: "rotateY(0deg)",
                   }}
                 >
-                  <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: { xs: 1, md: 1.5, lg: 2 } }}>
-                    <img
-                      src={service.icon}
-                      alt={`icon for ${service.title}`}
-                      style={{ width: "40px", height: "40px", maxWidth: "100%", objectFit: "contain", }}
-                    />
+                  <CardContent>
+                    <img src={service.icon} alt={service.title} style={{ width: 50, height: 50, marginBottom: 5 }} />
+                    <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>{service.title}</Typography>
+                    <Typography variant="body2" sx={{ color: "#ddd" }}>{service.description}</Typography>
+                  </CardContent>
+                  <Typography variant="caption" sx={{ color: "#ccc", mt: 1, fontSize: 12, opacity: 0.7 }}>
+                    Click to flip →
+                  </Typography>
+                </Card>
 
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontWeight: "bold",
-                        fontSize: { xs: "14px", sm: "15px", md: "16px", lg: "20px" },
-                      }}
-                    >
-                      {service.title}
-                    </Typography>
-                  </Box>
-
-                  <Typography
+                {/* Back Side */}
+                <Card
+                  className="card-face back"
+                  sx={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
+                    transform: "rotateY(180deg)",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "20px",
+                    background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    color: "#fff",
+                    textAlign: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <CardContent
                     sx={{
-                      fontSize: { xs: "12px", sm: "14px", md: "16px" },
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      gap: 2,
                     }}
                   >
-                    {service.mainDescription}
-                  </Typography>
-
-                  <Link to="/about">
-                    <Button
-                      sx={{
-                        mt: 1,
-                        px: { xs: 2, sm: 3, md: 4 },
-                        py: { xs: 1, sm: 1.5, md: 2 },
-                        fontSize: { xs: "12px", sm: "14px", md: "16px" },
-                        fontWeight: "bold",
-                        borderRadius: "12px",
-                        background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
-                        color: "#fff",
-                        boxShadow: "0px 4px 15px rgba(255, 255, 255, 0.1)",
-                        backdropFilter: "blur(10px)",
-                        border: "1px solid rgba(255, 255, 255, 0.2)",
-                        textTransform: "uppercase",
-                        transition: "all 0.3s ease",
-                        "&:hover": {
-                          background: "linear-gradient(135deg, rgba(50, 50, 50, 0.9), rgba(20, 20, 20, 1))",
-                          boxShadow: "0px 6px 20px rgba(255, 255, 255, 0.3)",
-                        },
-                      }}
-                    >
-                      Learn More
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                      <img src={service.icon} alt={service.title} style={{ width: 40, height: 40, objectFit: "contain" }} />
+                      <Typography variant="h6" sx={{ fontWeight: "bold", fontSize: { xs: "14px", lg: "20px" } }}>
+                        {service.title}
+                      </Typography>
+                    </Box>
+                    <Typography sx={{ fontSize: { xs: "12px", md: "16px" } }}>{service.mainDescription}</Typography>
+                    <Link to="/about">
+                      <Button
+                        sx={{
+                          mt: 1,
+                          px: 3,
+                          py: 1.5,
+                          fontSize: "14px",
+                          fontWeight: "bold",
+                          borderRadius: "12px",
+                          background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
+                          color: "#fff",
+                          boxShadow: "0px 4px 15px rgba(255, 255, 255, 0.1)",
+                          border: "1px solid rgba(255, 255, 255, 0.2)",
+                          textTransform: "uppercase",
+                          transition: "all 0.3s ease",
+                          "&:hover": {
+                            background: "linear-gradient(135deg, rgba(50, 50, 50, 0.9), rgba(20, 20, 20, 1))",
+                            boxShadow: "0px 6px 20px rgba(255, 255, 255, 0.3)",
+                          },
+                        }}
+                      >
+                        Learn More
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              </Box>
             </Box>
+
           ))}
         </Box>
       </Container>
@@ -1912,7 +1888,7 @@ const Home = () => {
 
       {/* Why choose us section */}
       <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
-      
+
         <Typography
           ref={headerRef}
           variant="h4"
