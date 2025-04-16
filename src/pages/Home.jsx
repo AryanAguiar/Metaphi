@@ -426,7 +426,7 @@ const Home = () => {
       );
     };
 
-    animateElements();  
+    animateElements();
 
     intervalId = setInterval(() => {
       changeSlide();
@@ -437,14 +437,14 @@ const Home = () => {
 
   useEffect(() => {
     if (!textRef.current || !imageRef.current) return;
-  
+
     gsap.fromTo(
       [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.2 }
     );
   }, [currentIndex]);
-  
+
 
   useEffect(() => {
 
@@ -1244,7 +1244,7 @@ const Home = () => {
                     </Box>
                     <Typography sx={{ fontSize: { xs: "12px", md: "16px" } }}>{service.mainDescription}</Typography>
                     <Link to="/about" onClick={(e) => e.preventDefault()}> {/* temporary disabled links */}
-                    
+
                       <Button
                         sx={{
                           mt: 1,
@@ -1525,63 +1525,7 @@ const Home = () => {
         </Typography>
 
         <Box sx={{ maxWidth: "1450px", px: 2, py: 4, margin: "auto", position: "relative" }}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: { md: "flex-end", lg: "center" },
-              gap: 2,
-              mb: 2,
-            }}
-          >
-            <IconButton
-              ref={prevRef}
-              disabled={isBeginning}
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                opacity: isBeginning ? 0.5 : 1,
-                cursor: isBeginning ? "not-allowed" : "pointer",
-                "&:hover": {
-                  background: isBeginning
-                    ? "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))"
-                    : "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                },
-              }}
-            >
-              <ArrowBack />
-            </IconButton>
 
-            <IconButton
-              ref={nextRef}
-              disabled={isEnd}
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                opacity: isEnd ? 0.5 : 1,
-                cursor: isEnd ? "not-allowed" : "pointer",
-                "&:hover": {
-                  background: isEnd
-                    ? "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))"
-                    : "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                },
-              }}
-            >
-              <ArrowForward />
-            </IconButton>
-
-          </Box>
 
           <Swiper
             modules={[Navigation, Pagination]}
@@ -1709,6 +1653,64 @@ const Home = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: { xs: "flex-end", lg: "center" },
+              gap: 2,
+              mt: 2,
+            }}
+          >
+            <IconButton
+              ref={prevRef}
+              disabled={isBeginning}
+              sx={{
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                color: "#fff",
+                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                opacity: isBeginning ? 0.5 : 1,
+                cursor: isBeginning ? "not-allowed" : "pointer",
+                "&:hover": {
+                  background: isBeginning
+                    ? "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))"
+                    : "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
+                },
+              }}
+            >
+              <ArrowBack />
+            </IconButton>
+
+            <IconButton
+              ref={nextRef}
+              disabled={isEnd}
+              sx={{
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                color: "#fff",
+                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                opacity: isEnd ? 0.5 : 1,
+                cursor: isEnd ? "not-allowed" : "pointer",
+                "&:hover": {
+                  background: isEnd
+                    ? "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))"
+                    : "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
+                },
+              }}
+            >
+              <ArrowForward />
+            </IconButton>
+
+          </Box>
         </Box>
       </Container>
 
@@ -1750,58 +1752,7 @@ const Home = () => {
         </Typography>
 
         <Box sx={{ px: { xs: 2, sm: 5, md: 6, lg: 6, xl: 7 }, py: 8, color: "white", maxWidth: "1448px", margin: "auto" }}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: { md: "flex-end", lg: "center" },
-              gap: 2,
-              mb: 2,
-            }}
-          >
-            <IconButton
-              ref={prevRefProj}
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                opacity: 1,
-                cursor: "pointer",
-                "&:hover": {
-                  background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                },
-              }}
-            >
-              <ArrowBack />
-            </IconButton>
-
-            <IconButton
-              ref={nextRefProj}
-
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                opacity: 1,
-                cursor: "pointer",
-                "&:hover": {
-                  background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                },
-              }}
-            >
-              <ArrowForward />
-            </IconButton>
-
-          </Box>
+          
           <Swiper
             modules={[Navigation]}
             spaceBetween={24}
@@ -1870,6 +1821,60 @@ const Home = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: { xs: "flex-end", lg: "center" },
+              gap: 2,
+              mb: 2,
+            }}
+          >
+            <IconButton
+              ref={prevRefProj}
+              sx={{
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                color: "#fff",
+                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                opacity: 1,
+                cursor: "pointer",
+                "&:hover": {
+                  background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
+                },
+              }}
+            >
+              <ArrowBack />
+            </IconButton>
+
+            <IconButton
+              ref={nextRefProj}
+
+              sx={{
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
+                color: "#fff",
+                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                opacity: 1,
+                mb: 3,
+                cursor: "pointer",
+                "&:hover": {
+                  background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
+                },
+              }}
+            >
+              <ArrowForward />
+            </IconButton>
+
+          </Box>
 
           {/* View More Button */}
           <Box sx={{ textAlign: "center", marginTop: 3 }}>
