@@ -196,8 +196,8 @@ const Navbar = (props) => {
                                     gap: { md: 1, lg: 3 },
                                     alignItems: "center",
                                     position: "absolute",
-                                    // left: {md: "49.2%", lg:"51.3%"}, if careers is next to contact button
-                                    left: {md: "54.2%", lg:"51.3%"},
+                                    left: {md: "49.2%", lg:"51.3%"}, //if careers is next to contact button
+                                    //left: {md: "54.2%", lg:"51.3%"}, //if careers is centered
                                     transform: "translateX(-52.5%)",
                                 }}
                             >
@@ -361,8 +361,9 @@ const Navbar = (props) => {
 
                                         );
                                     })}
-
-                                <NavLink
+                                
+                                {/*careers button if centered*/}
+                                {/* <NavLink
                                     key="Careers"
                                     to="/careers"
                                     className="nav-item"
@@ -379,13 +380,13 @@ const Navbar = (props) => {
                                     >
                                         Careers
                                     </Button>
-                                </NavLink>
+                                </NavLink> */}
 
                             </Box>
 
                             {/* Contact Button */}
-                             <Box sx={{ position: "absolute", right: 20, display: { xs: "none", md: "block" } }}>
-                                <Link to="/contact" onClick={(e) => e.preventDefault()}  >{/*temporary disabled sublinks*/}
+                            {/*<Box sx={{ position: "absolute", right: 20, display: { xs: "none", md: "block" } }}>
+                                <Link to="/contact" onClick={(e) => e.preventDefault()}  >{/*temporary disabled sublinks*"/"}
                                     <Button
                                         variant="contained"
                                         sx={{
@@ -397,10 +398,10 @@ const Navbar = (props) => {
                                         Contact Us
                                     </Button>
                                 </Link>
-                            </Box>
+                            </Box>*/}
 
                             {/* Right Side Buttons - Careers and Contact */}
-                            {/*<Box
+                            <Box
                                 sx={{
                                     position: "absolute",
                                     right: 20,
@@ -438,7 +439,7 @@ const Navbar = (props) => {
                                         Contact Us
                                     </Button>
                                 </Link>
-                            </Box>*/}
+                            </Box>
 
 
                             {/* Mobile Menu Button */}
