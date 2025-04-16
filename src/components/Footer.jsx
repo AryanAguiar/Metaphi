@@ -117,7 +117,8 @@ const Footer = () => {
                 style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
                 onMouseEnter={e => (e.target.style.color = "#fff")}
                 onMouseLeave={e => (e.target.style.color = "#bbb")}
-              >
+                onClick={(e) => e.preventDefault()} 
+              > {/*temporary disabled sublinks*/}
                 {link.name}
               </Link>
             ))}
@@ -135,7 +136,8 @@ const Footer = () => {
                 style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
                 onMouseEnter={e => (e.target.style.color = "#fff")}
                 onMouseLeave={e => (e.target.style.color = "#bbb")}
-              >
+                onClick={(e) => e.preventDefault()} 
+              >{/*temporary disabled sublinks*/}
                 {link.name}
               </Link>
             ))}
@@ -153,7 +155,8 @@ const Footer = () => {
                 style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
                 onMouseEnter={e => (e.target.style.color = "#fff")}
                 onMouseLeave={e => (e.target.style.color = "#bbb")}
-              >
+                onClick={(e) => e.preventDefault()} 
+              >{/*temporary disabled sublinks*/}
                 {link.name}
               </Link>
             ))}
@@ -168,7 +171,7 @@ const Footer = () => {
               Share your project details and take the first step toward success.
             </Typography>
             <Box sx={{ position: "absolute", display: { xs: "none", md: "block" } }}>
-              <Link to="/contact">
+              <Link to="/contact" onClick={(e) => e.preventDefault()} >{/*temporary disabled sublinks*/}
                 <Button
                   variant="contained"
                   sx={{

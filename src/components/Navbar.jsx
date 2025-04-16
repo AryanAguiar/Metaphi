@@ -297,6 +297,7 @@ const Navbar = (props) => {
                                                                         <NavLink
                                                                             key={subLink.path}
                                                                             to={subLink.path}
+                                                                            onClick={(e) => e.preventDefault()} //temporary disabled sublinks
                                                                             style={{
                                                                                 textDecoration: "none",
                                                                                 color: "rgba(255, 255, 255, 0.9)",
@@ -356,7 +357,7 @@ const Navbar = (props) => {
 
                             {/* Contact Button */}
                             <Box sx={{ position: "absolute", right: 20, display: { xs: "none", md: "block" } }}>
-                                <Link to="/contact">
+                                <Link to="/contact"  onClick={(e) => e.preventDefault()}  >{/*temporary disabled sublinks*/}
                                     <Button
                                         variant="contained"
                                         sx={{

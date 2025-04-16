@@ -1243,7 +1243,8 @@ const Home = () => {
                       </Typography>
                     </Box>
                     <Typography sx={{ fontSize: { xs: "12px", md: "16px" } }}>{service.mainDescription}</Typography>
-                    <Link to="/about">
+                    <Link to="/about" onClick={(e) => e.preventDefault()}> {/* temporary disabled links */}
+                    
                       <Button
                         sx={{
                           mt: 1,
@@ -2002,7 +2003,7 @@ const Home = () => {
               Connect with our expert IT transformation team and take the next step toward
               groundbreaking innovation for your business.
             </Typography>
-            <Link to={"/contact"}>
+            <Link to={"/"} > {/* temporary disabled links */}
               <Button
                 variant="contained"
                 sx={{
