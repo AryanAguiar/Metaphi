@@ -10,6 +10,7 @@ import PageNotFount from './pages/PageNotFount';
 import Industries from './pages/Industries';
 import Services from './pages/Services';
 import Careers from './pages/Careers';
+import CareersInner from './pages/CareersInner';
 function App() {
 
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path='/industries/:industry' element={<Industries />} />
           </Route>
           <Route path='/careers' element = {<Careers />} />
+          <Route path='/careers/:slug' element = {<CareersInner />} />
           
           <Route path='*' element = {<PageNotFount/>} />
         </Route>
