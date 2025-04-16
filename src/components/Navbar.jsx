@@ -193,10 +193,11 @@ const Navbar = (props) => {
                             <Box
                                 sx={{
                                     display: { xs: "none", md: "flex" },
-                                    gap: 3,
+                                    gap: { md: 1, lg: 3 },
                                     alignItems: "center",
                                     position: "absolute",
-                                    left: "51.3%",
+                                    // left: {md: "49.2%", lg:"51.3%"}, if careers is next to contact button
+                                    left: {md: "54.2%", lg:"51.3%"},
                                     transform: "translateX(-52.5%)",
                                 }}
                             >
@@ -380,13 +381,10 @@ const Navbar = (props) => {
                                     </Button>
                                 </NavLink>
 
-
                             </Box>
 
-
-
                             {/* Contact Button */}
-                            <Box sx={{ position: "absolute", right: 20, display: { xs: "none", md: "block" } }}>
+                             <Box sx={{ position: "absolute", right: 20, display: { xs: "none", md: "block" } }}>
                                 <Link to="/contact" onClick={(e) => e.preventDefault()}  >{/*temporary disabled sublinks*/}
                                     <Button
                                         variant="contained"
@@ -400,6 +398,48 @@ const Navbar = (props) => {
                                     </Button>
                                 </Link>
                             </Box>
+
+                            {/* Right Side Buttons - Careers and Contact */}
+                            {/*<Box
+                                sx={{
+                                    position: "absolute",
+                                    right: 20,
+                                    display: { xs: "none", md: "flex" },
+                                    gap: 2,
+                                    alignItems: "center",
+                                }}
+                            >
+                                <NavLink
+                                    to="/careers"
+                                    style={{ textDecoration: "none" }}
+                                >
+                                    <Button
+                                        disableRipple
+                                        className="nav-item"
+                                        sx={{
+                                            color: "white",
+                                            fontWeight: location.pathname === "/careers" ? "bold" : "normal",
+                                            "&:hover": { color: "#00C853" },
+                                        }}
+                                    >
+                                        Careers
+                                    </Button>
+                                </NavLink>
+
+                                <Link to="/contact" onClick={(e) => e.preventDefault()}>
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            background: "linear-gradient(90deg, #0D47A1, #00C853)",
+                                            color: "white",
+                                            borderRadius: "830px",
+                                        }}
+                                    >
+                                        Contact Us
+                                    </Button>
+                                </Link>
+                            </Box>*/}
+
 
                             {/* Mobile Menu Button */}
                             <IconButton
