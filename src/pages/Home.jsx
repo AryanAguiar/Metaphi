@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, MenuItem } from "@mui/material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, Divider } from "@mui/material";
 import { gsap } from "gsap";
 
 //hero section
@@ -908,7 +908,7 @@ const Home = () => {
             className="heading"
             sx={{
               fontWeight: "bold",
-              mb: 2,
+        
               background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -918,9 +918,16 @@ const Home = () => {
               textAlign: "center"
             }}
           >
-            Official Partners Of
+            Our Official Partners
           </Typography>
-
+          {/* <Divider sx={{
+            width: "60px",
+            height: "2px",
+            backgroundColor: "#1976d2",
+            margin: "0 auto 24px auto",
+            borderRadius: "2px"
+          }}
+          /> */}
           <Swiper
             modules={[Autoplay, FreeMode]}
             slidesPerView="auto"
@@ -1525,8 +1532,6 @@ const Home = () => {
         </Typography>
 
         <Box sx={{ maxWidth: "1450px", px: 2, py: 4, margin: "auto", position: "relative" }}>
-
-
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -1653,7 +1658,6 @@ const Home = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-
           <Box
             sx={{
               display: "flex",
@@ -1752,7 +1756,7 @@ const Home = () => {
         </Typography>
 
         <Box sx={{ px: { xs: 2, sm: 5, md: 6, lg: 6, xl: 7 }, py: 8, color: "white", maxWidth: "1448px", margin: "auto" }}>
-          
+
           <Swiper
             modules={[Navigation]}
             spaceBetween={24}
@@ -1878,26 +1882,25 @@ const Home = () => {
 
           {/* View More Button */}
           <Box sx={{ textAlign: "center", marginTop: 3 }}>
-            <Button
-              sx={{
-                alignSelf: "flex-start",
-                mt: "auto",
-                border: "1px solid #00eaff",
-                color: "#00eaff",
-                fontWeight: 500,
-                textTransform: "none",
-                fontSize: "1rem",
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  backgroundColor: "rgba(0, 234, 255, 0.1)",
-                  borderColor: "#00eaff",
-                  color: "#00f7ff",
-                  boxShadow: "0 0 8px #00f7ff",
-                },
-              }}
-            >
-              View More
-            </Button>
+          <Button
+                variant="contained"
+                sx={{
+                  alignSelf: { xs: "center", md: "flex-start" },
+                  mt: 3,
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: 3,
+                  textTransform: "none",
+                  fontWeight: 500,
+                  color: "white",
+                  background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
+                  "&:hover": {
+                    background: "linear-gradient(to right, #00eaff, #0066ff)",
+                  },
+                }}
+              >
+                VIEW MORE
+              </Button>
           </Box>
         </Box>
       </Container>

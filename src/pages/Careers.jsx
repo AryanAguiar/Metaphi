@@ -121,12 +121,15 @@ const Careers = () => {
             >
                 {/* Filter Buttons */}
                 <Stack
-                    direction="row"
-                    spacing={2}
-                    mb={6}
-                    flexWrap="wrap"
-                    justifyContent="center"
+                    sx={{
+                        flexDirection: { xs: 'row', md: 'row' },
+                        gap: { xs:0, md: 2 },
+                        mb: 6,
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                    }}
                 >
+
                     {techStacks.map((tech) => (
                         <Button
                             key={tech}
@@ -136,6 +139,8 @@ const Careers = () => {
                                 textTransform: "none",
                                 fontWeight: 600,
                                 px: 3,
+                                m:1,
+                                width:"100px",
                                 borderRadius: "20px",
                                 backgroundColor:
                                     selectedStack === tech ? "#00C853" : "transparent",
@@ -166,7 +171,7 @@ const Careers = () => {
                         <Card
                             key={idx}
                             component={Link}
-                            to={`/careers/${job.slug}`} 
+                            to={`/careers/${job.slug}`}
                             sx={{
                                 textDecoration: "none",
                                 width: "340px",
