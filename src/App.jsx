@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import PageNotFount from './pages/PageNotFount';
 import Industries from './pages/Industries';
 import Services from './pages/Services';
+import Careers from './pages/Careers';
 function App() {
 
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route>
             <Route path='/industries/:industry' element={<Industries />} />
           </Route>
+          <Route path='/careers' element = {<Careers />} />
           
           <Route path='*' element = {<PageNotFount/>} />
         </Route>

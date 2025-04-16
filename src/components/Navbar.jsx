@@ -8,7 +8,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import logoImg from "../images/logo.svg";
 import gsap from "gsap";
 
-const pages = ["About", "Services", "Industries", "Resources", "Contact"];
+const pages = ["About", "Services", "Industries", "Resources", "Careers", "Contact"];
 const subLinks = {
     About: [
         { name: "Company Overview", path: "/about#overview", description: "Who we are and what we do." },
@@ -16,7 +16,6 @@ const subLinks = {
         { name: "Services We Offer", path: "/about#services", description: "Our specialized skills and experience." },
         { name: "Why Choose Us", path: "/about#why-choose-us", description: "What makes us stand out." },
         { name: "Mission & Vision", path: "/about#mission-vision", description: "Our goals and future aspirations." },
-        { name: "Careers", path: "/about#careers", description: "Join our team and grow with us." },
         // { name: "Events", path: "/about/events", description: "Stay updated on our latest events." }
     ],
 
@@ -50,7 +49,10 @@ const subLinks = {
 
     Resources: [
         { name: "Blogs", path: "/resources/blogs", description: "Insights, trends, and news." }
-    ]
+    ],
+
+
+
 };
 
 // Elevation Effect on Scroll
@@ -87,11 +89,11 @@ const Navbar = (props) => {
     let closeTimeout;
 
     const handleLogoClick = (e) => {
-        if(location.pathname==="/"){
+        if (location.pathname === "/") {
             e.preventDefault();
-            window.scrollTo({top: 0, behavior: "smooth"});
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
-        else{
+        else {
             navigate("/");
         }
     }
@@ -164,7 +166,7 @@ const Navbar = (props) => {
         setOpenDropdown(openDropdown === page ? null : page);
     };
 
-    const [hoveredPage, setHoveredPage] = useState("");  
+    const [hoveredPage, setHoveredPage] = useState("");
 
     return (
         <>
@@ -199,17 +201,20 @@ const Navbar = (props) => {
                                 }}
                             >
                                 {pages
-                                    .filter((page) => page !== "Contact")
+                                    .filter((page) => page !== "Contact" && page != "Careers")
                                     .map((page) => {
+
                                         const isActive = subLinks[page]?.some((subLink) => location.pathname === subLink.path);
 
                                         return subLinks[page] ? (
+
                                             <Box
                                                 key={page}
                                                 sx={{ position: "relative" }}
                                                 onMouseEnter={() => handleMouseEnter(page)}
                                                 onMouseLeave={handleMouseLeave}
                                             >
+
                                                 <Button
                                                     disableRipple
                                                     className="nav-item"
@@ -277,7 +282,7 @@ const Navbar = (props) => {
                                                                 textAlign: "center",
                                                             }}
                                                         >
-                                                            {hoveredPage || page} 
+                                                            {hoveredPage || page}
                                                         </Typography>
 
                                                         {Array.from({ length: Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN)) }).map((_, colIndex) => (
@@ -351,13 +356,38 @@ const Navbar = (props) => {
                                             >
                                                 {page}
                                             </NavLink>
+
+
                                         );
                                     })}
+
+                                <NavLink
+                                    key="Careers"
+                                    to="/careers"
+                                    className="nav-item"
+                                    style={{ textDecoration: "none" }}
+                                >
+                                    <Button
+                                        disableRipple
+                                        className="nav-item"
+                                        sx={{
+                                            color: "white",
+                                            fontWeight: location.pathname === "/careers" ? "bold" : "normal",
+                                            "&:hover": { color: "#00C853" },
+                                        }}
+                                    >
+                                        Careers
+                                    </Button>
+                                </NavLink>
+
+
                             </Box>
+
+
 
                             {/* Contact Button */}
                             <Box sx={{ position: "absolute", right: 20, display: { xs: "none", md: "block" } }}>
-                                <Link to="/contact"  onClick={(e) => e.preventDefault()}  >{/*temporary disabled sublinks*/}
+                                <Link to="/contact" onClick={(e) => e.preventDefault()}  >{/*temporary disabled sublinks*/}
                                     <Button
                                         variant="contained"
                                         sx={{
