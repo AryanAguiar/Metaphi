@@ -13,6 +13,7 @@ const Careers = () => {
 
     const filteredJobs = selectedStack === "All" ? jobs : jobs.filter((job) => job.tags.includes(selectedStack));
 
+    
 
     return (
         <>
@@ -62,7 +63,7 @@ const Careers = () => {
                 </Box>
             </Container>
 
-            <Container
+            {/* <Container
                 maxWidth={false}
                 disableGutters
                 sx={{
@@ -103,7 +104,7 @@ const Careers = () => {
                         At Metaphi Innovations, our passionate and forward-thinking team is dedicated to delivering scalable solutions that solve real-world challenges. Join us in shaping the future of technology through collaboration and innovation.
                     </Typography>
                 </Box>
-            </Container>
+            </Container> */}
 
             <Container
                 maxWidth={false}
@@ -165,6 +166,7 @@ const Careers = () => {
                         gap: 4,
                         justifyContent: "center",
                         width: "100%",
+                        maxWidth:"1500px"
                     }}
                 >
                     {filteredJobs.map((job, idx) => (

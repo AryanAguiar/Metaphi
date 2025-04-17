@@ -2442,6 +2442,13 @@ const Home = () => {
                           error={meta.touched && Boolean(meta.error)}
                           helperText={meta.touched && meta.error}
                           sx={{
+                            '& input:-webkit-autofill': {
+                              WebkitBoxShadow: '0 0 0 1000px #121212 inset',  
+                              WebkitTextFillColor: '#fff',  
+                              caretColor: '#fff', 
+                              transition: 'background-color 5000s ease-in-out 0s', 
+                            },
+            
                             mb: 3,
                             backgroundColor: "#222",
                             borderRadius: 1,
