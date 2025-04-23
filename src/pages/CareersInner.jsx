@@ -24,7 +24,12 @@ const CareersInner = () => {
   }
 
   const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState({ type: '', message: '', open: false });
+  const [alert, setAlert] = useState({
+    open: false,
+    message: '',
+    type: '', // 'success' or 'error'
+  });
+
 
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -76,6 +81,8 @@ const CareersInner = () => {
       setLoading(false);
     }
   };
+
+
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -259,225 +266,243 @@ const CareersInner = () => {
             </Box>
 
           </Box>) : (
-            <Box
-              component="form"
-              onSubmit={formik.handleSubmit}
-              sx={{
-                width: '100%',
-                maxWidth: 600,
-                margin: 'auto',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 3,
-                mt: 4,
-                color: '#ddd',
-              }}
-            >
-              {/* Name */}
-              <TextField
-                label="Name"
-                name="name"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.name && Boolean(formik.errors.name)}
-                helperText={formik.touched.name && formik.errors.name}
-                fullWidth
-                variant="outlined"
+            <>
+              {alert.open && (
+                <div
+                  style={{
+                    padding: '12px',
+                    borderRadius: '6px',
+                    marginBottom: '16px',
+                    color: alert.type === 'success' ? 'green' : 'red',
+                    background: alert.type === 'success' ? '#e6ffe6' : '#ffe6e6',
+                    border: `1px solid ${alert.type === 'success' ? 'green' : 'red'}`
+                  }}
+                >
+                  {alert.message}
+                </div>
+              )}
+
+              <Box
+                component="form"
+                onSubmit={formik.handleSubmit}
                 sx={{
-                  '& label': {
-                    color: '#aaa',
-                  },
-                  '& label.Mui-focused': {
-                    color: '#00e676',
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    color: '#fff',
-                    '& fieldset': { borderColor: '#555' },
-                    '&:hover fieldset': { borderColor: '#00e676' },
-                    '&.Mui-focused fieldset': { borderColor: '#00e676' },
-                  },
-                  '& input:-webkit-autofill': {
-                    WebkitBoxShadow: '0 0 0 1000px #121212 inset',
-                    WebkitTextFillColor: '#fff',
-                    caretColor: '#fff',
-                    transition: 'background-color 5000s ease-in-out 0s',
-                  },
+                  width: '100%',
+                  maxWidth: 600,
+                  margin: 'auto',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 3,
+                  mt: 4,
+                  color: '#ddd',
                 }}
-              />
-
-              {/* Email */}
-              <TextField
-                label="Email"
-                name="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-                fullWidth
-                variant="outlined"
-                sx={{
-                  '& label': {
-                    color: '#aaa',
-                  },
-                  '& label.Mui-focused': {
-                    color: '#00e676',
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    color: '#fff',
-                    '& fieldset': { borderColor: '#555' },
-                    '&:hover fieldset': { borderColor: '#00e676' },
-                    '&.Mui-focused fieldset': { borderColor: '#00e676' },
-                  },
-                  '& input:-webkit-autofill': {
-                    WebkitBoxShadow: '0 0 0 1000px #121212 inset',
-                    WebkitTextFillColor: '#fff',
-                    caretColor: '#fff',
-                    transition: 'background-color 5000s ease-in-out 0s',
-                  },
-                }}
-              />
-
-              {/* Mobile */}
-              <TextField
-                label="Mobile"
-                name="mobile"
-                value={formik.values.mobile}
-                onChange={(e) => {
-                  const input = e.target.value;
-                  if (/^\d{0,10}$/.test(input)) {
-                    formik.setFieldValue("mobile", input);
-                  }
-                }}
-                onBlur={formik.handleBlur}
-                error={formik.touched.mobile && Boolean(formik.errors.mobile)}
-                helperText={formik.touched.mobile && formik.errors.mobile}
-                fullWidth
-                variant="outlined"
-                inputProps={{ maxLength: 10 }}
-                sx={{
-                  '& label': {
-                    color: '#aaa',
-                  },
-                  '& label.Mui-focused': {
-                    color: '#00e676',
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    color: '#fff',
-                    '& fieldset': { borderColor: '#555' },
-                    '&:hover fieldset': { borderColor: '#00e676' },
-                    '&.Mui-focused fieldset': { borderColor: '#00e676' },
-                  },
-                  '& input:-webkit-autofill': {
-                    WebkitBoxShadow: '0 0 0 1000px #121212 inset',
-                    WebkitTextFillColor: '#fff',
-                    caretColor: '#fff',
-                    transition: 'background-color 5000s ease-in-out 0s',
-                  },
-                }}
-              />
-
-
-              {/* LinkedIn */}
-              <TextField
-                label="LinkedIn (Optional)"
-                name="linkedin"
-                value={formik.values.linkedin}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.linkedin && Boolean(formik.errors.linkedin)}
-                helperText={formik.touched.linkedin && formik.errors.linkedin}
-                fullWidth
-                variant="outlined"
-                sx={{
-                  '& label': {
-                    color: '#aaa',
-                  },
-                  '& label.Mui-focused': {
-                    color: '#00e676',
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    color: '#fff',
-                    '& fieldset': { borderColor: '#555' },
-                    '&:hover fieldset': { borderColor: '#00e676' },
-                    '&.Mui-focused fieldset': { borderColor: '#00e676' },
-                  },
-                  '& input:-webkit-autofill': {
-                    WebkitBoxShadow: '0 0 0 1000px #121212 inset',
-                    WebkitTextFillColor: '#fff',
-                    caretColor: '#fff',
-                    transition: 'background-color 5000s ease-in-out 0s',
-                  },
-                }}
-              />
-
-              {/* Resume Upload */}
-              <Box>
-                <Typography sx={{ mb: 1, fontSize: 16, color: '#aaa' }}>
-                  Upload Resume <span style={{ fontSize: 12 }}>(PDF, DOCX - Max 5MB)</span>
-                </Typography>
-
-                <Button
+              >
+                {/* Name */}
+                <TextField
+                  label="Name"
+                  name="name"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.name && Boolean(formik.errors.name)}
+                  helperText={formik.touched.name && formik.errors.name}
+                  fullWidth
                   variant="outlined"
-                  component="label"
                   sx={{
-                    color: '#00e676',
-                    borderColor: '#00e676',
-                    fontWeight: 'bold',
-                    textTransform: 'none',
-                    '&:hover': {
-                      borderColor: '#00c853',
-                      backgroundColor: 'rgba(0, 230, 118, 0.08)',
+                    '& label': {
+                      color: '#aaa',
+                    },
+                    '& label.Mui-focused': {
+                      color: '#00e676',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      color: '#fff',
+                      '& fieldset': { borderColor: '#555' },
+                      '&:hover fieldset': { borderColor: '#00e676' },
+                      '&.Mui-focused fieldset': { borderColor: '#00e676' },
+                    },
+                    '& input:-webkit-autofill': {
+                      WebkitBoxShadow: '0 0 0 1000px #121212 inset',
+                      WebkitTextFillColor: '#fff',
+                      caretColor: '#fff',
+                      transition: 'background-color 5000s ease-in-out 0s',
                     },
                   }}
-                >
-                  Choose File
-                  <input
-                    type="file"
-                    accept=".pdf,.doc,.docx"
-                    hidden
-                    name="resume"
-                    onChange={(e) => {
-                      formik.setFieldValue('resume', e.currentTarget.files[0]);
+                />
+
+                {/* Email */}
+                <TextField
+                  label="Email"
+                  name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                  fullWidth
+                  variant="outlined"
+                  sx={{
+                    '& label': {
+                      color: '#aaa',
+                    },
+                    '& label.Mui-focused': {
+                      color: '#00e676',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      color: '#fff',
+                      '& fieldset': { borderColor: '#555' },
+                      '&:hover fieldset': { borderColor: '#00e676' },
+                      '&.Mui-focused fieldset': { borderColor: '#00e676' },
+                    },
+                    '& input:-webkit-autofill': {
+                      WebkitBoxShadow: '0 0 0 1000px #121212 inset',
+                      WebkitTextFillColor: '#fff',
+                      caretColor: '#fff',
+                      transition: 'background-color 5000s ease-in-out 0s',
+                    },
+                  }}
+                />
+
+                {/* Mobile */}
+                <TextField
+                  label="Mobile"
+                  name="mobile"
+                  value={formik.values.mobile}
+                  onChange={(e) => {
+                    const input = e.target.value;
+                    if (/^\d{0,10}$/.test(input)) {
+                      formik.setFieldValue("mobile", input);
+                    }
+                  }}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.mobile && Boolean(formik.errors.mobile)}
+                  helperText={formik.touched.mobile && formik.errors.mobile}
+                  fullWidth
+                  variant="outlined"
+                  inputProps={{ maxLength: 10 }}
+                  sx={{
+                    '& label': {
+                      color: '#aaa',
+                    },
+                    '& label.Mui-focused': {
+                      color: '#00e676',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      color: '#fff',
+                      '& fieldset': { borderColor: '#555' },
+                      '&:hover fieldset': { borderColor: '#00e676' },
+                      '&.Mui-focused fieldset': { borderColor: '#00e676' },
+                    },
+                    '& input:-webkit-autofill': {
+                      WebkitBoxShadow: '0 0 0 1000px #121212 inset',
+                      WebkitTextFillColor: '#fff',
+                      caretColor: '#fff',
+                      transition: 'background-color 5000s ease-in-out 0s',
+                    },
+                  }}
+                />
+
+
+                {/* LinkedIn */}
+                <TextField
+                  label="LinkedIn (Optional)"
+                  name="linkedin"
+                  value={formik.values.linkedin}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.linkedin && Boolean(formik.errors.linkedin)}
+                  helperText={formik.touched.linkedin && formik.errors.linkedin}
+                  fullWidth
+                  variant="outlined"
+                  sx={{
+                    '& label': {
+                      color: '#aaa',
+                    },
+                    '& label.Mui-focused': {
+                      color: '#00e676',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      color: '#fff',
+                      '& fieldset': { borderColor: '#555' },
+                      '&:hover fieldset': { borderColor: '#00e676' },
+                      '&.Mui-focused fieldset': { borderColor: '#00e676' },
+                    },
+                    '& input:-webkit-autofill': {
+                      WebkitBoxShadow: '0 0 0 1000px #121212 inset',
+                      WebkitTextFillColor: '#fff',
+                      caretColor: '#fff',
+                      transition: 'background-color 5000s ease-in-out 0s',
+                    },
+                  }}
+                />
+
+                {/* Resume Upload */}
+                <Box>
+                  <Typography sx={{ mb: 1, fontSize: 16, color: '#aaa' }}>
+                    Upload Resume <span style={{ fontSize: 12 }}>(PDF, DOCX - Max 5MB)</span>
+                  </Typography>
+
+                  <Button
+                    variant="outlined"
+                    component="label"
+                    sx={{
+                      color: '#00e676',
+                      borderColor: '#00e676',
+                      fontWeight: 'bold',
+                      textTransform: 'none',
+                      '&:hover': {
+                        borderColor: '#00c853',
+                        backgroundColor: 'rgba(0, 230, 118, 0.08)',
+                      },
                     }}
-                  />
-                </Button>
+                  >
+                    Choose File
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx"
+                      hidden
+                      name="resume"
+                      onChange={(e) => {
+                        formik.setFieldValue('resume', e.currentTarget.files[0]);
+                      }}
+                    />
+                  </Button>
 
-                {formik.touched.resume && formik.errors.resume && (
-                  <Typography sx={{ fontSize: 12, color: 'red', mt: 1 }}>
-                    {formik.errors.resume}
-                  </Typography>
-                )}
+                  {formik.touched.resume && formik.errors.resume && (
+                    <Typography sx={{ fontSize: 12, color: 'red', mt: 1 }}>
+                      {formik.errors.resume}
+                    </Typography>
+                  )}
 
-                {formik.values.resume && (
-                  <Typography sx={{ fontSize: 14, color: '#ddd', mt: 1 }}>
-                    Selected: {formik.values.resume.name}
-                  </Typography>
-                )}
+                  {formik.values.resume && (
+                    <Typography sx={{ fontSize: 14, color: '#ddd', mt: 1 }}>
+                      Selected: {formik.values.resume.name}
+                    </Typography>
+                  )}
+                </Box>
+
+
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      backgroundColor: '#00e676',
+                      color: '#000',
+                      fontWeight: 'bold',
+                      '&:hover': {
+                        backgroundColor: '#00c853',
+                      },
+                      px: 4,
+                      py: 1,
+                      borderRadius: 2,
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </Box>
               </Box>
+            </>
 
-
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  sx={{
-                    backgroundColor: '#00e676',
-                    color: '#000',
-                    fontWeight: 'bold',
-                    '&:hover': {
-                      backgroundColor: '#00c853',
-                    },
-                    px: 4,
-                    py: 1,
-                    borderRadius: 2,
-                  }}
-                >
-                  Submit
-                </Button>
-              </Box>
-            </Box>
 
           )}
         </Paper>
