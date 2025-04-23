@@ -27,7 +27,7 @@ const CareersInner = () => {
   const [alert, setAlert] = useState({
     open: false,
     message: '',
-    type: '', // 'success' or 'error'
+    type: '',  
   });
 
 
@@ -122,7 +122,7 @@ const CareersInner = () => {
             color: "#ffffff",
           }}
         >
-          <Link to="/careers"><Button sx={{ color: "#00e676" }}>Go Back</Button></Link>
+          <Link to="/careers#jobs"><Button sx={{ color: "#00e676" }}>Go Back</Button></Link>
           {/* Title and Apply Button */}
           <Box
             display="flex"

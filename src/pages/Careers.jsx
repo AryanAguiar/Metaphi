@@ -1,10 +1,42 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Divider, IconButton, Stack, Card, CardContent } from "@mui/material";
+import { Container, Box, Button, Typography, Divider, IconButton, Stack, Card, Paper, TextField } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { gsap } from "gsap";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { ScrollTrigger } from "gsap/all";
-import { jobs } from "./JobsData"
+import { jobs } from "./JobsData";
+import "./Careers.css";
+import joinusIcon1 from "../images/team_icon.png";
+import { useFormik } from "formik";
+import * as Yup from 'yup';
+import axios from "axios";
+import { ADD_JOB_APPLICATION_ENDPOINT } from "../utils/apiConfig";
+const whyJoinUs = [
+    {
+        value: "Flexible Working Hours",
+        icon: joinusIcon1
+    },
+    {
+        value: "Learning Support & Upskilling",
+        icon: "",
+    },
+    {
+        value: "Flexible Working Hours",
+        icon: "",
+    },
+    {
+        value: "Flexible Working Hours",
+        icon: "",
+    },
+    {
+        value: "Flexible Working Hours",
+        icon: "",
+    },
+    {
+        value: "Flexible Working Hours",
+        icon: "",
+    },
+]
 
 const Careers = () => {
 
@@ -13,10 +45,111 @@ const Careers = () => {
 
     const filteredJobs = selectedStack === "All" ? jobs : jobs.filter((job) => job.tags.includes(selectedStack));
 
-    
+
+    const imageBoxSx = ({ mdSpan = 1, height = 120 }) => ({
+        backgroundColor: '#f3f4f6',
+        borderRadius: 3,
+        height,
+        gridColumn: {
+            xs: 'span 6',
+            md: `span ${mdSpan}`,
+        },
+    });
+
+    const [formClicked, setFormClicked] = useState(false);
+
+    const handleClick = () => {
+        setFormClicked((prevState) => !prevState);
+    }
+
+    const [loading, setLoading] = useState(false);
+    const [alert, setAlert] = useState({
+        open: false,
+        message: '',
+        type: '',
+    });
+
+
+
+    const handleSubmit = async (values, { resetForm }) => {
+        console.log(values, "form values");
+
+    }
+    //const formData = new FormData();
+    //     formData.append('full_name', values.name);
+    //     formData.append('email_id', values.email);
+    //     formData.append('phone_no', values.mobile);
+    //     formData.append('linkedin_url', values.linkedin);
+    //     formData.append('designation', values.slug);
+    //     formData.append('stack', values.stack);
+
+    //     if (values.resume) {
+    //       formData.append('resume_file', values.resume);
+    //     }
+
+    //     try {
+    //       setLoading(true);
+
+    //       const response = await axios.post(
+    //         ADD_JOB_APPLICATION_ENDPOINT,
+    //         formData,
+    //         {
+    //           headers: {
+    //             'Content-Type': 'multipart/form-data',
+    //           },
+    //         }
+    //       );
+
+    //       console.log('Form submitted:', response.data);
+
+    //       setAlert({
+    //         type: 'success',
+    //         message: 'Application submitted successfully!',
+    //         open: true,
+    //       });
+
+    //       resetForm();
+    //     } catch (error) {
+    //       console.error('Submission error:', error.response?.data || error.message);
+
+    //       setAlert({
+    //         type: 'error',
+    //         message: error.response?.data?.message || 'Submission failed. Please try again.',
+    //         open: true,
+    //       });
+    //     } finally {
+    //       setLoading(false);
+    //     }
+    //   };
+
+
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            name: '',
+            email: '',
+            mobile: '',
+            linkedin: '',
+            resume: null,
+
+        },
+        validationSchema: Yup.object({
+            name: Yup.string().required('Required'),
+            email: Yup.string().email('Invalid email').required('Required'),
+            mobile: Yup.string().required('Required'),
+            linkedin: Yup.string().url('Invalid URL'),
+            mobile: Yup.string()
+                .matches(/^\d{10}$/, 'Mobile number must be exactly 10 digits')
+                .required('Required'),
+        }),
+        onSubmit: handleSubmit,
+    });
 
     return (
         <>
+            <div className="Ellipse-5"></div>
+            {/* hero section */}
             <Container
                 maxWidth={false}
                 disableGutters
@@ -30,7 +163,6 @@ const Careers = () => {
                     alignItems: "center",
                     justifyContent: "center",
                     textAlign: "center",
-                    backgroundColor: "rgba(18, 18, 18, 0.6)"
                 }}
             >
                 <Box>
@@ -38,30 +170,540 @@ const Careers = () => {
                         variant="h2"
                         component="h1"
                         sx={{
-                            fontWeight: 800,
-                            fontSize: { xs: "2.25rem", sm: "3.25rem", md: "4rem" },
+                            fontWeight: 500,
+                            fontSize: { xs: "2.25rem", sm: "3.25rem", md: "64px" },
                             color: "#fff",
                             mb: 2,
                             lineHeight: 1.2,
                         }}
                     >
-                        Careers at Metaphi
+                        Join Us
                     </Typography>
 
                     <Typography
                         variant="h6"
                         sx={{
-                            maxWidth: "800px",
+                            maxWidth: "820px",
                             mx: "auto",
                             color: "#bdbdbd",
-                            fontSize: { xs: "1rem", md: "1.125rem" },
-                            lineHeight: 1.9,
+                            fontSize: { xs: "20px", md: "40px" },
+                            flexGrow: 0
                         }}
                     >
-                        We foster a collaborative and inclusive work culture where both budding talent and seasoned professionals thrive. Explore opportunities to be part of our journey toward building impactful technologies.
+                        We’re always Looking for <br />
+                        <span className="text-style-1">Curious Minds </span>
+                        and
+                        <span className="text-style-2"> Passionate Builders</span><span className="text-style-3">.</span>
                     </Typography>
                 </Box>
             </Container>
+
+            {/* Life at metaphi */}
+            <Container
+                maxWidth={false}
+                disableGutters
+                sx={{
+                    px: { xs: 3, md: 8 },
+                    py: { xs: 8, md: 14 },
+                    width: "100%",
+                    minHeight: "60vh",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                }}
+            >
+                <Box>
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: { xs: '1fr', md: 'repeat(6, 1fr)' },
+                            gridAutoRows: 'auto',
+                            gap: 2,
+                        }}
+                    >
+                        {/* Text Block */}
+                        <Box
+                            sx={{
+                                gridColumn: { xs: 'span 6', md: 'span 2' },
+                                backgroundColor: '#1a1a1d',
+                                color: 'white',
+                                borderRadius: 3,
+                                padding: 3,
+                                maxWidth: "555px"
+                            }}
+                        >
+                            <Typography variant="h5" fontWeight="bold" gutterBottom>
+                                Life at Metaphi
+                            </Typography>
+                            <Typography variant="body1">
+                                At Metaphi, we believe in collaboration, creativity, and continuous learning. We keep things flexible,
+                                encourage ownership, and celebrate wins — big or small. You'll work with a tight-knit team that values
+                                innovation, transparency, and having fun along the way.
+                            </Typography>
+                        </Box>
+
+                        {/* Top right images (2 boxes) */}
+                        <Box sx={imageBoxSx({ mdSpan: 2 })} />
+                        <Box sx={imageBoxSx({ mdSpan: 2 })} />
+
+                        {/* Bottom row: left, center wide, right */}
+                        <Box sx={imageBoxSx({ mdSpan: 1 })} />
+                        <Box sx={imageBoxSx({ mdSpan: 3, height: 140 })} />
+                        <Box sx={imageBoxSx({ mdSpan: 2 })} />
+                    </Box>
+                </Box>
+            </Container>
+
+            {/* Why join us */}
+            <Container
+                maxWidth={false}
+                disableGutters
+            >
+                <Typography
+                    className="why-join-us"
+                    sx={{
+                        fontWeight: 500,
+                        fontSize: { xs: "2.25rem", sm: "3.25rem", md: "64px" },
+                        color: "#fff",
+                        mb: 2,
+                        lineHeight: 1.2,
+                    }}
+                >
+                    Why Join Us
+                </Typography>
+
+                <Container
+                    maxWidth={false}
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        gap: '20px',
+                        py: 4,
+                        maxWidth: "1400px"
+                    }}
+                >
+                    {whyJoinUs.map((item, index) => (
+                        <Box
+                            key={index}
+                            sx={{
+                                boxSizing: "border-box",
+                                width: 296,
+                                height: 96,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 2,
+                                px: 3,
+                                borderRadius: '32px',
+                                boxShadow: '0 8px 20px 0 rgba(31, 34, 46, 0.2)',
+                                backgroundImage: `radial-gradient(circle at 140% 230%, #3c71f7, rgba(0, 0, 0, 0) 48%),
+                          radial-gradient(circle at -10% 200%, #37de8d, rgba(0, 0, 0, 0) 40%),
+                          linear-gradient(to bottom, #15171e, #15171e)`,
+                                overflow: 'hidden',
+                                color: 'white',
+                            }}
+                        >
+                            {/* Icon */}
+                            <Box
+                                sx={{
+                                    width: 28,
+                                    height: 28,
+                                    borderRadius: '10px',
+                                    backgroundColor: '#37de8d',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexShrink: 0,
+                                    p: 2
+                                }}
+                            >
+                                <img src={joinusIcon1} alt="" />
+                            </Box>
+
+                            {/* Text */}
+                            <Typography
+                                sx={{
+                                    height: '48px',
+                                    flexGrow: 1,
+                                    fontFamily: 'Inter',
+                                    fontSize: '20px',
+                                    fontWeight: 500,
+                                    fontStretch: 'normal',
+                                    fontStyle: 'normal',
+                                    lineHeight: 'normal',
+                                    letterSpacing: 'normal',
+                                    textAlign: 'left',
+                                    color: '#f3f4f7',
+                                }}
+
+                            >
+                                {item.value}
+                            </Typography>
+                        </Box>
+                    ))}
+                </Container>
+            </Container>
+
+            {/* Open roles */}
+            <Container
+                maxWidth={false}
+                disableGutters
+                sx={{
+                    backgroundColor: "#edeef3",
+                }}
+            >
+                <Container
+                    maxWidth={false}
+                    sx={{
+                        py: 6,
+                        maxWidth: "1270px"
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            fontFamily: 'Inter',
+                            fontSize: '48px',
+                            fontWeight: 800,
+                            textAlign: 'left',
+                            color: '#0a0c10',
+                            mb: 4,
+                        }}
+                    >
+                        Open Roles
+                    </Typography>
+
+                    <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
+                        {/* Sidebar */}
+                        <Box sx={{ minWidth: { xs: '100%', md: 180 } }}>
+                            {techStacks.map((tech) => (
+                                <Typography
+                                    key={tech}
+                                    variant="body1"
+                                    fontWeight={selectedStack === tech ? 700 : 500}
+                                    sx={{
+                                        color: selectedStack === tech ? '#0a0c10' : 'gray',
+                                        cursor: 'pointer',
+                                        mb: 1.5,
+                                        height: '39px',
+                                        alignSelf: 'stretch',
+                                        flexGrow: 0,
+                                        fontFamily: 'Inter',
+                                        fontSize: { xs: '20px', sm: '24px', md: '32px' },
+                                        fontWeight: 'bold',
+                                        textAlign: 'left'
+                                    }}
+                                    onClick={() => setSelectedStack(tech)}
+                                >
+                                    {tech}
+                                </Typography>
+                            ))}
+                        </Box>
+
+                        {/* Job Listings */}
+                        <Stack spacing={1} sx={{ flexGrow: 1, minWidth: 0 }}>
+                            {filteredJobs.map((job, idx) => (
+                                <Box
+                                    key={idx}
+                                    sx={{
+                                        px: 4,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: 2,
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: { xs: 'column', sm: 'row' },
+                                            alignItems: { xs: 'center', sm: 'center' },
+                                            justifyContent: 'space-between',
+                                            flexWrap: 'nowrap',
+                                            gap: 2,
+                                        }}
+                                    >
+                                        {/* Title + Tags */}
+                                        <Box sx={{ flex: 1, minWidth: 0 }}>
+                                            <Typography
+                                                sx={{
+                                                    fontFamily: 'Inter',
+                                                    fontSize: { xs: '18px', sm: '22px', md: '32px' },
+                                                    fontWeight: 600,
+                                                    color: '#000',
+                                                    mb: 1,
+                                                    textAlign: { xs: 'center', sm: 'left' },
+                                                    whiteSpace: 'normal',
+                                                    overflowWrap: 'break-word',
+                                                }}
+                                            >
+                                                {job.title}
+                                            </Typography>
+
+                                            <Stack
+                                                direction="row"
+                                                spacing={1}
+                                                flexWrap="wrap"
+                                                justifyContent={{ xs: 'center', sm: 'flex-start' }}
+                                            >
+                                                {job.tags?.map((tag) => (
+                                                    <Box
+                                                        key={tag}
+                                                        sx={{
+                                                            px: 2,
+                                                            py: 0.5,
+                                                            bgcolor: '#e0e0ea',
+                                                            borderRadius: 1,
+                                                            fontSize: { xs: 10, sm: 11, md: 12 },
+                                                            color: 'black',
+                                                            fontWeight: 600,
+                                                        }}
+                                                    >
+                                                        {tag}
+                                                    </Box>
+                                                ))}
+                                            </Stack>
+                                        </Box>
+
+                                        {/* Buttons */}
+                                        <Stack
+                                            direction="row"
+                                            spacing={1}
+                                            sx={{
+                                                flexShrink: 0,
+                                                flexWrap: { xs: 'wrap', sm: 'nowrap' },
+                                                justifyContent: { xs: 'center', sm: 'flex-end' },
+                                            }}
+                                        >
+                                            <Button
+                                                variant="outlined"
+                                                sx={{
+                                                    textTransform: 'none',
+                                                    borderRadius: '999px',
+                                                    px: { xs: 1.5, sm: 2.5 },
+                                                    py: { xs: 0.5, sm: 1 },
+                                                    fontSize: { xs: '11px', sm: '13px' },
+                                                    fontWeight: 600,
+                                                    color: 'black',
+                                                    borderColor: 'black',
+                                                    border: '2px solid',
+                                                }}
+                                            >
+                                                Learn More
+                                            </Button>
+                                            <Link to={`/careers/${job.slug}`}>
+                                                <Button
+
+                                                    variant="contained"
+                                                    sx={{
+                                                        textTransform: 'none',
+                                                        borderRadius: '999px',
+                                                        px: { xs: 1.5, sm: 2.5 },
+                                                        py: { xs: 0.5, sm: 1 },
+                                                        fontSize: { xs: '11px', sm: '13px' },
+                                                        bgcolor: 'black',
+                                                        '&:hover': {
+                                                            bgcolor: '#333',
+                                                        },
+                                                    }}
+                                                >
+                                                    Apply
+                                                </Button>
+                                            </Link>
+
+                                        </Stack>
+                                    </Box>
+
+                                    {/* Divider */}
+                                    {idx < filteredJobs.length - 1 && (
+                                        <Box
+                                            sx={{
+                                                height: '2px',
+                                                width: '100%',
+                                                background: 'linear-gradient(to right, #00c853, #2979ff)',
+                                            }}
+                                        />
+                                    )}
+                                </Box>
+                            ))}
+                        </Stack>
+
+
+                    </Stack>
+
+                </Container>
+            </Container>
+
+            {/* Apply now */}
+            <Container
+                maxWidth={false}
+                disableGutters
+                sx={{ backgroundColor: "#edeef3" }}
+            >
+                <Container
+                    maxWidth={false}
+                    sx={{
+                        py: 6,
+                        maxWidth: "1270px"
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            fontFamily: 'Inter',
+                            fontSize: '48px',
+                            fontWeight: 800,
+                            textAlign: 'center',
+                            color: '#0a0c10',
+                            mb: 2,
+                        }}
+                    >
+                        Apply Now
+                    </Typography>
+                    <Typography
+                        sx={{
+                            margin: "auto",
+                            width: '627px',
+                            height: 'auto',
+                            textAlign: "center",
+                            fontSize: "20px",
+                            color: 'black',
+                            lineHeight: 1.6
+                        }}
+                    >
+                        Send us your resume and a few lines about why you'd love to join Metaphi.
+                    </Typography>
+                </Container>
+
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: { xs: 'column', md: 'row' },
+                        justifyContent: 'center',
+                        gap: 4,
+                        px: 3,
+                        pb: 6,
+                    }}
+                >
+                    {/* Left gray blocks */}
+                    <Stack spacing={3} sx={{ width: { xs: '100%', md: '50%' } }}>
+                        {[...Array(3)].map((_, i) => (
+                            <Box
+                                key={i}
+                                sx={{
+                                    height: 180,
+                                    borderRadius: 3,
+                                    backgroundColor: '#ccc',
+                                }}
+                            />
+                        ))}
+                    </Stack>
+
+                    {/* Right: Form Card */}
+                    <Box
+                        sx={{
+                            width: { xs: '100%', md: '50%' },
+                            backgroundColor: '#fff',
+                            borderRadius: 3,
+                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                            p: 3,
+                        }}
+                    >
+                        <Stack spacing={3} component="form" onSubmit={formik.handleSubmit}>
+                            {/* Name & Email */}
+                            <Stack direction="row" spacing={2}>
+                                <TextField
+                                    label="Name"
+                                    name="name"
+                                    fullWidth
+                                    value={formik.values.name}
+                                    onChange={formik.handleChange}
+                                />
+                                <TextField
+                                    label="Email"
+                                    name="email"
+                                    fullWidth
+                                    value={formik.values.email}
+                                    onChange={formik.handleChange}
+                                />
+                            </Stack>
+
+                            {/* Message */}
+                            <TextField
+                                label="Message*"
+                                name="message"
+                                multiline
+                                minRows={5}
+                                fullWidth
+                                value={formik.values.message}
+                                onChange={formik.handleChange}
+                                placeholder="Why do you want to join Metaphi?"
+                            />
+
+                            <Box>
+                                <Typography sx={{ fontWeight: 'bold', mb: 1, color: "black" }}>Upload Resume*</Typography>
+                                <Box
+                                    onClick={() => document.getElementById("fileInput")?.click()}
+                                    sx={{
+                                        border: '2px dashed #d0d0d0',
+                                        borderRadius: 2,
+                                        padding: 3,
+                                        textAlign: 'center',
+                                        cursor: 'pointer',
+                                        backgroundColor: '#f9f9fc',
+                                        '&:hover': {
+                                            backgroundColor: '#f0f0f7',
+                                        },
+                                    }}
+                                >
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        Drag or drop your file, or <strong>click here</strong>.
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 12, color: '#666' }}>
+                                        .pdf, .doc, .docx | Max 5MB
+                                    </Typography>
+                                    <input
+                                        type="file"
+                                        id="fileInput"
+                                        accept=".pdf,.doc,.docx"
+                                        hidden
+                                        onChange={(e) => formik.setFieldValue('resume', e.target.files?.[0])}
+                                    />
+                                </Box>
+                                {formik.values.resume && (
+                                    <Typography sx={{ fontSize: 14, mt: 1 }}>
+                                        Selected: {formik.values.resume.name}
+                                    </Typography>
+                                )}
+                            </Box>
+
+                            {/* Submit */}
+                            <Button
+                                type="submit"
+                                fullWidth
+                                sx={{
+                                    background: '#000',
+                                    color: '#fff',
+                                    fontWeight: 600,
+                                    py: 1.5,
+                                    borderRadius: 2,
+                                    '&:hover': {
+                                        backgroundColor: '#333',
+                                    },
+                                }}
+                            >
+                                Send Message
+                            </Button>
+
+                            {/* Gradient line and alternate email */}
+                            <Box sx={{ height: 2, background: 'linear-gradient(to right, #00c853, #2979ff)' }} />
+                            <Typography align="center" sx={{ fontSize: 12 }}>
+                                Prefer email? <br /> Send your resume directly to: <strong>hr@example.com</strong>
+                            </Typography>
+                        </Stack>
+                    </Box>
+                </Box>
+            </Container>
+
 
             {/* <Container
                 maxWidth={false}
@@ -106,7 +748,7 @@ const Careers = () => {
                 </Box>
             </Container> */}
 
-            <Container
+            {/* <Container
                 maxWidth={false}
                 disableGutters
                 sx={{
@@ -120,11 +762,11 @@ const Careers = () => {
                     textAlign: "center",
                 }}
             >
-                {/* Filter Buttons */}
+   
                 <Stack
                     sx={{
                         flexDirection: { xs: 'row', md: 'row' },
-                        gap: { xs:0, md: 2 },
+                        gap: { xs: 0, md: 2 },
                         mb: 6,
                         flexWrap: 'wrap',
                         justifyContent: 'center',
@@ -140,8 +782,8 @@ const Careers = () => {
                                 textTransform: "none",
                                 fontWeight: 600,
                                 px: 3,
-                                m:1,
-                                width:"100px",
+                                m: 1,
+                                width: "100px",
                                 borderRadius: "20px",
                                 backgroundColor:
                                     selectedStack === tech ? "#00C853" : "transparent",
@@ -158,7 +800,7 @@ const Careers = () => {
                     ))}
                 </Stack>
 
-                {/* Cards */}
+        
                 <Box
                     sx={{
                         display: "flex",
@@ -166,7 +808,7 @@ const Careers = () => {
                         gap: 4,
                         justifyContent: "center",
                         width: "100%",
-                        maxWidth:"1500px"
+                        maxWidth: "1500px"
                     }}
                 >
                     {filteredJobs.map((job, idx) => (
@@ -240,7 +882,7 @@ const Careers = () => {
                         </Card>
                     ))}
                 </Box>
-            </Container>
+            </Container> */}
 
         </>
     )

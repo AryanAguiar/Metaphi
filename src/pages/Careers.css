@@ -1,0 +1,45 @@
+.Ellipse-5 {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 50vw;
+    height: 50vh;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(60, 113, 247, 0.8) 0%, rgba(60, 113, 247, 0.2) 60%, transparent 100%);
+    filter: blur(200px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+.text-style-1 {
+    font-weight: 600;
+    color: #37de8d;
+}
+
+.text-style-2 {
+    font-weight: 600;
+    color: #3c71f7;
+}
+
+.text-style-3 {
+    font-weight: 600;
+    color: #fff;
+}
+
+.why-join-us {
+    height: 77px;
+    align-self: stretch;
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 64px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #f3f4f7;
+}
+
