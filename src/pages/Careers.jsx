@@ -11,6 +11,7 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 import axios from "axios";
 import { ADD_JOB_APPLICATION_ENDPOINT } from "../utils/apiConfig";
+
 const whyJoinUs = [
     {
         value: "Flexible Working Hours",
@@ -37,6 +38,7 @@ const whyJoinUs = [
         icon: "",
     },
 ]
+
 
 const Careers = () => {
 
@@ -655,7 +657,7 @@ const Careers = () => {
                                         },
                                     }}
                                 >
-                                    <Typography sx={{ fontSize: 14 }}>
+                                    <Typography sx={{ fontSize: 14, color: "grey" }}>
                                         Drag or drop your file, or <strong>click here</strong>.
                                     </Typography>
                                     <Typography sx={{ fontSize: 12, color: '#666' }}>
@@ -696,7 +698,7 @@ const Careers = () => {
 
                             {/* Gradient line and alternate email */}
                             <Box sx={{ height: 2, background: 'linear-gradient(to right, #00c853, #2979ff)' }} />
-                            <Typography align="center" sx={{ fontSize: 12 }}>
+                            <Typography align="center" sx={{ fontSize: 12, color: "black" }}>
                                 Prefer email? <br /> Send your resume directly to: <strong>hr@example.com</strong>
                             </Typography>
                         </Stack>
