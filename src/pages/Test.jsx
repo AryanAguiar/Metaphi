@@ -88,25 +88,29 @@ const counters = [
     value: 420,
     suffix: '%',
     label: 'More Speed',
-    description: 'Ut porttitor leo a diam sollicitudin. Integer enim neque volutpat ac.'
+    description: 'Ut porttitor leo a diam sollicitudin. Integer enim neque volutpat ac.',
+    icon: svg1
   },
   {
     value: 21.2,
     suffix: 'K',
     label: 'Total Ratings',
-    description: 'Maecenas pharetra convallis posuere morbi. Scelerisque felis.'
+    description: 'Maecenas pharetra convallis posuere morbi. Scelerisque felis.',
+    icon: svg1
   },
   {
     value: 110,
     suffix: 'X',
     label: 'Efficiency Level',
-    description: 'Lacinia at quis risus sed vulputate. Lectus mauris ultrices eros.'
+    description: 'Lacinia at quis risus sed vulputate. Lectus mauris ultrices eros.',
+    icon: svg1
   },
   {
     value: 16,
     suffix: 'M',
     label: 'Total Users',
-    description: 'Fames ac turpis egestas sed tempus. Tellus mauris a diam maecenas.'
+    description: 'Fames ac turpis egestas sed tempus. Tellus mauris a diam maecenas.',
+    icon: svg1
   }
 ];
 
@@ -881,12 +885,12 @@ const Home = () => {
             sx={{
               fontWeight: "bold",
               fontSize: { xs: "24px", md: "36px" },
-              py:8
+              py: 8
             }}
           >
             Our Results
           </Typography>
-          
+
           <Box
             sx={{
               display: "flex",
@@ -904,6 +908,7 @@ const Home = () => {
                 transition={{ duration: 0.8, delay: index * 0.3 }}
                 viewport={{ once: true }}
               >
+
                 <Box
                   sx={{
                     width: { xs: "100%", sm: "220px", md: "260px" },
@@ -912,25 +917,44 @@ const Home = () => {
                     gap: 1,
                   }}
                 >
-                  <Typography
-                    variant="h4"
+                  <Box
                     sx={{
-                      fontWeight: 700,
-                      fontSize: "32px",
-                      background: "linear-gradient(90deg, #00C87F, #007FFF)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center", // Ensures vertical alignment
+                      gap: 2, // Adjust gap as needed
                     }}
                   >
-                    <CountUp start={0} end={counter.value} duration={3} />{counter.suffix || ''}
-                  </Typography>
+                    <Box
+                      component="img"
+                      src={counter.icon}
+                      alt=""
+                      sx={{ width: 50, height: 50 }}
+                    />
 
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontWeight: 600, color: "white" }}
-                  >
-                    {counter.label}
-                  </Typography>
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <Typography
+                        variant="h4"
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: "32px",
+                          background: "linear-gradient(90deg, #00C87F, #007FFF)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                        }}
+                      >
+                        <CountUp start={0} end={counter.value} duration={3} />
+                        {counter.suffix || ''}
+                      </Typography>
+
+                      <Typography
+                        variant="subtitle1"
+                        sx={{ fontWeight: 600, color: "white" }}
+                      >
+                        {counter.label}
+                      </Typography>
+                    </Box>
+                  </Box>
 
                   <Typography
                     variant="body2"
@@ -939,6 +963,7 @@ const Home = () => {
                     {counter.description}
                   </Typography>
                 </Box>
+
               </motion.div>
             ))}
           </Box>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import axios from "axios";
+import { ADD_JOB_APPLICATION_ENDPOINT } from "../utils/apiConfig";
 
 const CareersInner = () => {
   const { slug } = useParams();
@@ -23,41 +24,58 @@ const CareersInner = () => {
   }
 
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState({ type: '', message: '', open: false });
+
 
   const handleSubmit = async (values, { resetForm }) => {
-    console.log(values, "form values")
+    console.log(values, "form values");
     const formData = new FormData();
-    formData.append('name', values.name);
-    formData.append('email', values.email);
-    formData.append('mobile', values.mobile);
-    formData.append('linkedin', values.linkedin);
-    formData.append('slug', values.slug);
+
+    formData.append('full_name', values.name);
+    formData.append('email_id', values.email);
+    formData.append('phone_no', values.mobile);
+    formData.append('linkedin_url', values.linkedin);
+    formData.append('designation', values.slug);
     formData.append('stack', values.stack);
 
     if (values.resume) {
-      formData.append('resume', values.resume);
-      resetForm();
+      formData.append('resume_file', values.resume);
     }
 
-    // try {
-    //   setLoading(true);
-    //   const response = await axios.post(
-    //     'https://your-api-endpoint.com/job-application', // replace with actual URL
-    //     formData,
-    //     {
-    //       headers: { 'Content-Type': 'multipart/form-data' },
-    //     }
-    //   );
+    try {
+      setLoading(true);
 
-    //   console.log('Form submitted:', response.data);
-    //   resetForm(); 
-    // } catch (error) {
-    //   console.error('Submission error:', values);
-    // } finally {
-    //   setLoading(false);
-    // }
+      const response = await axios.post(
+        ADD_JOB_APPLICATION_ENDPOINT,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      console.log('Form submitted:', response.data);
+
+      setAlert({
+        type: 'success',
+        message: 'Application submitted successfully!',
+        open: true,
+      });
+
+      resetForm();
+    } catch (error) {
+      console.error('Submission error:', error.response?.data || error.message);
+
+      setAlert({
+        type: 'error',
+        message: error.response?.data?.message || 'Submission failed. Please try again.',
+        open: true,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
-
 
   const formik = useFormik({
     enableReinitialize: true,

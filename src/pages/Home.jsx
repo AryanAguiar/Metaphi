@@ -84,9 +84,34 @@ const slides = [
 ];
 
 const counters = [
-  { value: 50, label: "Projects Completed", icon: svg1 },
-  { value: 40, label: "Trusted Partners", icon: svg2 },
-  { value: 10, label: "Innovation Awards Won", icon: svg3 },
+  {
+    value: 30,
+    suffix: '+',
+    label: 'Developers',
+    description: 'Ut porttitor leo a diam sollicitudin. Integer enim neque volutpat ac.',
+    icon: svg1
+  },
+  {
+    value: 20,
+    suffix: '+',
+    label: 'Industries Worked For',
+    description: 'Maecenas pharetra convallis posuere morbi. Scelerisque felis.',
+    icon: svg1
+  },
+  {
+    value: 100,
+    suffix: '+',
+    label: 'Successful Projects',
+    description: 'Lacinia at quis risus sed vulputate. Lectus mauris ultrices eros.',
+    icon: svg1
+  },
+  {
+    value: 50,
+    suffix: '+',
+    label: 'Global Clients',
+    description: 'Fames ac turpis egestas sed tempus. Tellus mauris a diam maecenas.',
+    icon: svg1
+  }
 ];
 
 //cards
@@ -847,49 +872,100 @@ const Home = () => {
         {/* stats section */}
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 6,
+            maxWidth: "1440px",
+            margin: "0 auto",
+            px: 3,
+            py: { xs: 6, md: 10 },
             textAlign: "center",
-            py: 7,
-            flexWrap: "wrap",
           }}
         >
-          {counters.map((counter, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.3 }}
-              viewport={{ once: true }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  backgroundColor: "rgba(37, 4, 255, 0.29)",
-                  padding: "15px 25px",
-                  borderRadius: "50px",
-                  width: "250px"
-                }}
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+              fontSize: { xs: "24px", md: "36px" },
+              py: 8
+            }}
+          >
+            Our Results
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: { xs: 4, md: 6 },
+              textAlign: "left",
+            }}
+          >
+            {counters.map((counter, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.3 }}
+                viewport={{ once: true }}
               >
 
-                <Typography variant="h4" sx={{ fontSize: 40 }}>
-                  <img style={{ width: "40px" }} src={counter.icon} alt="" />
-                </Typography>
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "220px", md: "260px" },
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 1,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center", // Ensures vertical alignment
+                      gap: 2, // Adjust gap as needed
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      src={counter.icon}
+                      alt=""
+                      sx={{ width: 50, height: 50 }}
+                    />
 
-                <Box sx={{ textAlign: "left" }}>
-                  <Typography variant="h4" sx={{ fontWeight: "bold", }}>
-                    <CountUp start={0} end={counter.value} duration={4} />+
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <Typography
+                        variant="h4"
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: "32px",
+                          background: "linear-gradient(90deg, #00C87F, #007FFF)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                        }}
+                      >
+                        <CountUp start={0} end={counter.value} duration={3} />
+                        {counter.suffix || ''}
+                      </Typography>
+
+                      <Typography
+                        variant="subtitle1"
+                        sx={{ fontWeight: 600, color: "white" }}
+                      >
+                        {counter.label}
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "#6B7280", fontSize: "14px" }}
+                  >
+                    {counter.description}
                   </Typography>
-                  <Typography variant="body1">{counter.label}</Typography>
                 </Box>
-              </Box>
-            </motion.div>
-          ))}
+
+              </motion.div>
+            ))}
+          </Box>
         </Box>
 
       </Container>
@@ -908,7 +984,7 @@ const Home = () => {
             className="heading"
             sx={{
               fontWeight: "bold",
-        
+
               background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -1028,7 +1104,7 @@ const Home = () => {
                     },
                   }}
                 >
-                  Learn More <FontAwesomeIcon icon={faArrowRight} />
+                  About Us <FontAwesomeIcon icon={faArrowRight} />
                 </Button>
               </Box>
             </Box>
@@ -1109,7 +1185,7 @@ const Home = () => {
                     },
                   }}
                 >
-                  Services <FontAwesomeIcon icon={faArrowRight} />
+                  Our Services <FontAwesomeIcon icon={faArrowRight} />
                 </Button>
               </Box>
             </Box>
@@ -1882,25 +1958,25 @@ const Home = () => {
 
           {/* View More Button */}
           <Box sx={{ textAlign: "center", marginTop: 3 }}>
-          <Button
-                variant="contained"
-                sx={{
-                  alignSelf: { xs: "center", md: "flex-start" },
-                  mt: 3,
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: 3,
-                  textTransform: "none",
-                  fontWeight: 500,
-                  color: "white",
-                  background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
-                  "&:hover": {
-                    background: "linear-gradient(to right, #00eaff, #0066ff)",
-                  },
-                }}
-              >
-                VIEW MORE
-              </Button>
+            <Button
+              variant="contained"
+              sx={{
+                alignSelf: { xs: "center", md: "flex-start" },
+                mt: 3,
+                px: 4,
+                py: 1.5,
+                borderRadius: 3,
+                textTransform: "none",
+                fontWeight: 500,
+                color: "white",
+                background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
+                "&:hover": {
+                  background: "linear-gradient(to right, #00eaff, #0066ff)",
+                },
+              }}
+            >
+              VIEW MORE
+            </Button>
           </Box>
         </Box>
       </Container>
@@ -2443,12 +2519,12 @@ const Home = () => {
                           helperText={meta.touched && meta.error}
                           sx={{
                             '& input:-webkit-autofill': {
-                              WebkitBoxShadow: '0 0 0 1000px #121212 inset',  
-                              WebkitTextFillColor: '#fff',  
-                              caretColor: '#fff', 
-                              transition: 'background-color 5000s ease-in-out 0s', 
+                              WebkitBoxShadow: '0 0 0 1000px #121212 inset',
+                              WebkitTextFillColor: '#fff',
+                              caretColor: '#fff',
+                              transition: 'background-color 5000s ease-in-out 0s',
                             },
-            
+
                             mb: 3,
                             backgroundColor: "#222",
                             borderRadius: 1,
