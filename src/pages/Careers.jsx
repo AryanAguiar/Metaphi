@@ -276,8 +276,6 @@ const Careers = () => {
                 </Box>
             </Container>
 
-
-
             {/* Why join us */}
             <Container
                 maxWidth={false}

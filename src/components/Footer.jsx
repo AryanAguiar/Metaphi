@@ -51,8 +51,8 @@ const Footer = () => {
   }
 
   return (
-    <Box sx={{ maxWidth: "1480px", margin: "auto", pt: 8, pb: 4 }}>
-      <hr />
+    <Box sx={{ maxWidth: "1230px", margin: "auto", pt: 8, pb: 4, px: { xs: 4, md: 5 } }}>
+
       {/* Top Section */}
       <Box
         sx={{
@@ -60,48 +60,55 @@ const Footer = () => {
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           justifyContent: "space-between",
-          px: { xs: 3, sm: 6, md: 12 },
+
           gap: 8,
         }}
       >
         {/* Left Column */}
         <Box sx={{ flex: 1 }}>
-          <Box sx={{ position: "relative",}}>
+          <Box sx={{ position: "relative", }}>
             <Link to="/" onClick={handleLogoClick}>
               <img src={logoImg} alt="Logo" style={{ height: "50px" }} />
             </Link>
           </Box>
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            Metaphi Innovations
-          </Typography>
-          <Typography sx={{ color: "#bbb", mt: 1 }}>
-            Leading IT Consulting Company Delivering Custom, Innovative Solutions.
+          <Typography sx={{ color: "#bbb", mt: 1, maxWidth: "420px" }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare cursus sed nunc eget dictum  Sed ornare cursus
           </Typography>
         </Box>
 
         {/* Right Column - Social & Newsletter */}
         <Box sx={{ flex: 1 }}>
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            Stay Connected with Us!
+          <Typography sx={{ fontWeight: "bold", fontSize: "40px", fontWeight: "600" }}>
+            Social Media
           </Typography>
-          <Typography sx={{ color: "#bbb", mt: 1 }}>
-            Follow us on social media and stay updated with our latest innovations and insights.
+          <Typography sx={{ color: "#bbb", mt: 1, maxWidth: "420px" }}>
+            Don't Miss To Follow Us On Our Social Networks Accounts.
           </Typography>
           <Box sx={{ mt: 2, display: "flex", gap: 1 }}>
-            <IconButton sx={{ color: "#3b5998" }}><Facebook /></IconButton>
-            <IconButton sx={{ color: "#0077B5" }}><LinkedIn /></IconButton>
-            <IconButton sx={{ color: "#C13584" }}><Instagram /></IconButton>
-            <IconButton sx={{ color: "#FF0000" }}><YouTube /></IconButton>
+            <IconButton sx={{ color: "white" }}><Facebook /></IconButton>
+            <IconButton sx={{ color: "white" }}><LinkedIn /></IconButton>
+            <IconButton sx={{ color: "white" }}><Instagram /></IconButton>
+            <IconButton sx={{ color: "white" }}><YouTube /></IconButton>
           </Box>
         </Box>
       </Box>
 
+      {/* Divider */}
+      <Box
+        sx={{
+          height: '2px',
+          width: '100%',
+          my:2,
+          background: 'linear-gradient(to right, #00c853, #2979ff)',
+        }}
+      />
+
       {/* Nav Links Section */}
-      <Box sx={{ px: { xs: 3, sm: 6, md: 12 }, py: 6 }}>
+      <Box  >
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(4, 1fr)" },
+            gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(4, 1fr)", lg: "repeat(6, 1fr)" },
             gap: 4,
           }}
         >
@@ -117,7 +124,7 @@ const Footer = () => {
                 style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
                 onMouseEnter={e => (e.target.style.color = "#fff")}
                 onMouseLeave={e => (e.target.style.color = "#bbb")}
-                onClick={(e) => e.preventDefault()} 
+                onClick={(e) => e.preventDefault()}
               > {/*temporary disabled sublinks*/}
                 {link.name}
               </Link>
@@ -136,7 +143,64 @@ const Footer = () => {
                 style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
                 onMouseEnter={e => (e.target.style.color = "#fff")}
                 onMouseLeave={e => (e.target.style.color = "#bbb")}
-                onClick={(e) => e.preventDefault()} 
+                onClick={(e) => e.preventDefault()}
+              >{/*temporary disabled sublinks*/}
+                {link.name}
+              </Link>
+            ))}
+          </Box>
+
+          {/* Temp footer links */}
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+              Company
+            </Typography>
+            {companyLinks.map(link => (
+              <Link
+                key={link.name}
+                to={link.path}
+                style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
+                onMouseEnter={e => (e.target.style.color = "#fff")}
+                onMouseLeave={e => (e.target.style.color = "#bbb")}
+                onClick={(e) => e.preventDefault()}
+              >{/*temporary disabled sublinks*/}
+                {link.name}
+              </Link>
+            ))}
+          </Box>
+
+          {/* Temp footer links */}
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+              Company
+            </Typography>
+            {companyLinks.map(link => (
+              <Link
+                key={link.name}
+                to={link.path}
+                style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
+                onMouseEnter={e => (e.target.style.color = "#fff")}
+                onMouseLeave={e => (e.target.style.color = "#bbb")}
+                onClick={(e) => e.preventDefault()}
+              >{/*temporary disabled sublinks*/}
+                {link.name}
+              </Link>
+            ))}
+          </Box>
+
+          {/* Temp footer links */}
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+              Company
+            </Typography>
+            {companyLinks.map(link => (
+              <Link
+                key={link.name}
+                to={link.path}
+                style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
+                onMouseEnter={e => (e.target.style.color = "#fff")}
+                onMouseLeave={e => (e.target.style.color = "#bbb")}
+                onClick={(e) => e.preventDefault()}
               >{/*temporary disabled sublinks*/}
                 {link.name}
               </Link>
@@ -155,48 +219,30 @@ const Footer = () => {
                 style={{ textDecoration: "none", color: "#bbb", marginBottom: "8px", display: "block" }}
                 onMouseEnter={e => (e.target.style.color = "#fff")}
                 onMouseLeave={e => (e.target.style.color = "#bbb")}
-                onClick={(e) => e.preventDefault()} 
+                onClick={(e) => e.preventDefault()}
               >{/*temporary disabled sublinks*/}
                 {link.name}
               </Link>
             ))}
           </Box>
 
-          {/* Contact */}
-          <Box>
-            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-              Contact Us
-            </Typography>
-            <Typography sx={{ color: "#bbb", mb: 2 }}>
-              Share your project details and take the first step toward success.
-            </Typography>
-            <Box sx={{ position: "absolute", display: { xs: "none", md: "block" } }}>
-              <Link to="/contact" onClick={(e) => e.preventDefault()} >{/*temporary disabled sublinks*/}
-                <Button
-                  variant="contained"
-                  sx={{
-                    background: "linear-gradient(90deg, #0D47A1, #00C853)",
-                    color: "white",
-                    borderRadius: "830px",
-                  }}
-                >
-                  Contact Us
-                </Button>
-              </Link>
-            </Box>
-          </Box>
+
         </Box>
       </Box>
 
-      <Box sx={{ textAlign: "center", px: { xs: 3, sm: 6 }, pb: 4 }}>
-        <Typography sx={{ fontWeight: "bold", mb: 1 }}>Our Offices</Typography>
-        <Typography sx={{ color: "#bbb" }}>India – Mumbai, Maharashtra</Typography>
-
-      </Box>
+      {/* Divider */}
+      <Box
+        sx={{
+          height: '2px',
+          width: '100%',
+          my:2,
+          background: 'linear-gradient(to right, #00c853, #2979ff)',
+        }}
+      />
 
       {/* Bottom Copyright */}
-      <Box sx={{ textAlign: "center", borderTop: "1px solid #333", pt: 3, fontSize: "0.85rem", color: "#999" }}>
-        ©2025 Metaphi Innovations | All Rights Reserved.
+      <Box sx={{ textAlign: "center", pt: 3, fontSize: "18px", color: "#999" }}>
+      © 2025 Metaphi Innovations Pvt. Ltd. All rights reserved.
       </Box>
     </Box>
   );

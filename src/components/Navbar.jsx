@@ -49,27 +49,25 @@ const Navbar = (props) => {
                     position: "fixed",
                     top: "40px",
                     left: 0,
-                    right: 0,  
+                    right: 0,
                     zIndex: (theme) => theme.zIndex.appBar,
                     display: "flex",
                     justifyContent: "center",
-                    px: { xs: 2, sm: 3 }, 
+                    px: 2
                 }}
             >
                 <AppBar
                     position="static"
                     sx={{
-                      width: "100%",
-                      maxWidth: "1240px",
-                      height: "77.8px",
-                      borderRadius: "36px",
-                      backgroundColor: "#0a0c10",
-                      boxSizing: "border-box",
-                      display: "flex",
-                      justifyContent: "center",
-                      px: { xs: 2, sm: 3 }, 
+                        width: "100%",
+                        maxWidth: { xl: "1260px", lg: "1260px", md: "100%" },  
+                        px: 2,
+                        borderRadius: "36px",
+                        backgroundColor: "#0a0c10",
+                        justifyContent: "center",
                     }}
                 >
+
                     <Toolbar
                         disableGutters
                         sx={{
@@ -107,16 +105,21 @@ const Navbar = (props) => {
                                             to={path}
                                             style={({ isActive }) => ({
                                                 textDecoration: "none",
-                                                color: "#F9FAFB",
-                                                backgroundColor: isActive ? "#1F2937" : "transparent", 
-                                                borderRadius:5,
-                                                fontWeight: isActive ? "bold" : 500,
-                                                padding: "8px 16px",
-                                                fontSize: "16px",
-                                                fontWeight: "700",
+                                                backgroundColor: isActive ? "#15171E" : "transparent", borderRadius: 5, padding: "7px 0",
+                                                fontWeight: "bold",
+                                                color: "#F9FAFB"
                                             })}
                                         >
-                                            {page}
+                                            <Box
+                                                component="span"
+                                                sx={{
+                                                    padding: "8px 16px",
+                                                    fontSize: { md: "13px", lg: "16px" },
+                                                    fontWeight: 700,
+                                                }}
+                                            >
+                                                {page}
+                                            </Box>
                                         </NavLink>
                                     );
                                 })}
@@ -128,20 +131,19 @@ const Navbar = (props) => {
                                 <Button
                                     variant="contained"
                                     sx={{
-                                        fontSize: "16px",
-                                        background: "linear-gradient(90deg, #00C853, #00E676)", 
+                                        fontSize: { md: "13", lg: "16px" },
+                                        background: "linear-gradient(90deg, #00C853, #00E676)",
                                         color: "black",
-                                        borderRadius: "999px", 
+                                        borderRadius: "999px",
                                         fontWeight: 600,
                                         textTransform: "none",
-                                        px: 3, 
-                                        py: 1,  
-                                        boxShadow: "0px 4px 20px rgba(0, 229, 123, 0.4)",   
+                                        px: { md: 1, lg: 3 },
+                                        py: 1,
+                                        boxShadow: "0px 4px 20px rgba(0, 229, 123, 0.4)",
                                         transition: "all 0.3s ease",
                                         "&:hover": {
-                                            background: "linear-gradient(90deg, #00C853, #00E676)",  
-                                            color: "black",  
-                                            boxShadow: "0px 4px 20px rgba(0, 229, 123, 0.4)", 
+                                            boxShadow: "0px 6px 24px rgba(0, 229, 123, 0.5)",
+                                            transform: "translateY(-1px)",
                                         },
                                     }}
                                 >
