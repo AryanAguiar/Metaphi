@@ -8,68 +8,10 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import logoImg from "../images/logo.svg";
 import gsap from "gsap";
 
-const pages = ["About", "Services", "Industries", "Resources", "Careers", "Contact"];
-const subLinks = {
-    About: [
-        { name: "Company Overview", path: "/about#overview", description: "Who we are and what we do." },
-        { name: "Our Team", path: "/about/team", description: "Meet the people behind our success." },
-        { name: "Services We Offer", path: "/about#services", description: "Our specialized skills and experience." },
-        { name: "Why Choose Us", path: "/about#why-choose-us", description: "What makes us stand out." },
-        { name: "Mission & Vision", path: "/about#mission-vision", description: "Our goals and future aspirations." },
-        // { name: "Events", path: "/about/events", description: "Stay updated on our latest events." }
-    ],
-
-    Services: [
-        { name: "Game Development", path: "/services/game", description: "Creating immersive gaming experiences." },
-        { name: "Mobile App Development", path: "/services/mobile", description: "Building user-friendly mobile applications." },
-        { name: "Web and CMS Development", path: "/services/web", description: "Custom websites and CMS solutions." },
-        { name: "E-commerce Development", path: "/services/ecommerce", description: "Robust online store solutions." },
-        { name: "Blockchain Development", path: "/services/blockchain", description: "Secure and decentralized applications." },
-        { name: "Salesforce Solutions", path: "/services/salesforce", description: "Optimized CRM and automation tools." },
-        { name: "AI & Machine Learning", path: "/services/ai-ml", description: "Smart AI-driven solutions for businesses." },
-        { name: "IoT & Embedded Systems", path: "/services/iot", description: "Connecting smart devices and automation." },
-        { name: "DevOps Services", path: "/services/devops", description: "Streamlining development and operations." }
-    ],
-
-    Industries: [
-        { name: "Education", path: "/industries/education", description: "Tech-driven learning experiences." },
-        { name: "Healthcare", path: "/industries/healthcare", description: "Innovative solutions for healthcare." },
-        { name: "Real Estate", path: "/industries/real-estate", description: "Smart technology for real estate." },
-        { name: "Retail", path: "/industries/retail", description: "Enhancing shopping experiences." },
-        { name: "Tourism", path: "/industries/tourism", description: "Travel and hospitality solutions." },
-        { name: "Fintech", path: "/industries/fintech", description: "Revolutionizing financial services." },
-        { name: "Game", path: "/industries/game", description: "Gaming industry solutions and tools." },
-        { name: "Entertainment", path: "/industries/entertainment", description: "Innovating media and entertainment." },
-        { name: "Logistics", path: "/industries/logistics", description: "Optimized supply chain and transport." },
-        { name: "Sports", path: "/industries/sports", description: "Technology in sports and fitness." },
-        { name: "On-Demand", path: "/industries/on-demand", description: "Solutions for on-demand services." }
-    ],
+const pages = ["Home", "About", "Services", "Industries", "Resources", "Careers", "Contact"];
 
 
 
-    Resources: [
-        { name: "Blogs", path: "/resources/blogs", description: "Insights, trends, and news." }
-    ],
-
-
-
-};
-
-// Elevation Effect on Scroll
-const ElevationScroll = (props) => {
-    const { children } = props;
-    const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 50 });
-
-    return React.cloneElement(children, {
-        elevation: trigger ? 6 : 0,
-        sx: {
-            background: trigger ? "#121212" : "transparent",
-            transition: "background 0.3s ease-in-out",
-        },
-    });
-};
-
-const ITEMS_PER_COLUMN = window.innerWidth < 1000 ? 3 : 4;
 
 
 const Navbar = (props) => {
@@ -86,7 +28,6 @@ const Navbar = (props) => {
 
     const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
-    let closeTimeout;
 
     const handleLogoClick = (e) => {
         if (location.pathname === "/") {
@@ -98,490 +39,135 @@ const Navbar = (props) => {
         }
     }
 
-    const handleMouseEnter = (page) => {
-        clearTimeout(closeTimeout);
 
-        if (!activeDropdown) {
-            setActiveDropdown(page);
-
-            setTimeout(() => {
-                if (dropDownRef.current) {
-                    gsap.set(dropDownRef.current, {
-                        opacity: 0,
-                        y: -20,
-                        scaleY: 0.8,
-                        visibility: "hidden",
-                        pointerEvents: "none",
-                    });
-
-                    gsap.fromTo(
-                        dropDownRef.current,
-                        {
-                            opacity: 0,
-                            y: -20,
-                            scaleY: 0.8,
-                            transformOrigin: "top center",
-                            pointerEvents: "none",
-                        },
-                        {
-                            opacity: 1,
-                            y: 0,
-                            scaleY: 1,
-                            duration: 0.4,
-                            ease: "power2.out",
-                            overwrite: "auto",
-                            onStart: () => {
-                                dropDownRef.current.style.visibility = "visible";
-                            },
-                            onComplete: () => {
-                                dropDownRef.current.style.pointerEvents = "auto";
-                            }
-                        }
-                    );
-                }
-            });
-        } else {
-            setActiveDropdown(page);
-        }
-    };
-
-    const handleMouseLeave = () => {
-        closeTimeout = setTimeout(() => {
-            if (dropDownRef.current) {
-                gsap.to(dropDownRef.current, {
-                    opacity: 0,
-                    y: -20,
-                    scaleY: 0.9,
-                    transformOrigin: "top center",
-                    duration: 0.3,
-                    ease: "power2.in",
-                    overwrite: "auto",
-                    onComplete: () => setActiveDropdown(null),
-                });
-            }
-        }, 200);
-    };
-
-    const handleDropdownClick = (page) => {
-        setOpenDropdown(openDropdown === page ? null : page);
-    };
-
-    const [hoveredPage, setHoveredPage] = useState("");
 
     return (
         <>
-            <ElevationScroll {...props}>
-                <AppBar position="fixed" sx={{ backgroundColor: "rgba(0, 0, 0, 0.6)", backdropFilter: "blur(10px)", }}>
-                    <Container maxWidth="xl">
-                        <Toolbar
-                            disableGutters
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                px: { xs: 2, md: 6 },
-                                position: "relative",
-                            }}
-                        >
-                            {/* Logo  */}
-                            <Box sx={{ position: "absolute", left: 20 }}>
-                                <Link to="/" onClick={handleLogoClick}>
-                                    <img src={logoImg} alt="Logo" style={{ height: "50px" }} />
-                                </Link>
-                            </Box>
 
-                            {/* Desktop Navigation */}
-                            <Box
-                                sx={{
-                                    display: { xs: "none", md: "flex" },
-                                    gap: { md: 1, lg: 3 },
-                                    alignItems: "center",
-                                    position: "absolute",
-                                    left: {md: "49.2%", lg:"51.3%"}, //if careers is next to contact button
-                                    //left: {md: "54.2%", lg:"51.3%"}, //if careers is centered
-                                    transform: "translateX(-52.5%)",
-                                }}
-                            >
-                                {pages
-                                    .filter((page) => page !== "Contact" && page != "Careers")
-                                    .map((page) => {
-
-                                        const isActive = subLinks[page]?.some((subLink) => location.pathname === subLink.path);
-
-                                        return subLinks[page] ? (
-
-                                            <Box
-                                                key={page}
-                                                sx={{ position: "relative" }}
-                                                onMouseEnter={() => handleMouseEnter(page)}
-                                                onMouseLeave={handleMouseLeave}
-                                            >
-
-                                                <Button
-                                                    disableRipple
-                                                    className="nav-item"
-
-                                                    sx={{
-                                                        color: "white",
-                                                        fontWeight: isActive ? "bold" : "normal",
-                                                        "&:hover": { color: "#00C853" },
-                                                    }}
-                                                >
-                                                    {page}
-                                                </Button>
-
-                                                {/* Invisible Hover Bridge */}
-                                                {activeDropdown === page && (
-                                                    <Box
-                                                        sx={{
-                                                            position: "fixed",
-                                                            top: "37px",
-                                                            left: "0%",
-                                                            width: "100%",
-                                                            height: "45px",
-                                                            backgroundColor: "tranaparent",
-                                                            zIndex: 5,
-                                                        }}
-                                                        onMouseEnter={() => handleMouseEnter(page)}
-                                                    />
-                                                )}
-
-                                                {/* Dropdown Menu */}
-
-                                                {activeDropdown === page && (
-                                                    <Box
-                                                        ref={dropDownRef}
-                                                        sx={{
-                                                            position: "fixed",
-                                                            top: "100%",
-                                                            left: "50%",
-                                                            transform: "translate3d(-50%, 0, 0)",
-                                                            width: "790px",
-                                                            backgroundColor: "rgba(24, 24, 24, 0.95)",
-                                                            backdropFilter: "blur(5px)",
-                                                            willChange: "backdrop-filter",
-                                                            borderRadius: "10px",
-                                                            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
-                                                            padding: "18px",
-                                                            display: "grid",
-                                                            gridTemplateColumns: `repeat(${Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN))}, 1fr)`,
-                                                            gap: "20px",
-                                                            zIndex: 1000,
-                                                            border: "1px solid rgba(255, 255, 255, 0.1)",
-                                                            marginTop: "10px",
-                                                        }}
-                                                    >
-
-                                                        <Typography
-                                                            sx={{
-                                                                color: "rgba(255, 255, 255, 0.9)",
-                                                                fontSize: "16px",
-                                                                fontWeight: "700",
-                                                                textTransform: "uppercase",
-                                                                paddingBottom: "6px",
-                                                                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                                                                gridColumn: `span ${Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN))}`,
-                                                                textAlign: "center",
-                                                            }}
-                                                        >
-                                                            {hoveredPage || page}
-                                                        </Typography>
-
-                                                        {Array.from({ length: Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN)) }).map((_, colIndex) => (
-                                                            <Box
-                                                                key={colIndex}
-                                                                sx={{
-                                                                    display: "flex",
-                                                                    flexDirection: "column",
-                                                                    gap: "10px",
-                                                                    paddingRight: colIndex !== Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN)) - 1 ? "20px" : "0px",
-                                                                    borderRight: colIndex !== Math.min(3, Math.ceil(subLinks[page].length / ITEMS_PER_COLUMN)) - 1 ? "1px solid rgba(255, 255, 255, 0.2)" : "none",
-                                                                }}
-                                                            >
-                                                                {subLinks[page]
-                                                                    .slice(colIndex * ITEMS_PER_COLUMN, (colIndex + 1) * ITEMS_PER_COLUMN)
-                                                                    .map((subLink) => (
-                                                                        <NavLink
-                                                                            key={subLink.path}
-                                                                            to={subLink.path}
-                                                                            onClick={(e) => e.preventDefault()} //temporary disabled sublinks
-                                                                            style={{
-                                                                                textDecoration: "none",
-                                                                                color: "rgba(255, 255, 255, 0.9)",
-                                                                                fontSize: "15px",
-                                                                                fontWeight: "500",
-                                                                            }}
-                                                                            className="dropdown-item"
-                                                                        >
-                                                                            <Box
-                                                                                sx={{
-                                                                                    padding: "8px 12px",
-                                                                                    borderRadius: "6px",
-                                                                                    minHeight: "50px",
-                                                                                    transition: "all 0.2s ease-in-out",
-                                                                                    "&:hover": {
-                                                                                        backgroundColor: "rgba(0, 255, 150, 0.15)",
-                                                                                        boxShadow: "0px 4px 10px rgba(0, 255, 150, 0.3)",
-                                                                                    },
-                                                                                }}
-                                                                            >
-                                                                                {subLink.name}
-                                                                                <Typography
-                                                                                    sx={{
-                                                                                        fontSize: "13px",
-                                                                                        color: "rgba(255, 255, 255, 0.6)",
-                                                                                        marginTop: "2px",
-                                                                                    }}
-                                                                                >
-                                                                                    {subLink.description}
-                                                                                </Typography>
-                                                                            </Box>
-                                                                        </NavLink>
-                                                                    ))}
-                                                            </Box>
-                                                        ))}
-                                                    </Box>
-                                                )}
-                                            </Box>
-                                        ) : (
-                                            <NavLink
-                                                key={page}
-                                                to={`/${page.toLowerCase()}`}
-                                                className="nav-item"
-                                                style={{
-                                                    textDecoration: "none",
-                                                    color: "white",
-                                                    fontSize: "16px",
-                                                    fontWeight: location.pathname === `/${page.toLowerCase()}` ? "bold" : "400",
-                                                    transition: "all 0.3s ease-in-out",
-                                                }}
-                                            >
-                                                {page}
-                                            </NavLink>
-
-
-                                        );
-                                    })}
-                                
-                                {/*careers button if centered*/}
-                                {/* <NavLink
-                                    key="Careers"
-                                    to="/careers"
-                                    className="nav-item"
-                                    style={{ textDecoration: "none" }}
-                                >
-                                    <Button
-                                        disableRipple
-                                        className="nav-item"
-                                        sx={{
-                                            color: "white",
-                                            fontWeight: location.pathname === "/careers" ? "bold" : "normal",
-                                            "&:hover": { color: "#00C853" },
-                                        }}
-                                    >
-                                        Careers
-                                    </Button>
-                                </NavLink> */}
-
-                            </Box>
-
-                            {/* Contact Button */}
-                            {/*<Box sx={{ position: "absolute", right: 20, display: { xs: "none", md: "block" } }}>
-                                <Link to="/contact" onClick={(e) => e.preventDefault()}  >{/*temporary disabled sublinks*"/"}
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            background: "linear-gradient(90deg, #0D47A1, #00C853)",
-                                            color: "white",
-                                            borderRadius: "830px",
-                                        }}
-                                    >
-                                        Contact Us
-                                    </Button>
-                                </Link>
-                            </Box>*/}
-
-                            {/* Right Side Buttons - Careers and Contact */}
-                            <Box
-                                sx={{
-                                    position: "absolute",
-                                    right: 20,
-                                    display: { xs: "none", md: "flex" },
-                                    gap: 2,
-                                    alignItems: "center",
-                                }}
-                            >
-                                <NavLink
-                                    to="/careers"
-                                    style={{ textDecoration: "none" }}
-                                >
-                                    <Button
-                                        disableRipple
-                                        className="nav-item"
-                                        sx={{
-                                            color: "white",
-                                            fontWeight: location.pathname === "/careers" ? "bold" : "normal",
-                                            "&:hover": { color: "#00C853" },
-                                        }}
-                                    >
-                                        Careers
-                                    </Button>
-                                </NavLink>
-
-                                <Link to="/contact" onClick={(e) => e.preventDefault()}>
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            background: "linear-gradient(90deg, #0D47A1, #00C853)",
-                                            color: "white",
-                                            borderRadius: "830px",
-                                        }}
-                                    >
-                                        Contact Us
-                                    </Button>
-                                </Link>
-                            </Box>
-
-
-                            {/* Mobile Menu Button */}
-                            <IconButton
-                                size="large"
-                                color="inherit"
-                                onClick={handleDrawerToggle}
-                                disableRipple
-                                sx={{
-                                    display: { xs: "block", md: "none" },
-                                    position: "absolute",
-                                    right: 20,
-                                    pr: 0,
-                                }}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                        </Toolbar>
-                    </Container>
-                </AppBar>
-            </ElevationScroll>
-
-            {/* Mobile Sidebar */}
-            <Drawer
-                anchor="left"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
+            <Box
                 sx={{
-                    "& .MuiDrawer-paper": {
-                        width: 250,
-                        backgroundColor: "#242424",
-                        color: "white",
-                        padding: "10px 0"
-                    }
+                    position: "fixed",
+                    top: "40px",
+                    left: 0,
+                    right: 0,  
+                    zIndex: (theme) => theme.zIndex.appBar,
+                    display: "flex",
+                    justifyContent: "center",
+                    px: { xs: 2, sm: 3 }, 
                 }}
             >
-                <Box sx={{ width: "100%", display: "flex", flexDirection: "column" }}>
-                    {/* Logo and Close Button */}
-                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", p: 2 }}>
-                        <NavLink to="/" onClick={handleDrawerToggle}>
-                            <img src={logoImg} alt="Logo" style={{ height: "40px" }} />
-                        </NavLink>
-                        <IconButton onClick={handleDrawerToggle} sx={{ color: "white" }}>
-                            <CloseIcon />
+                <AppBar
+                    position="static"
+                    sx={{
+                      width: "100%",
+                      maxWidth: "1240px",
+                      height: "77.8px",
+                      borderRadius: "36px",
+                      backgroundColor: "#0a0c10",
+                      boxSizing: "border-box",
+                      display: "flex",
+                      justifyContent: "center",
+                      px: { xs: 2, sm: 3 }, 
+                    }}
+                >
+                    <Toolbar
+                        disableGutters
+                        sx={{
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                        }}
+                    >
+                        {/* Logo */}
+                        <Box sx={{ flexShrink: 1 }}>
+                            <Link to="/" onClick={handleLogoClick}>
+                                <img src={logoImg} alt="Logo" style={{ height: "50px" }} />
+                            </Link>
+                        </Box>
+
+                        {/* Center Nav Links */}
+                        <Box
+                            sx={{
+                                display: { xs: "none", md: "flex" },
+                                gap: 0,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                maxWidth: "668px",
+                                flexGrow: 1,
+                            }}
+                        >
+                            {pages
+                                .filter((page) => page !== "Contact")
+                                .map((page) => {
+                                    const path = page.toLowerCase() === "home" ? "/" : `/${page.toLowerCase()}`;
+                                    return (
+                                        <NavLink
+                                            key={page}
+                                            to={path}
+                                            style={({ isActive }) => ({
+                                                textDecoration: "none",
+                                                color: "#F9FAFB",
+                                                backgroundColor: isActive ? "#1F2937" : "transparent", 
+                                                borderRadius:5,
+                                                fontWeight: isActive ? "bold" : 500,
+                                                padding: "8px 16px",
+                                                fontSize: "16px",
+                                                fontWeight: "700",
+                                            })}
+                                        >
+                                            {page}
+                                        </NavLink>
+                                    );
+                                })}
+                        </Box>
+
+                        {/* Contact Button */}
+                        <Box sx={{ flexShrink: 0, display: { xs: "none", md: "flex" }, gap: 2 }}>
+                            <Link to="/contact">
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        fontSize: "16px",
+                                        background: "linear-gradient(90deg, #00C853, #00E676)", 
+                                        color: "black",
+                                        borderRadius: "999px", 
+                                        fontWeight: 600,
+                                        textTransform: "none",
+                                        px: 3, 
+                                        py: 1,  
+                                        boxShadow: "0px 4px 20px rgba(0, 229, 123, 0.4)",   
+                                        transition: "all 0.3s ease",
+                                        "&:hover": {
+                                            background: "linear-gradient(90deg, #00C853, #00E676)",  
+                                            color: "black",  
+                                            boxShadow: "0px 4px 20px rgba(0, 229, 123, 0.4)", 
+                                        },
+                                    }}
+                                >
+                                    Request a quote
+                                </Button>
+                            </Link>
+                        </Box>
+
+                        {/* Mobile Menu Button */}
+                        <IconButton
+                            size="large"
+                            color="inherit"
+                            onClick={handleDrawerToggle}
+                            disableRipple
+                            sx={{
+                                display: { xs: "block", md: "none" },
+                                ml: "auto",
+                            }}
+                        >
+                            <MenuIcon />
                         </IconButton>
-                    </Box>
+                    </Toolbar>
+                </AppBar>
+            </Box>
 
-                    <Divider sx={{ backgroundColor: "#00C853" }} />
 
-                    {/* Sidebar Navigation */}
-                    <List>
-                        {pages.map((page) => {
-                            const hasDropdown = subLinks[page];
-
-                            return (
-                                <Box key={page}>
-                                    {/* Main Nav Item */}
-                                    <ListItem
-                                        button
-                                        component={!hasDropdown ? NavLink : "div"}
-                                        to={!hasDropdown ? `/${page.toLowerCase()}` : undefined}
-                                        onClick={() => (hasDropdown ? handleDropdownClick(page) : handleDrawerToggle())}
-                                        sx={{
-                                            color: "white",
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            alignItems: "center",
-                                            padding: "10px 16px",
-                                            "&:hover": {
-                                                backgroundColor: "rgba(0, 255, 150, 0.15)",
-                                            },
-                                        }}
-                                    >
-                                        <ListItemText primary={page} />
-                                        {hasDropdown ? (openDropdown === page ? <ExpandLess /> : <ExpandMore />) : null}
-                                    </ListItem>
-
-                                    {/* Dropdown Links with Overlay */}
-                                    {hasDropdown && (
-                                        <Collapse in={openDropdown === page} timeout="auto" unmountOnExit>
-                                            <Box
-                                                sx={{
-                                                    paddingLeft: "16px",
-                                                    backgroundColor: "rgba(255, 255, 255, 0.05)",
-                                                    position: "relative",
-                                                    overflow: "hidden",
-                                                }}
-                                            >
-                                                {/* Overlay Effect */}
-                                                <Box
-                                                    sx={{
-                                                        position: "absolute",
-                                                        top: 0,
-                                                        left: 0,
-                                                        width: "100%",
-                                                        height: "100%",
-                                                        background: "linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0.02))",
-                                                        zIndex: -1,
-                                                    }}
-                                                />
-
-                                                {subLinks[page].map((subLink, index) => (
-                                                    <Box key={subLink.path} sx={{ position: "relative" }}>
-                                                        {/* Overlay Between Items */}
-                                                        {index !== 0 && (
-                                                            <Box
-                                                                sx={{
-                                                                    height: "1px",
-                                                                    backgroundColor: "rgba(255, 255, 255, 0.2)",
-                                                                    margin: "4px 0",
-                                                                }}
-                                                            />
-                                                        )}
-
-                                                        <ListItem
-                                                            button
-                                                            component={NavLink}
-                                                            to={subLink.path}
-                                                            onClick={handleDrawerToggle}
-                                                            sx={{
-                                                                color: "rgba(255, 255, 255, 0.9)",
-                                                                padding: "8px 12px",
-                                                                "&:hover": {
-                                                                    backgroundColor: "rgba(0, 255, 150, 0.15)",
-                                                                },
-                                                            }}
-                                                        >
-                                                            <ListItemText primary={subLink.name} />
-                                                        </ListItem>
-                                                    </Box>
-                                                ))}
-                                            </Box>
-                                        </Collapse>
-                                    )}
-
-                                    <Divider sx={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }} />
-                                </Box>
-                            );
-                        })}
-                    </List>
-                </Box>
-            </Drawer>
 
         </>
     );

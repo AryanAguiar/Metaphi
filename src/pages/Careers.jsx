@@ -156,6 +156,7 @@ const Careers = () => {
                 maxWidth={false}
                 disableGutters
                 sx={{
+                    mt:15,
                     px: { xs: 3, md: 8 },
                     py: { xs: 8, md: 14 },
                     width: "100%",
