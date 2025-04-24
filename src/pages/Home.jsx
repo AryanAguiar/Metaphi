@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 
 //hero section
 import heroImg1 from "../images/mobile application development.webp";
-import heroImg2 from "../images/webdev.png";
+import heroImg2 from "../images/heroimg2.png";
 import heroImg3 from "../images/Blockchain.webp";
 import partner1 from "../images/partner-2.png";
 import "./Home.css";
@@ -67,9 +67,9 @@ import * as Yup from "yup";
 
 const slides = [
   {
-    title: "App Development Company",
-    subtitle: " Rated # 1  Mobile App Development Company in India.",
-    image: heroImg1,
+    title: "Custom Software Development",
+    subtitle: "Tailored software solutions built to fit your business needs and workflow.",
+    image: heroImg2,
   },
   {
     title: "Web Development Company",
@@ -759,6 +759,7 @@ const Home = () => {
 
   return (
     <>
+      <div className="Ellipse-5"></div>
       {/* Hero section */}
       <Container
         maxWidth={false}
@@ -768,6 +769,7 @@ const Home = () => {
           minHeight: "100%",
           padding: "20px",
           color: "white",
+          mt: 12
         }}
       >
         <Box sx={{
@@ -776,23 +778,23 @@ const Home = () => {
           alignItems: "center",
           justifyContent: "space-between",
           margin: "auto",
-          maxWidth: "1485px",
+          maxWidth: "1255px",
           paddingTop: 7,
         }}>
           {/* Left Side - Text Content */}
-          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: "20px", maxWidth: "900px" }}>
+          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: "15px", maxWidth: "614px" }}>
             <Typography
               ref={textRef}
               variant="h3"
               className="heading"
               sx={{
-                fontWeight: "bold",
+                fontWeight: "800",
                 mb: 2,
                 background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-                fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "40px" },
+                fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "46px", xl: "64px" },
               }}
             >
               {slides[currentIndex].title}
@@ -803,34 +805,73 @@ const Home = () => {
               variant="h6"
               className="desc"
               sx={{
+                maxWidth: "352px",
+                fontWeight: "400",
                 mb: 4,
                 background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-                fontSize: { xs: "20px", sm: "24px", md: "19px", lg: "24px", xl: "28px" },
+                fontSize: { xs: "14px", sm: "15px", md: "16px", lg: "18px", xl: "20px" },
               }}
             >
               {slides[currentIndex].subtitle}
             </Typography>
-            <Button
-              ref={buttonRef}
-              variant="contained"
-              sx={{
-                fontSize: "1rem",
-                borderRadius: "30px",
-                padding: "10px 20px",
-                background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
-                color: "white",
-                textTransform: "uppercase",
-                "&:hover": {
-                  background: "linear-gradient(90deg, #0B3D91, #00796B, #00B248)",
-                  boxShadow: "0px 0px 10px #0B3D91",
-                },
-              }}
-            >
-              Get Started
-            </Button>
+            <Box sx={{
+              mt: 12,
+              flexDirection: "row",
+ 
+            }}>
+              <Link to="/contact">
+                <Button
+
+                  variant="contained"
+                  sx={{
+                    fontSize: { md: "13", lg: "16px" },
+                    background: "linear-gradient(90deg, #00C853, #00E676)",
+                    color: "black",
+                    borderRadius: "999px",
+                    fontWeight: 600,
+                    textTransform: "none",
+                    px: { md: 3, lg: 5 },
+                    py: 1,
+                    boxShadow: "0px 4px 20px rgba(0, 229, 123, 0.4)",
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      boxShadow: "0px 6px 24px rgba(0, 229, 123, 0.5)",
+                      transform: "translateY(-1px)",
+                    },
+                  }}
+                >
+                  Contact Us
+                </Button>
+              </Link>
+
+              <Link to="/contact" style={{marginLeft: "20px"}}>
+                <Button
+
+                  variant="contained"
+                  sx={{
+                    fontSize: { md: "13", lg: "16px" },
+                    background: "#15171E",
+                    color: "white",
+                    borderRadius: "999px",
+                    fontWeight: 600,
+                    textTransform: "none",
+                    px: { md: 3, lg: 5 },
+                    py: 1,
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      boxShadow: "0px 6px 24px rgba(143, 145, 144, 0.5)",
+                      transform: "translateY(-1px)",
+                    },
+                  }}
+                >
+                  Explore More
+                </Button>
+              </Link>
+            </Box>
+
           </Box>
 
           {/* Right Side - Changing Image */}
@@ -920,8 +961,8 @@ const Home = () => {
                     sx={{
                       display: "flex",
                       flexDirection: "row",
-                      alignItems: "center", // Ensures vertical alignment
-                      gap: 2, // Adjust gap as needed
+                      alignItems: "center",
+                      gap: 2,
                     }}
                   >
                     <Box
@@ -1210,18 +1251,26 @@ const Home = () => {
           variant="h4"
           className="heading"
           sx={{
-            fontWeight: "bold",
+            fontWeight: "800",
             mb: 2,
             background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            fontSize: { xs: "20px", sm: "24px", md: "39px", lg: "46px", xl: "64px" },
             padding: "20px",
             textAlign: "center"
           }}
         >
-          Solutions We Offer
+          Our Services
+        </Typography>
+        <Typography sx={{
+          fontSize:"20px",
+          maxWidth: "702px",
+          textAlign: "center",
+          margin: "auto"
+        }}>
+        We deliver full-cycle development services tailored to your business goals. From strategy to deployment, our team ensures every solution is scalable, secure, and built for impact.
         </Typography>
 
         <Box

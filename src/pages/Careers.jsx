@@ -318,7 +318,6 @@ const Careers = () => {
                                 gap: 2,
                                 px: 3,
                                 borderRadius: '32px',
-                                boxShadow: '0 4px 12px rgba(60, 113, 247, 0.72)',
                                 backgroundImage: `radial-gradient(circle at 140% 230%, #3c71f7, rgba(0, 0, 0, 0) 48%),
                           radial-gradient(circle at -10% 200%, #37de8d, rgba(0, 0, 0, 0) 40%),
                           linear-gradient(to bottom, #15171e, #15171e)`,
