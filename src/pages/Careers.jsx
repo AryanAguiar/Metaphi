@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 import axios from "axios";
 import { ADD_JOB_APPLICATION_ENDPOINT } from "../utils/apiConfig";
-
+import vector from "../images/vector.png"
 const whyJoinUs = [
     {
         value: "Flexible Working Hours",
@@ -48,15 +48,15 @@ const Careers = () => {
     const filteredJobs = selectedStack === "All" ? jobs : jobs.filter((job) => job.tags.includes(selectedStack));
 
 
-    const imageBoxSx = ({ mdSpan = 1, height = 120 }) => ({
-        backgroundColor: '#f3f4f6',
-        borderRadius: 3,
+    const imageBoxSx = ({ width = 265, height = 310 }) => ({
+        width: { xs: '100%', sm: width },
         height,
-        gridColumn: {
-            xs: 'span 6',
-            md: `span ${mdSpan}`,
-        },
+        backgroundColor: '#f1f2f4',
+        borderRadius: 12,
+        flexShrink: 0,
     });
+
+
 
     const [formClicked, setFormClicked] = useState(false);
 
@@ -207,61 +207,81 @@ const Careers = () => {
                 sx={{
                     px: { xs: 3, md: 8 },
                     py: { xs: 8, md: 14 },
-                    width: "100%",
-                    minHeight: "60vh",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    textAlign: "center",
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
                 }}
             >
-                <Box>
+                <Box
+                    sx={{
+                        maxWidth: '1200px',
+                        width: '100%',
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: 1.5,
+                        flexDirection: { xs: "column", md: "row" },
+                        boxSizing: "border-box"
+                    }}
+                >
+                    {/* First Box: Text Block */}
                     <Box
                         sx={{
-                            display: 'grid',
-                            gridTemplateColumns: { xs: '1fr', md: 'repeat(6, 1fr)' },
-                            gridAutoRows: 'auto',
-                            gap: 2,
+                            width: '100%',
+                            maxWidth: { xs: '100%', sm: '90%', md: '623px' },
+                            maxHeight: '100%',
+                            backgroundColor: '#1a1a1d',
+                            color: 'white',
+                            borderRadius: 12,
+                            p: { xs: 2, sm: 3, md: 4 },
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            boxSizing: "border-box"
                         }}
                     >
-                        {/* Text Block */}
-                        <Box
+                        <Typography
+                            variant="h5"
+                            fontWeight="800"
                             sx={{
-                                gridColumn: { xs: 'span 6', md: 'span 2' },
-                                backgroundColor: '#1a1a1d',
-                                color: 'white',
-                                borderRadius: 3,
-                                padding: 3,
-                                maxWidth: "555px"
+                                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+                                lineHeight: 1.2,
+                            }}
+                            gutterBottom
+                        >
+                            Life at Metaphi
+                        </Typography>
+
+                        <Typography
+                            variant="body1"
+                            sx={{
+                                fontSize: { xs: '0.95rem', sm: '1.05rem', md: '1.25rem' },
+                                fontWeight: 400,
+                                lineHeight: 1.6,
                             }}
                         >
-                            <Typography variant="h5" fontWeight="bold" gutterBottom>
-                                Life at Metaphi
-                            </Typography>
-                            <Typography variant="body1">
-                                At Metaphi, we believe in collaboration, creativity, and continuous learning. We keep things flexible,
-                                encourage ownership, and celebrate wins — big or small. You'll work with a tight-knit team that values
-                                innovation, transparency, and having fun along the way.
-                            </Typography>
-                        </Box>
-
-                        {/* Top right images (2 boxes) */}
-                        <Box sx={imageBoxSx({ mdSpan: 2 })} />
-                        <Box sx={imageBoxSx({ mdSpan: 2 })} />
-
-                        {/* Bottom row: left, center wide, right */}
-                        <Box sx={imageBoxSx({ mdSpan: 1 })} />
-                        <Box sx={imageBoxSx({ mdSpan: 3, height: 140 })} />
-                        <Box sx={imageBoxSx({ mdSpan: 2 })} />
+                            At Metaphi, we believe in collaboration, creativity, and continuous learning. We keep things flexible,
+                            encourage ownership, and celebrate wins — big or small. You'll work with a tight-knit team that values
+                            innovation, transparency, and having fun along the way.
+                        </Typography>
                     </Box>
+
+
+                    {/* Image Boxes */}
+                    <Box sx={imageBoxSx({})} />               {/* 295 x 289 */}
+                    <Box sx={imageBoxSx({})} />               {/* 295 x 289 */}
+                    <Box sx={imageBoxSx({})} />               {/* 295 x 289 */}
+                    <Box sx={imageBoxSx({ width: 625 })} />   {/* 610 x 289 */}
+                    <Box sx={imageBoxSx({})} />               {/* 295 x 289 */}
                 </Box>
             </Container>
+
+
 
             {/* Why join us */}
             <Container
                 maxWidth={false}
                 disableGutters
+                sx={{ py: 5 }}
             >
                 <Typography
                     className="why-join-us"
@@ -299,7 +319,7 @@ const Careers = () => {
                                 gap: 2,
                                 px: 3,
                                 borderRadius: '32px',
-                                boxShadow: '0 8px 20px 0 rgba(31, 34, 46, 0.2)',
+                                boxShadow: '0 4px 12px rgba(60, 113, 247, 0.72)',
                                 backgroundImage: `radial-gradient(circle at 140% 230%, #3c71f7, rgba(0, 0, 0, 0) 48%),
                           radial-gradient(circle at -10% 200%, #37de8d, rgba(0, 0, 0, 0) 40%),
                           linear-gradient(to bottom, #15171e, #15171e)`,
@@ -536,7 +556,7 @@ const Careers = () => {
                 </Container>
             </Container>
 
-            {/* Apply now */}
+            {/* Apply now form */}
             <Container
                 maxWidth={false}
                 disableGutters
@@ -564,12 +584,13 @@ const Careers = () => {
                     <Typography
                         sx={{
                             margin: "auto",
-                            width: '627px',
+                            maxWidth: '627px',
                             height: 'auto',
                             textAlign: "center",
                             fontSize: "20px",
                             color: 'black',
-                            lineHeight: 1.6
+                            lineHeight: 1.6,
+                            width: "100%"
                         }}
                     >
                         Send us your resume and a few lines about why you'd love to join Metaphi.
@@ -578,6 +599,8 @@ const Careers = () => {
 
                 <Box
                     sx={{
+                        maxWidth: "1250px",
+                        margin: "auto",
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' },
                         justifyContent: 'center',
@@ -592,7 +615,7 @@ const Careers = () => {
                             <Box
                                 key={i}
                                 sx={{
-                                    height: 180,
+                                    height: 265,
                                     borderRadius: 3,
                                     backgroundColor: '#ccc',
                                 }}
@@ -607,60 +630,143 @@ const Careers = () => {
                             backgroundColor: '#fff',
                             borderRadius: 3,
                             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-                            p: 3,
+                            p: { xs: 2, md: 3 },
+                            boxSizing: "border-box"
                         }}
                     >
                         <Stack spacing={3} component="form" onSubmit={formik.handleSubmit}>
                             {/* Name & Email */}
-                            <Stack direction="row" spacing={2}>
-                                <TextField
-                                    label="Name"
-                                    name="name"
-                                    fullWidth
-                                    value={formik.values.name}
-                                    onChange={formik.handleChange}
-                                />
-                                <TextField
-                                    label="Email"
-                                    name="email"
-                                    fullWidth
-                                    value={formik.values.email}
-                                    onChange={formik.handleChange}
-                                />
+                            <Stack direction={{ xs: 'column', sm: "row", md: 'row' }} spacing={3}>
+                                <Stack direction="column" sx={{ width: '100%' }}>
+                                    <p style={{ color: "black", fontWeight: "600", fontSize: "16px", marginBottom: '8px' }}>Name</p>
+                                    <TextField
+                                        name="name"
+                                        variant="outlined"
+                                        placeholder="Full Name"
+                                        fullWidth
+                                        value={formik.values.name}
+                                        onChange={formik.handleChange}
+                                        sx={{
+                                            '& .MuiInputBase-root': {
+                                                height: 60,
+                                                borderRadius: 3,
+                                                fontSize: '1.2rem',
+                                                paddingRight: '14px',
+                                                backgroundColor: "#EDEEF3",
+                                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                                                padding: "20px 10px",
+                                            },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': {
+                                                    border: 'none',
+                                                },
+                                                '&:hover fieldset': {
+                                                    border: 'none',
+                                                },
+                                                '&.Mui-focused fieldset': {
+                                                    border: 'none',
+                                                },
+                                            },
+                                        }}
+                                    />
+                                </Stack>
+
+                                <Stack direction="column" sx={{ width: '100%' }}>
+                                    <p style={{ color: "black", fontWeight: "600", fontSize: "16px", marginBottom: '8px' }}>Email</p>
+                                    <TextField
+                                        name="email"
+                                        placeholder="Valid Email"
+                                        fullWidth
+                                        value={formik.values.email}
+                                        onChange={formik.handleChange}
+                                        sx={{
+                                            '& .MuiInputBase-root': {
+                                                height: 60,
+                                                borderRadius: 3,
+                                                fontSize: '1.2rem',
+                                                paddingRight: '14px',
+                                                backgroundColor: "#EDEEF3",
+                                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                                                padding: "20px 10px",
+                                            },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': {
+                                                    border: 'none',
+                                                },
+                                                '&:hover fieldset': {
+                                                    border: 'none',
+                                                },
+                                                '&.Mui-focused fieldset': {
+                                                    border: 'none',
+                                                },
+                                            },
+                                        }}
+                                    />
+                                </Stack>
                             </Stack>
 
                             {/* Message */}
-                            <TextField
-                                label="Message*"
-                                name="message"
-                                multiline
-                                minRows={5}
-                                fullWidth
-                                value={formik.values.message}
-                                onChange={formik.handleChange}
-                                placeholder="Why do you want to join Metaphi?"
-                            />
+                            <Stack direction="column" sx={{ width: '100%' }}>
+                                <p style={{ color: "black", fontWeight: "600", paddingTop: 6, fontSize: "16px", }}>Message*</p>
+                                <TextField
+                                    name="message"
+                                    multiline
+                                    minRows={5}
+                                    fullWidth
+                                    value={formik.values.message}
+                                    onChange={formik.handleChange}
+                                    placeholder="Why do you want to join Metaphi?"
+                                    sx={{
+                                        '& .MuiInputBase-root': {
+                                            borderRadius: 3,
+                                            fontSize: '1.2rem',
+                                            paddingRight: '14px',
+                                            backgroundColor: "#EDEEF3",
+                                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                                            padding: "20px 25px",
+                                        },
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': {
+                                                border: 'none',
+                                            },
+                                            '&:hover fieldset': {
+                                                border: 'none',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                border: 'none',
+                                            },
+                                        },
+                                    }}
+                                />
+                            </Stack>
 
+                            {/* Upload Resume */}
                             <Box>
-                                <Typography sx={{ fontWeight: 'bold', mb: 1, color: "black" }}>Upload Resume*</Typography>
+                                <Typography sx={{ fontWeight: 'bold', mb: 1, color: "black", fontSize: "16px", mt: 2 }}>Upload Resume*</Typography>
                                 <Box
                                     onClick={() => document.getElementById("fileInput")?.click()}
                                     sx={{
-                                        border: '2px dashed #d0d0d0',
+                                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                                         borderRadius: 2,
                                         padding: 3,
                                         textAlign: 'center',
+                                        height: "120px",
                                         cursor: 'pointer',
-                                        backgroundColor: '#f9f9fc',
+                                        backgroundColor: '#EDEEF3',
                                         '&:hover': {
                                             backgroundColor: '#f0f0f7',
                                         },
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center",
                                     }}
                                 >
-                                    <Typography sx={{ fontSize: 14, color: "grey" }}>
-                                        Drag or drop your file, or <strong>click here</strong>.
+                                    <img src={vector} alt="" />
+                                    <Typography sx={{ fontSize: "15px", color: "black", pt: 2 }}>
+                                        <strong>Drag or drop your file, or click here</strong>.
                                     </Typography>
-                                    <Typography sx={{ fontSize: 12, color: '#666' }}>
+                                    <Typography sx={{ fontSize: "14px", color: '#666' }}>
                                         .pdf, .doc, .docx | Max 5MB
                                     </Typography>
                                     <input
@@ -688,6 +794,7 @@ const Careers = () => {
                                     fontWeight: 600,
                                     py: 1.5,
                                     borderRadius: 2,
+                                    textTransform: "none",
                                     '&:hover': {
                                         backgroundColor: '#333',
                                     },
@@ -703,6 +810,7 @@ const Careers = () => {
                             </Typography>
                         </Stack>
                     </Box>
+
                 </Box>
             </Container>
 
