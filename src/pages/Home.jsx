@@ -811,7 +811,7 @@ const Home = () => {
           {services.map((service, index) => (
             <Box
               key={service.id}
-              onClick={() => handleFlip(index)}
+              //onClick={() => handleFlip(index)} temp disabled flip
               sx={{
                 perspective: "1200px",
                 width: "100%",
