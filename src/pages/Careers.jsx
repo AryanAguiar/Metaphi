@@ -48,16 +48,15 @@ const Careers = () => {
     const filteredJobs = selectedStack === "All" ? jobs : jobs.filter((job) => job.tags.includes(selectedStack));
 
 
-    const imageBoxSx = {
-        width: '100%',
-        height: 240,  
+    const imageBoxSx = ({ width = 265, height = 310 }) => ({
+        width: { xs: '100%', sm: width },
+        height,
         backgroundColor: '#f1f2f4',
-        borderRadius: 2,
-        boxSizing: 'border-box',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    };
+        borderRadius: 12,
+        flexShrink: 0,
+    });
+
+
 
     const [formClicked, setFormClicked] = useState(false);
 
@@ -157,7 +156,7 @@ const Careers = () => {
                 maxWidth={false}
                 disableGutters
                 sx={{
-                    mt: 15,
+                    mt:15,
                     px: { xs: 3, md: 8 },
                     py: { xs: 8, md: 14 },
                     width: "100%",
@@ -207,64 +206,76 @@ const Careers = () => {
                 maxWidth={false}
                 disableGutters
                 sx={{
-                    px: { xs: 2, md: 8 },
-                    py: { xs: 6, md: 10 },
+                    px: { xs: 3, md: 8 },
+                    py: { xs: 8, md: 14 },
+                    width: '100%',
                     display: 'flex',
                     justifyContent: 'center',
+                    margin: "auto",
+                    overflow: "hidden"
                 }}
             >
                 <Box
                     sx={{
-                        display: 'grid',
-                        gridTemplateColumns: {
-                            xs: '1fr',        // Stack vertically on small screens
-                            sm: 'repeat(3, 1fr)', // 3 columns on larger screens
-                        },
-                        gap: 2,
                         maxWidth: '1200px',
                         width: '100%',
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: 1.5,
+                        flexDirection: { xs: "column", md: "row" },
+                        boxSizing: "border-box",
+                        
                     }}
                 >
-                    {/* 6 Boxes - same size */}
+                    {/* First Box: Text Block */}
                     <Box
                         sx={{
-                            ...imageBoxSx,
+                            width: '100%',
+                            maxWidth: { xs: '100%', sm: '90%', md: '623px' },
+                            maxHeight: '100%',
                             backgroundColor: '#1a1a1d',
                             color: 'white',
-                            p: 3,
+                            borderRadius: 12,
+                            p: { xs: 2, sm: 3, md: 4 },
+                            display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'flex-start',
+                            justifyContent: 'center',
+                            boxSizing: "border-box"
                         }}
                     >
                         <Typography
                             variant="h5"
                             fontWeight="800"
                             sx={{
-                                fontSize: { xs: '1.75rem', sm: '2rem' },
+                                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
                                 lineHeight: 1.2,
-                                mb: 1,
                             }}
+                            gutterBottom
                         >
                             Life at Metaphi
                         </Typography>
+
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             sx={{
-                                fontSize: { xs: '0.9rem', sm: '1rem' },
+                                fontSize: { xs: '0.95rem', sm: '1.05rem', md: '1.25rem' },
                                 fontWeight: 400,
                                 lineHeight: 1.6,
                             }}
                         >
-                            At Metaphi, we believe in collaboration, creativity, and continuous learning.
-                            We keep things flexible, encourage ownership, and celebrate wins — big or small.
+                            At Metaphi, we believe in collaboration, creativity, and continuous learning. We keep things flexible,
+                            encourage ownership, and celebrate wins — big or small. You'll work with a tight-knit team that values
+                            innovation, transparency, and having fun along the way.
                         </Typography>
                     </Box>
 
-                    <Box sx={imageBoxSx} /> {/* Box 2 */}
-                    <Box sx={imageBoxSx} /> {/* Box 3 */}
-                    <Box sx={imageBoxSx} /> {/* Box 4 */}
-                    <Box sx={imageBoxSx} /> {/* Box 5 */}
-                    <Box sx={imageBoxSx} /> {/* Box 6 */}
+
+                    {/* Image Boxes */}
+                    <Box sx={imageBoxSx({})} />               {/* 295 x 289 */}
+                    <Box sx={imageBoxSx({})} />               {/* 295 x 289 */}
+                    <Box sx={imageBoxSx({})} />               {/* 295 x 289 */}
+                    <Box sx={imageBoxSx({ width: 625 })} />   {/* 610 x 289 */}
+                    <Box sx={imageBoxSx({})} />               {/* 295 x 289 */}
                 </Box>
             </Container>
 

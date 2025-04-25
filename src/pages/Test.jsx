@@ -1,2569 +1,991 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, Divider } from "@mui/material";
+import { Container, Box, Button, Typography, Divider, IconButton, Stack, Card, Paper, TextField } from "@mui/material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { gsap } from "gsap";
-
-//hero section
-import heroImg1 from "../images/mobile application development.webp";
-import heroImg2 from "../images/webdev.png";
-import heroImg3 from "../images/Blockchain.webp";
-import partner1 from "../images/partner-2.png";
-import "./Home.css";
-
-//swiper and countup 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/free-mode";
-import { Autoplay, FreeMode, Pagination, Navigation } from "swiper/modules";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { ScrollTrigger } from "gsap/all";
-import { motion } from "framer-motion";
-import CountUp from "react-countup";
-import svg1 from "../images/folder.png";
-import svg2 from "../images/handshake.svg";
-import svg3 from "../images/award.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faArrowLeft, faStar, faTimes, faEnvelope, faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-
-//service cards
-import serviceicon1 from "../images/gamedev.svg";
-import serviceicon2 from "../images/appdev.svg";
-import serviceicon3 from "../images/webdev.svg";
-import serviceicon4 from "../images/ecommerce.svg";
-import serviceicon5 from "../images/aiml.svg";
-import serviceicon6 from "../images/iot.svg";
-import serviceicon7 from "../images/devops.svg";
-import serviceicon8 from "../images/salesforce-svgrepo-com 1.svg";
-import serviceicon9 from "../images/block chain development.svg";
-import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward, } from "@mui/icons-material";
-gsap.registerPlugin(ScrollTrigger);
-
-//strategic execution images
-import dedicatedIcon from "../images/Dedicated.svg";
-import supportIcon from "../images/customersupport.svg";
-import clientCentricIcon from "../images/clientcetric.svg";
-import agileIcon from "../images/agiledev.svg";
-import enhancementIcon from "../images/enhancement.svg";
-import qualityIcon from "../images/quality.svg";
-import dataProtectionIcon from "../images/dataprotec.svg";
-import dataBackupIcon from "../images/databackup.svg";
-import { useMemo } from "react";
-import clutchlogo from "../images/clutchlogo.png";
-
-//industries we serve
-import socialNetworking from "../images/Social networking.jpg";
-import travelandHospitality from "../images/travel and hospitality.jpg";
-import gaming from "../images/gaming software development.jpg";
-import logistics from "../images/logistic and dashboard.jpg";
-import realestate from "../images/real estate.jpg";
-import ecommerce from "../images/ecommerce retail.jpg";
-import fitness from "../images/fitness.jpg";
-import food from "../images/food and restaurant.jpg";
-import elearning from "../images/E Learning.jpg";
-import elearning2 from "../images/E Learning 2 image.jpg";
-
-//form components
-import { FastField, Formik, Form, } from "formik";
-import * as Yup from "yup";
-
-const slides = [
-  {
-    title: "App Development Company",
-    subtitle: " Rated # 1  Mobile App Development Company in India.",
-    image: heroImg1,
-  },
-  {
-    title: "Web Development Company",
-    subtitle: " Rated #1 Web Development Company in India.",
-    image: heroImg1,
-  },
-  {
-    title: "Blockchain Development Company",
-    subtitle: " Rated #1 Blockchain Development Company in India.",
-    image: heroImg3,
-  },
-];
-
-const counters = [
-  {
-    value: 420,
-    suffix: '%',
-    label: 'More Speed',
-    description: 'Ut porttitor leo a diam sollicitudin. Integer enim neque volutpat ac.',
-    icon: svg1
-  },
-  {
-    value: 21.2,
-    suffix: 'K',
-    label: 'Total Ratings',
-    description: 'Maecenas pharetra convallis posuere morbi. Scelerisque felis.',
-    icon: svg1
-  },
-  {
-    value: 110,
-    suffix: 'X',
-    label: 'Efficiency Level',
-    description: 'Lacinia at quis risus sed vulputate. Lectus mauris ultrices eros.',
-    icon: svg1
-  },
-  {
-    value: 16,
-    suffix: 'M',
-    label: 'Total Users',
-    description: 'Fames ac turpis egestas sed tempus. Tellus mauris a diam maecenas.',
-    icon: svg1
-  }
-];
-
-//cards
-const services = [
-  {
-    id: "game-dev",
-    title: "Game Development",
-    icon: serviceicon1,
-    description: "Transform your game ideas into high-quality, immersive 2D & 3D gaming experiences.",
-    mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
-  },
-  {
-    id: "mobile-app",
-    title: "Mobile App Development",
-    icon: serviceicon2,
-    description: "Empowering businesses with cutting-edge mobile solutions tailored to diverse industries.",
-    mainDescription: "We craft intuitive, high-performance apps that enhance user experience, drive engagement, and deliver lasting value."
-  },
-  {
-    id: "web-dev",
-    title: "Web Development",
-    icon: serviceicon3,
-    description: "Enhance your digital presence with cutting-edge web development solutions.",
-    mainDescription: " We craft dynamic, high-performance websites and applications that captivate audiences and deliver seamless user experiences."
-  },
-  {
-    id: "ecommerce",
-    title: "E-commerce Development",
-    icon: serviceicon4,
-    description: "Build seamless, secure, and high-performance eCommerce solutions.",
-    mainDescription: "Our expertise ensures a smooth shopping experience with robust integrations that drive sales and enhance user engagement."
-  },
-  {
-    id: "blockchain",
-    title: "Blockchain Development",
-    icon: serviceicon9,
-    description: "Empower your business with decentralized, secure, and innovative blockchain solutions.",
-    mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
-  },
-  {
-    id: "salesforce",
-    title: "Salesforce Solutions",
-    icon: serviceicon8,
-    description: "Maximize the power of Salesforce to optimize operations and drive intelligent decision-making.",
-    mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
-  },
-  {
-    id: "ai-ml",
-    title: "AI & ML Solutions",
-    icon: serviceicon5,
-    description: "Harness the power of Artificial Intelligence and Machine Learning.",
-    mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
-  },
-  {
-    id: "iot",
-    title: "IoT & Embedded Solutions",
-    icon: serviceicon6,
-    description: "Transform your business with smart, connected devices and IoT infrastructure.",
-    mainDescription: " Our custom IoT solutions enhance efficiency, drive automation, and enable seamless data-driven decision-making."
-  },
-  {
-    id: "devops",
-    title: "DevOps Solutions",
-    icon: serviceicon7,
-    description: "Streamline workflows, automate processes, and optimize infrastructure.",
-    mainDescription: "We streamline workflows, automate processes, and optimize infrastructure for high-performance, scalable, and secure applications."
-  }
-];
-
-//strategic execution features
-const features = [
-  {
-    title: "Dedicated Development Team",
-    description: "Our dedicated development team brings years of expertise to every project, ensuring optimal results by maximizing their skills to meet your development needs.",
-    img: dedicatedIcon,
-  },
-  {
-    title: "Excellent Support",
-    description: "We are always available to assist our clients, ensuring their expectations and requirements are met with exceptional service.",
-    img: supportIcon,
-  },
-  {
-    title: "Client-Centric Development",
-    description: "We tailor solutions for web, mobile, and blockchain, meticulously aligning them with client needs to enhance performance and innovation.",
-    img: clientCentricIcon,
-  },
-  {
-    title: "Agile Development",
-    description: "We adhere to the Agile development process, ensuring reliable, scalable, and efficient project delivery.",
-    img: agileIcon,
-  },
-  {
-    title: "Enhancement",
-    description: "Our technical team is always ready to incorporate your suggestions and refinements, ensuring solutions that exceed expectations.",
-    img: enhancementIcon,
-  },
-  {
-    title: "Quality Deliverance",
-    description: "We are committed to delivering high-quality products, leveraging our expertise to create exceptional solutions for our clients.",
-    img: qualityIcon,
-  },
-  {
-    title: "Data Protection",
-    description: "We implement industry-leading security measures to safeguard your data, ensuring confidentiality and the uniqueness of your project.",
-    img: dataProtectionIcon,
-  },
-  {
-    title: "Data Backups",
-    description: "We securely maintain project backups, minimizing the risk of data loss and ensuring seamless recovery when needed.",
-    img: dataBackupIcon,
-  }
-];
+import { jobs } from "./JobsData";
+import "./Careers.css";
+import joinusIcon1 from "../images/team_icon.png";
+import { useFormik } from "formik";
+import * as Yup from 'yup';
+import axios from "axios";
+import { ADD_JOB_APPLICATION_ENDPOINT } from "../utils/apiConfig";
+import vector from "../images/vector.png"
+const whyJoinUs = [
+    {
+        value: "Flexible Working Hours",
+        icon: joinusIcon1
+    },
+    {
+        value: "Learning Support & Upskilling",
+        icon: "",
+    },
+    {
+        value: "Flexible Working Hours",
+        icon: "",
+    },
+    {
+        value: "Flexible Working Hours",
+        icon: "",
+    },
+    {
+        value: "Flexible Working Hours",
+        icon: "",
+    },
+    {
+        value: "Flexible Working Hours",
+        icon: "",
+    },
+]
 
 
-//design process
-const designT = [
-  {
-    id: 1,
-    title: "01 - Ideation",
-    description:
-      "Brainstorm and refine creative ideas, transforming them into a well-structured plan for a smart, successful solution.",
-    svg: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32 4C21.402 4 12.8 12.602 12.8 23.2C12.8 29.38 16.054 35.165 21.333 38.146C22.077 38.58 22.533 39.395 22.533 40.278V42.8C22.533 45.091 24.442 47 26.733 47H37.267C39.558 47 41.467 45.091 41.467 42.8V40.278C41.467 39.395 41.923 38.58 42.667 38.146C47.946 35.165 51.2 29.38 51.2 23.2C51.2 12.602 42.598 4 32 4Z" stroke="#00FF7F" strokeWidth="2" fill="rgba(0,255,127,0.05)" /><path d="M26 28C26 25.239 28.239 23 31 23C33.761 23 36 25.239 36 28" stroke="#007FFF" strokeWidth="2" strokeLinecap="round" /><rect x="26" y="47" width="12" height="4" rx="1" fill="#007FFF" /><rect x="27" y="51" width="10" height="3" rx="1" fill="#00FF7F" /><rect x="28" y="54" width="8" height="3" rx="1" fill="#007FFF" /><circle cx="32" cy="60" r="2" fill="#00FF7F" /></svg>
-    ),
-  },
-  {
-    id: 2,
-    title: "02 - Plan",
-    description:
-      "Define project objectives, establish a timeline with key milestones, and assemble a skilled team tailored to your development needs.",
-    svg: (
-      <svg width="64" height="64" fill="none" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="14" width="44" height="36" rx="4" stroke="#007FFF" strokeWidth="2" /><rect x="10" y="14" width="44" height="8" fill="#007FFF" /><line x1="18" y1="10" x2="18" y2="18" stroke="#00FF7F" strokeWidth="2" /><line x1="46" y1="10" x2="46" y2="18" stroke="#00FF7F" strokeWidth="2" /><path d="M18 26h6M28 26h6M38 26h6M18 34h6M28 34h6M38 34h6M18 42h6M28 42h6M38 42h6" stroke="#00FF7F" strokeWidth="2" /></svg>
-    ),
-  },
-  {
-    id: 3,
-    title: "03 - Design",
-    description:
-      "Create interactive prototypes using wireframes and sketches, providing a clear visual representation of the solution's interface and user experience.",
-    svg: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="10" stroke="#007FFF" strokeWidth="2" /><path d="M28 30c0-1 1-2 2-2s2 1 2 2c0-1 1-2 2-2s2 1 2 2c0 1-1 2-2 2h-4c-1 0-2-1-2-2z" fill="#00FF7F" /><g stroke="#00FF7F" strokeWidth="2"><path d="M32 10v6" /><path d="M32 48v6" /><path d="M10 32h6" /><path d="M48 32h6" /><path d="M19 19l4 4" /><path d="M45 45l-4-4" /><path d="M19 45l4-4" /><path d="M45 19l-4 4" /></g></svg>
-    ),
-  },
-  {
-    id: 4,
-    title: "04 - Implement",
-    description:
-      "Select the most suitable tools and technologies to develop the product, adhering to the defined timeline, project scope, and requirements.",
-    svg: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 78.188 78.188" fill="none"><g><path d="M75.006,12.39c-1.104-0.208-2.229,0.218-2.918,1.101c-0.084,0.106-0.17,0.21-0.266,0.306L66,19.619c-1.256,1.255-3.442,1.255-4.698,0l-2.731-2.731c-1.295-1.296-1.297-3.404,0-4.699l5.826-5.828c0.096-0.095,0.197-0.179,0.301-0.26c0.885-0.691,1.309-1.816,1.102-2.918s-1.012-1.997-2.086-2.319c-1.899-0.57-3.871-0.859-5.858-0.859c-5.429,0-10.534,2.114-14.375,5.953c-4.843,4.842-6.892,11.75-5.557,18.391L24.346,37.925c-1.319-0.265-2.663-0.398-4.014-0.398c-5.429,0-10.534,2.114-14.375,5.954c-5.296,5.297-7.249,13.05-5.096,20.232c0.322,1.073,1.216,1.879,2.318,2.087c1.101,0.209,2.228-0.217,2.919-1.102c0.086-0.109,0.176-0.217,0.265-0.306l5.825-5.822c1.255-1.254,3.442-1.255,4.698,0.001l2.731,2.731c1.295,1.296,1.295,3.403,0,4.698l-5.833,5.832c-0.093,0.095-0.194,0.176-0.296,0.256c-0.884,0.689-1.309,1.814-1.101,2.918c0.208,1.103,1.012,1.997,2.086,2.318c1.9,0.569,3.873,0.858,5.861,0.858l0,0c5.43,0,10.534-2.114,14.372-5.953c4.844-4.843,6.894-11.75,5.557-18.392l13.578-13.576c1.317,0.265,2.663,0.398,4.015,0.398c5.43,0,10.534-2.115,14.374-5.955c5.298-5.297,7.249-13.05,5.097-20.233C77.002,13.402,76.11,12.598,75.006,12.39z" stroke="#007FFF" strokeWidth="2" fill="none" /><path d="M67.989,30.467c-2.707,2.706-6.306,4.196-10.133,4.196c-1.388,0-2.763-0.199-4.088-0.592c-1.057-0.311-2.195-0.022-2.975,0.755L34.824,50.794c-0.778,0.777-1.068,1.92-0.755,2.975c1.497,5.052,0.116,10.501-3.605,14.221c-2.305,2.307-5.258,3.729-8.448,4.101l1.843-1.845c3.635-3.635,3.635-9.549,0-13.184l-2.731-2.73c-1.761-1.763-4.103-2.732-6.593-2.731c-2.49,0-4.832,0.97-6.591,2.729l-1.845,1.845c0.372-3.145,1.781-6.132,4.1-8.449c2.707-2.709,6.305-4.199,10.132-4.199c1.387,0,2.762,0.199,4.087,0.592c1.055,0.314,2.195,0.022,2.974-0.754l15.97-15.97c0.777-0.777,1.066-1.918,0.756-2.973c-1.496-5.053-0.115-10.502,3.604-14.222c2.307-2.305,5.26-3.729,8.449-4.099l-1.844,1.844c-3.635,3.633-3.635,9.548,0,13.186l2.732,2.73c1.762,1.761,4.102,2.731,6.592,2.731c2.49,0,4.832-0.97,6.592-2.73l1.844-1.843C71.715,25.162,70.306,28.148,67.989,30.467z" stroke="#00FF7F" strokeWidth="2" fill="none" /></g></svg>
-    ),
-  },
-  {
-    id: 5,
-    title: "05 - Test",
-    description:
-      "Conduct rigorous manual and automated testing to ensure a thoroughly tested, high-quality, and bug-free solution.",
-    svg: (
-      <svg width="64" height="64" fill="none" viewBox="0 0 64 64">
-        <circle cx="32" cy="32" r="24" stroke="#007FFF" strokeWidth="2" />
-        <path d="M24 32l6 6 10-14" stroke="#00FF7F" strokeWidth="2" />
-      </svg>
-    ),
-  },
-  {
-    id: 6,
-    title: "06 - Deploy",
-    description:
-      "Launch the product, ensuring it meets all predefined standards and is seamlessly accessible to the target audience.",
-    svg: (
-      <svg width="64" height="64" fill="none" viewBox="0 0 64 64"><path d="M32 4c6 4 12 18 12 26s-6 20-12 20-12-12-12-20 6-22 12-26z" stroke="#007FFF" strokeWidth="2" /><path d="M24 50l-6 10 10-6 4 6 4-6 10 6-6-10" stroke="#00FF7F" strokeWidth="2" /><circle cx="32" cy="26" r="4" stroke="#00FF7F" strokeWidth="2" /><path d="M20 28c-4 4-6 8-6 12 0 2 2 2 4 2 4 0 8-2 12-6" stroke="#007FFF" strokeWidth="2" /><path d="M44 28c4 4 6 8 6 12 0 2-2 2-4 2-4 0-8-2-12-6" stroke="#007FFF" strokeWidth="2" /></svg>
-    ),
-  },
-];
+const Careers = () => {
 
-//industries we serve
-const industries = [
-  {
-    title: 'Retail & E-commerce',
-    description: 'Empower your retail business with scalable, future-ready digital solutions.',
-    image: ecommerce,
-  },
-  {
-    title: 'Education & E-Learning',
-    description: 'Enhance learning experiences with tech-driven solutions for global learners.',
-    image: elearning,
-  },
-  {
-    title: 'Healthcare & Fitness',
-    description: 'Leverage AI, ML, and IoT to transform healthcare services and outcomes.',
-    image: fitness,
-  },
-  {
-    title: 'Logistics & Distribution',
-    description: 'Optimize logistics with customer-centric, industry-specific solutions.',
-    image: logistics,
-  },
-  {
-    title: 'Social Networking',
-    description: 'Build engaging, seamless social media applications.',
-    image: socialNetworking,
-  },
-  {
-    title: 'Real Estate',
-    description: 'Implement cutting-edge real estate solutions for your unique needs.',
-    image: realestate,
-  },
-  {
-    title: 'Travel & Hospitality',
-    description: 'Deliver intuitive digital travel experiences with feature-rich platforms.',
-    image: travelandHospitality,
-  },
-  {
-    title: 'Food & Restaurant',
-    description: 'Drive growth in food & restaurant industry with innovative solutions.',
-    image: food,
-  },
-  {
-    title: 'On-Demand Solutions',
-    description: 'Craft intelligent, high-performance on-demand platforms.',
-    image: elearning2,
-  },
-  {
-    title: 'Gaming',
-    description: 'Create immersive, interactive gaming experiences with the latest tech.',
-    image: gaming,
-  },
-];
+    const techStacks = ["All", "React", "Vue", "PHP", "MERN"];
+    const [selectedStack, setSelectedStack] = useState("All");
 
-//projects
-const projects = [
-  {
-    title: "Road Safety App",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "House Renting App",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "House Renting App",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "House Renting App",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-  },
-];
-
-//business section
-const businessTypes = [
-  {
-    title: "Startups",
-    desc: "Operating on a tight budget with limited resources? Our experts provide the essential tech support to transform your vision into reality.",
-  },
-  {
-    title: "Small Business",
-    desc: "Build a strong brand identity with our experienced professionals, seamlessly aligning development expertise with your unique business needs.",
-  },
-  {
-    title: "Enterprise Business",
-    desc: "Empower your enterprise with cutting-edge technology to expand your reach, optimize operations, and drive innovation.",
-  },
-  {
-    title: "Agency Business",
-    desc: "Enhance your service offerings by leveraging our expertise and the latest technological advancements to stay ahead in the industry.",
-  },
-];
-
-//testimonials section
-const testimonials = [
-  {
-    title: "Lorem ipsum dolor sit amet",
-    review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-    logo: clutchlogo,
-  },
-  {
-    title: "Consectetur adipiscing elit",
-    review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
-    logo: clutchlogo,
-  },
-  {
-    title: "Sed ut perspiciatis unde",
-    review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
-    logo: clutchlogo,
-  },
-  {
-    title: "Nemo enim ipsam voluptatem",
-    review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
-    logo: clutchlogo,
-  },
-];
+    const filteredJobs = selectedStack === "All" ? jobs : jobs.filter((job) => job.tags.includes(selectedStack));
 
 
-const Home = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const textRef = useRef(null);
-  const subTextRef = useRef(null);
-  const buttonRef = useRef(null);
-  const imageRef = useRef(null);
-  const headerRef = useRef(null);
-  const sectionRef = useRef([]);
-  const addToRefs = (el) => {
-    if (el && !sectionRef.current.includes(el)) {
-      sectionRef.current.push(el);
+    const imageBoxSx = {
+        width: '100%',
+        height: 240,  
+        backgroundColor: '#f1f2f4',
+        borderRadius: 2,
+        boxSizing: 'border-box',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    };
+
+    const [formClicked, setFormClicked] = useState(false);
+
+    const handleClick = () => {
+        setFormClicked((prevState) => !prevState);
     }
-  };
-  const lineRef = useRef(null);
 
-  //hero section animation
-  useEffect(() => {
-    let intervalId;
-
-    const animateElements = () => {
-      gsap.fromTo(
-        [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.2 }
-      );
-    };
-
-    const changeSlide = () => {
-      gsap.to(
-        [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
-        {
-          opacity: 0,
-          y: -30,
-          duration: 0.8,
-          ease: "power3.inOut",
-          onComplete: () => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-          },
-        }
-      );
-    };
-
-    animateElements();
-
-    intervalId = setInterval(() => {
-      changeSlide();
-    }, 5000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    if (!textRef.current || !imageRef.current) return;
-
-    gsap.fromTo(
-      [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.2 }
-    );
-  }, [currentIndex]);
-
-
-  useEffect(() => {
-
-    //line animation
-    gsap.fromTo(
-      lineRef.current,
-      { scaleX: 0, transformOrigin: "center" },
-      {
-        scaleX: 1,
-        duration: 4,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: lineRef.current,
-          start: "top 70%",
-          end: "bottom 30%",
-          toggleActions: "play none none reverse",
-        },
-      },
-    );
-
-    //about sec animation
-    sectionRef.current.forEach((el, index) => {
-      gsap.fromTo(
-        el,
-        { opacity: 0, y: 80, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 70%",
-            toggleActions: "play none none reverse",
-          },
-          delay: index * 0.2,
-        }
-      );
+    const [loading, setLoading] = useState(false);
+    const [alert, setAlert] = useState({
+        open: false,
+        message: '',
+        type: '',
     });
-  }, []);
 
 
-  //our partner slider
-  const logos = [
-    partner1,
-    partner1,
-    partner1,
-    partner1,
-    partner1,
-    partner1,
-  ];
 
-  //cards
-  const [flippedCard, setFlippedCard] = useState(null);
-  const handleFlip = (index) => {
-    setFlippedCard(flippedCard === index ? null : index);
-  };
+    const handleSubmit = async (values, { resetForm }) => {
+        console.log(values, "form values");
 
-
-  //strategic execution section
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const swiperRef = useRef(null);
-  const visibleItems = 3;
-
-  const handlePrev = () => {
-    if (swiperRef.current) {
-      swiperRef.current.slidePrev();
     }
-  };
+    //const formData = new FormData();
+    //     formData.append('full_name', values.name);
+    //     formData.append('email_id', values.email);
+    //     formData.append('phone_no', values.mobile);
+    //     formData.append('linkedin_url', values.linkedin);
+    //     formData.append('designation', values.slug);
+    //     formData.append('stack', values.stack);
 
-  const handleNext = () => {
-    if (swiperRef.current) {
-      swiperRef.current.slideNext();
-    }
-  };
+    //     if (values.resume) {
+    //       formData.append('resume_file', values.resume);
+    //     }
 
-  useEffect(() => {
-    if (!swiperRef.current) return;
+    //     try {
+    //       setLoading(true);
 
-    const swiperInstance = swiperRef.current;
+    //       const response = await axios.post(
+    //         ADD_JOB_APPLICATION_ENDPOINT,
+    //         formData,
+    //         {
+    //           headers: {
+    //             'Content-Type': 'multipart/form-data',
+    //           },
+    //         }
+    //       );
 
-    const animateSlide = (index) => {
-      const currentSlide = swiperInstance.slides[index];
-      gsap.fromTo(
-        currentSlide,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-        }
-      );
-    };
+    //       console.log('Form submitted:', response.data);
 
-    // Initial animation
-    animateSlide(swiperInstance.activeIndex);
+    //       setAlert({
+    //         type: 'success',
+    //         message: 'Application submitted successfully!',
+    //         open: true,
+    //       });
 
-    swiperInstance.on("slideChange", () => {
-      animateSlide(swiperInstance.activeIndex);
-    });
+    //       resetForm();
+    //     } catch (error) {
+    //       console.error('Submission error:', error.response?.data || error.message);
 
-    return () => {
-      swiperInstance.off("slideChange");
-    };
-  }, []);
-
-
-  //design process animation
-  const designRef = useRef([]);
-  useEffect(() => {
-    if (typeof window === "undefined" || !designRef.current) return;
-
-    gsap.to(designRef.current, {
-      opacity: 1,
-      duration: 2,
-      y: -20,
-      ease: "power2.out",
-      stagger: 0.2,
-      scrollTrigger: {
-        trigger: designRef.current[0]?.parentNode,
-        start: "top 75%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    return () => ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-  }, []);
+    //       setAlert({
+    //         type: 'error',
+    //         message: error.response?.data?.message || 'Submission failed. Please try again.',
+    //         open: true,
+    //       });
+    //     } finally {
+    //       setLoading(false);
+    //     }
+    //   };
 
 
-  //industries animation
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
 
-  //projects section
-  const prevRefProj = useRef(null);
-  const nextRefProj = useRef(null);
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            name: '',
+            email: '',
+            mobile: '',
+            linkedin: '',
+            resume: null,
 
-
-  //why choose us section
-  const leftRef = useRef(null);
-  const rightRef = useRef(null);
-
-  useEffect(() => {
-    // Left box 
-    gsap.fromTo(
-      leftRef.current,
-      { x: -50, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1.3,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: leftRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
         },
-      }
-    );
-
-    // Right box
-    gsap.fromTo(
-      rightRef.current,
-      { x: 50, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1.3,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: rightRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  }, []);
-
-  //business types section
-  const businessRef = useRef(null);
-  const itemRefs = useRef([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray(".business-item").forEach((item, i) => {
-        gsap.from(item, {
-          opacity: 0,
-          y: 50,
-          duration: 1,
-          delay: i * 0.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
-    }, businessRef);
-
-    return () => ctx.revert();
-  }, []);
-
-
-  //testimonial animation
-  gsap.registerPlugin(ScrollTrigger);
-
-  const testimonialCards = useRef([]);
-
-  useEffect(() => {
-
-    gsap.set(".swiper-slide", { opacity: 0 });
-
-    ScrollTrigger.batch(".swiper-slide", {
-      start: "top 100%",
-      once: true,
-      onEnter: (batch) => {
-        gsap.to(batch, {
-          opacity: 1,
-          duration: 1.5,
-          stagger: 0.2,
-          ease: "power2.out",
-        });
-      },
+        validationSchema: Yup.object({
+            name: Yup.string().required('Required'),
+            email: Yup.string().email('Invalid email').required('Required'),
+            mobile: Yup.string().required('Required'),
+            linkedin: Yup.string().url('Invalid URL'),
+            mobile: Yup.string()
+                .matches(/^\d{10}$/, 'Mobile number must be exactly 10 digits')
+                .required('Required'),
+        }),
+        onSubmit: handleSubmit,
     });
 
-    return () => ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  }, []);
-
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedTestimonial, setSelectedTestimonial] = useState(null);
-
-  const handleOpenModal = (testimonial) => {
-    setSelectedTestimonial(testimonial);
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-    setSelectedTestimonial(null);
-  };
-
-  //contact form
-  const containerRef = useRef();
-  const leftContactRef = useRef();
-  const righContactRef = useRef();
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (leftContactRef.current) {
-        gsap.from(leftContactRef.current, {
-          x: -50,
-          opacity: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      }
-
-      if (righContactRef.current) {
-        gsap.from(righContactRef.current, {
-          x: 50,
-          opacity: 0,
-          duration: 1,
-          delay: 0.2,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      }
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-
-  return (
-    <>
-      {/* Hero section */}
-      <Container
-        maxWidth={false}
-        sx={{
-          width: "100%",
-          maxWidth: "none",
-          minHeight: "100%",
-          padding: "20px",
-          color: "white",
-        }}
-      >
-        <Box sx={{
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "auto",
-          maxWidth: "1485px",
-          paddingTop: 7,
-        }}>
-          {/* Left Side - Text Content */}
-          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: "20px", maxWidth: "900px" }}>
-            <Typography
-              ref={textRef}
-              variant="h3"
-              className="heading"
-              sx={{
-                fontWeight: "bold",
-                mb: 2,
-                background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-                fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "40px" },
-              }}
-            >
-              {slides[currentIndex].title}
-            </Typography>
-
-            <Typography
-              ref={subTextRef}
-              variant="h6"
-              className="desc"
-              sx={{
-                mb: 4,
-                background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-                fontSize: { xs: "20px", sm: "24px", md: "19px", lg: "24px", xl: "28px" },
-              }}
-            >
-              {slides[currentIndex].subtitle}
-            </Typography>
-            <Button
-              ref={buttonRef}
-              variant="contained"
-              sx={{
-                fontSize: "1rem",
-                borderRadius: "30px",
-                padding: "10px 20px",
-                background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
-                color: "white",
-                textTransform: "uppercase",
-                "&:hover": {
-                  background: "linear-gradient(90deg, #0B3D91, #00796B, #00B248)",
-                  boxShadow: "0px 0px 10px #0B3D91",
-                },
-              }}
-            >
-              Get Started
-            </Button>
-          </Box>
-
-          {/* Right Side - Changing Image */}
-          <Box
-            ref={imageRef}
-            sx={{
-              flex: 1,
-              display: "flex",
-              justifyContent: { xs: "center", md: "flex-end" },
-              alignItems: "center",
-
-            }}
-          >
-            <Box
-              sx={{
-                width: { xs: "300px", sm: "400px", md: "500px", lg: "600px" },
-                height: { xs: "300px", sm: "350px", md: "400px", lg: "450px" },
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: 2,
-              }}
-            >
-              <Box
-                component="img"
-                src={slides[currentIndex].image}
-                alt="Slide Image"
+    return (
+        <>
+            <div className="Ellipse-5"></div>
+            {/* hero section */}
+            <Container
+                maxWidth={false}
+                disableGutters
                 sx={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "contain",
-                  display: "block",
-                }}
-              />
-            </Box>
-          </Box>
-        </Box>
-
-        {/* stats section */}
-        <Box
-          sx={{
-            maxWidth: "1440px",
-            margin: "0 auto",
-            px: 3,
-            py: { xs: 6, md: 10 },
-            textAlign: "center",
-          }}
-        >
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: "bold",
-              fontSize: { xs: "24px", md: "36px" },
-              py: 8
-            }}
-          >
-            Our Results
-          </Typography>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: { xs: 4, md: 6 },
-              textAlign: "left",
-            }}
-          >
-            {counters.map((counter, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.3 }}
-                viewport={{ once: true }}
-              >
-
-                <Box
-                  sx={{
-                    width: { xs: "100%", sm: "220px", md: "260px" },
+                    mt: 15,
+                    px: { xs: 3, md: 8 },
+                    py: { xs: 8, md: 14 },
+                    width: "100%",
+                    minHeight: "60vh",
                     display: "flex",
                     flexDirection: "column",
-                    gap: 1,
-                  }}
-                >
-                  <Box
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                }}
+            >
+                <Box>
+                    <Typography
+                        variant="h2"
+                        component="h1"
+                        sx={{
+                            fontWeight: 500,
+                            fontSize: { xs: "2.25rem", sm: "3.25rem", md: "64px" },
+                            color: "#fff",
+                            mb: 2,
+                            lineHeight: 1.2,
+                        }}
+                    >
+                        Join Us
+                    </Typography>
+
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            maxWidth: "820px",
+                            mx: "auto",
+                            color: "#bdbdbd",
+                            fontSize: { xs: "20px", md: "40px" },
+                            flexGrow: 0
+                        }}
+                    >
+                        We’re always Looking for <br />
+                        <span className="text-style-1">Curious Minds </span>
+                        and
+                        <span className="text-style-2"> Passionate Builders</span><span className="text-style-3">.</span>
+                    </Typography>
+                </Box>
+            </Container>
+
+            {/* Life at metaphi */}
+            <Container
+                maxWidth={false}
+                disableGutters
+                sx={{
+                    px: { xs: 2, md: 8 },
+                    py: { xs: 6, md: 10 },
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}
+            >
+                <Box
                     sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center", // Ensures vertical alignment
-                      gap: 2, // Adjust gap as needed
+                        display: 'grid',
+                        gridTemplateColumns: {
+                            xs: '1fr',        // Stack vertically on small screens
+                            sm: 'repeat(3, 1fr)', // 3 columns on larger screens
+                        },
+                        gap: 2,
+                        maxWidth: '1200px',
+                        width: '100%',
                     }}
-                  >
+                >
+                    {/* 6 Boxes - same size */}
                     <Box
-                      component="img"
-                      src={counter.icon}
-                      alt=""
-                      sx={{ width: 50, height: 50 }}
-                    />
-
-                    <Box sx={{ display: "flex", flexDirection: "column" }}>
-                      <Typography
-                        variant="h4"
                         sx={{
-                          fontWeight: 700,
-                          fontSize: "32px",
-                          background: "linear-gradient(90deg, #00C87F, #007FFF)",
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
+                            ...imageBoxSx,
+                            backgroundColor: '#1a1a1d',
+                            color: 'white',
+                            p: 3,
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
                         }}
-                      >
-                        <CountUp start={0} end={counter.value} duration={3} />
-                        {counter.suffix || ''}
-                      </Typography>
-
-                      <Typography
-                        variant="subtitle1"
-                        sx={{ fontWeight: 600, color: "white" }}
-                      >
-                        {counter.label}
-                      </Typography>
+                    >
+                        <Typography
+                            variant="h5"
+                            fontWeight="800"
+                            sx={{
+                                fontSize: { xs: '1.75rem', sm: '2rem' },
+                                lineHeight: 1.2,
+                                mb: 1,
+                            }}
+                        >
+                            Life at Metaphi
+                        </Typography>
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                fontSize: { xs: '0.9rem', sm: '1rem' },
+                                fontWeight: 400,
+                                lineHeight: 1.6,
+                            }}
+                        >
+                            At Metaphi, we believe in collaboration, creativity, and continuous learning.
+                            We keep things flexible, encourage ownership, and celebrate wins — big or small.
+                        </Typography>
                     </Box>
-                  </Box>
 
-                  <Typography
-                    variant="body2"
-                    sx={{ color: "#6B7280", fontSize: "14px" }}
-                  >
-                    {counter.description}
-                  </Typography>
+                    <Box sx={imageBoxSx} /> {/* Box 2 */}
+                    <Box sx={imageBoxSx} /> {/* Box 3 */}
+                    <Box sx={imageBoxSx} /> {/* Box 4 */}
+                    <Box sx={imageBoxSx} /> {/* Box 5 */}
+                    <Box sx={imageBoxSx} /> {/* Box 6 */}
                 </Box>
+            </Container>
 
-              </motion.div>
-            ))}
-          </Box>
-        </Box>
-
-      </Container>
-
-      {/* Partners section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
-        <Box sx={{
-          maxWidth: "1454px",
-          width: "100%",
-          margin: "0 auto",
-          display: "block",
-        }}>
-          <Typography
-            ref={headerRef}
-            variant="h4"
-            className="heading"
-            sx={{
-              fontWeight: "bold",
-              fontSize: { xs: "22px", sm: "30px", md: "36px" },
-              background: "linear-gradient(90deg, #00C87F, #007FFF)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              mb: 5,
-              textAlign: "center"
-            }}
-          >
-            Our Official Partners
-          </Typography>
-          {/* <Divider sx={{
-            width: "60px",
-            height: "2px",
-            backgroundColor: "#1976d2",
-            margin: "0 auto 24px auto",
-            borderRadius: "2px"
-          }}
-          /> */}
-          <Swiper
-            modules={[Autoplay, FreeMode]}
-            slidesPerView="auto"
-            loop={true}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: false,
-            }}
-            speed={2000}
-            allowTouchMove={true}
-            breakpoints={{
-              200: { slidesPerView: 2, spaceBetween: 50 },
-              450: { slidesPerView: 3, spaceBetween: 50 },
-              620: { slidesPerView: 3, },
-              768: { slidesPerView: 4, },
-              1024: { slidesPerView: 5, },
-            }}
-            className="marquee-swiper"
-          >
-            {/* Duplicate logos to ensure smooth looping */}
-            {logos.concat(logos).map((logo, index) => (
-              <SwiperSlide key={index} className="marquee-slide">
-                <img src={logo} alt={`Logo ${index + 1}`} className="marquee-logo" />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </Box>
-      </Container>
-
-      {/* description section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
-        <Box sx={{
-          maxWidth: "1454px",
-          width: "100%",
-          margin: "0 auto",
-          display: "block",
-        }}>
-          {/* first section */}
-          <Box
-            ref={addToRefs}
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              alignItems: "center",
-              gap: { xs: 4, md: 6 },
-              py: { xs: 4, md: 6 },
-              textAlign: { xs: "center", md: "left" }
-            }}
-          >
-            <Typography
-              variant="h3"
-              sx={{
-                flex: 1,
-                minWidth: "300px",
-                fontWeight: "bold",
-                background: "linear-gradient(90deg, #007FFF, #0047AB)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                fontSize: { xs: "24px", sm: "30px", md: "36px", lg: "42px", xl: "50px" }
-              }}
+            {/* Why join us */}
+            <Container
+                maxWidth={false}
+                disableGutters
+                sx={{ py: 5 }}
             >
-              Leading Mobile App Development, Software Development & IT Consulting Company
-
-            </Typography>
-            <Box sx={{ flex: 1, maxWidth: "600px" }}>
-              <Typography
-                variant="body1"
-                sx={{
-                  flex: 1,
-                  color: "#ddd",
-                  lineHeight: 1.8,
-                  fontSize: { xs: "20px", sm: "22px", md: "16px", lg: "21px", xl: "24px" },
-                  mt: 2,
-                }}
-              >
-                Founded in 2025, Metaphi Innovations is a leading Mobile App, Software Development, and Web Development company, driving digital transformation for businesses worldwide. As a trusted technology partner, we empower startups and enterprises alike to innovate, scale, and lead in their industries.
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: { xs: "center", md: "flex-start" },
-                  mt: 3,
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "30px",
-                    color: "#fff",
-                    borderColor: "rgba(0, 26, 255, 0.87)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1,
-                    "&:hover": {
-                      backgroundColor: "rgba(0, 26, 255, 0.87)",
-                      color: "#fff",
-                    },
-                  }}
-                >
-                  About us <FontAwesomeIcon icon={faArrowRight} />
-                </Button>
-              </Box>
-            </Box>
-          </Box>
-
-          {/* Line */}
-          <Box
-            ref={lineRef}
-            sx={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              mt: 2
-            }}
-          >
-            <Box
-              sx={{
-                width: "100%",
-                maxWidth: "1454px",
-                height: "1px",
-                backgroundImage: "linear-gradient(to right, #007FFF, #00C87F)",
-                borderRadius: "200px"
-              }}
-            />
-          </Box>
-
-          {/* second section */}
-          <Box
-            ref={addToRefs}
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: "column", md: "row" },
-              alignItems: "center",
-              gap: { xs: 4, md: 6 },
-              py: { xs: 4, md: 6 },
-              textAlign: { xs: "center", md: "left" },
-              mt: 2
-            }}
-          >
-            <Typography
-              variant="h3"
-              sx={{
-                flex: 1,
-                minWidth: "300px",
-                fontWeight: "bold",
-                background: "linear-gradient(90deg, #00FF7F,rgb(5, 107, 47))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                fontSize: { xs: "24px", sm: "30px", md: "36px", lg: "42px", xl: "50px" }
-              }}
-            >
-              Accelerating Business Growth with Intelligent Solutions
-            </Typography>
-            <Box sx={{ flex: 1, maxWidth: "600px" }} >
-              <Typography variant="body1" sx={{ flex: 1, color: "#ddd", lineHeight: 1.8, fontSize: { xs: "20px", sm: "22px", md: "16px", lg: "21px", xl: "24px" } }}>
-                Unlock growth opportunities with robust software solutions, system modernization, and next-gen technologies—powered by a leading development company.
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: { xs: "center", md: "flex-start" },
-                  mt: 3,
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "30px",
-                    color: "#fff",
-                    borderColor: "rgba(0, 255, 0, 0.69)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1,
-                    mt: 3,
-                    "&:hover": {
-                      backgroundColor: "rgba(0, 255, 0, 0.69)",
-                      color: "#fff",
-                    },
-                  }}
-                >
-                  Services <FontAwesomeIcon icon={faArrowRight} />
-                </Button>
-              </Box>
-            </Box>
-          </Box>
-          <Box
-            ref={addToRefs}
-            sx={{
-              display: "flex",
-              justifyContent: { xs: "center", md: "left" },
-              mt: 2,
-              width: "100%",
-            }}
-          >
-          </Box>
-        </Box>
-      </Container>
-
-      {/* services section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
-        <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
-          sx={{
-            fontWeight: "bold",
-            mb: 2,
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            padding: "20px",
-            textAlign: "center"
-          }}
-        >
-          Solutions We Offer
-        </Typography>
-
-        <Box
-          sx={{
-            maxWidth: "1440px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "1fr 1fr 1fr" },
-            gap: 3,
-            py: 6,
-          }}
-        >
-          {services.map((service, index) => (
-            <Box
-              key={service.id}
-              onClick={() => handleFlip(index)}
-              sx={{
-                perspective: "1200px",
-                width: "100%",
-                height: "290px",
-              }}
-            >
-              <Box
-                className={`flip-card-inner ${flippedCard === index ? "flipped" : ""}`}
-                sx={{
-                  position: "relative",
-                  width: "100%",
-                  height: "100%",
-                  transformStyle: "preserve-3d",
-                  transition: "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)",
-                }}
-              >
-                {/* Front Side */}
-                <Card
-                  className="card-face front"
-                  sx={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    backfaceVisibility: "hidden",
-                    WebkitBackfaceVisibility: "hidden",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    textAlign: "center",
-                    cursor: "pointer",
-                    borderRadius: "20px",
-                    boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                    background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    color: "#fff",
-                    transform: "rotateY(0deg)",
-                  }}
-                >
-                  <CardContent>
-                    <img src={service.icon} alt={service.title} style={{ width: 50, height: 50, marginBottom: 5 }} />
-                    <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>{service.title}</Typography>
-                    <Typography variant="body2" sx={{ color: "#ddd" }}>{service.description}</Typography>
-                  </CardContent>
-                  <Typography variant="caption" sx={{ color: "#ccc", mt: 1, fontSize: 12, opacity: 0.7 }}>
-                    Click to flip →
-                  </Typography>
-                </Card>
-
-                {/* Back Side */}
-                <Card
-                  className="card-face back"
-                  sx={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    backfaceVisibility: "hidden",
-                    WebkitBackfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: "20px",
-                    background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    color: "#fff",
-                    textAlign: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  <CardContent
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                      gap: 2,
-                    }}
-                  >
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                      <img src={service.icon} alt={service.title} style={{ width: 40, height: 40, objectFit: "contain" }} />
-                      <Typography variant="h6" sx={{ fontWeight: "bold", fontSize: { xs: "14px", lg: "20px" } }}>
-                        {service.title}
-                      </Typography>
-                    </Box>
-                    <Typography sx={{ fontSize: { xs: "12px", md: "16px" } }}>{service.mainDescription}</Typography>
-                    <Link to="/about" onClick={(e) => e.preventDefault()}> {/* temporary disabled links */}
-
-                      <Button
-                        sx={{
-                          mt: 1,
-                          px: 3,
-                          py: 1.5,
-                          fontSize: "14px",
-                          fontWeight: "bold",
-                          borderRadius: "12px",
-                          background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
-                          color: "#fff",
-                          boxShadow: "0px 4px 15px rgba(255, 255, 255, 0.1)",
-                          border: "1px solid rgba(255, 255, 255, 0.2)",
-                          textTransform: "uppercase",
-                          transition: "all 0.3s ease",
-                          "&:hover": {
-                            background: "linear-gradient(135deg, rgba(50, 50, 50, 0.9), rgba(20, 20, 20, 1))",
-                            boxShadow: "0px 6px 20px rgba(255, 255, 255, 0.3)",
-                          },
-                        }}
-                      >
-                        Learn More
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-              </Box>
-            </Box>
-
-          ))}
-        </Box>
-      </Container>
-
-      {/* Strategic execution setion */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 9, position: "relative", width: "100%" }}>
-        <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
-          sx={{
-            fontWeight: "bold",
-            mb: 2,
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            padding: "20px",
-            textAlign: "center"
-          }}
-        >
-          Strategic Execution
-        </Typography>
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            maxWidth: "1400px",
-            margin: "auto",
-            mt: 5,
-            flexDirection: { xs: "column", md: "row" },
-            gap: { xs: 4, md: 8 },
-          }}
-        >
-          {/* Left Side - Image Navigation */}
-          <Box
-            sx={{
-              maxWidth: { xs: "300px", sm: "400px" },
-              width: "100%",
-              minWidth: "240px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 1,
-              boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-              background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              transition: "all 0.4s ease",
-              borderRadius: "20px",
-              padding: 2,
-            }}
-          >
-            {/* Up Arrow Button */}
-            <IconButton sx={{ color: "white" }} onClick={handlePrev}>
-              <ArrowUpward />
-            </IconButton>
-
-            {/* Swiper Feature List */}
-            <Swiper
-              direction="vertical"
-              slidesPerView={visibleItems}
-              spaceBetween={10}
-              loop
-              centeredSlides={true}
-              allowTouchMove={false}
-              onSwiper={(swiper) => (swiperRef.current = swiper)}
-              onSlideChange={(swiper) => setSelectedIndex(swiper.realIndex)}
-              style={{
-                height: 300,
-                width: "100%",
-                maxWidth: "400px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                pointerEvents: "none"
-              }}
-            >
-
-              {features.map((feature, index) => (
-                <SwiperSlide key={index} style={{ display: "flex", justifyContent: "center" }}>
-                  <Box
-                    sx={{
-                      cursor: "pointer",
-                      border: index === selectedIndex ? "1px solid #3B2ED0" : "1px solid rgba(255, 255, 255, 0.1)",
-                      borderRadius: "25px",
-                      transition: "all 0.3s ease-in-out",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 2,
-                      padding: { xs: "10px 14px", md: "12px 18px" },
-                      maxWidth: { xs: "198px", sm: "280px", md: "250px", lg: "270px" },
-                      margin: "auto",
-                      width: "100%",
-                      background: index === selectedIndex
-                        ? "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 0.9))"
-                        : "transparent",
-                      backdropFilter: index === selectedIndex ? "blur(10px)" : "none",
-                      transform: index === selectedIndex ? "scale(1.05)" : "scale(1)",
-                      opacity: index === selectedIndex ? 1 : 0.8,
-                      transition: "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
-                    }}
-                  >
-                    <img
-                      src={feature.img}
-                      alt={feature.title}
-                      style={{
-                        width: 60,
-                        height: 60,
-
-                        objectFit: "cover",
-                      }}
-                    />
-                    <Typography
-                      variant="body1"
-                      fontWeight={index === selectedIndex ? "bold" : "normal"}
-                      sx={{
-                        fontSize: { xs: "12px", md: "16px" },
-                        textAlign: "center",
-                        color: "white",
-                      }}
-                    >
-                      {feature.title}
-                    </Typography>
-                  </Box>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-            {/* Down Arrow Button */}
-            <IconButton sx={{ color: "white" }} onClick={handleNext}>
-              <ArrowDownward />
-            </IconButton>
-          </Box>
-
-          {/* Right Side - Feature Description */}
-          <Card
-            sx={{
-              maxWidth: "800px",
-              width: "100%",
-              minHeight: 200,
-              padding: 3,
-              borderRadius: "20px",
-              background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
-              boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              color: "#fff",
-              textAlign: { xs: "center", md: "left" }
-            }}
-          >
-            <CardContent>
-              <img style={{ height: 50, width: 50 }} src={features[selectedIndex].img} alt="" />
-              <Typography variant="h5" color="primary" sx={{ mb: 2 }}>
-                {features[selectedIndex].title}
-              </Typography>
-              <Typography sx={{ lineHeight: 1.6 }}>
-                {features[selectedIndex].description}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Box>
-
-
-      </Container>
-
-      {/* Design steps section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
-        <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
-          sx={{
-            fontWeight: "bold",
-            mb: 2,
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            padding: "20px",
-            textAlign: "center"
-          }}
-        >
-          Our Design Process
-        </Typography>
-
-        <Box sx={{ maxWidth: 'xl', mx: 'auto', pr: { xs: null, lg: 1.5 } }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              padding: 3,
-              gap: 8,
-              justifyContent: "center",
-              mt: 6,
-            }}
-          >
-            {designT.map((step, index) => (
-              <Box
-                key={step.id}
-                ref={(el) => (designRef.current[index] = el)}
-                sx={{
-                  width: { xs: "100%", sm: "30%", md: "25%" },
-                  textAlign: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  color: "white",
-                  opacity: 0
-                }}
-              >
-                <Box mb={2}>{step.svg}</Box>
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
-                  {step.title}
-                </Typography>
-                <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                  {step.description}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        </Box>
-
-      </Container>
-
-      {/* industries we serve */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
-        <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
-          sx={{
-            fontWeight: "bold",
-            mb: 2,
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            padding: "20px",
-            textAlign: "center"
-          }}
-        >
-          Industries We Serve
-        </Typography>
-
-        <Box sx={{ maxWidth: "1450px", px: 2, py: 4, margin: "auto", position: "relative" }}>
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={1}
-            onSwiper={(swiper) => {
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
-            onSlideChange={(swiper) => {
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
-            onBeforeInit={(swiper) => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-            }}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              600: { slidesPerView: 2 },
-              900: { slidesPerView: 3 },
-              1200: { slidesPerView: 4 },
-            }}
-          >
-            {industries.map((industry, index) => (
-              <SwiperSlide key={index}>
-                <Card
-                  sx={{
-                    borderRadius: 4,
-                    minHeight: 240,
-                    height: "100%",
-                    position: "relative",
-                    color: "#fff",
-                    boxShadow: 3,
-                    transition: "transform 0.3s ease",
-                    overflow: "hidden",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={industry.image}
-                    loading="lazy"
-                    alt={industry.title}
-                    sx={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      zIndex: 0,
-                    }}
-                  />
-
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))",
-                      backdropFilter: "blur(3px)",
-                      zIndex: 1,
-                    }}
-                  />
-
-                  <CardContent
-                    sx={{
-                      position: "relative",
-                      zIndex: 2,
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "flex-end",
-                      p: { xs: 2, sm: 3 },
-                    }}
-                  >
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontWeight: 600,
-                        mb: 1,
-                        color: "#fff",
-                        textShadow: "0 2px 4px rgba(0,0,0,0.5)",
-                      }}
-                    >
-                      {industry.title}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: "#e0e0e0",
-                        fontSize: { xs: "0.85rem", sm: "0.9rem" },
-                        textShadow: "0 1px 2px rgba(0,0,0,0.5)",
-                      }}
-                    >
-                      {industry.description}
-                    </Typography>
-                    <Button
-                      sx={{
-                        mt: 10,
-                        color: "#fff",
-                        background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                        boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                        backdropFilter: "blur(10px)",
-                        border: "1px solid rgba(255, 255, 255, 0.1)",
-                        borderRadius: "40px",
-                        textTransform: "none",
-                        px: 3,
-                        py: 1.5,
-                        "&:hover": {
-                          background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                        },
-                      }}
-                    >
-                      Learn More
-                    </Button>
-                  </CardContent>
-                </Card>
-
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: { xs: "flex-end", lg: "center" },
-              gap: 2,
-              mt: 2,
-            }}
-          >
-            <IconButton
-              ref={prevRef}
-              disabled={isBeginning}
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                opacity: isBeginning ? 0.5 : 1,
-                cursor: isBeginning ? "not-allowed" : "pointer",
-                "&:hover": {
-                  background: isBeginning
-                    ? "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))"
-                    : "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                },
-              }}
-            >
-              <ArrowBack />
-            </IconButton>
-
-            <IconButton
-              ref={nextRef}
-              disabled={isEnd}
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                opacity: isEnd ? 0.5 : 1,
-                cursor: isEnd ? "not-allowed" : "pointer",
-                "&:hover": {
-                  background: isEnd
-                    ? "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))"
-                    : "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                },
-              }}
-            >
-              <ArrowForward />
-            </IconButton>
-
-          </Box>
-        </Box>
-      </Container>
-
-      {/* Projects section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
-        <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
-          sx={{
-            fontWeight: "bold",
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            padding: "10px",
-            textAlign: "center"
-          }}
-        >
-          Our Work
-        </Typography>
-
-        <Typography
-          sx={{
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "15px", sm: "20px", md: "20px", lg: "24px", xl: "25px" },
-            padding: "10px 40px",
-            textAlign: "center",
-            maxWidth: "1420px",
-            margin: "auto"
-          }}
-        >
-          A Glimpse of the Solutions We’ve Delivered to Global Clients
-          As a leading IT company, we specialize in crafting innovative and customized solutions tailored to diverse business needs.
-        </Typography>
-
-        <Box sx={{ px: { xs: 2, sm: 5, md: 6, lg: 6, xl: 7 }, py: 8, color: "white", maxWidth: "1448px", margin: "auto" }}>
-
-          <Swiper
-            modules={[Navigation]}
-            spaceBetween={24}
-            slidesPerView={1}
-            navigation={{
-              prevEl: prevRefProj.current,
-              nextEl: nextRefProj.current,
-            }}
-            onBeforeInit={(swiper) => {
-              swiper.params.navigation.prevEl = prevRefProj.current;
-              swiper.params.navigation.nextEl = nextRefProj.current;
-            }}
-            pagination={{ clickable: true }}
-            loop={true}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            style={{ paddingBottom: "40px" }}
-          >
-            {projects.map((project, index) => (
-              <SwiperSlide key={index}>
-                <Card
-                  sx={{
-                    background: "linear-gradient(135deg, rgba(219, 220, 226, 0.29), rgba(36, 36, 36, 0.9))",
-                    backdropFilter: "blur(10px)",
-                    borderRadius: 4,
-                    overflow: "hidden",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                    transition: "0.3s",
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                    "&:hover": {
-                      borderColor: "#00ffff",
-                    },
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    image={project.image}
-                    alt={project.title}
-                    sx={{ height: 180, objectFit: "cover" }}
-                  />
-                  <CardContent sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flexGrow: 1 }}>
-                    <Typography variant="h6" fontWeight={600} sx={{ color: "white", marginBottom: 2 }}>
-                      {project.title}
-                    </Typography>
-                    <Button
-                      sx={{
-                        alignSelf: "flex-start",
-                        marginTop: "auto",
-                        background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                        color: "#fff",
-                        "&:hover": {
-                          backgroundColor: "#00b2e6",
-                        },
-                      }}
-                    >
-                      View Details
-                    </Button>
-                  </CardContent>
-                </Card>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: { xs: "flex-end", lg: "center" },
-              gap: 2,
-              mb: 2,
-            }}
-          >
-            <IconButton
-              ref={prevRefProj}
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                opacity: 1,
-                cursor: "pointer",
-                "&:hover": {
-                  background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                },
-              }}
-            >
-              <ArrowBack />
-            </IconButton>
-
-            <IconButton
-              ref={nextRefProj}
-
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                opacity: 1,
-                mb: 3,
-                cursor: "pointer",
-                "&:hover": {
-                  background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                },
-              }}
-            >
-              <ArrowForward />
-            </IconButton>
-
-          </Box>
-
-          {/* View More Button */}
-          <Box sx={{ textAlign: "center", marginTop: 3 }}>
-            <Button
-              variant="contained"
-              sx={{
-                alignSelf: { xs: "center", md: "flex-start" },
-                mt: 3,
-                px: 4,
-                py: 1.5,
-                borderRadius: 3,
-                textTransform: "none",
-                fontWeight: 500,
-                color: "white",
-                background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
-                "&:hover": {
-                  background: "linear-gradient(to right, #00eaff, #0066ff)",
-                },
-              }}
-            >
-              VIEW MORE
-            </Button>
-          </Box>
-        </Box>
-      </Container>
-
-      {/* Why choose us section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
-
-        <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
-          sx={{
-            fontWeight: "bold",
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            padding: "10px",
-            textAlign: "center"
-          }}
-        >
-          Why Choose Us?
-        </Typography>
-
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            alignItems: "stretch",
-            justifyContent: "space-between",
-            gap: 4,
-            px: { xs: 4, sm: 7, md: 6 },
-            py: { xs: 6, md: 10 },
-            maxWidth: "1440px",
-            margin: "auto",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          {/* Left */}
-          <Box ref={leftRef} sx={{ flex: 1, textAlign: { xs: "center", md: "left" } }}>
-            <Typography
-              gutterBottom
-              sx={{
-                fontSize: {
-                  xs: "17px",
-                  sm: "26px",
-                  md: "30px",
-                  lg: "36px",
-                  xl: "40px",
-                },
-                color: "white",
-              }}
-            >
-              Building Smarter Businesses with Advanced Technology
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", sm: "16px", md: "17px", lg: "18px" },
-                color: "white",
-              }}
-            >
-              As a leading app development company in India,{" "}
-              <strong>Metaphi Innovations</strong> has collaborated with many businesses,
-              from startups to enterprises, delivering top-tier solutions across industries.
-              We offer a comprehensive range of IT consulting services tailored to meet diverse business needs.
-            </Typography>
-          </Box>
-
-          {/* Right */}
-          <Box
-            ref={rightRef}
-            sx={{
-              flex: 1,
-              backgroundColor: "rgba(255, 255, 255, 0.03)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              borderRadius: 4,
-              padding: 4,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              textAlign: { xs: "center", md: "left" },
-            }}
-          >
-            <Typography
-              fontWeight="bold"
-              gutterBottom
-              sx={{
-                fontSize: {
-                  xs: "20px",
-                  sm: "24px",
-                  md: "26px",
-                  lg: "30px",
-                },
-                color: "white",
-              }}
-            >
-              Innovate with Us!
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", sm: "16px", md: "17px", lg: "18px" },
-                color: "white",
-              }}
-              gutterBottom
-            >
-              Connect with our expert IT transformation team and take the next step toward
-              groundbreaking innovation for your business.
-            </Typography>
-            <Link to={"/"} > {/* temporary disabled links */}
-              <Button
-                variant="contained"
-                sx={{
-                  alignSelf: { xs: "center", md: "flex-start" },
-                  mt: 3,
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: 3,
-                  textTransform: "none",
-                  fontWeight: 500,
-                  color: "white",
-                  background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
-                  "&:hover": {
-                    background: "linear-gradient(to right, #00eaff, #0066ff)",
-                  },
-                }}
-              >
-                DROP QUERIES
-              </Button>
-            </Link>
-
-          </Box>
-        </Box>
-
-        <Box
-          ref={businessRef}
-          sx={{
-            py: { xs: 6, md: 10 },
-            px: { xs: 3, sm: 5, md: 6 },
-            maxWidth: "1440px",
-            mx: "auto",
-          }}
-        >
-          <Typography
-            ref={headerRef}
-            variant="h4"
-            className="heading"
-            sx={{
-              fontWeight: "bold",
-              background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-              fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-              padding: "10px",
-              textAlign: "center",
-              mb: 5
-            }}
-          >
-            Tailored Solutions for Every Business Type
-          </Typography>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 4,
-            }}
-          >
-            {businessTypes.map((item, idx) => (
-              <Box
-                key={idx}
-                ref={(el) => (itemRefs.current[idx] = el)}
-                className="business-item"
-                sx={{
-                  flex: {
-                    xs: "1 1 100%",
-                    md: "1 1 calc(40% - 16px)",
-                    lg: "1 1 calc(35% - 18px)",
-                  },
-                  minHeight: "120px",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(15px)",
-                  borderRadius: 3,
-                  px: { xs: 3, sm: 5 },
-                  py: { xs: 4, sm: 5 },
-                  color: "white",
-                }}
-              >
                 <Typography
-                  variant="h6"
-                  sx={{
-                    fontWeight: "bold",
-                    fontSize: { xs: "18px", sm: "20px" },
-                    mb: 1,
-                  }}
-                >
-                  {item.title}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: { xs: "14px", sm: "16px" },
-                    color: "#ddd",
-                  }}
-                >
-                  {item.desc}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        </Box>
-      </Container>
-
-      {/* Testimonial section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
-
-        <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
-          sx={{
-            fontWeight: "bold",
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            paddingTop: "80px",
-            textAlign: "center"
-          }}
-        >
-          What Our Clients Say
-        </Typography>
-
-        <Box
-          sx={{
-            py: 9,
-            px: { xs: "auto", sm: 3, md: 4, lg: 3, xl: 15 },
-            textAlign: "center",
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 2,
-            mb: { sx: "auto", md: "50px" }
-          }}
-        >
-          {/* Navigation Arrow for Desktop */}
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <FontAwesomeIcon icon={faArrowLeft} size="2x" className="prev-button" color="#00C8FF" style={{ cursor: "pointer" }} />
-          </Box>
-
-          {/* Swiper Container */}
-          <Box sx={{ width: "90%", maxWidth: "1480px", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-            <Swiper
-              modules={[Navigation, Autoplay]}
-              navigation={{
-                prevEl: ".prev-button",
-                nextEl: ".next-button",
-              }}
-              autoplay={{ delay: 2500, disableOnInteraction: false }}
-              loop={true}
-              speed={1000}
-              spaceBetween={20}
-              slidesPerView={1}
-              centeredSlides={true}
-              breakpoints={{
-                1000: { slidesPerView: 1, centeredSlides: true },
-                1024: { slidesPerView: 3, centeredSlides: false, spaceBetween: 10 },
-                1340: { slidesPerView: 3, centeredSlides: false, spaceBetween: 15 },
-                1440: { slidesPerView: 3, centeredSlides: false, spaceBetween: 15 },
-              }}
-              style={{ margin: "auto", overflow: "hidden", width: "100%" }}
-            >
-              {testimonials.map((item, index) => (
-                <SwiperSlide key={index} style={{ willChange: "opacity" }}>
-                  <Box
-                    ref={(el) => (testimonialCards.current[index] = el)}
-                    onClick={() => handleOpenModal(item)}
+                    className="why-join-us"
                     sx={{
-                      background: "linear-gradient(135deg, #00C853, #0D47A1)",
-                      backgroundSize: "400% 400%",
-                      animation: "moveGradient 6s infinite alternate ease-in-out",
-                      borderRadius: "10px",
-                      padding: "20px",
-                      color: "white",
-                      textAlign: "left",
-                      maxWidth: "450px",
-                      height: "200px",
-                      mx: "auto",
-                      transition: "all 0.4s ease-in-out",
-                      overflow: "hidden",
-                      cursor: "pointer",
+                        fontWeight: 500,
+                        fontSize: { xs: "2.25rem", sm: "3.25rem", md: "64px" },
+                        color: "#fff",
+                        mb: 2,
+                        lineHeight: 1.2,
                     }}
-                  >
-                    {/* Rating Stars */}
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      {[...Array(5)].map((_, i) => (
-                        <FontAwesomeIcon key={i} icon={faStar} color="#00C8FF" />
-                      ))}
-                    </Box>
+                >
+                    Why Join Us
+                </Typography>
 
-                    <Typography sx={{ fontWeight: "bold", mt: 1, fontSize: { xs: "12px", md: "14px" } }}>{item.title}</Typography>
-                    <Typography
-                      sx={{
-                        mt: 1,
-                        fontSize: { xs: "10px", md: "14px" },
-                        display: "-webkit-box",
-                        WebkitBoxOrient: "vertical",
-                        WebkitLineClamp: 3,
-                        overflow: "hidden",
-                      }}
-                    >
-                      {item.review}
-                    </Typography>
+                <Container
+                    maxWidth={false}
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        gap: '20px',
+                        py: 4,
+                        maxWidth: "1400px"
+                    }}
+                >
+                    {whyJoinUs.map((item, index) => (
+                        <Box
+                            key={index}
+                            sx={{
+                                boxSizing: "border-box",
+                                width: 296,
+                                height: 96,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 2,
+                                px: 3,
+                                borderRadius: '32px',
+                                backgroundImage: `radial-gradient(circle at 140% 230%, #3c71f7, rgba(0, 0, 0, 0) 48%),
+                          radial-gradient(circle at -10% 200%, #37de8d, rgba(0, 0, 0, 0) 40%),
+                          linear-gradient(to bottom, #15171e, #15171e)`,
+                                overflow: 'hidden',
+                                color: 'white',
+                            }}
+                        >
+                            {/* Icon */}
+                            <Box
+                                sx={{
+                                    width: 28,
+                                    height: 28,
+                                    borderRadius: '10px',
+                                    backgroundColor: '#37de8d',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexShrink: 0,
+                                    p: 2
+                                }}
+                            >
+                                <img src={joinusIcon1} alt="" />
+                            </Box>
 
-                    <Box sx={{ display: "flex", alignItems: "center", mt: 3 }}>
-                      <img
-                        src={item.logo}
-                        alt="Logo"
-                        style={{ height: "70px", width: "70px", objectFit: "contain" }}
-                      />
-                    </Box>
-                  </Box>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                            {/* Text */}
+                            <Typography
+                                sx={{
+                                    height: '48px',
+                                    flexGrow: 1,
+                                    fontFamily: 'Inter',
+                                    fontSize: '20px',
+                                    fontWeight: 500,
+                                    fontStretch: 'normal',
+                                    fontStyle: 'normal',
+                                    lineHeight: 'normal',
+                                    letterSpacing: 'normal',
+                                    textAlign: 'left',
+                                    color: '#f3f4f7',
+                                }}
 
-            {/* Navigation Arrows */}
-            <Box
-              sx={{
-                display: { xs: "flex", md: "none" },
-                justifyContent: "center",
-                gap: 3,
-                mt: 3,
-              }}
-            >
-              <FontAwesomeIcon icon={faArrowLeft} size="2x" className="prev-button" color="#00C8FF" style={{ cursor: "pointer" }} />
-              <FontAwesomeIcon icon={faArrowRight} size="2x" className="next-button" color="#00C8FF" style={{ cursor: "pointer" }} />
-            </Box>
-
-          </Box>
-
-          {/* Navigation Arrow for Desktop */}
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <FontAwesomeIcon icon={faArrowRight} size="2x" className="next-button" color="#00C8FF" style={{ cursor: "pointer" }} />
-          </Box>
-          {/* Modal */}
-          <Modal open={openModal} onClose={handleCloseModal} disableScrollLock sx={{ margin: 4 }}>
-            <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                bgcolor: "#111212",
-
-                color: "white",
-                borderRadius: "10px",
-                padding: { xs: "20px", sm: "30px", md: "40px" },
-                width: { xs: "90%", sm: "70%", md: "50%" },
-                maxHeight: "80vh",
-                overflowY: "auto",
-                boxShadow: 24,
-              }}
-            >
-              {/* Close Button */}
-              <IconButton
-                onClick={handleCloseModal}
-                sx={{
-                  position: "absolute",
-                  top: 10,
-                  right: 10,
-                  color: "white",
-                }}
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </IconButton>
-
-              {selectedTestimonial && (
-                <>
-                  {/* Rating Stars */}
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    {[...Array(5)].map((_, i) => (
-                      <FontAwesomeIcon key={i} icon={faStar} color="#00C8FF" />
+                            >
+                                {item.value}
+                            </Typography>
+                        </Box>
                     ))}
-                  </Box>
+                </Container>
+            </Container>
 
-                  {/* Title */}
-                  <Typography sx={{ fontWeight: "bold", mt: 2, fontSize: "22px" }}>
-                    {selectedTestimonial.title}
-                  </Typography>
-
-                  {/* Full Review */}
-                  <Typography sx={{ mt: 2, fontSize: "16px", lineHeight: 1.5 }}>
-                    {selectedTestimonial.review}
-                  </Typography>
-
-                  {/* Logo */}
-                  <Box sx={{ display: "flex", alignItems: "center", mt: 3 }}>
-                    <img
-                      src={selectedTestimonial.logo}
-                      alt="Logo"
-                      style={{ height: "70px", width: "70px", objectFit: "contain" }}
-                    />
-                  </Box>
-
-                </>
-              )}
-            </Box>
-          </Modal>
-
-        </Box>
-      </Container>
-
-      {/* Contact us section */}
-      <Container ref={containerRef} maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
-        <Box
-          sx={{
-            display: "flex",
-            maxWidth: "1480px",
-            flexDirection: { xs: "column", md: "row" },
-            py: { xs: 6, md: 10 },
-            px: { xs: 0, md: 6, lg: 6, xl: 3 },
-            gap: { xs: 5, md: 8 },
-            justifyContent: "center",
-            alignItems: "center",
-            overflowX: "hidden",
-            boxSizing: "border-box",
-            margin: "auto"
-          }}
-        >
-          {/* Left Info */}
-          <Box
-            ref={leftContactRef}
-            sx={{
-              flex: 1,
-              minWidth: { xs: "100%", md: "300px" },
-              color: "white",
-              textAlign: { xs: "center", md: "left" },
-            }}
-          >
-            <Typography variant="h3" fontWeight="bold" fontSize={{ xs: "2rem", sm: "2.5rem", md: "3rem" }}>
-              Let’s Build Something{" "}
-              <span
-                style={{
-                  background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
-                  WebkitBackgroundClip: "text",
-                  color: "transparent",
+            {/* Open roles */}
+            <Container
+                maxWidth={false}
+                disableGutters
+                sx={{
+                    backgroundColor: "#edeef3",
                 }}
-              >
-                Extraordinary
-              </span>{" "}
-              Together!
-            </Typography>
-            <Typography sx={{ mt: 2, color: "#BBBBBB", fontSize: { xs: "0.95rem", md: "1rem" } }}>
-              Share your project details and take the first step toward success.
-            </Typography>
-
-            {[{
-              icon: faEnvelope,
-              label: "Email",
-              value: "contact@test.com",
-            }, {
-              icon: faCalendar,
-              label: "Schedule a Call",
-              value: "Free Consultation",
-            }].map(({ icon, label, value }, i) => (
-              <Box key={i} sx={{ display: "flex", alignItems: "center", mt: 4, justifyContent: { xs: "center", md: "flex-start" } }}>
-                <Box
-                  sx={{
-                    width: 50,
-                    height: 50,
-                    backgroundColor: "#0E2A3A",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: 2,
-                  }}
-                >
-                  <FontAwesomeIcon icon={icon} color="#00C8FF" size="lg" />
-                </Box>
-                <Box sx={{ ml: 2 }}>
-                  <Typography variant="body2" sx={{ color: "#AAAAAA" }}>{label}</Typography>
-                  <Typography variant="body1" fontWeight="bold">{value}</Typography>
-                </Box>
-              </Box>
-            ))}
-          </Box>
-
-          {/* Contact Form */}
-          <Box
-            ref={righContactRef}
-            sx={{
-              flex: 1,
-              width: "100%",
-              maxWidth: { xs: "250px", sm: "500px" },
-              minWidth: 0,
-              background: "rgba(17, 17, 17, 0.85)",
-              backdropFilter: "blur(12px)",
-              p: { xs: 2, sm: 3, md: 4 },
-              borderRadius: 3,
-              boxShadow: "0 0 30px rgba(0,200,255,0.1)",
-              margin: "auto",
-            }}
-          >
-            <Formik
-              initialValues={{ email: "", jobTitle: "", message: "" }}
-              validationSchema={Yup.object({
-                email: Yup.string().email("Invalid email").required("Email is required"),
-                jobTitle: Yup.string().required("Job title is required"),
-                message: Yup.string().required("Message is required"),
-              })}
-              onSubmit={(values, { setSubmitting }) => {
-                console.log("Form Data:", values);
-                alert("Message Sent Successfully!");
-                setSubmitting(false);
-              }}
             >
-              {({ handleSubmit }) => (
-                <Form onSubmit={handleSubmit}>
-                  {[
-                    { name: "email", label: "Email*", type: "text" },
-                    { name: "jobTitle", label: "Job Title*", type: "text" },
-                    { name: "message", label: "Message*", type: "textarea" },
-                  ].map(({ name, label, type }) => (
-                    <FastField key={name} name={name}>
-                      {({ field, meta }) => (
-                        <TextField
-                          {...field}
-                          fullWidth
-                          multiline={type === "textarea"}
-                          rows={type === "textarea" ? 4 : undefined}
-                          label={label}
-                          variant="outlined"
-                          error={meta.touched && Boolean(meta.error)}
-                          helperText={meta.touched && meta.error}
-                          sx={{
-                            '& input:-webkit-autofill': {
-                              WebkitBoxShadow: '0 0 0 1000px #121212 inset',
-                              WebkitTextFillColor: '#fff',
-                              caretColor: '#fff',
-                              transition: 'background-color 5000s ease-in-out 0s',
-                            },
-
-                            mb: 3,
-                            backgroundColor: "#222",
-                            borderRadius: 1,
-                            "& .MuiInputBase-input": { color: "white" },
-                            "& .MuiInputLabel-root": { color: "#ccc" },
-                            "& .MuiOutlinedInput-root": {
-                              "& fieldset": { borderColor: "#444" },
-                              "&:hover fieldset": { borderColor: "#00C8FF" },
-                              "&.Mui-focused fieldset": { borderColor: "#00C8FF" },
-                            },
-                          }}
-                        />
-                      )}
-                    </FastField>
-                  ))}
-
-                  <Button
-                    type="submit"
-                    fullWidth
+                <Container
+                    maxWidth={false}
                     sx={{
-                      background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
-                      color: "white",
-                      fontWeight: "bold",
-                      py: 1.5,
-                      mt: 2,
-                      borderRadius: 2,
-                      fontSize: { xs: "1rem", md: "1.1rem" },
+                        py: 6,
+                        maxWidth: "1270px"
                     }}
-                  >
-                    Send Message
-                  </Button>
-                </Form>
-              )}
-            </Formik>
-          </Box>
+                >
+                    <Typography
+                        sx={{
+                            fontFamily: 'Inter',
+                            fontSize: '48px',
+                            fontWeight: 800,
+                            textAlign: 'left',
+                            color: '#0a0c10',
+                            mb: 4,
+                        }}
+                    >
+                        Open Roles
+                    </Typography>
 
-        </Box>
-      </Container>
+                    <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
+                        {/* Sidebar */}
+                        <Box sx={{ minWidth: { xs: '100%', md: 180 } }}>
+                            {techStacks.map((tech) => (
+                                <Typography
+                                    key={tech}
+                                    variant="body1"
+                                    fontWeight={selectedStack === tech ? 700 : 500}
+                                    sx={{
+                                        color: selectedStack === tech ? '#0a0c10' : 'gray',
+                                        cursor: 'pointer',
+                                        mb: 1.5,
+                                        height: '39px',
+                                        alignSelf: 'stretch',
+                                        flexGrow: 0,
+                                        fontFamily: 'Inter',
+                                        fontSize: { xs: '20px', sm: '24px', md: '32px' },
+                                        fontWeight: 'bold',
+                                        textAlign: 'left'
+                                    }}
+                                    onClick={() => setSelectedStack(tech)}
+                                >
+                                    {tech}
+                                </Typography>
+                            ))}
+                        </Box>
 
-    </>
-  );
-};
+                        {/* Job Listings */}
+                        <Stack spacing={1} sx={{ flexGrow: 1, minWidth: 0 }}>
+                            {filteredJobs.map((job, idx) => (
+                                <Box
+                                    key={idx}
+                                    sx={{
+                                        px: 4,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: 2,
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: { xs: 'column', sm: 'row' },
+                                            alignItems: { xs: 'center', sm: 'center' },
+                                            justifyContent: 'space-between',
+                                            flexWrap: 'nowrap',
+                                            gap: 2,
+                                        }}
+                                    >
+                                        {/* Title + Tags */}
+                                        <Box sx={{ flex: 1, minWidth: 0 }}>
+                                            <Typography
+                                                sx={{
+                                                    fontFamily: 'Inter',
+                                                    fontSize: { xs: '18px', sm: '22px', md: '32px' },
+                                                    fontWeight: 600,
+                                                    color: '#000',
+                                                    mb: 1,
+                                                    textAlign: { xs: 'center', sm: 'left' },
+                                                    whiteSpace: 'normal',
+                                                    overflowWrap: 'break-word',
+                                                }}
+                                            >
+                                                {job.title}
+                                            </Typography>
 
-export default Home;
+                                            <Stack
+                                                direction="row"
+                                                spacing={1}
+                                                flexWrap="wrap"
+                                                justifyContent={{ xs: 'center', sm: 'flex-start' }}
+                                            >
+                                                {job.tags?.map((tag) => (
+                                                    <Box
+                                                        key={tag}
+                                                        sx={{
+                                                            px: 2,
+                                                            py: 0.5,
+                                                            bgcolor: '#e0e0ea',
+                                                            borderRadius: 1,
+                                                            fontSize: { xs: 10, sm: 11, md: 12 },
+                                                            color: 'black',
+                                                            fontWeight: 600,
+                                                        }}
+                                                    >
+                                                        {tag}
+                                                    </Box>
+                                                ))}
+                                            </Stack>
+                                        </Box>
+
+                                        {/* Buttons */}
+                                        <Stack
+                                            direction="row"
+                                            spacing={1}
+                                            sx={{
+                                                flexShrink: 0,
+                                                flexWrap: { xs: 'wrap', sm: 'nowrap' },
+                                                justifyContent: { xs: 'center', sm: 'flex-end' },
+                                            }}
+                                        >
+                                            <Button
+                                                variant="outlined"
+                                                sx={{
+                                                    textTransform: 'none',
+                                                    borderRadius: '999px',
+                                                    px: { xs: 1.5, sm: 2.5 },
+                                                    py: { xs: 0.5, sm: 1 },
+                                                    fontSize: { xs: '11px', sm: '13px' },
+                                                    fontWeight: 600,
+                                                    color: 'black',
+                                                    borderColor: 'black',
+                                                    border: '2px solid',
+                                                }}
+                                            >
+                                                Learn More
+                                            </Button>
+                                            <Link to={`/careers/${job.slug}`}>
+                                                <Button
+
+                                                    variant="contained"
+                                                    sx={{
+                                                        textTransform: 'none',
+                                                        borderRadius: '999px',
+                                                        px: { xs: 1.5, sm: 2.5 },
+                                                        py: { xs: 0.5, sm: 1 },
+                                                        fontSize: { xs: '11px', sm: '13px' },
+                                                        bgcolor: 'black',
+                                                        '&:hover': {
+                                                            bgcolor: '#333',
+                                                        },
+                                                    }}
+                                                >
+                                                    Apply
+                                                </Button>
+                                            </Link>
+
+                                        </Stack>
+                                    </Box>
+
+                                    {/* Divider */}
+                                    {idx < filteredJobs.length - 1 && (
+                                        <Box
+                                            sx={{
+                                                height: '2px',
+                                                width: '100%',
+                                                background: 'linear-gradient(to right, #00c853, #2979ff)',
+                                            }}
+                                        />
+                                    )}
+                                </Box>
+                            ))}
+                        </Stack>
+
+
+                    </Stack>
+
+                </Container>
+            </Container>
+
+            {/* Apply now form */}
+            <Container
+                maxWidth={false}
+                disableGutters
+                sx={{ backgroundColor: "#edeef3" }}
+            >
+                <Container
+                    maxWidth={false}
+                    sx={{
+                        py: 6,
+                        maxWidth: "1270px"
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            fontFamily: 'Inter',
+                            fontSize: '48px',
+                            fontWeight: 800,
+                            textAlign: 'center',
+                            color: '#0a0c10',
+                            mb: 2,
+                        }}
+                    >
+                        Apply Now
+                    </Typography>
+                    <Typography
+                        sx={{
+                            margin: "auto",
+                            maxWidth: '627px',
+                            height: 'auto',
+                            textAlign: "center",
+                            fontSize: "20px",
+                            color: 'black',
+                            lineHeight: 1.6,
+                            width: "100%"
+                        }}
+                    >
+                        Send us your resume and a few lines about why you'd love to join Metaphi.
+                    </Typography>
+                </Container>
+
+                <Box
+                    sx={{
+                        maxWidth: "1250px",
+                        margin: "auto",
+                        display: 'flex',
+                        flexDirection: { xs: 'column', md: 'row' },
+                        justifyContent: 'center',
+                        gap: 4,
+                        px: 3,
+                        pb: 6,
+                    }}
+                >
+                    {/* Left gray blocks */}
+                    <Stack spacing={3} sx={{ width: { xs: '100%', md: '50%' } }}>
+                        {[...Array(3)].map((_, i) => (
+                            <Box
+                                key={i}
+                                sx={{
+                                    height: 265,
+                                    borderRadius: 3,
+                                    backgroundColor: '#ccc',
+                                }}
+                            />
+                        ))}
+                    </Stack>
+
+                    {/* Right: Form Card */}
+                    <Box
+                        sx={{
+                            width: { xs: '100%', md: '50%' },
+                            backgroundColor: '#fff',
+                            borderRadius: 3,
+                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                            p: { xs: 2, md: 3 },
+                            boxSizing: "border-box"
+                        }}
+                    >
+                        <Stack spacing={3} component="form" onSubmit={formik.handleSubmit}>
+                            {/* Name & Email */}
+                            <Stack direction={{ xs: 'column', sm: "row", md: 'row' }} spacing={3}>
+                                <Stack direction="column" sx={{ width: '100%' }}>
+                                    <p style={{ color: "black", fontWeight: "600", fontSize: "16px", marginBottom: '8px' }}>Name</p>
+                                    <TextField
+                                        name="name"
+                                        variant="outlined"
+                                        placeholder="Full Name"
+                                        fullWidth
+                                        value={formik.values.name}
+                                        onChange={formik.handleChange}
+                                        sx={{
+                                            '& .MuiInputBase-root': {
+                                                height: 60,
+                                                borderRadius: 3,
+                                                fontSize: '1.2rem',
+                                                paddingRight: '14px',
+                                                backgroundColor: "#EDEEF3",
+                                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                                                padding: "20px 10px",
+                                            },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': {
+                                                    border: 'none',
+                                                },
+                                                '&:hover fieldset': {
+                                                    border: 'none',
+                                                },
+                                                '&.Mui-focused fieldset': {
+                                                    border: 'none',
+                                                },
+                                            },
+                                        }}
+                                    />
+                                </Stack>
+
+                                <Stack direction="column" sx={{ width: '100%' }}>
+                                    <p style={{ color: "black", fontWeight: "600", fontSize: "16px", marginBottom: '8px' }}>Email</p>
+                                    <TextField
+                                        name="email"
+                                        placeholder="Valid Email"
+                                        fullWidth
+                                        value={formik.values.email}
+                                        onChange={formik.handleChange}
+                                        sx={{
+                                            '& .MuiInputBase-root': {
+                                                height: 60,
+                                                borderRadius: 3,
+                                                fontSize: '1.2rem',
+                                                paddingRight: '14px',
+                                                backgroundColor: "#EDEEF3",
+                                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                                                padding: "20px 10px",
+                                            },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': {
+                                                    border: 'none',
+                                                },
+                                                '&:hover fieldset': {
+                                                    border: 'none',
+                                                },
+                                                '&.Mui-focused fieldset': {
+                                                    border: 'none',
+                                                },
+                                            },
+                                        }}
+                                    />
+                                </Stack>
+                            </Stack>
+
+                            {/* Message */}
+                            <Stack direction="column" sx={{ width: '100%' }}>
+                                <p style={{ color: "black", fontWeight: "600", paddingTop: 6, fontSize: "16px", }}>Message*</p>
+                                <TextField
+                                    name="message"
+                                    multiline
+                                    minRows={5}
+                                    fullWidth
+                                    value={formik.values.message}
+                                    onChange={formik.handleChange}
+                                    placeholder="Why do you want to join Metaphi?"
+                                    sx={{
+                                        '& .MuiInputBase-root': {
+                                            borderRadius: 3,
+                                            fontSize: '1.2rem',
+                                            paddingRight: '14px',
+                                            backgroundColor: "#EDEEF3",
+                                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                                            padding: "20px 25px",
+                                        },
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': {
+                                                border: 'none',
+                                            },
+                                            '&:hover fieldset': {
+                                                border: 'none',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                border: 'none',
+                                            },
+                                        },
+                                    }}
+                                />
+                            </Stack>
+
+                            {/* Upload Resume */}
+                            <Box>
+                                <Typography sx={{ fontWeight: 'bold', mb: 1, color: "black", fontSize: "16px", mt: 2 }}>Upload Resume*</Typography>
+                                <Box
+                                    onClick={() => document.getElementById("fileInput")?.click()}
+                                    sx={{
+                                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                                        borderRadius: 2,
+                                        padding: 3,
+                                        textAlign: 'center',
+                                        height: "120px",
+                                        cursor: 'pointer',
+                                        backgroundColor: '#EDEEF3',
+                                        '&:hover': {
+                                            backgroundColor: '#f0f0f7',
+                                        },
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <img src={vector} alt="" />
+                                    <Typography sx={{ fontSize: "15px", color: "black", pt: 2 }}>
+                                        <strong>Drag or drop your file, or click here</strong>.
+                                    </Typography>
+                                    <Typography sx={{ fontSize: "14px", color: '#666' }}>
+                                        .pdf, .doc, .docx | Max 5MB
+                                    </Typography>
+                                    <input
+                                        type="file"
+                                        id="fileInput"
+                                        accept=".pdf,.doc,.docx"
+                                        hidden
+                                        onChange={(e) => formik.setFieldValue('resume', e.target.files?.[0])}
+                                    />
+                                </Box>
+                                {formik.values.resume && (
+                                    <Typography sx={{ fontSize: 14, mt: 1 }}>
+                                        Selected: {formik.values.resume.name}
+                                    </Typography>
+                                )}
+                            </Box>
+
+                            {/* Submit */}
+                            <Button
+                                type="submit"
+                                fullWidth
+                                sx={{
+                                    background: '#000',
+                                    color: '#fff',
+                                    fontWeight: 600,
+                                    py: 1.5,
+                                    borderRadius: 2,
+                                    textTransform: "none",
+                                    '&:hover': {
+                                        backgroundColor: '#333',
+                                    },
+                                }}
+                            >
+                                Send Message
+                            </Button>
+
+                            {/* Gradient line and alternate email */}
+                            <Box sx={{ height: 2, background: 'linear-gradient(to right, #00c853, #2979ff)' }} />
+                            <Typography align="center" sx={{ fontSize: 12, color: "black" }}>
+                                Prefer email? <br /> Send your resume directly to: <strong>hr@example.com</strong>
+                            </Typography>
+                        </Stack>
+                    </Box>
+
+                </Box>
+            </Container>
+
+
+            {/* <Container
+                maxWidth={false}
+                disableGutters
+                sx={{
+                    px: { xs: 3, md: 8 },
+                    pt: { xs: 4, md: 10 },
+                    pb: { xs: 6, md: 10 },
+                    width: "100%",
+                    textAlign: "left",
+                }}
+            >
+                <Box
+                    sx={{
+                        maxWidth: "1440px",
+                        margin: "0 auto",
+                    }}
+                >
+                    <Typography
+                        variant="h3"
+                        sx={{
+                            fontWeight: 700,
+                            fontSize: { xs: "1.75rem", sm: "2.5rem", md: "3rem" },
+                            color: "#fff",
+                            mb: 2,
+                        }}
+                    >
+                        Open Positions
+                    </Typography>
+
+                    <Typography
+                        variant="body1"
+                        sx={{
+                            maxWidth: "1000px",
+                            color: "#bbbbbb",
+                            fontSize: { xs: "1rem", md: "1.125rem" },
+                            lineHeight: 1.85,
+                        }}
+                    >
+                        At Metaphi Innovations, our passionate and forward-thinking team is dedicated to delivering scalable solutions that solve real-world challenges. Join us in shaping the future of technology through collaboration and innovation.
+                    </Typography>
+                </Box>
+            </Container> */}
+
+            {/* <Container
+                maxWidth={false}
+                disableGutters
+                sx={{
+                    px: { xs: 2, sm: 4, md: 6 },
+                    py: { xs: 4, sm: 6 },
+                    width: "100%",
+                    minHeight: "60vh",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    textAlign: "center",
+                }}
+            >
+   
+                <Stack
+                    sx={{
+                        flexDirection: { xs: 'row', md: 'row' },
+                        gap: { xs: 0, md: 2 },
+                        mb: 6,
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                    }}
+                >
+
+                    {techStacks.map((tech) => (
+                        <Button
+                            key={tech}
+                            variant={selectedStack === tech ? "contained" : "outlined"}
+                            onClick={() => setSelectedStack(tech)}
+                            sx={{
+                                textTransform: "none",
+                                fontWeight: 600,
+                                px: 3,
+                                m: 1,
+                                width: "100px",
+                                borderRadius: "20px",
+                                backgroundColor:
+                                    selectedStack === tech ? "#00C853" : "transparent",
+                                color: selectedStack === tech ? "#fff" : "#00C853",
+                                borderColor: "#00C853",
+                                "&:hover": {
+                                    backgroundColor:
+                                        selectedStack === tech ? "#00b94c" : "rgba(0,200,83,0.1)",
+                                },
+                            }}
+                        >
+                            {tech}
+                        </Button>
+                    ))}
+                </Stack>
+
+        
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 4,
+                        justifyContent: "center",
+                        width: "100%",
+                        maxWidth: "1500px"
+                    }}
+                >
+                    {filteredJobs.map((job, idx) => (
+                        <Card
+                            key={idx}
+                            component={Link}
+                            to={`/careers/${job.slug}`}
+                            sx={{
+                                textDecoration: "none",
+                                width: "340px",
+                                backgroundColor: "#1e1e1e",
+                                borderRadius: 3,
+                                border: "1px solid rgba(255,255,255,0.05)",
+                                color: "white",
+                                transition: "all 0.3s ease",
+                                boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+                                "&:hover": {
+                                    borderColor: "#00C853",
+                                    boxShadow: "0 6px 30px rgba(0,255,150,0.15)",
+                                    backgroundColor: "rgba(0, 0, 0, 0.44)",
+                                },
+                            }}
+                        >
+                            <CardContent
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "space-between",
+                                    p: 3,
+                                    gap: 2,
+                                }}
+                            >
+                                <Typography
+                                    variant="h6"
+                                    fontWeight="600"
+                                    sx={{ color: "white" }}
+                                >
+                                    {job.title}
+                                </Typography>
+
+                                <Stack
+                                    direction="row"
+                                    alignItems="center"
+                                    justifyContent="space-between"
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        fontWeight={500}
+                                        sx={{ color: "white" }}
+                                    >
+                                        {job.location}
+                                    </Typography>
+
+                                    <IconButton
+                                        sx={{
+                                            border: "1px solid #fff",
+                                            borderRadius: "50%",
+                                            p: 1.2,
+                                            color: "white",
+                                            transition: "all 0.2s ease",
+                                            "&:hover": {
+                                                backgroundColor: "rgba(0, 200, 83, 0.1)",
+                                                borderColor: "#00C853",
+                                            },
+                                        }}
+                                    >
+                                        <ArrowForwardIcon />
+                                    </IconButton>
+                                </Stack>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </Box>
+            </Container> */}
+
+        </>
+    )
+}
+
+export default Careers
