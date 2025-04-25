@@ -25,41 +25,25 @@ import { faArrowRight, faArrowLeft, faStar, faTimes, faEnvelope, faCalendar } fr
 import { Link } from "react-router-dom";
 
 //service cards
-import serviceicon1 from "../images/gamedev.svg";
-import serviceicon2 from "../images/appdev.svg";
-import serviceicon3 from "../images/webdev.svg";
+import serviceicon1 from "../images/customsoftwaredev.png";
+import serviceicon2 from "../images/appdev.png";
+import serviceicon3 from "../images/web.png";
 import serviceicon4 from "../images/ecommerce.svg";
 import serviceicon5 from "../images/aiml.svg";
 import serviceicon6 from "../images/iot.svg";
 import serviceicon7 from "../images/devops.svg";
-import serviceicon8 from "../images/salesforce-svgrepo-com 1.svg";
+import serviceicon8 from "../images/salesforce.png";
 import serviceicon9 from "../images/block chain development.svg";
 import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward, } from "@mui/icons-material";
 gsap.registerPlugin(ScrollTrigger);
 
-//strategic execution images
-import dedicatedIcon from "../images/Dedicated.svg";
-import supportIcon from "../images/customersupport.svg";
-import clientCentricIcon from "../images/clientcetric.svg";
-import agileIcon from "../images/agiledev.svg";
-import enhancementIcon from "../images/enhancement.svg";
-import qualityIcon from "../images/quality.svg";
-import dataProtectionIcon from "../images/dataprotec.svg";
-import dataBackupIcon from "../images/databackup.svg";
-import { useMemo } from "react";
 import clutchlogo from "../images/clutchlogo.png";
 
 //industries we serve
-import socialNetworking from "../images/Social networking.jpg";
-import travelandHospitality from "../images/travel and hospitality.jpg";
-import gaming from "../images/gaming software development.jpg";
-import logistics from "../images/logistic and dashboard.jpg";
-import realestate from "../images/real estate.jpg";
-import ecommerce from "../images/ecommerce retail.jpg";
-import fitness from "../images/fitness.jpg";
-import food from "../images/food and restaurant.jpg";
-import elearning from "../images/E Learning.jpg";
-import elearning2 from "../images/E Learning 2 image.jpg";
+
+import food from "../images/publichealth.png";
+import elearning from "../images/college project-bro (1) 1.png";
+import elearning2 from "../images/Manage money-pana 1.png";
 
 //form components
 import { FastField, Formik, Form, } from "formik";
@@ -117,18 +101,11 @@ const counters = [
 //cards
 const services = [
   {
-    id: "game-dev",
-    title: "Game Development",
+    id: "custom-software-dev",
+    title: "Custom Software Development",
     icon: serviceicon1,
     description: "Transform your game ideas into high-quality, immersive 2D & 3D gaming experiences.",
     mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
-  },
-  {
-    id: "mobile-app",
-    title: "Mobile App Development",
-    icon: serviceicon2,
-    description: "Empowering businesses with cutting-edge mobile solutions tailored to diverse industries.",
-    mainDescription: "We craft intuitive, high-performance apps that enhance user experience, drive engagement, and deliver lasting value."
   },
   {
     id: "web-dev",
@@ -138,29 +115,15 @@ const services = [
     mainDescription: " We craft dynamic, high-performance websites and applications that captivate audiences and deliver seamless user experiences."
   },
   {
-    id: "ecommerce",
-    title: "E-commerce Development",
-    icon: serviceicon4,
-    description: "Build seamless, secure, and high-performance eCommerce solutions.",
-    mainDescription: "Our expertise ensures a smooth shopping experience with robust integrations that drive sales and enhance user engagement."
-  },
-  {
-    id: "blockchain",
-    title: "Blockchain Development",
-    icon: serviceicon9,
-    description: "Empower your business with decentralized, secure, and innovative blockchain solutions.",
-    mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
-  },
-  {
-    id: "salesforce",
-    title: "Salesforce Solutions",
-    icon: serviceicon8,
-    description: "Maximize the power of Salesforce to optimize operations and drive intelligent decision-making.",
-    mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
+    id: "mobile-app",
+    title: "Mobile App Development",
+    icon: serviceicon2,
+    description: "Empowering businesses with cutting-edge mobile solutions tailored to diverse industries.",
+    mainDescription: "We craft intuitive, high-performance apps that enhance user experience, drive engagement, and deliver lasting value."
   },
   {
     id: "ai-ml",
-    title: "AI & ML Solutions",
+    title: "AI/ML Solutions",
     icon: serviceicon5,
     description: "Harness the power of Artificial Intelligence and Machine Learning.",
     mainDescription: "From stunning visuals to seamless gameplay and captivating storylines, we craft interactive solutions that engage and excite players."
@@ -168,7 +131,7 @@ const services = [
   {
     id: "iot",
     title: "IoT & Embedded Solutions",
-    icon: serviceicon6,
+    icon: serviceicon8,
     description: "Transform your business with smart, connected devices and IoT infrastructure.",
     mainDescription: " Our custom IoT solutions enhance efficiency, drive automation, and enable seamless data-driven decision-making."
   },
@@ -178,50 +141,6 @@ const services = [
     icon: serviceicon7,
     description: "Streamline workflows, automate processes, and optimize infrastructure.",
     mainDescription: "We streamline workflows, automate processes, and optimize infrastructure for high-performance, scalable, and secure applications."
-  }
-];
-
-//strategic execution features
-const features = [
-  {
-    title: "Dedicated Development Team",
-    description: "Our dedicated development team brings years of expertise to every project, ensuring optimal results by maximizing their skills to meet your development needs.",
-    img: dedicatedIcon,
-  },
-  {
-    title: "Excellent Support",
-    description: "We are always available to assist our clients, ensuring their expectations and requirements are met with exceptional service.",
-    img: supportIcon,
-  },
-  {
-    title: "Client-Centric Development",
-    description: "We tailor solutions for web, mobile, and blockchain, meticulously aligning them with client needs to enhance performance and innovation.",
-    img: clientCentricIcon,
-  },
-  {
-    title: "Agile Development",
-    description: "We adhere to the Agile development process, ensuring reliable, scalable, and efficient project delivery.",
-    img: agileIcon,
-  },
-  {
-    title: "Enhancement",
-    description: "Our technical team is always ready to incorporate your suggestions and refinements, ensuring solutions that exceed expectations.",
-    img: enhancementIcon,
-  },
-  {
-    title: "Quality Deliverance",
-    description: "We are committed to delivering high-quality products, leveraging our expertise to create exceptional solutions for our clients.",
-    img: qualityIcon,
-  },
-  {
-    title: "Data Protection",
-    description: "We implement industry-leading security measures to safeguard your data, ensuring confidentiality and the uniqueness of your project.",
-    img: dataProtectionIcon,
-  },
-  {
-    title: "Data Backups",
-    description: "We securely maintain project backups, minimizing the risk of data loss and ensuring seamless recovery when needed.",
-    img: dataBackupIcon,
   }
 ];
 
@@ -289,124 +208,37 @@ const designT = [
 //industries we serve
 const industries = [
   {
-    title: 'Retail & E-commerce',
-    description: 'Empower your retail business with scalable, future-ready digital solutions.',
-    image: ecommerce,
-  },
-  {
-    title: 'Education & E-Learning',
-    description: 'Enhance learning experiences with tech-driven solutions for global learners.',
-    image: elearning,
-  },
-  {
-    title: 'Healthcare & Fitness',
-    description: 'Leverage AI, ML, and IoT to transform healthcare services and outcomes.',
-    image: fitness,
-  },
-  {
-    title: 'Logistics & Distribution',
-    description: 'Optimize logistics with customer-centric, industry-specific solutions.',
-    image: logistics,
-  },
-  {
-    title: 'Social Networking',
-    description: 'Build engaging, seamless social media applications.',
-    image: socialNetworking,
-  },
-  {
-    title: 'Real Estate',
-    description: 'Implement cutting-edge real estate solutions for your unique needs.',
-    image: realestate,
-  },
-  {
-    title: 'Travel & Hospitality',
-    description: 'Deliver intuitive digital travel experiences with feature-rich platforms.',
-    image: travelandHospitality,
-  },
-  {
-    title: 'Food & Restaurant',
-    description: 'Drive growth in food & restaurant industry with innovative solutions.',
-    image: food,
-  },
-  {
-    title: 'On-Demand Solutions',
-    description: 'Craft intelligent, high-performance on-demand platforms.',
+    title: 'Fintech',
+    description: 'Developing secure, scalable platforms for digital payments, personal finance, and banking innovation.',
     image: elearning2,
   },
   {
-    title: 'Gaming',
-    description: 'Create immersive, interactive gaming experiences with the latest tech.',
-    image: gaming,
+    title: 'Ed-tech',
+    description: 'Enhancing the learning experience for global learners through tech-driven solutions.',
+    image: elearning,
+  },
+  {
+    title: 'Healthtech',
+    description: 'Leveraging smart technologies like AI, ML, IoT, and more to empower global health organizations.',
+    image: food,
+  },
+  {
+    title: 'Fintech',
+    description: 'Developing secure, scalable platforms for digital payments, personal finance, and banking innovation.',
+    image: elearning2,
+  },
+  {
+    title: 'Ed-tech',
+    description: 'Enhancing the learning experience for global learners through tech-driven solutions.',
+    image: elearning,
+  },
+  {
+    title: 'Healthtech',
+    description: 'Leveraging smart technologies like AI, ML, IoT, and more to empower global health organizations.',
+    image: food,
   },
 ];
 
-//projects
-const projects = [
-  {
-    title: "Road Safety App",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "House Renting App",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "House Renting App",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "House Renting App",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-  },
-];
-
-//business section
-const businessTypes = [
-  {
-    title: "Startups",
-    desc: "Operating on a tight budget with limited resources? Our experts provide the essential tech support to transform your vision into reality.",
-  },
-  {
-    title: "Small Business",
-    desc: "Build a strong brand identity with our experienced professionals, seamlessly aligning development expertise with your unique business needs.",
-  },
-  {
-    title: "Enterprise Business",
-    desc: "Empower your enterprise with cutting-edge technology to expand your reach, optimize operations, and drive innovation.",
-  },
-  {
-    title: "Agency Business",
-    desc: "Enhance your service offerings by leveraging our expertise and the latest technological advancements to stay ahead in the industry.",
-  },
-];
-
-//testimonials section
-const testimonials = [
-  {
-    title: "Lorem ipsum dolor sit amet",
-    review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-    logo: clutchlogo,
-  },
-  {
-    title: "Consectetur adipiscing elit",
-    review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
-    logo: clutchlogo,
-  },
-  {
-    title: "Sed ut perspiciatis unde",
-    review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
-    logo: clutchlogo,
-  },
-  {
-    title: "Nemo enim ipsam voluptatem",
-    review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
-    logo: clutchlogo,
-  },
-];
 
 
 const Home = () => {
@@ -530,53 +362,6 @@ const Home = () => {
   };
 
 
-  //strategic execution section
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const swiperRef = useRef(null);
-  const visibleItems = 3;
-
-  const handlePrev = () => {
-    if (swiperRef.current) {
-      swiperRef.current.slidePrev();
-    }
-  };
-
-  const handleNext = () => {
-    if (swiperRef.current) {
-      swiperRef.current.slideNext();
-    }
-  };
-
-  useEffect(() => {
-    if (!swiperRef.current) return;
-
-    const swiperInstance = swiperRef.current;
-
-    const animateSlide = (index) => {
-      const currentSlide = swiperInstance.slides[index];
-      gsap.fromTo(
-        currentSlide,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-        }
-      );
-    };
-
-    // Initial animation
-    animateSlide(swiperInstance.activeIndex);
-
-    swiperInstance.on("slideChange", () => {
-      animateSlide(swiperInstance.activeIndex);
-    });
-
-    return () => {
-      swiperInstance.off("slideChange");
-    };
-  }, []);
 
 
   //design process animation
@@ -607,116 +392,6 @@ const Home = () => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  //projects section
-  const prevRefProj = useRef(null);
-  const nextRefProj = useRef(null);
-
-
-  //why choose us section
-  const leftRef = useRef(null);
-  const rightRef = useRef(null);
-
-  useEffect(() => {
-    // Left box 
-    gsap.fromTo(
-      leftRef.current,
-      { x: -50, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1.3,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: leftRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    // Right box
-    gsap.fromTo(
-      rightRef.current,
-      { x: 50, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1.3,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: rightRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  }, []);
-
-  //business types section
-  const businessRef = useRef(null);
-  const itemRefs = useRef([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray(".business-item").forEach((item, i) => {
-        gsap.from(item, {
-          opacity: 0,
-          y: 50,
-          duration: 1,
-          delay: i * 0.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
-    }, businessRef);
-
-    return () => ctx.revert();
-  }, []);
-
-
-  //testimonial animation
-  gsap.registerPlugin(ScrollTrigger);
-
-  const testimonialCards = useRef([]);
-
-  useEffect(() => {
-
-    gsap.set(".swiper-slide", { opacity: 0 });
-
-    ScrollTrigger.batch(".swiper-slide", {
-      start: "top 100%",
-      once: true,
-      onEnter: (batch) => {
-        gsap.to(batch, {
-          opacity: 1,
-          duration: 1.5,
-          stagger: 0.2,
-          ease: "power2.out",
-        });
-      },
-    });
-
-    return () => ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  }, []);
-
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedTestimonial, setSelectedTestimonial] = useState(null);
-
-  const handleOpenModal = (testimonial) => {
-    setSelectedTestimonial(testimonial);
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-    setSelectedTestimonial(null);
-  };
 
   //contact form
   const containerRef = useRef();
@@ -807,6 +482,7 @@ const Home = () => {
               sx={{
                 maxWidth: "352px",
                 fontWeight: "400",
+                p:0.5,
                 mb: 4,
                 background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
                 WebkitBackgroundClip: "text",
@@ -820,7 +496,7 @@ const Home = () => {
             <Box sx={{
               mt: 12,
               flexDirection: "row",
- 
+
             }}>
               <Link to="/contact">
                 <Button
@@ -847,7 +523,7 @@ const Home = () => {
                 </Button>
               </Link>
 
-              <Link to="/contact" style={{marginLeft: "20px"}}>
+              <Link to="/contact" style={{ marginLeft: "20px" }}>
                 <Button
 
                   variant="contained"
@@ -1075,175 +751,6 @@ const Home = () => {
         </Box>
       </Container>
 
-      {/* description section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
-        <Box sx={{
-          maxWidth: "1454px",
-          width: "100%",
-          margin: "0 auto",
-          display: "block",
-        }}>
-          {/* first section */}
-          <Box
-            ref={addToRefs}
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              alignItems: "center",
-              gap: { xs: 4, md: 6 },
-              py: { xs: 4, md: 6 },
-              textAlign: { xs: "center", md: "left" }
-            }}
-          >
-            <Typography
-              variant="h3"
-              sx={{
-                flex: 1,
-                minWidth: "300px",
-                fontWeight: "bold",
-                background: "linear-gradient(90deg, #007FFF, #0047AB)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                fontSize: { xs: "24px", sm: "30px", md: "36px", lg: "42px", xl: "50px" }
-              }}
-            >
-              Leading Mobile App Development, Software Development & IT Consulting Company
-
-            </Typography>
-            <Box sx={{ flex: 1, maxWidth: "600px" }}>
-              <Typography
-                variant="body1"
-                sx={{
-                  flex: 1,
-                  color: "#ddd",
-                  lineHeight: 1.8,
-                  fontSize: { xs: "20px", sm: "22px", md: "16px", lg: "21px", xl: "24px" },
-                  mt: 2,
-                }}
-              >
-                Founded in 2025, Metaphi Innovations is a leading Mobile App, Software Development, and Web Development company, driving digital transformation for businesses worldwide. As a trusted technology partner, we empower startups and enterprises alike to innovate, scale, and lead in their industries.
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: { xs: "center", md: "flex-start" },
-                  mt: 3,
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "30px",
-                    color: "#fff",
-                    borderColor: "rgba(0, 26, 255, 0.87)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1,
-                    "&:hover": {
-                      backgroundColor: "rgba(0, 26, 255, 0.87)",
-                      color: "#fff",
-                    },
-                  }}
-                >
-                  About Us <FontAwesomeIcon icon={faArrowRight} />
-                </Button>
-              </Box>
-            </Box>
-          </Box>
-
-          {/* Line */}
-          <Box
-            ref={lineRef}
-            sx={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              mt: 2
-            }}
-          >
-            <Box
-              sx={{
-                width: "100%",
-                maxWidth: "1454px",
-                height: "1px",
-                backgroundImage: "linear-gradient(to right, #007FFF, #00C87F)",
-                borderRadius: "200px"
-              }}
-            />
-          </Box>
-
-          {/* second section */}
-          <Box
-            ref={addToRefs}
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: "column", md: "row" },
-              alignItems: "center",
-              gap: { xs: 4, md: 6 },
-              py: { xs: 4, md: 6 },
-              textAlign: { xs: "center", md: "left" },
-              mt: 2
-            }}
-          >
-            <Typography
-              variant="h3"
-              sx={{
-                flex: 1,
-                minWidth: "300px",
-                fontWeight: "bold",
-                background: "linear-gradient(90deg, #00FF7F,rgb(5, 107, 47))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                fontSize: { xs: "24px", sm: "30px", md: "36px", lg: "42px", xl: "50px" }
-              }}
-            >
-              Accelerating Business Growth with Intelligent Solutions
-            </Typography>
-            <Box sx={{ flex: 1, maxWidth: "600px" }} >
-              <Typography variant="body1" sx={{ flex: 1, color: "#ddd", lineHeight: 1.8, fontSize: { xs: "20px", sm: "22px", md: "16px", lg: "21px", xl: "24px" } }}>
-                Unlock growth opportunities with robust software solutions, system modernization, and next-gen technologies—powered by a leading development company.
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: { xs: "center", md: "flex-start" },
-                  mt: 3,
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "30px",
-                    color: "#fff",
-                    borderColor: "rgba(0, 255, 0, 0.69)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1,
-                    mt: 3,
-                    "&:hover": {
-                      backgroundColor: "rgba(0, 255, 0, 0.69)",
-                      color: "#fff",
-                    },
-                  }}
-                >
-                  Our Services <FontAwesomeIcon icon={faArrowRight} />
-                </Button>
-              </Box>
-            </Box>
-          </Box>
-          <Box
-            ref={addToRefs}
-            sx={{
-              display: "flex",
-              justifyContent: { xs: "center", md: "left" },
-              mt: 2,
-              width: "100%",
-            }}
-          >
-          </Box>
-        </Box>
-      </Container>
-
       {/* services section */}
       <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
         <Typography
@@ -1265,21 +772,25 @@ const Home = () => {
           Our Services
         </Typography>
         <Typography sx={{
-          fontSize:"20px",
+          fontSize: "20px",
           maxWidth: "702px",
+          width: "100%",
           textAlign: "center",
-          margin: "auto"
+          margin: "auto",
+          fontWeight: "400",
+          lineHeight: "100%"
         }}>
-        We deliver full-cycle development services tailored to your business goals. From strategy to deployment, our team ensures every solution is scalable, secure, and built for impact.
+          We deliver full-cycle development services tailored to your business goals. From strategy to deployment, our team ensures every solution is scalable, secure, and built for impact.
         </Typography>
 
         <Box
           sx={{
-            maxWidth: "1440px",
+            maxWidth: "1240px",
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "1fr 1fr 1fr" },
-            gap: 3,
+            rowGap: 4,
+            columnGap: 2,
             py: 6,
           }}
         >
@@ -1290,7 +801,9 @@ const Home = () => {
               sx={{
                 perspective: "1200px",
                 width: "100%",
-                height: "290px",
+                maxWidth: "400px",
+                height: { xs: "300px", md: "320px", lg: "369px" },
+                margin: "auto",
               }}
             >
               <Box
@@ -1314,30 +827,42 @@ const Home = () => {
                     WebkitBackfaceVisibility: "hidden",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    textAlign: "center",
+                    justifyContent: "space-between",
+                    textAlign: "left",
                     cursor: "pointer",
-                    borderRadius: "20px",
-                    boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                    background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    borderRadius: "10px",
+                    background: "#15171E",
                     color: "#fff",
                     transform: "rotateY(0deg)",
+                    paddingBottom: 2,
                   }}
                 >
-                  <CardContent>
-                    <img src={service.icon} alt={service.title} style={{ width: 50, height: 50, marginBottom: 5 }} />
-                    <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>{service.title}</Typography>
-                    <Typography variant="body2" sx={{ color: "#ddd" }}>{service.description}</Typography>
+                  <CardContent
+                    sx={{
+                      flex: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Box>
+                      <img src={service.icon} alt={service.title} style={{ width: 40, height: 40, marginBottom: 5, marginTop: 20 }} />
+                      <Typography sx={{ maxWidth: "272px", py: 2, fontWeight: "600", color: "#fff", fontSize: { xs: "20px", md: "25px", lg: "32px" }, lineHeight: "100%" }}>
+                        {service.title}
+                      </Typography>
+                      <Typography sx={{ py: { xs: 1, md: 2 }, color: "#A3AAC1", fontSize: { xs: "15px", sm: "16px", md: "16px", lg: "20px" }, lineHeight: "100%" }}>
+                        {service.description}
+                      </Typography>
+                    </Box>
                   </CardContent>
-                  <Typography variant="caption" sx={{ color: "#ccc", mt: 1, fontSize: 12, opacity: 0.7 }}>
-                    Click to flip →
+                  <Typography sx={{ color: "#F3F4F7", px: "18px", fontSize: "16px", fontWeight: "700", paddingBottom: "20px " }}>
+                    Learn More
                   </Typography>
                 </Card>
 
+
                 {/* Back Side */}
-                <Card
+                {/* <Card
                   className="card-face back"
                   sx={{
                     position: "absolute",
@@ -1350,7 +875,7 @@ const Home = () => {
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
-                    borderRadius: "20px",
+                    borderRadius: "10px",
                     background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
                     border: "1px solid rgba(255, 255, 255, 0.1)",
                     color: "#fff",
@@ -1375,7 +900,7 @@ const Home = () => {
                       </Typography>
                     </Box>
                     <Typography sx={{ fontSize: { xs: "12px", md: "16px" } }}>{service.mainDescription}</Typography>
-                    <Link to="/about" onClick={(e) => e.preventDefault()}> {/* temporary disabled links */}
+                    <Link to="/about" onClick={(e) => e.preventDefault()}>    
 
                       <Button
                         sx={{
@@ -1401,7 +926,7 @@ const Home = () => {
                       </Button>
                     </Link>
                   </CardContent>
-                </Card>
+                </Card> */}
               </Box>
             </Box>
 
@@ -1409,174 +934,8 @@ const Home = () => {
         </Box>
       </Container>
 
-      {/* Strategic execution setion */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 9, position: "relative", width: "100%" }}>
-        <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
-          sx={{
-            fontWeight: "bold",
-            mb: 2,
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            padding: "20px",
-            textAlign: "center"
-          }}
-        >
-          Strategic Execution
-        </Typography>
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            maxWidth: "1400px",
-            margin: "auto",
-            mt: 5,
-            flexDirection: { xs: "column", md: "row" },
-            gap: { xs: 4, md: 8 },
-          }}
-        >
-          {/* Left Side - Image Navigation */}
-          <Box
-            sx={{
-              maxWidth: { xs: "300px", sm: "400px" },
-              width: "100%",
-              minWidth: "240px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 1,
-              boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-              background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              transition: "all 0.4s ease",
-              borderRadius: "20px",
-              padding: 2,
-            }}
-          >
-            {/* Up Arrow Button */}
-            <IconButton sx={{ color: "white" }} onClick={handlePrev}>
-              <ArrowUpward />
-            </IconButton>
-
-            {/* Swiper Feature List */}
-            <Swiper
-              direction="vertical"
-              slidesPerView={visibleItems}
-              spaceBetween={10}
-              loop
-              centeredSlides={true}
-              allowTouchMove={false}
-              onSwiper={(swiper) => (swiperRef.current = swiper)}
-              onSlideChange={(swiper) => setSelectedIndex(swiper.realIndex)}
-              style={{
-                height: 300,
-                width: "100%",
-                maxWidth: "400px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                pointerEvents: "none"
-              }}
-            >
-
-              {features.map((feature, index) => (
-                <SwiperSlide key={index} style={{ display: "flex", justifyContent: "center" }}>
-                  <Box
-                    sx={{
-                      cursor: "pointer",
-                      border: index === selectedIndex ? "1px solid #3B2ED0" : "1px solid rgba(255, 255, 255, 0.1)",
-                      borderRadius: "25px",
-                      transition: "all 0.3s ease-in-out",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 2,
-                      padding: { xs: "10px 14px", md: "12px 18px" },
-                      maxWidth: { xs: "198px", sm: "280px", md: "250px", lg: "270px" },
-                      margin: "auto",
-                      width: "100%",
-                      background: index === selectedIndex
-                        ? "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 0.9))"
-                        : "transparent",
-                      backdropFilter: index === selectedIndex ? "blur(10px)" : "none",
-                      transform: index === selectedIndex ? "scale(1.05)" : "scale(1)",
-                      opacity: index === selectedIndex ? 1 : 0.8,
-                      transition: "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
-                    }}
-                  >
-                    <img
-                      src={feature.img}
-                      alt={feature.title}
-                      style={{
-                        width: 60,
-                        height: 60,
-
-                        objectFit: "cover",
-                      }}
-                    />
-                    <Typography
-                      variant="body1"
-                      fontWeight={index === selectedIndex ? "bold" : "normal"}
-                      sx={{
-                        fontSize: { xs: "12px", md: "16px" },
-                        textAlign: "center",
-                        color: "white",
-                      }}
-                    >
-                      {feature.title}
-                    </Typography>
-                  </Box>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-            {/* Down Arrow Button */}
-            <IconButton sx={{ color: "white" }} onClick={handleNext}>
-              <ArrowDownward />
-            </IconButton>
-          </Box>
-
-          {/* Right Side - Feature Description */}
-          <Card
-            sx={{
-              maxWidth: "800px",
-              width: "100%",
-              minHeight: 200,
-              padding: 3,
-              borderRadius: "20px",
-              background: "linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9))",
-              boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              color: "#fff",
-              textAlign: { xs: "center", md: "left" }
-            }}
-          >
-            <CardContent>
-              <img style={{ height: 50, width: 50 }} src={features[selectedIndex].img} alt="" />
-              <Typography variant="h5" color="primary" sx={{ mb: 2 }}>
-                {features[selectedIndex].title}
-              </Typography>
-              <Typography sx={{ lineHeight: 1.6 }}>
-                {features[selectedIndex].description}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Box>
-
-
-      </Container>
-
       {/* Design steps section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+      {/* <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
         <Typography
           ref={headerRef}
           variant="h4"
@@ -1633,10 +992,10 @@ const Home = () => {
           </Box>
         </Box>
 
-      </Container>
+      </Container> */}
 
       {/* industries we serve */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%", backgroundColor: "#EDEEF3" }}>
         <Typography
           ref={headerRef}
           variant="h4"
@@ -1644,19 +1003,30 @@ const Home = () => {
           sx={{
             fontWeight: "bold",
             mb: 2,
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
             WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            color: "#0A0C10",
+            fontWeight: 800,
+            fontSize: { xs: "20px", sm: "24px", md: "39px", lg: "46px", xl: "64px" },
             padding: "20px",
             textAlign: "center"
           }}
         >
-          Industries We Serve
+          Industries We Work With
+        </Typography>
+        <Typography
+          sx={{
+            color: "#15171E",
+            maxWidth: "702px",
+            textAlign: "center",
+            margin: "auto",
+            fontSize: "20px",
+            lineHeight: "100%"
+          }}
+        >
+          Discover why Next-Gen AI Summit is the must-attend event for AI professionals, innovators, and industry leaders.
         </Typography>
 
-        <Box sx={{ maxWidth: "1450px", px: 2, py: 4, margin: "auto", position: "relative" }}>
+        <Box sx={{ maxWidth: "1250px", px: 2, py: 4, margin: "auto", position: "relative" }}>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -1680,8 +1050,8 @@ const Home = () => {
             pagination={{ clickable: true }}
             breakpoints={{
               600: { slidesPerView: 2 },
-              900: { slidesPerView: 3 },
-              1200: { slidesPerView: 4 },
+              900: { slidesPerView: 2 },
+              1200: { slidesPerView: 3 },
             }}
           >
             {industries.map((industry, index) => (
@@ -1689,61 +1059,45 @@ const Home = () => {
                 <Card
                   sx={{
                     borderRadius: 4,
-                    minHeight: 240,
-                    height: "100%",
+                    height: "477px",
+                    maxWidth: "400px",
+                    width: "100%",
                     position: "relative",
                     color: "#fff",
-                    boxShadow: 3,
+                    boxShadow: "0px 4px 20px #3C71F736",
                     transition: "transform 0.3s ease",
                     overflow: "hidden",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "flex-end",
+                    justifyContent: "flex-start",
+                    marginBottom: "30px",
                   }}
                 >
-                  <Box
-                    component="img"
-                    src={industry.image}
-                    loading="lazy"
-                    alt={industry.title}
-                    sx={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      zIndex: 0,
-                    }}
-                  />
-
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))",
-                      backdropFilter: "blur(3px)",
-                      zIndex: 1,
-                    }}
-                  />
-
                   <CardContent
                     sx={{
-                      position: "relative",
-                      zIndex: 2,
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "flex-end",
-                      p: { xs: 2, sm: 3 },
+                      p: { xs: 2, sm: 3, md: "28px" },
                     }}
                   >
+                    <Box
+                      component="img"
+                      src={industry.image}
+                      alt=""
+                      sx={{
+                        width: "100%",
+                        height: "230px",
+                        objectFit: "cover",
+                      }}
+                    />
+
                     <Typography
                       variant="h6"
                       sx={{
                         fontWeight: 600,
                         mb: 1,
-                        color: "#fff",
-                        textShadow: "0 2px 4px rgba(0,0,0,0.5)",
+                        mt: 2,
+                        color: "#0A0C10",
+                        textAlign: "center",
+                        fontSize: "32px",
                       }}
                     >
                       {industry.title}
@@ -1751,35 +1105,15 @@ const Home = () => {
                     <Typography
                       variant="body2"
                       sx={{
-                        color: "#e0e0e0",
-                        fontSize: { xs: "0.85rem", sm: "0.9rem" },
-                        textShadow: "0 1px 2px rgba(0,0,0,0.5)",
+                        color: "#15171E",
+                        fontSize: { xs: "15px", sm: "20px" },
+                        textAlign: "center"
                       }}
                     >
                       {industry.description}
                     </Typography>
-                    <Button
-                      sx={{
-                        mt: 10,
-                        color: "#fff",
-                        background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                        boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                        backdropFilter: "blur(10px)",
-                        border: "1px solid rgba(255, 255, 255, 0.1)",
-                        borderRadius: "40px",
-                        textTransform: "none",
-                        px: 3,
-                        py: 1.5,
-                        "&:hover": {
-                          background: "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                        },
-                      }}
-                    >
-                      Learn More
-                    </Button>
                   </CardContent>
                 </Card>
-
               </SwiperSlide>
             ))}
           </Swiper>
@@ -1844,7 +1178,7 @@ const Home = () => {
       </Container>
 
       {/* Projects section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+      {/* <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
         <Typography
           ref={headerRef}
           variant="h4"
@@ -2004,8 +1338,7 @@ const Home = () => {
             </IconButton>
 
           </Box>
-
-          {/* View More Button */}
+ 
           <Box sx={{ textAlign: "center", marginTop: 3 }}>
             <Button
               variant="contained"
@@ -2028,420 +1361,42 @@ const Home = () => {
             </Button>
           </Box>
         </Box>
-      </Container>
+      </Container> */}
 
       {/* Why choose us section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
-
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%"}}>
         <Typography
           ref={headerRef}
           variant="h4"
           className="heading"
           sx={{
             fontWeight: "bold",
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            mb: 2,
             WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            padding: "10px",
+            color: "#F3F4F7",
+            fontWeight: 800,
+            fontSize: { xs: "20px", sm: "24px", md: "39px", lg: "46px", xl: "64px" },
+            padding: "20px",
             textAlign: "center"
           }}
         >
-          Why Choose Us?
+          Why Choose Us
         </Typography>
-
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            alignItems: "stretch",
-            justifyContent: "space-between",
-            gap: 4,
-            px: { xs: 4, sm: 7, md: 6 },
-            py: { xs: 6, md: 10 },
-            maxWidth: "1440px",
-            margin: "auto",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          {/* Left */}
-          <Box ref={leftRef} sx={{ flex: 1, textAlign: { xs: "center", md: "left" } }}>
-            <Typography
-              gutterBottom
-              sx={{
-                fontSize: {
-                  xs: "17px",
-                  sm: "26px",
-                  md: "30px",
-                  lg: "36px",
-                  xl: "40px",
-                },
-                color: "white",
-              }}
-            >
-              Building Smarter Businesses with Advanced Technology
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", sm: "16px", md: "17px", lg: "18px" },
-                color: "white",
-              }}
-            >
-              As a leading app development company in India,{" "}
-              <strong>Metaphi Innovations</strong> has collaborated with many businesses,
-              from startups to enterprises, delivering top-tier solutions across industries.
-              We offer a comprehensive range of IT consulting services tailored to meet diverse business needs.
-            </Typography>
-          </Box>
-
-          {/* Right */}
-          <Box
-            ref={rightRef}
-            sx={{
-              flex: 1,
-              backgroundColor: "rgba(255, 255, 255, 0.03)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              borderRadius: 4,
-              padding: 4,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              textAlign: { xs: "center", md: "left" },
-            }}
-          >
-            <Typography
-              fontWeight="bold"
-              gutterBottom
-              sx={{
-                fontSize: {
-                  xs: "20px",
-                  sm: "24px",
-                  md: "26px",
-                  lg: "30px",
-                },
-                color: "white",
-              }}
-            >
-              Innovate with Us!
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", sm: "16px", md: "17px", lg: "18px" },
-                color: "white",
-              }}
-              gutterBottom
-            >
-              Connect with our expert IT transformation team and take the next step toward
-              groundbreaking innovation for your business.
-            </Typography>
-            <Link to={"/"} > {/* temporary disabled links */}
-              <Button
-                variant="contained"
-                sx={{
-                  alignSelf: { xs: "center", md: "flex-start" },
-                  mt: 3,
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: 3,
-                  textTransform: "none",
-                  fontWeight: 500,
-                  color: "white",
-                  background: "linear-gradient(90deg, #0D47A1, #009688, #00C853)",
-                  "&:hover": {
-                    background: "linear-gradient(to right, #00eaff, #0066ff)",
-                  },
-                }}
-              >
-                DROP QUERIES
-              </Button>
-            </Link>
-
-          </Box>
-        </Box>
-
-        <Box
-          ref={businessRef}
-          sx={{
-            py: { xs: 6, md: 10 },
-            px: { xs: 3, sm: 5, md: 6 },
-            maxWidth: "1440px",
-            mx: "auto",
-          }}
-        >
-          <Typography
-            ref={headerRef}
-            variant="h4"
-            className="heading"
-            sx={{
-              fontWeight: "bold",
-              background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-              fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-              padding: "10px",
-              textAlign: "center",
-              mb: 5
-            }}
-          >
-            Tailored Solutions for Every Business Type
-          </Typography>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 4,
-            }}
-          >
-            {businessTypes.map((item, idx) => (
-              <Box
-                key={idx}
-                ref={(el) => (itemRefs.current[idx] = el)}
-                className="business-item"
-                sx={{
-                  flex: {
-                    xs: "1 1 100%",
-                    md: "1 1 calc(40% - 16px)",
-                    lg: "1 1 calc(35% - 18px)",
-                  },
-                  minHeight: "120px",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(15px)",
-                  borderRadius: 3,
-                  px: { xs: 3, sm: 5 },
-                  py: { xs: 4, sm: 5 },
-                  color: "white",
-                }}
-              >
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontWeight: "bold",
-                    fontSize: { xs: "18px", sm: "20px" },
-                    mb: 1,
-                  }}
-                >
-                  {item.title}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: { xs: "14px", sm: "16px" },
-                    color: "#ddd",
-                  }}
-                >
-                  {item.desc}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        </Box>
-      </Container>
-
-      {/* Testimonial section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
-
         <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
           sx={{
-            fontWeight: "bold",
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
-            paddingTop: "80px",
-            textAlign: "center"
-          }}
-        >
-          What Our Clients Say
-        </Typography>
-
-        <Box
-          sx={{
-            py: 9,
-            px: { xs: "auto", sm: 3, md: 4, lg: 3, xl: 15 },
+            color: "#F3F4F7",
+            maxWidth: "689px",
             textAlign: "center",
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 2,
-            mb: { sx: "auto", md: "50px" }
+            margin: "auto",
+            fontSize: "20px",
+            lineHeight: "100%"
           }}
         >
-          {/* Navigation Arrow for Desktop */}
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <FontAwesomeIcon icon={faArrowLeft} size="2x" className="prev-button" color="#00C8FF" style={{ cursor: "pointer" }} />
-          </Box>
-
-          {/* Swiper Container */}
-          <Box sx={{ width: "90%", maxWidth: "1480px", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-            <Swiper
-              modules={[Navigation, Autoplay]}
-              navigation={{
-                prevEl: ".prev-button",
-                nextEl: ".next-button",
-              }}
-              autoplay={{ delay: 2500, disableOnInteraction: false }}
-              loop={true}
-              speed={1000}
-              spaceBetween={20}
-              slidesPerView={1}
-              centeredSlides={true}
-              breakpoints={{
-                1000: { slidesPerView: 1, centeredSlides: true },
-                1024: { slidesPerView: 3, centeredSlides: false, spaceBetween: 10 },
-                1340: { slidesPerView: 3, centeredSlides: false, spaceBetween: 15 },
-                1440: { slidesPerView: 3, centeredSlides: false, spaceBetween: 15 },
-              }}
-              style={{ margin: "auto", overflow: "hidden", width: "100%" }}
-            >
-              {testimonials.map((item, index) => (
-                <SwiperSlide key={index} style={{ willChange: "opacity" }}>
-                  <Box
-                    ref={(el) => (testimonialCards.current[index] = el)}
-                    onClick={() => handleOpenModal(item)}
-                    sx={{
-                      background: "linear-gradient(135deg, #00C853, #0D47A1)",
-                      backgroundSize: "400% 400%",
-                      animation: "moveGradient 6s infinite alternate ease-in-out",
-                      borderRadius: "10px",
-                      padding: "20px",
-                      color: "white",
-                      textAlign: "left",
-                      maxWidth: "450px",
-                      height: "200px",
-                      mx: "auto",
-                      transition: "all 0.4s ease-in-out",
-                      overflow: "hidden",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {/* Rating Stars */}
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      {[...Array(5)].map((_, i) => (
-                        <FontAwesomeIcon key={i} icon={faStar} color="#00C8FF" />
-                      ))}
-                    </Box>
-
-                    <Typography sx={{ fontWeight: "bold", mt: 1, fontSize: { xs: "12px", md: "14px" } }}>{item.title}</Typography>
-                    <Typography
-                      sx={{
-                        mt: 1,
-                        fontSize: { xs: "10px", md: "14px" },
-                        display: "-webkit-box",
-                        WebkitBoxOrient: "vertical",
-                        WebkitLineClamp: 3,
-                        overflow: "hidden",
-                      }}
-                    >
-                      {item.review}
-                    </Typography>
-
-                    <Box sx={{ display: "flex", alignItems: "center", mt: 3 }}>
-                      <img
-                        src={item.logo}
-                        alt="Logo"
-                        style={{ height: "70px", width: "70px", objectFit: "contain" }}
-                      />
-                    </Box>
-                  </Box>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-            {/* Navigation Arrows */}
-            <Box
-              sx={{
-                display: { xs: "flex", md: "none" },
-                justifyContent: "center",
-                gap: 3,
-                mt: 3,
-              }}
-            >
-              <FontAwesomeIcon icon={faArrowLeft} size="2x" className="prev-button" color="#00C8FF" style={{ cursor: "pointer" }} />
-              <FontAwesomeIcon icon={faArrowRight} size="2x" className="next-button" color="#00C8FF" style={{ cursor: "pointer" }} />
-            </Box>
-
-          </Box>
-
-          {/* Navigation Arrow for Desktop */}
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <FontAwesomeIcon icon={faArrowRight} size="2x" className="next-button" color="#00C8FF" style={{ cursor: "pointer" }} />
-          </Box>
-          {/* Modal */}
-          <Modal open={openModal} onClose={handleCloseModal} disableScrollLock sx={{ margin: 4 }}>
-            <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                bgcolor: "#111212",
-
-                color: "white",
-                borderRadius: "10px",
-                padding: { xs: "20px", sm: "30px", md: "40px" },
-                width: { xs: "90%", sm: "70%", md: "50%" },
-                maxHeight: "80vh",
-                overflowY: "auto",
-                boxShadow: 24,
-              }}
-            >
-              {/* Close Button */}
-              <IconButton
-                onClick={handleCloseModal}
-                sx={{
-                  position: "absolute",
-                  top: 10,
-                  right: 10,
-                  color: "white",
-                }}
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </IconButton>
-
-              {selectedTestimonial && (
-                <>
-                  {/* Rating Stars */}
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    {[...Array(5)].map((_, i) => (
-                      <FontAwesomeIcon key={i} icon={faStar} color="#00C8FF" />
-                    ))}
-                  </Box>
-
-                  {/* Title */}
-                  <Typography sx={{ fontWeight: "bold", mt: 2, fontSize: "22px" }}>
-                    {selectedTestimonial.title}
-                  </Typography>
-
-                  {/* Full Review */}
-                  <Typography sx={{ mt: 2, fontSize: "16px", lineHeight: 1.5 }}>
-                    {selectedTestimonial.review}
-                  </Typography>
-
-                  {/* Logo */}
-                  <Box sx={{ display: "flex", alignItems: "center", mt: 3 }}>
-                    <img
-                      src={selectedTestimonial.logo}
-                      alt="Logo"
-                      style={{ height: "70px", width: "70px", objectFit: "contain" }}
-                    />
-                  </Box>
-
-                </>
-              )}
-            </Box>
-          </Modal>
-
-        </Box>
+          We don’t just build software - we build smart, scalable, and sustainable digital experiences. Here’s what sets us apart:
+        </Typography>
       </Container>
+
+
 
       {/* Contact us section */}
 

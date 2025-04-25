@@ -211,6 +211,8 @@ const Careers = () => {
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'center',
+                    margin: "auto",
+                    overflow: "hidden"
                 }}
             >
                 <Box
@@ -221,7 +223,8 @@ const Careers = () => {
                         flexWrap: 'wrap',
                         gap: 1.5,
                         flexDirection: { xs: "column", md: "row" },
-                        boxSizing: "border-box"
+                        boxSizing: "border-box",
+                        
                     }}
                 >
                     {/* First Box: Text Block */}

@@ -63,7 +63,7 @@ const Navbar = (props) => {
                         maxWidth: { xl: "1260px", lg: "1260px", md: "100%" },  
                         px: 2,
                         borderRadius: "36px",
-                        backgroundColor: "#0a0c10",
+                        backgroundColor: "#0A0C10",
                         justifyContent: "center",
                     }}
                 >
