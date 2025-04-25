@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, Divider } from "@mui/material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, Divider, useTheme, useMediaQuery } from "@mui/material";
 import { gsap } from "gsap";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 //hero section
 import heroImg1 from "../images/mobile application development.webp";
 import heroImg2 from "../images/heroimg2.png";
 import heroImg3 from "../images/Blockchain.webp";
 import partner1 from "../images/partner-2.png";
+
 import "./Home.css";
 
 //swiper and countup 
@@ -45,7 +47,16 @@ import food from "../images/publichealth.png";
 import elearning from "../images/college project-bro (1) 1.png";
 import elearning2 from "../images/Manage money-pana 1.png";
 
-//form components
+//why join us accordion
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import joinusIcon1 from "../images/team_icon.png";
+
+//contact us section
+import contactimg from "../images/Website Creator-bro 1.png";
+
+//form components unused
 import { FastField, Formik, Form, } from "formik";
 import * as Yup from "yup";
 
@@ -71,29 +82,43 @@ const counters = [
   {
     value: 30,
     suffix: '+',
-    label: 'Developers',
-    description: 'Ut porttitor leo a diam sollicitudin. Integer enim neque volutpat ac.',
+    label: 'Frontend Developers',
+    description: 'Experienced in React, Vue, and modern UI/UX practices.',
+    icon: svg1
+  },
+  {
+    value: 30,
+    suffix: '+',
+    label: 'Backend Developers',
+    description: 'Skilled in Node.js, Python, PHP, and scalable backend systems.',
+    icon: svg1
+  },
+  {
+    value: 30,
+    suffix: '+',
+    label: 'Full Stack Developers',
+    description: 'Experts in end-to-end product engineering and deployment.',
     icon: svg1
   },
   {
     value: 20,
     suffix: '+',
     label: 'Industries Worked For',
-    description: 'Maecenas pharetra convallis posuere morbi. Scelerisque felis.',
+    description: 'From healthcare to fintech, retail, education, and beyond.',
     icon: svg1
   },
   {
     value: 100,
     suffix: '+',
     label: 'Successful Projects',
-    description: 'Lacinia at quis risus sed vulputate. Lectus mauris ultrices eros.',
+    description: 'Completed projects delivered with measurable client success.',
     icon: svg1
   },
   {
     value: 50,
     suffix: '+',
     label: 'Global Clients',
-    description: 'Fames ac turpis egestas sed tempus. Tellus mauris a diam maecenas.',
+    description: 'Trusted by businesses across North America, Europe, and Asia.',
     icon: svg1
   }
 ];
@@ -239,6 +264,13 @@ const industries = [
   },
 ];
 
+//accordion data
+const accordionData = [
+  { title: "Strong Tech Team", content: "Details about the strong tech team.", icon: joinusIcon1 },
+  { title: "Fast & Reliable Delivery", content: "Details about fast & reliable delivery.", icon: joinusIcon1 },
+  { title: "Innovation-First Approach", content: "Details about innovation-first approach.", icon: joinusIcon1 },
+];
+
 
 
 const Home = () => {
@@ -361,9 +393,6 @@ const Home = () => {
     setFlippedCard(flippedCard === index ? null : index);
   };
 
-
-
-
   //design process animation
   const designRef = useRef([]);
   useEffect(() => {
@@ -391,6 +420,18 @@ const Home = () => {
   const nextRef = useRef(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  //accordion function
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
 
 
   //contact form
@@ -465,11 +506,8 @@ const Home = () => {
               sx={{
                 fontWeight: "800",
                 mb: 2,
-                background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-                fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "46px", xl: "64px" },
+                color: "#F3F4F7",
+                fontSize: { xs: "27px", sm: "34px", md: "35px", lg: "56px", xl: "64px" },
               }}
             >
               {slides[currentIndex].title}
@@ -482,7 +520,7 @@ const Home = () => {
               sx={{
                 maxWidth: "352px",
                 fontWeight: "400",
-                p:0.5,
+                p: 0.5,
                 mb: 4,
                 background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
                 WebkitBackgroundClip: "text",
@@ -494,13 +532,14 @@ const Home = () => {
               {slides[currentIndex].subtitle}
             </Typography>
             <Box sx={{
-              mt: 12,
-              flexDirection: "row",
-
+              mt: { xs: 4, md: 4, lg: 5 },
+              display: 'flex',
+              flexDirection: { xs: 'column', md: 'row' },
+              alignItems: 'center',
+              gap: { xs: 2, sm: 3 },
             }}>
               <Link to="/contact">
                 <Button
-
                   variant="contained"
                   sx={{
                     fontSize: { md: "13", lg: "16px" },
@@ -523,9 +562,8 @@ const Home = () => {
                 </Button>
               </Link>
 
-              <Link to="/contact" style={{ marginLeft: "20px" }}>
+              <Link to="/contact" sx={{ marginLeft: { xs: "0", md: "20px" }, }}>
                 <Button
-
                   variant="contained"
                   sx={{
                     fontSize: { md: "13", lg: "16px" },
@@ -534,6 +572,7 @@ const Home = () => {
                     borderRadius: "999px",
                     fontWeight: 600,
                     textTransform: "none",
+                    mb: { xs: 3, md: 0 },
                     px: { md: 3, lg: 5 },
                     py: 1,
                     transition: "all 0.3s ease",
@@ -596,94 +635,69 @@ const Home = () => {
             textAlign: "center",
           }}
         >
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: "bold",
-              fontSize: { xs: "24px", md: "36px" },
-              py: 8
-            }}
-          >
-            Our Results
-          </Typography>
-
           <Box
             sx={{
               display: "flex",
+              justifyContent: "space-around",
               flexWrap: "wrap",
-              justifyContent: "center",
-              gap: { xs: 4, md: 6 },
-              textAlign: "left",
+              gap: 3,
+              py: 6,
+              px: 2,
             }}
           >
             {counters.map((counter, index) => (
-              <motion.div
+              <Box
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.3 }}
-                viewport={{ once: true }}
+                sx={{
+                  width: { xs: "120px", sm: "150px", md: "180px" },
+                  textAlign: "center",
+                  color: "white",
+                }}
               >
-
                 <Box
+                  component="img"
+                  src={counter.icon}
+                  alt={counter.label}
+                  sx={{ width: 60, height: 60, mb: 1 }}
+                />
+                <Typography
+                  variant="h4"
                   sx={{
-                    width: { xs: "100%", sm: "220px", md: "260px" },
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 1,
+                    fontWeight: 700,
+                    fontSize: { xs: "24px", md: "32px" },
+                    background: "linear-gradient(90deg, #00C87F, #007FFF)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
                   }}
                 >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: 2,
-                    }}
-                  >
-                    <Box
-                      component="img"
-                      src={counter.icon}
-                      alt=""
-                      sx={{ width: 50, height: 50 }}
-                    />
-
-                    <Box sx={{ display: "flex", flexDirection: "column" }}>
-                      <Typography
-                        variant="h4"
-                        sx={{
-                          fontWeight: 700,
-                          fontSize: "32px",
-                          background: "linear-gradient(90deg, #00C87F, #007FFF)",
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
-                        }}
-                      >
-                        <CountUp start={0} end={counter.value} duration={3} />
-                        {counter.suffix || ''}
-                      </Typography>
-
-                      <Typography
-                        variant="subtitle1"
-                        sx={{ fontWeight: 600, color: "white" }}
-                      >
-                        {counter.label}
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  <Typography
-                    variant="body2"
-                    sx={{ color: "#6B7280", fontSize: "14px" }}
-                  >
-                    {counter.description}
-                  </Typography>
-                </Box>
-
-              </motion.div>
+                  <CountUp start={0} end={counter.value} duration={3} />
+                  {counter.suffix || ""}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 500, fontSize: "16px", mt: 0.5 }}
+                >
+                  {counter.label}
+                </Typography>
+              </Box>
             ))}
           </Box>
         </Box>
+
+      </Container>
+
+      <div className="Ellipse-6"></div>
+      <Container
+        maxWidth={false}
+        sx={{
+          width: "100%",
+          maxWidth: "none",
+          minHeight: "100%",
+          padding: "20px",
+          color: "white",
+          mt: 12
+        }}
+      >
 
       </Container>
 
@@ -1364,7 +1378,7 @@ const Home = () => {
       </Container> */}
 
       {/* Why choose us section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%"}}>
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
         <Typography
           ref={headerRef}
           variant="h4"
@@ -1394,13 +1408,267 @@ const Home = () => {
         >
           We don’t just build software - we build smart, scalable, and sustainable digital experiences. Here’s what sets us apart:
         </Typography>
+
+        <Box sx={{ maxWidth: "1250px", px: 2, py: 6, margin: "auto", position: "relative" }}>
+          {accordionData.map((item, index) => (
+            <Box
+              key={index}
+              sx={{
+                backgroundColor: '#121212',
+                borderRadius: '20px',
+                mb: 2,
+                p: "9px",
+                boxShadow: expanded === index
+                  ? '0 0 10px #00ff95'
+                  : '0 0 5px rgba(0, 0, 0, 0.2)',
+                overflow: 'hidden',
+                transition: 'box-shadow 0.3s ease',
+                backgroundImage: isMobile
+                  ? `
+                 radial-gradient(circle at 10% 170%, #37de8d 0%, rgba(0, 0, 0, 0) 40%),
+                 radial-gradient(circle at 90% 160%, #3c71f7 0%, rgba(0, 0, 0, 0) 40%),
+                 linear-gradient(to bottom, #15171e, #15171e)
+               `
+                  : `
+                 radial-gradient(circle at 10% 540%, #37de8d 0%, rgba(0, 0, 0, 0) 40%),
+                 radial-gradient(circle at 90% 500%, #3c71f7 0%, rgba(0, 0, 0, 0) 40%),
+                 linear-gradient(to bottom, #15171e, #15171e)
+               `,
+              }}
+            >
+
+              <Accordion
+                expanded={expanded === index}
+                onChange={handleChange(index)}
+                sx={{
+                  backgroundColor: 'transparent',
+                  boxShadow: 'none',
+                  '&:before': { display: 'none' },
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon sx={{ color: '#00ff95', fontSize: "32px" }} />}
+                  aria-controls="panel-content"
+                  id="panel-header"
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                    minHeight: 64,
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 50,
+                      height: 50,
+                      borderRadius: 3,
+                      backgroundColor: '#37de8d',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                      mr: { xs: 2, sm: 4 },
+                    }}
+                  >
+                    <img src={joinusIcon1} alt="" style={{ width: 34, height: 34 }} />
+                  </Box>
+
+                  <Typography
+                    sx={{
+                      fontWeight: 600,
+                      color: '#fff',
+                      fontSize: {
+                        xs: '20px',
+                        sm: '24px',
+                        md: '28px',
+                        lg: '32px',
+                      },
+                      flexGrow: 1,
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+                </AccordionSummary>
+
+                <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)', mx: 3 }} />
+
+                <AccordionDetails sx={{ color: '#bbb', px: 3, py: 2 }}>
+                  {item.content}
+                </AccordionDetails>
+              </Accordion>
+            </Box>
+
+          ))}
+        </Box>
+
       </Container>
 
-
+      {/* Testimonials section */}
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 20, position: "relative", width: "100%" }}>
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "bold",
+            mb: 2,
+            WebkitBackgroundClip: "text",
+            color: "#F3F4F7",
+            fontWeight: 800,
+            fontSize: { xs: "20px", sm: "24px", md: "39px", lg: "46px", xl: "64px" },
+            padding: "20px",
+            textAlign: "center"
+          }}
+        >
+          Client Highlights / Testimonials
+        </Typography>
+        <Typography
+          sx={{
+            color: "#F3F4F7",
+            maxWidth: "689px",
+            textAlign: "center",
+            margin: "auto",
+            fontSize: "20px",
+            lineHeight: "100%"
+          }}
+        >
+          (Coming Soon)
+        </Typography>
+      </Container>
 
       {/* Contact us section */}
+      <Container
+        maxWidth={false}
+        sx={{
+          width: "100%",
+          maxWidth: "none",
+          minHeight: "100%",
+          padding: "20px",
+          background: "#F3F4F7",
+          mt: 12
+        }}
+      >
+        <Box sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          justifyContent: "space-between",
+          margin: "auto",
+          maxWidth: "1255px",
+          paddingTop: 7,
+        }}>
+          {/* Left Side - Text Content */}
+          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: "15px", maxWidth: "602px" }}>
+            <Typography
+              className="heading"
+              sx={{
+                fontWeight: "800",
+                mb: 2,
+                color: "#0A0C10",
+                fontSize: { xs: "27px", sm: "34px", md: "35px", lg: "56px", xl: "64px" },
+              }}
+            >
+              Let’s Build Something Great Together
+            </Typography>
 
-      <Container ref={containerRef} maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
+            <Box sx={{
+              mt: { xs: 4, md: 4, lg: 5 },
+              display: 'flex',
+              flexDirection: { xs: 'column', md: 'row' },
+              alignItems: 'center',
+              gap: { xs: 2, sm: 3 },
+            }}>
+              <Link to="/contact">
+                <Button
+                  variant="contained"
+                  sx={{
+                    fontSize: { xs: '12px', sm: '13px', lg: '16px' },
+                    background: "#15171E",
+                    color: "white",
+                    borderRadius: "999px",
+                    fontWeight: 600,
+                    textTransform: "none",
+                    px: { xs: 2, sm: 3, lg: 5 },
+                    py: 1,
+                    transition: "all 0.3s ease",
+                    width: { xs: '100%', sm: 'auto' },
+                    "&:hover": {
+                      boxShadow: "0px 6px 24px rgba(143, 145, 144, 0.5)",
+                      transform: "translateY(-1px)",
+                    },
+                  }}
+                >
+                  Contact Us
+                </Button>
+              </Link>
+
+              <Link to="/contact" sx={{ marginLeft: { xs: "0", md: "20px" } }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    fontSize: { xs: '12px', sm: '13px', lg: '16px' },
+                    background: "#15171E",
+                    color: "white",
+                    borderRadius: "999px",
+                    fontWeight: 600,
+                    textTransform: "none",
+                    px: { xs: 2, sm: 3, lg: 5 },
+                    py: 1,
+                    transition: "all 0.3s ease",
+                    width: { xs: '100%', sm: 'auto' },
+                    "&:hover": {
+                      boxShadow: "0px 6px 24px rgba(143, 145, 144, 0.5)",
+                      transform: "translateY(-1px)",
+                    },
+                  }}
+                >
+                  Explore More
+                </Button>
+              </Link>
+            </Box>
+
+
+          </Box>
+
+          {/* Right Side */}
+          <Box
+            sx={{
+              flex: 1,
+              display: "flex",
+              justifyContent: { xs: "center", md: "flex-end" },
+              alignItems: "center",
+
+            }}
+          >
+            <Box
+              sx={{
+                width: { xs: "300px", sm: "400px", md: "500px", lg: "600px" },
+                height: { xs: "300px", sm: "350px", md: "400px", lg: "450px" },
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 2,
+              }}
+            >
+              <Box
+                component="img"
+                src={contactimg}
+                alt="Slide Image"
+                sx={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
+            </Box>
+          </Box>
+        </Box>
+
+      </Container>
+
+      {/* <Container ref={containerRef} maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
         <Box
           sx={{
             display: "flex",
@@ -1416,7 +1684,7 @@ const Home = () => {
             margin: "auto"
           }}
         >
-          {/* Left Info */}
+       
           <Box
             ref={leftContactRef}
             sx={{
@@ -1474,7 +1742,7 @@ const Home = () => {
             ))}
           </Box>
 
-          {/* Contact Form */}
+    
           <Box
             ref={righContactRef}
             sx={{
@@ -1566,7 +1834,7 @@ const Home = () => {
           </Box>
 
         </Box>
-      </Container>
+      </Container> */}
 
     </>
   );
