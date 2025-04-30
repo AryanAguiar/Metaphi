@@ -477,6 +477,7 @@ const Home = () => {
     <>
       <div className="Ellipse-5"></div>
       {/* Hero section */}
+
       <Container
         maxWidth={false}
         sx={{
@@ -486,9 +487,67 @@ const Home = () => {
           padding: "20px",
           color: "white",
           mt: 12,
-      
+
         }}
       >
+        <Box
+          sx={{
+            zIndex: 2,
+            isolation: "isolate",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "black",
+            maxWidth: "255px",
+            maxHeight: "52px",
+            margin: "auto",
+            borderRadius: "15px",
+            padding: "8px 10px",
+            gap: "12px",
+          }}
+        >
+          <Typography sx={{ color: "#fff", fontWeight: 500, fontSize: "14px" }}>
+            We're hiring!
+          </Typography>
+
+          <Box
+            sx={{
+              display: "inline-block",
+              padding: "2px",  
+              borderRadius: "16px",
+              background: "linear-gradient(90deg, #07B9CE, #3969E7, #7D2AE7)", 
+              cursor: "pointer"
+            }}
+          >
+            <Box
+              sx={{
+                backgroundColor: "#0B0D12",  
+                borderRadius: "14px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "8px 20px",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontWeight: 600,
+                  fontSize: "16px",
+                  background: "linear-gradient(90deg, #07B9CE, #3969E7, #7D2AE7)",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Join Our Team
+              </Typography>
+            </Box>
+          </Box>
+
+
+        </Box>
+
         <Box sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
@@ -499,9 +558,9 @@ const Home = () => {
           paddingTop: 7,
         }}>
           {/* Left Side - Text Content */}
-          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: {md:"10px", lg:"0px"}, maxWidth: "614px" }}>
+          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: { md: "10px", lg: "0px" }, maxWidth: "614px" }}>
             <Typography
- 
+
               variant="h3"
               className="heading"
               sx={{
@@ -515,7 +574,7 @@ const Home = () => {
             </Typography>
 
             <Typography
- 
+
               variant="h6"
               className="desc"
               sx={{
@@ -528,7 +587,7 @@ const Home = () => {
                 WebkitTextFillColor: "transparent",
                 textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
                 fontSize: { xs: "14px", sm: "15px", md: "16px", lg: "18px", xl: "20px" },
-                margin: {xs:"auto", md:0}
+                margin: { xs: "auto", md: 0 }
               }}
             >
               {slides[currentIndex].subtitle}
@@ -593,7 +652,7 @@ const Home = () => {
 
           {/* Right Side - Changing Image */}
           <Box
-      
+
             sx={{
               flex: 1,
               display: "flex",

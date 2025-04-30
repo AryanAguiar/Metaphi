@@ -202,6 +202,7 @@ const Careers = () => {
                 </Box>
             </Container>
 
+
             {/* Life at metaphi */}
             <Container
                 maxWidth="1320px"
@@ -304,7 +305,7 @@ const Careers = () => {
                                     width: 28,
                                     height: 28,
                                     borderRadius: '10px',
-                                    backgroundColor: '#37de8d',
+                                    backgroundColor: '#6216C533',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
@@ -340,28 +341,49 @@ const Careers = () => {
             </Container>
 
             {/* Open roles */}
+
             <Container
                 maxWidth={false}
                 disableGutters
                 sx={{
-                    backgroundColor: "#edeef3",
+                    backgroundColor: "#040506",
                 }}
             >
                 <Container
                     maxWidth={false}
                     sx={{
                         py: 6,
-                        maxWidth: "1270px"
+                        maxWidth: "1270px",
+                        position: "relative",
+                        overflow: "hidden",  
                     }}
                 >
+                    {/* ellipse */}
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: "-100px",  
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            width: "min(600px, 80vw)",
+                            height: "min(300px, 30vh)",
+                            background: "rgba(80, 124, 236, 0.7)",
+                            filter: "blur(180px)",
+                            borderRadius: "50%",
+                            pointerEvents: "none",
+                            zIndex: 1,
+                        }}
+                    />
+
                     <Typography
                         sx={{
                             fontFamily: 'Inter',
                             fontSize: '48px',
                             fontWeight: 800,
                             textAlign: 'left',
-                            color: '#0a0c10',
+                            color: '#F9FAFB',
                             mb: 4,
+                            textAlign: "center"
                         }}
                     >
                         Open Roles
@@ -369,14 +391,14 @@ const Careers = () => {
 
                     <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
                         {/* Sidebar */}
-                        <Box sx={{ minWidth: { xs: '100%', md: 180 } }}>
+                        <Box sx={{ minWidth: { xs: '100%', md: 180, backgroundColor: "#15171E", height: "250px", padding: 20 } }}>
                             {techStacks.map((tech) => (
                                 <Typography
                                     key={tech}
                                     variant="body1"
                                     fontWeight={selectedStack === tech ? 700 : 500}
                                     sx={{
-                                        color: selectedStack === tech ? '#0a0c10' : 'gray',
+                                        color: selectedStack === tech ? '#17E1F7' : '#A3AAC1',
                                         cursor: 'pointer',
                                         mb: 1.5,
                                         height: '39px',
@@ -423,7 +445,7 @@ const Careers = () => {
                                                     fontFamily: 'Inter',
                                                     fontSize: { xs: '18px', sm: '22px', md: '32px' },
                                                     fontWeight: 600,
-                                                    color: '#000',
+                                                    color: '#A3AAC1',
                                                     mb: 1,
                                                     textAlign: { xs: 'center', sm: 'left' },
                                                     whiteSpace: 'normal',
@@ -445,10 +467,10 @@ const Careers = () => {
                                                         sx={{
                                                             px: 2,
                                                             py: 0.5,
-                                                            bgcolor: '#e0e0ea',
+                                                            bgcolor: '#292D3D',
                                                             borderRadius: 1,
                                                             fontSize: { xs: 10, sm: 11, md: 12 },
-                                                            color: 'black',
+                                                            color: '#A3AAC1',
                                                             fontWeight: 600,
                                                         }}
                                                     >
@@ -783,7 +805,7 @@ const Careers = () => {
                     </Box>
 
                 </Box>
-            </Container>
+            </Container >
 
 
             {/* <Container

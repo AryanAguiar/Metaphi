@@ -12,6 +12,21 @@
     z-index: 0;
 }
 
+.Ellipse-7 {
+    position: absolute;
+    top: 320%;
+    left: 50%;
+    width: min(500px, 50vw);
+    height: min(500px, 50vh);
+    transform: translate(-50%, -50%);
+    background: rgba(80, 124, 236, 0.719);
+    filter: blur(200px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* full */
 .Ellipse-6 {
     position: absolute;
     left: 50%;
@@ -74,7 +89,7 @@
     grid-auto-rows: minmax(260px, auto);
     gap: 1em;
     width: 100%;
-    max-width: 1240px;
+    max-width: 1290px;
     margin: 0 auto;
     padding: 1em;
     box-sizing: border-box;

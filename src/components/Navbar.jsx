@@ -50,7 +50,6 @@ const Navbar = (props) => {
                         top: 0,
                         left: 0,
                         right: 0,
-                        pl: 1,
                         zIndex: (theme) => theme.zIndex.appBar,
                     }}
                 >
@@ -61,6 +60,7 @@ const Navbar = (props) => {
                             backgroundColor: "#040506",
                             px: "24px",
                             py: 1,
+                            paddingLeft: 2.5
                         }}
                     >
                         {/* Centered inner container */}
