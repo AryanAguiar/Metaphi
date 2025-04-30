@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { ScrollTrigger } from "gsap/all";
 import { jobs } from "./JobsData";
-import "./Careers.css";
+import "./Test.css";
 import joinusIcon1 from "../images/team_icon.png";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
@@ -50,7 +50,7 @@ const Careers = () => {
 
     const imageBoxSx = {
         width: '100%',
-        height: 240,  
+        height: 240,
         backgroundColor: '#f1f2f4',
         borderRadius: 2,
         boxSizing: 'border-box',
@@ -204,7 +204,7 @@ const Careers = () => {
 
             {/* Life at metaphi */}
             <Container
-                maxWidth={false}
+                maxWidth="1320px"
                 disableGutters
                 sx={{
                     px: { xs: 2, md: 8 },
@@ -213,59 +213,40 @@ const Careers = () => {
                     justifyContent: 'center',
                 }}
             >
-                <Box
-                    sx={{
-                        display: 'grid',
-                        gridTemplateColumns: {
-                            xs: '1fr',        // Stack vertically on small screens
-                            sm: 'repeat(3, 1fr)', // 3 columns on larger screens
-                        },
-                        gap: 2,
-                        maxWidth: '1200px',
-                        width: '100%',
-                    }}
-                >
-                    {/* 6 Boxes - same size */}
-                    <Box
-                        sx={{
-                            ...imageBoxSx,
-                            backgroundColor: '#1a1a1d',
-                            color: 'white',
-                            p: 3,
-                            flexDirection: 'column',
-                            alignItems: 'flex-start',
-                        }}
-                    >
+                <div className="grid-container">
+                    <div className="box" style={{ gridArea: "box1", backgroundColor: "rgba(21, 23, 30, 1)", boxSizing: "border-box", padding: "24px" }}>
                         <Typography
                             variant="h5"
                             fontWeight="800"
                             sx={{
-                                fontSize: { xs: '1.75rem', sm: '2rem' },
+                                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
                                 lineHeight: 1.2,
-                                mb: 1,
                             }}
+                            gutterBottom
                         >
                             Life at Metaphi
                         </Typography>
+
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             sx={{
-                                fontSize: { xs: '0.9rem', sm: '1rem' },
+                                fontSize: { xs: '0.95rem', sm: '1.05rem', md: '1.25rem' },
                                 fontWeight: 400,
                                 lineHeight: 1.6,
                             }}
                         >
-                            At Metaphi, we believe in collaboration, creativity, and continuous learning.
-                            We keep things flexible, encourage ownership, and celebrate wins — big or small.
+                            At Metaphi, we believe in collaboration, creativity, and continuous learning. We keep things flexible,
+                            encourage ownership, and celebrate wins — big or small. You'll work with a tight-knit team that values
+                            innovation, transparency, and having fun along the way.
                         </Typography>
-                    </Box>
+                    </div>
+                    <div className="box" style={{ gridArea: "box2" }}></div>
+                    <div className="box" style={{ gridArea: "box3" }}></div>
+                    <div className="box" style={{ gridArea: "box4" }}></div>
+                    <div className="box" style={{ gridArea: "box5" }}></div>
+                    <div className="box" style={{ gridArea: "box6" }}></div>
+                </div>
 
-                    <Box sx={imageBoxSx} /> {/* Box 2 */}
-                    <Box sx={imageBoxSx} /> {/* Box 3 */}
-                    <Box sx={imageBoxSx} /> {/* Box 4 */}
-                    <Box sx={imageBoxSx} /> {/* Box 5 */}
-                    <Box sx={imageBoxSx} /> {/* Box 6 */}
-                </Box>
             </Container>
 
             {/* Why join us */}
