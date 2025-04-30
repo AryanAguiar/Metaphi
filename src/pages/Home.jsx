@@ -289,40 +289,40 @@ const Home = () => {
   const lineRef = useRef(null);
 
   //hero section animation
-  useEffect(() => {
-    let intervalId;
+  // useEffect(() => {
+  //   let intervalId;
 
-    const animateElements = () => {
-      gsap.fromTo(
-        [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.2 }
-      );
-    };
+  //   const animateElements = () => {
+  //     gsap.fromTo(
+  //       [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
+  //       { opacity: 0, y: 30 },
+  //       { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.2 }
+  //     );
+  //   };
 
-    const changeSlide = () => {
-      gsap.to(
-        [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
-        {
-          opacity: 0,
-          y: -30,
-          duration: 0.8,
-          ease: "power3.inOut",
-          onComplete: () => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-          },
-        }
-      );
-    };
+  //   const changeSlide = () => {
+  //     gsap.to(
+  //       [textRef.current, subTextRef.current, buttonRef.current, imageRef.current],
+  //       {
+  //         opacity: 0,
+  //         y: -30,
+  //         duration: 0.8,
+  //         ease: "power3.inOut",
+  //         onComplete: () => {
+  //           setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+  //         },
+  //       }
+  //     );
+  //   };
 
-    animateElements();
+  //   animateElements();
 
-    intervalId = setInterval(() => {
-      changeSlide();
-    }, 5000);
+  //   intervalId = setInterval(() => {
+  //     changeSlide();
+  //   }, 5000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   useEffect(() => {
     if (!textRef.current || !imageRef.current) return;
@@ -500,7 +500,7 @@ const Home = () => {
           {/* Left Side - Text Content */}
           <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: "15px", maxWidth: "614px" }}>
             <Typography
-              ref={textRef}
+ 
               variant="h3"
               className="heading"
               sx={{
@@ -514,7 +514,7 @@ const Home = () => {
             </Typography>
 
             <Typography
-              ref={subTextRef}
+ 
               variant="h6"
               className="desc"
               sx={{
@@ -591,7 +591,7 @@ const Home = () => {
 
           {/* Right Side - Changing Image */}
           <Box
-            ref={imageRef}
+      
             sx={{
               flex: 1,
               display: "flex",

@@ -47,13 +47,12 @@ const Navbar = (props) => {
             <Box
                 sx={{
                     position: "fixed",
-                    top: "40px",
+                    top: 0,
                     left: 0,
                     right: 0,
                     zIndex: (theme) => theme.zIndex.appBar,
                     display: "flex",
                     justifyContent: "center",
-                    px: 2
                 }}
             >
                 <AppBar
@@ -62,8 +61,7 @@ const Navbar = (props) => {
                         width: "100%",
                         maxWidth: { xl: "1260px", lg: "1260px", md: "100%" },  
                         px: 2,
-                        borderRadius: "36px",
-                        backgroundColor: "#0A0C10",
+                        backgroundColor: "#040506",
                         justifyContent: "center",
                     }}
                 >
@@ -78,7 +76,7 @@ const Navbar = (props) => {
                         }}
                     >
                         {/* Logo */}
-                        <Box sx={{ flexShrink: 1 }}>
+                        <Box sx={{ flexShrink: 1, pl:{md:2, lg:0, xl:0} }}>
                             <Link to="/" onClick={handleLogoClick}>
                                 <img src={logoImg} alt="Logo" style={{ height: "50px" }} />
                             </Link>
@@ -93,10 +91,10 @@ const Navbar = (props) => {
                                 alignItems: "center",
                                 maxWidth: "668px",
                                 flexGrow: 1,
+                                paddingRight:{sm:0, md:1,xl:3}
                             }}
                         >
                             {pages
-                                .filter((page) => page !== "Contact")
                                 .map((page) => {
                                     const path = page.toLowerCase() === "home" ? "/" : `/${page.toLowerCase()}`;
                                     return (
@@ -125,32 +123,6 @@ const Navbar = (props) => {
                                 })}
                         </Box>
 
-                        {/* Contact Button */}
-                        <Box sx={{ flexShrink: 0, display: { xs: "none", md: "flex" }, gap: 2 }}>
-                            <Link to="/contact">
-                                <Button
-                                    variant="contained"
-                                    sx={{
-                                        fontSize: { md: "13", lg: "16px" },
-                                        background: "linear-gradient(90deg, #00C853, #00E676)",
-                                        color: "black",
-                                        borderRadius: "999px",
-                                        fontWeight: 600,
-                                        textTransform: "none",
-                                        px: { md: 1, lg: 3 },
-                                        py: 1,
-                                        boxShadow: "0px 4px 20px rgba(0, 229, 123, 0.4)",
-                                        transition: "all 0.3s ease",
-                                        "&:hover": {
-                                            boxShadow: "0px 6px 24px rgba(0, 229, 123, 0.5)",
-                                            transform: "translateY(-1px)",
-                                        },
-                                    }}
-                                >
-                                    Request a quote
-                                </Button>
-                            </Link>
-                        </Box>
 
                         {/* Mobile Menu Button */}
                         <IconButton
