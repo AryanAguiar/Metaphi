@@ -5,7 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import logoImg from "../images/logo.svg";
+import logoImg from "../images/logo.png";
 import gsap from "gsap";
 
 const pages = ["Home", "About", "Services", "Industries", "Resources", "Careers", "Contact"];
@@ -43,106 +43,123 @@ const Navbar = (props) => {
 
     return (
         <>
-
-            <Box
-                sx={{
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    zIndex: (theme) => theme.zIndex.appBar,
-                    display: "flex",
-                    justifyContent: "center",
-                }}
-            >
-                <AppBar
-                    position="static"
+            <Box sx={{ width: "100%", backgroundColor: "black" }}>
+                <Box
                     sx={{
-                        width: "100%",
-                        maxWidth: { xl: "1260px", lg: "1260px", md: "100%" },  
-                        px: 2,
-                        backgroundColor: "#040506",
-                        justifyContent: "center",
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        pl: 1,
+                        zIndex: (theme) => theme.zIndex.appBar,
                     }}
                 >
-
-                    <Toolbar
-                        disableGutters
+                    <AppBar
+                        position="static"
                         sx={{
                             width: "100%",
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
+                            backgroundColor: "#040506",
+                            px: "24px",
+                            py: 1,
                         }}
                     >
-                        {/* Logo */}
-                        <Box sx={{ flexShrink: 1, pl:{md:2, lg:0, xl:0} }}>
-                            <Link to="/" onClick={handleLogoClick}>
-                                <img src={logoImg} alt="Logo" style={{ height: "50px" }} />
-                            </Link>
-                        </Box>
-
-                        {/* Center Nav Links */}
+                        {/* Centered inner container */}
                         <Box
                             sx={{
-                                display: { xs: "none", md: "flex" },
-                                gap: 0,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                maxWidth: "668px",
-                                flexGrow: 1,
-                                paddingRight:{sm:0, md:1,xl:3}
+                                width: "100%",
+                                maxWidth: "1260px",
+                                mx: "auto",
                             }}
                         >
-                            {pages
-                                .map((page) => {
-                                    const path = page.toLowerCase() === "home" ? "/" : `/${page.toLowerCase()}`;
-                                    return (
-                                        <NavLink
-                                            key={page}
-                                            to={path}
-                                            style={({ isActive }) => ({
-                                                textDecoration: "none",
-                                                backgroundColor: isActive ? "#15171E" : "transparent", borderRadius: 5, padding: "7px 0",
-                                                fontWeight: "bold",
-                                                color: "#F9FAFB"
-                                            })}
-                                        >
-                                            <Box
-                                                component="span"
-                                                sx={{
-                                                    padding: "8px 16px",
-                                                    fontSize: { md: "13px", lg: "16px" },
-                                                    fontWeight: 700,
-                                                }}
+                            <Toolbar
+                                disableGutters
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                }}
+                            >
+                                {/* Logo */}
+                                <Box sx={{ flexShrink: 1, }}>
+                                    <Link to="/" onClick={handleLogoClick}>
+                                        <img src={logoImg} alt="Logo" style={{ height: "50px" }} />
+                                    </Link>
+                                </Box>
+
+                                {/* Center Nav Links */}
+                                <Box
+                                    sx={{
+                                        display: { xs: "none", md: "flex" },
+                                        gap: {lg:2, md:.5},
+                                        justifyContent: "flex-end",
+                                        alignItems: "center",
+                                        maxWidth: "808px",
+                                        flexGrow: 1,    
+                                    }}
+                                >
+                                    {pages.map((page) => {
+                                        const path = page.toLowerCase() === "home" ? "/" : `/${page.toLowerCase()}`;
+                                        return (
+                                            <NavLink
+                                                key={page}
+                                                to={path}
+                                                style={{ textDecoration: "none", display: "inline-block" }}
                                             >
-                                                {page}
-                                            </Box>
-                                        </NavLink>
-                                    );
-                                })}
+                                                {({ isActive }) => (
+                                                    <Box
+                                                        sx={{
+                                                            display: "inline-block",
+                                                            borderRadius: "12px",
+                                                            padding: "2px",  
+                                                            background: isActive
+                                                                ? "linear-gradient(90deg, #07B9CE, #3969E7, #7D2AE7)"
+                                                                : "transparent",
+                                                            transition: "background 0.3s ease",
+                                                            "&:hover": {
+                                                                background: "linear-gradient(90deg, #07B9CE, #3969E7, #7D2AE7)",
+                                                            },
+                                                        }}
+                                                    >
+                                                        <Box
+                                                            component="span"
+                                                            sx={{
+                                                                display: "inline-block",
+                                                                padding: "8px 20px",
+                                                                borderRadius: "10px",
+                                                                backgroundColor: "#040506",  
+                                                                color: "#F9FAFB",
+                                                                fontSize: { md: "12px", lg: "15px" },
+                                                                fontWeight: 400,
+                                                            }}
+                                                        >
+                                                            {page}
+                                                        </Box>
+                                                    </Box>
+                                                )}
+                                            </NavLink>
+
+                                        );
+                                    })}
+                                </Box>
+
+                                {/* Mobile Menu Button */}
+                                <IconButton
+                                    size="large"
+                                    color="inherit"
+                                    onClick={handleDrawerToggle}
+                                    disableRipple
+                                    sx={{
+                                        display: { xs: "block", md: "none" },
+                                        ml: "auto",
+                                    }}
+                                >
+                                    <MenuIcon />
+                                </IconButton>
+                            </Toolbar>
                         </Box>
-
-
-                        {/* Mobile Menu Button */}
-                        <IconButton
-                            size="large"
-                            color="inherit"
-                            onClick={handleDrawerToggle}
-                            disableRipple
-                            sx={{
-                                display: { xs: "block", md: "none" },
-                                ml: "auto",
-                            }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
+                    </AppBar>
+                </Box>
             </Box>
-
-
-
         </>
     );
 };

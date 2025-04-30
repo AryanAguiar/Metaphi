@@ -485,7 +485,8 @@ const Home = () => {
           minHeight: "100%",
           padding: "20px",
           color: "white",
-          mt: 12
+          mt: 12,
+      
         }}
       >
         <Box sx={{
@@ -498,7 +499,7 @@ const Home = () => {
           paddingTop: 7,
         }}>
           {/* Left Side - Text Content */}
-          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: "15px", maxWidth: "614px" }}>
+          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: {md:"10px", lg:"0px"}, maxWidth: "614px" }}>
             <Typography
  
               variant="h3"
@@ -527,6 +528,7 @@ const Home = () => {
                 WebkitTextFillColor: "transparent",
                 textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
                 fontSize: { xs: "14px", sm: "15px", md: "16px", lg: "18px", xl: "20px" },
+                margin: {xs:"auto", md:0}
               }}
             >
               {slides[currentIndex].subtitle}
@@ -806,6 +808,7 @@ const Home = () => {
             rowGap: 4,
             columnGap: 2,
             py: 6,
+            pr: 0,
           }}
         >
           {services.map((service, index) => (

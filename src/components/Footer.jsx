@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, IconButton, TextField, Button } from "@mui/material";
 import { Facebook, Twitter, LinkedIn, Instagram, YouTube } from "@mui/icons-material";
-import logoImg from "../images/logo.svg";
+import logoImg from "../images/logo.png";
 import { Link } from "react-router-dom";
 
 const quickLinks = [

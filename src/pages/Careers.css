@@ -78,6 +78,7 @@
     margin: 0 auto;
     padding: 1em;
     box-sizing: border-box;
+    justify-content: center;
 }
 
 @media (max-width: 1200px) {
