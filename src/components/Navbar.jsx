@@ -58,9 +58,9 @@ const Navbar = (props) => {
                         sx={{
                             width: "100%",
                             backgroundColor: "#040506",
-                            px: "24px",
+                            px: "25px",
                             py: 1,
-                            paddingLeft: 2.5
+                            paddingRight: 2.5
                         }}
                     >
                         {/* Centered inner container */}
