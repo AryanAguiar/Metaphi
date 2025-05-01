@@ -392,7 +392,7 @@ const Careers = () => {
                     <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 4, md: 6 }}>
 
                         {/* Sidebar */}
-                        <Box sx={{ minWidth: { xs: '100%', md: 180 }, backgroundColor: "#15171E", height: "250px", padding: "24px", width: "300px" }}>
+                        <Box sx={{ minWidth: { xs: '100%', md: 180 }, backgroundColor: "#15171E", height: "250px", padding: "24px", width: "300px", gap: '8px'}}>
                             {techStacks.map((tech) => (
                                 <Typography
                                     key={tech}
@@ -408,11 +408,12 @@ const Careers = () => {
                                         fontFamily: 'Inter',
                                         fontSize: { xs: '20px', sm: '24px', md: '32px' },
                                         fontWeight: 'bold',
-                                        textAlign: 'left'
+                                        textAlign: 'left',
+                                        gap: "16px" 
                                     }}
                                     onClick={() => setSelectedStack(tech)}
                                 >
-                                    {tech}
+                                    {tech} &gt;
                                 </Typography>
                             ))}
                         </Box>
@@ -684,7 +685,7 @@ const Careers = () => {
                                                     padding: "20px 10px",
                                                 },
                                                 '& ::placeholder': {
-                                                    color: '#898989',
+                                                    color: 'white',
                                                 },
                                                 '& .MuiOutlinedInput-root': {
                                                     '& fieldset': {
@@ -720,7 +721,7 @@ const Careers = () => {
                                                     padding: "20px 10px",
                                                 },
                                                 '& ::placeholder': {
-                                                    color: '#898989',
+                                                    color: 'white',
                                                 },
                                                 '& .MuiOutlinedInput-root': {
                                                     '& fieldset': {
@@ -759,7 +760,7 @@ const Careers = () => {
                                                 padding: "20px 25px",
                                             },
                                             '& ::placeholder': {
-                                                color: '#898989',
+                                                color: 'white',
                                             },
                                             '& .MuiOutlinedInput-root': {
                                                 '& fieldset': {
@@ -849,8 +850,6 @@ const Careers = () => {
 
                     </Box>
                 </Container>
-
-
             </Container >
 
 

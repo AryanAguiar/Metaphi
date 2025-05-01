@@ -513,15 +513,15 @@ const Home = () => {
           <Box
             sx={{
               display: "inline-block",
-              padding: "2px",  
+              padding: "2px",
               borderRadius: "16px",
-              background: "linear-gradient(90deg, #07B9CE, #3969E7, #7D2AE7)", 
+              background: "linear-gradient(90deg, #07B9CE, #3969E7, #7D2AE7)",
               cursor: "pointer"
             }}
           >
             <Box
               sx={{
-                backgroundColor: "#0B0D12",  
+                backgroundColor: "#0B0D12",
                 borderRadius: "14px",
                 display: "flex",
                 alignItems: "center",
@@ -564,9 +564,11 @@ const Home = () => {
               variant="h3"
               className="heading"
               sx={{
-                fontWeight: "800",
+                fontWeight: 800,
                 mb: 2,
-                color: "#F3F4F7",
+                background: "linear-gradient(90deg, #00c6ff, #0072ff, #7f00ff)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
                 fontSize: { xs: "27px", sm: "34px", md: "35px", lg: "56px", xl: "64px" },
               }}
             >
@@ -595,42 +597,18 @@ const Home = () => {
             <Box sx={{
               mt: { xs: 4, md: 4, lg: 5 },
               display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
               alignItems: 'center',
               gap: { xs: 2, sm: 3 },
             }}>
-              <Link to="/contact">
-                <Button
-                  variant="contained"
-                  sx={{
-                    fontSize: { md: "13", lg: "16px" },
-                    background: "linear-gradient(90deg, #00C853, #00E676)",
-                    color: "black",
-                    borderRadius: "999px",
-                    fontWeight: 600,
-                    textTransform: "none",
-                    px: { md: 3, lg: 5 },
-                    py: 1,
-                    boxShadow: "0px 4px 20px rgba(0, 229, 123, 0.4)",
-                    transition: "all 0.3s ease",
-                    "&:hover": {
-                      boxShadow: "0px 6px 24px rgba(0, 229, 123, 0.5)",
-                      transform: "translateY(-1px)",
-                    },
-                  }}
-                >
-                  Contact Us
-                </Button>
-              </Link>
 
               <Link to="/contact" sx={{ marginLeft: { xs: "0", md: "20px" }, }}>
                 <Button
                   variant="contained"
                   sx={{
                     fontSize: { md: "13", lg: "16px" },
-                    background: "#15171E",
+                    background: 'linear-gradient(90deg, #07B9CE, #3969E7, #7D2AE7)',
                     color: "white",
-                    borderRadius: "999px",
+                    borderRadius: "12px",
                     fontWeight: 600,
                     textTransform: "none",
                     mb: { xs: 3, md: 0 },
@@ -643,7 +621,7 @@ const Home = () => {
                     },
                   }}
                 >
-                  Explore More
+                  Request a quote
                 </Button>
               </Link>
             </Box>
@@ -686,6 +664,41 @@ const Home = () => {
           </Box>
         </Box>
 
+
+
+      </Container>
+
+
+      <Container
+        maxWidth={false}
+        sx={{
+          width: "100%",
+          maxWidth: "none",
+          minHeight: "100%",
+          padding: "20px",
+          color: "white",
+          mt: 12,
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* ellipse */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "-100px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "min(600px, 80vw)",
+            height: "min(300px, 30vh)",
+            background: "rgba(80, 124, 236, 0.7)",
+            filter: "blur(180px)",
+            borderRadius: "50%",
+            pointerEvents: "none",
+            zIndex: 1,
+          }}
+        />
+
         {/* stats section */}
         <Box
           sx={{
@@ -696,6 +709,35 @@ const Home = () => {
             textAlign: "center",
           }}
         >
+          <Typography
+            ref={headerRef}
+            variant="h4"
+            className="heading"
+            sx={{
+              fontWeight: "bold",
+              mb: 2,
+              WebkitBackgroundClip: "text",
+              color: "#F3F4F7",
+              fontWeight: 800,
+              fontSize: { xs: "20px", sm: "24px", md: "39px", lg: "46px", xl: "64px" },
+              padding: "20px",
+              textAlign: "center"
+            }}
+          >
+            Why Choose Us
+          </Typography>
+          <Typography
+            sx={{
+              color: "#F3F4F7",
+              maxWidth: "689px",
+              textAlign: "center",
+              margin: "auto",
+              fontSize: "20px",
+              lineHeight: "100%"
+            }}
+          >
+            We don’t just build software - we build smart, scalable, and sustainable digital experiences. Here’s what sets us apart:
+          </Typography>
           <Box
             sx={{
               display: "flex",
@@ -744,22 +786,6 @@ const Home = () => {
             ))}
           </Box>
         </Box>
-
-      </Container>
-
-      <div className="Ellipse-6"></div>
-      <Container
-        maxWidth={false}
-        sx={{
-          width: "100%",
-          maxWidth: "none",
-          minHeight: "100%",
-          padding: "20px",
-          color: "white",
-          mt: 12
-        }}
-      >
-
       </Container>
 
       {/* Partners section */}
@@ -827,7 +853,23 @@ const Home = () => {
       </Container>
 
       {/* services section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%" }}>
+      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%", overflow: "hidden" }}>
+        {/* ellipse */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "-100px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "min(600px, 80vw)",
+            height: "min(300px, 30vh)",
+            background: "rgba(80, 124, 236, 0.7)",
+            filter: "blur(180px)",
+            borderRadius: "50%",
+            pointerEvents: "none",
+            zIndex: 1,
+          }}
+        />
         <Typography
           ref={headerRef}
           variant="h4"
