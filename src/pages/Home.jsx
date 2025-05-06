@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, Divider, useTheme, useMediaQuery } from "@mui/material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, Divider, useTheme, useMediaQuery, Tab, Tabs } from "@mui/material";
 import { gsap } from "gsap";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 //hero section
 import heroImg1 from "../images/mobile application development.webp";
@@ -43,15 +43,19 @@ import clutchlogo from "../images/clutchlogo.png";
 
 //industries we serve
 
-import food from "../images/publichealth.png";
-import elearning from "../images/college project-bro (1) 1.png";
-import elearning2 from "../images/Manage money-pana 1.png";
+import food from "../images/industryimg.png";
+import elearning from  "../images/industryimg.png";
+import elearning2 from  "../images/industryimg.png";
 
-//why join us accordion
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import joinusIcon1 from "../images/team_icon.png";
+//our development process
+const steps = [
+  { id: 1, title: 'Discovery', description: 'Understand the problem and define clear requirements.' },
+  { id: 2, title: 'Discovery', description: 'Understand the problem and define clear requirements.' },
+  { id: 3, title: 'Discovery', description: 'Understand the problem and define clear requirements.' },
+  { id: 4, title: 'Discovery', description: 'Understand the problem and define clear requirements.' },
+  { id: 5, title: 'Discovery', description: 'Understand the problem and define clear requirements.' },
+  { id: 6, title: 'Discovery', description: 'Understand the problem and define clear requirements.' },
+];
 
 //contact us section
 import contactimg from "../images/Website Creator-bro 1.png";
@@ -169,67 +173,6 @@ const services = [
   }
 ];
 
-//design process
-const designT = [
-  {
-    id: 1,
-    title: "01 - Ideation",
-    description:
-      "Brainstorm and refine creative ideas, transforming them into a well-structured plan for a smart, successful solution.",
-    svg: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32 4C21.402 4 12.8 12.602 12.8 23.2C12.8 29.38 16.054 35.165 21.333 38.146C22.077 38.58 22.533 39.395 22.533 40.278V42.8C22.533 45.091 24.442 47 26.733 47H37.267C39.558 47 41.467 45.091 41.467 42.8V40.278C41.467 39.395 41.923 38.58 42.667 38.146C47.946 35.165 51.2 29.38 51.2 23.2C51.2 12.602 42.598 4 32 4Z" stroke="#00FF7F" strokeWidth="2" fill="rgba(0,255,127,0.05)" /><path d="M26 28C26 25.239 28.239 23 31 23C33.761 23 36 25.239 36 28" stroke="#007FFF" strokeWidth="2" strokeLinecap="round" /><rect x="26" y="47" width="12" height="4" rx="1" fill="#007FFF" /><rect x="27" y="51" width="10" height="3" rx="1" fill="#00FF7F" /><rect x="28" y="54" width="8" height="3" rx="1" fill="#007FFF" /><circle cx="32" cy="60" r="2" fill="#00FF7F" /></svg>
-    ),
-  },
-  {
-    id: 2,
-    title: "02 - Plan",
-    description:
-      "Define project objectives, establish a timeline with key milestones, and assemble a skilled team tailored to your development needs.",
-    svg: (
-      <svg width="64" height="64" fill="none" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="14" width="44" height="36" rx="4" stroke="#007FFF" strokeWidth="2" /><rect x="10" y="14" width="44" height="8" fill="#007FFF" /><line x1="18" y1="10" x2="18" y2="18" stroke="#00FF7F" strokeWidth="2" /><line x1="46" y1="10" x2="46" y2="18" stroke="#00FF7F" strokeWidth="2" /><path d="M18 26h6M28 26h6M38 26h6M18 34h6M28 34h6M38 34h6M18 42h6M28 42h6M38 42h6" stroke="#00FF7F" strokeWidth="2" /></svg>
-    ),
-  },
-  {
-    id: 3,
-    title: "03 - Design",
-    description:
-      "Create interactive prototypes using wireframes and sketches, providing a clear visual representation of the solution's interface and user experience.",
-    svg: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="10" stroke="#007FFF" strokeWidth="2" /><path d="M28 30c0-1 1-2 2-2s2 1 2 2c0-1 1-2 2-2s2 1 2 2c0 1-1 2-2 2h-4c-1 0-2-1-2-2z" fill="#00FF7F" /><g stroke="#00FF7F" strokeWidth="2"><path d="M32 10v6" /><path d="M32 48v6" /><path d="M10 32h6" /><path d="M48 32h6" /><path d="M19 19l4 4" /><path d="M45 45l-4-4" /><path d="M19 45l4-4" /><path d="M45 19l-4 4" /></g></svg>
-    ),
-  },
-  {
-    id: 4,
-    title: "04 - Implement",
-    description:
-      "Select the most suitable tools and technologies to develop the product, adhering to the defined timeline, project scope, and requirements.",
-    svg: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 78.188 78.188" fill="none"><g><path d="M75.006,12.39c-1.104-0.208-2.229,0.218-2.918,1.101c-0.084,0.106-0.17,0.21-0.266,0.306L66,19.619c-1.256,1.255-3.442,1.255-4.698,0l-2.731-2.731c-1.295-1.296-1.297-3.404,0-4.699l5.826-5.828c0.096-0.095,0.197-0.179,0.301-0.26c0.885-0.691,1.309-1.816,1.102-2.918s-1.012-1.997-2.086-2.319c-1.899-0.57-3.871-0.859-5.858-0.859c-5.429,0-10.534,2.114-14.375,5.953c-4.843,4.842-6.892,11.75-5.557,18.391L24.346,37.925c-1.319-0.265-2.663-0.398-4.014-0.398c-5.429,0-10.534,2.114-14.375,5.954c-5.296,5.297-7.249,13.05-5.096,20.232c0.322,1.073,1.216,1.879,2.318,2.087c1.101,0.209,2.228-0.217,2.919-1.102c0.086-0.109,0.176-0.217,0.265-0.306l5.825-5.822c1.255-1.254,3.442-1.255,4.698,0.001l2.731,2.731c1.295,1.296,1.295,3.403,0,4.698l-5.833,5.832c-0.093,0.095-0.194,0.176-0.296,0.256c-0.884,0.689-1.309,1.814-1.101,2.918c0.208,1.103,1.012,1.997,2.086,2.318c1.9,0.569,3.873,0.858,5.861,0.858l0,0c5.43,0,10.534-2.114,14.372-5.953c4.844-4.843,6.894-11.75,5.557-18.392l13.578-13.576c1.317,0.265,2.663,0.398,4.015,0.398c5.43,0,10.534-2.115,14.374-5.955c5.298-5.297,7.249-13.05,5.097-20.233C77.002,13.402,76.11,12.598,75.006,12.39z" stroke="#007FFF" strokeWidth="2" fill="none" /><path d="M67.989,30.467c-2.707,2.706-6.306,4.196-10.133,4.196c-1.388,0-2.763-0.199-4.088-0.592c-1.057-0.311-2.195-0.022-2.975,0.755L34.824,50.794c-0.778,0.777-1.068,1.92-0.755,2.975c1.497,5.052,0.116,10.501-3.605,14.221c-2.305,2.307-5.258,3.729-8.448,4.101l1.843-1.845c3.635-3.635,3.635-9.549,0-13.184l-2.731-2.73c-1.761-1.763-4.103-2.732-6.593-2.731c-2.49,0-4.832,0.97-6.591,2.729l-1.845,1.845c0.372-3.145,1.781-6.132,4.1-8.449c2.707-2.709,6.305-4.199,10.132-4.199c1.387,0,2.762,0.199,4.087,0.592c1.055,0.314,2.195,0.022,2.974-0.754l15.97-15.97c0.777-0.777,1.066-1.918,0.756-2.973c-1.496-5.053-0.115-10.502,3.604-14.222c2.307-2.305,5.26-3.729,8.449-4.099l-1.844,1.844c-3.635,3.633-3.635,9.548,0,13.186l2.732,2.73c1.762,1.761,4.102,2.731,6.592,2.731c2.49,0,4.832-0.97,6.592-2.73l1.844-1.843C71.715,25.162,70.306,28.148,67.989,30.467z" stroke="#00FF7F" strokeWidth="2" fill="none" /></g></svg>
-    ),
-  },
-  {
-    id: 5,
-    title: "05 - Test",
-    description:
-      "Conduct rigorous manual and automated testing to ensure a thoroughly tested, high-quality, and bug-free solution.",
-    svg: (
-      <svg width="64" height="64" fill="none" viewBox="0 0 64 64">
-        <circle cx="32" cy="32" r="24" stroke="#007FFF" strokeWidth="2" />
-        <path d="M24 32l6 6 10-14" stroke="#00FF7F" strokeWidth="2" />
-      </svg>
-    ),
-  },
-  {
-    id: 6,
-    title: "06 - Deploy",
-    description:
-      "Launch the product, ensuring it meets all predefined standards and is seamlessly accessible to the target audience.",
-    svg: (
-      <svg width="64" height="64" fill="none" viewBox="0 0 64 64"><path d="M32 4c6 4 12 18 12 26s-6 20-12 20-12-12-12-20 6-22 12-26z" stroke="#007FFF" strokeWidth="2" /><path d="M24 50l-6 10 10-6 4 6 4-6 10 6-6-10" stroke="#00FF7F" strokeWidth="2" /><circle cx="32" cy="26" r="4" stroke="#00FF7F" strokeWidth="2" /><path d="M20 28c-4 4-6 8-6 12 0 2 2 2 4 2 4 0 8-2 12-6" stroke="#007FFF" strokeWidth="2" /><path d="M44 28c4 4 6 8 6 12 0 2-2 2-4 2-4 0-8-2-12-6" stroke="#007FFF" strokeWidth="2" /></svg>
-    ),
-  },
-];
-
 //industries we serve
 const industries = [
   {
@@ -264,12 +207,6 @@ const industries = [
   },
 ];
 
-//accordion data
-const accordionData = [
-  { title: "Strong Tech Team", content: "Details about the strong tech team.", icon: joinusIcon1 },
-  { title: "Fast & Reliable Delivery", content: "Details about fast & reliable delivery.", icon: joinusIcon1 },
-  { title: "Innovation-First Approach", content: "Details about innovation-first approach.", icon: joinusIcon1 },
-];
 
 
 
@@ -416,10 +353,11 @@ const Home = () => {
 
 
   //industries animation
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const handleTabChange = (event, newValue) => {
+    setActiveIndex(newValue);
+  };
+
 
   //accordion function
   const [expanded, setExpanded] = useState(false);
@@ -506,7 +444,7 @@ const Home = () => {
             gap: "12px",
           }}
         >
-          <Typography sx={{ color: "#fff", fontWeight: 500, fontSize: "14px" }}>
+          <Typography sx={{ color: "#fff", fontWeight: 400, fontSize: "14px" }}>
             We're hiring!
           </Typography>
 
@@ -531,7 +469,7 @@ const Home = () => {
             >
               <Typography
                 sx={{
-                  fontWeight: 600,
+                  fontWeight: 400,
                   fontSize: "16px",
                   background: "linear-gradient(90deg, #07B9CE, #3969E7, #7D2AE7)",
                   backgroundClip: "text",
@@ -599,6 +537,7 @@ const Home = () => {
               display: 'flex',
               alignItems: 'center',
               gap: { xs: 2, sm: 3 },
+              justifyContent: {xs: "center", md: "flex-start"}
             }}>
 
               <Link to="/contact" sx={{ marginLeft: { xs: "0", md: "20px" }, }}>
@@ -663,12 +602,9 @@ const Home = () => {
             </Box>
           </Box>
         </Box>
-
-
-
       </Container>
 
-
+      {/* Why choose us stats */}
       <Container
         maxWidth={false}
         sx={{
@@ -877,10 +813,9 @@ const Home = () => {
           sx={{
             fontWeight: "800",
             mb: 2,
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            background: "#F3F4F7",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
             fontSize: { xs: "20px", sm: "24px", md: "39px", lg: "46px", xl: "64px" },
             padding: "20px",
             textAlign: "center"
@@ -961,6 +896,7 @@ const Home = () => {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
+                      p: "24px"
                     }}
                   >
                     <Box>
@@ -973,7 +909,7 @@ const Home = () => {
                       </Typography>
                     </Box>
                   </CardContent>
-                  <Typography sx={{ color: "#F3F4F7", px: "18px", fontSize: "16px", fontWeight: "700", paddingBottom: "20px " }}>
+                  <Typography sx={{ color: "#F3F4F7", px: "27px", fontSize: "16px", fontWeight: "700", paddingBottom: "20px " }}>
                     Learn More
                   </Typography>
                 </Card>
@@ -1052,246 +988,90 @@ const Home = () => {
         </Box>
       </Container>
 
-      {/* Design steps section */}
-      {/* <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+      {/* industries we serve */}
+      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%", overflow: "hidden" }}>
+        {/* ellipse */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "-100px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "min(600px, 80vw)",
+            height: "min(300px, 30vh)",
+            background: "rgba(80, 124, 236, 0.7)",
+            filter: "blur(180px)",
+            borderRadius: "50%",
+            pointerEvents: "none",
+            zIndex: 1,
+          }}
+        />
         <Typography
           ref={headerRef}
           variant="h4"
           className="heading"
           sx={{
-            fontWeight: "bold",
+            fontWeight: "800",
             mb: 2,
-            background: "linear-gradient(145deg, #d1d1d1, #ffffff, #a3a3a3)",
+            background: "#F3F4F7",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "46px" },
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "40px" },
             padding: "20px",
-            textAlign: "center"
+            textAlign: "left"
           }}
         >
-          Our Design Process
+          Our Services
         </Typography>
 
-        <Box sx={{ maxWidth: 'xl', mx: 'auto', pr: { xs: null, lg: 1.5 } }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              padding: 3,
-              gap: 8,
-              justifyContent: "center",
-              mt: 6,
-            }}
-          >
-            {designT.map((step, index) => (
-              <Box
-                key={step.id}
-                ref={(el) => (designRef.current[index] = el)}
-                sx={{
-                  width: { xs: "100%", sm: "30%", md: "25%" },
-                  textAlign: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  color: "white",
-                  opacity: 0
-                }}
-              >
-                <Box mb={2}>{step.svg}</Box>
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
-                  {step.title}
-                </Typography>
-                <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                  {step.description}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        </Box>
-
-      </Container> */}
-
-      {/* industries we serve */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%", backgroundColor: "#EDEEF3" }}>
-        <Typography
-          ref={headerRef}
-          variant="h4"
-          className="heading"
+        <Tabs
+          value={activeIndex}
+          onChange={handleTabChange}
+          textColor="white"
+          indicatorColor="primary"
           sx={{
-            fontWeight: "bold",
-            mb: 2,
-            WebkitBackgroundClip: "text",
-            color: "#0A0C10",
-            fontWeight: 800,
-            fontSize: { xs: "20px", sm: "24px", md: "39px", lg: "46px", xl: "64px" },
-            padding: "20px",
-            textAlign: "center"
+            mb: 3,
+            maxWidth: '1100px',
+            width: '100%',
+            ml: 3,
+            '& .MuiTab-root': {
+              minWidth: 'auto', 
+              marginRight: "24px",   
+            },
           }}
         >
-          Industries We Work With
-        </Typography>
-        <Typography
+          {industries.map((industry, index) => (
+            <Tab key={index} label={industry.title} sx={{
+              fontSize: "24px",
+              fontWeight: "600",
+              color: "#A3AAC1"
+            }} />
+          ))}
+        </Tabs>
+
+        <Box
           sx={{
-            color: "#15171E",
-            maxWidth: "702px",
-            textAlign: "center",
-            margin: "auto",
-            fontSize: "20px",
-            lineHeight: "100%"
+            maxWidth: "1210px",
+            margin: "0 auto",
+            display: "flex",
+            gap: 15
           }}
         >
-          Discover why Next-Gen AI Summit is the must-attend event for AI professionals, innovators, and industry leaders.
-        </Typography>
-
-        <Box sx={{ maxWidth: "1250px", px: 2, py: 4, margin: "auto", position: "relative" }}>
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={1}
-            onSwiper={(swiper) => {
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
-            onSlideChange={(swiper) => {
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
-            onBeforeInit={(swiper) => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-            }}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              600: { slidesPerView: 2 },
-              900: { slidesPerView: 2 },
-              1200: { slidesPerView: 3 },
-            }}
-          >
-            {industries.map((industry, index) => (
-              <SwiperSlide key={index}>
-                <Card
-                  sx={{
-                    borderRadius: 4,
-                    height: "477px",
-                    maxWidth: "400px",
-                    width: "100%",
-                    position: "relative",
-                    color: "#fff",
-                    boxShadow: "0px 4px 20px #3C71F736",
-                    transition: "transform 0.3s ease",
-                    overflow: "hidden",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    marginBottom: "30px",
-                  }}
-                >
-                  <CardContent
-                    sx={{
-                      p: { xs: 2, sm: 3, md: "28px" },
-                    }}
-                  >
-                    <Box
-                      component="img"
-                      src={industry.image}
-                      alt=""
-                      sx={{
-                        width: "100%",
-                        height: "230px",
-                        objectFit: "cover",
-                      }}
-                    />
-
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontWeight: 600,
-                        mb: 1,
-                        mt: 2,
-                        color: "#0A0C10",
-                        textAlign: "center",
-                        fontSize: "32px",
-                      }}
-                    >
-                      {industry.title}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: "#15171E",
-                        fontSize: { xs: "15px", sm: "20px" },
-                        textAlign: "center"
-                      }}
-                    >
-                      {industry.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: { xs: "flex-end", lg: "center" },
-              gap: 2,
-              mt: 2,
-            }}
-          >
-            <IconButton
-              ref={prevRef}
-              disabled={isBeginning}
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                opacity: isBeginning ? 0.5 : 1,
-                cursor: isBeginning ? "not-allowed" : "pointer",
-                "&:hover": {
-                  background: isBeginning
-                    ? "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))"
-                    : "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                },
-              }}
-            >
-              <ArrowBack />
-            </IconButton>
-
-            <IconButton
-              ref={nextRef}
-              disabled={isEnd}
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))",
-                color: "#fff",
-                boxShadow: "0px 8px 30px rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                opacity: isEnd ? 0.5 : 1,
-                cursor: isEnd ? "not-allowed" : "pointer",
-                "&:hover": {
-                  background: isEnd
-                    ? "linear-gradient(135deg, rgba(9, 12, 53, 0.29), rgba(36, 36, 36, 0.9))"
-                    : "linear-gradient(135deg, rgba(9, 12, 53, 0.5), rgba(36, 36, 36, 1))",
-                },
-              }}
-            >
-              <ArrowForward />
-            </IconButton>
-
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 3 }}>
+            <Box sx={{ flex: 1, maxWidth: "492px", maxHeight: "479px" }}>
+              <Typography variant="h6" gutterBottom sx={{color: '#A3AAC1', fontSize: "28px", fontWeight: "700"}}>
+                {industries[activeIndex].title}
+              </Typography>
+              <Typography variant="body1" sx={{color: "#A3AAC1", fontSize: "16px", fontWeight: "400"}}>{industries[activeIndex].description}</Typography>
+            </Box>
           </Box>
+
+          <Box
+            component="img"
+            src={industries[activeIndex].image}
+            alt={industries[activeIndex].title}
+            sx={{ maxWidth: '580px', maxHeight: '479px'}}
+          />
         </Box>
       </Container>
 
@@ -1481,8 +1261,25 @@ const Home = () => {
         </Box>
       </Container> */}
 
-      {/* Why choose us section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%" }}>
+      {/* Our Developemnt process */}
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%", position: "relative", overflow: "hidden", }}>
+        {/* ellipse */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "-100px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "min(600px, 80vw)",
+            height: "min(300px, 30vh)",
+            background: "rgba(80, 124, 236, 0.7)",
+            filter: "blur(180px)",
+            borderRadius: "50%",
+            pointerEvents: "none",
+            zIndex: 1,
+          }}
+        />
+
         <Typography
           ref={headerRef}
           variant="h4"
@@ -1498,113 +1295,10 @@ const Home = () => {
             textAlign: "center"
           }}
         >
-          Why Choose Us
-        </Typography>
-        <Typography
-          sx={{
-            color: "#F3F4F7",
-            maxWidth: "689px",
-            textAlign: "center",
-            margin: "auto",
-            fontSize: "20px",
-            lineHeight: "100%"
-          }}
-        >
-          We don’t just build software - we build smart, scalable, and sustainable digital experiences. Here’s what sets us apart:
+          Our Development Process
         </Typography>
 
-        <Box sx={{ maxWidth: "1250px", px: 2, py: 6, margin: "auto", position: "relative" }}>
-          {accordionData.map((item, index) => (
-            <Box
-              key={index}
-              sx={{
-                backgroundColor: '#121212',
-                borderRadius: '20px',
-                mb: 2,
-                p: "9px",
-                boxShadow: expanded === index
-                  ? '0 0 10px #00ff95'
-                  : '0 0 5px rgba(0, 0, 0, 0.2)',
-                overflow: 'hidden',
-                transition: 'box-shadow 0.3s ease',
-                backgroundImage: isMobile
-                  ? `
-                 radial-gradient(circle at 10% 170%, #37de8d 0%, rgba(0, 0, 0, 0) 40%),
-                 radial-gradient(circle at 90% 160%, #3c71f7 0%, rgba(0, 0, 0, 0) 40%),
-                 linear-gradient(to bottom, #15171e, #15171e)
-               `
-                  : `
-                 radial-gradient(circle at 10% 540%, #37de8d 0%, rgba(0, 0, 0, 0) 40%),
-                 radial-gradient(circle at 90% 500%, #3c71f7 0%, rgba(0, 0, 0, 0) 40%),
-                 linear-gradient(to bottom, #15171e, #15171e)
-               `,
-              }}
-            >
 
-              <Accordion
-                expanded={expanded === index}
-                onChange={handleChange(index)}
-                sx={{
-                  backgroundColor: 'transparent',
-                  boxShadow: 'none',
-                  '&:before': { display: 'none' },
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon sx={{ color: '#00ff95', fontSize: "32px" }} />}
-                  aria-controls="panel-content"
-                  id="panel-header"
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2,
-                    minHeight: 64,
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: 50,
-                      height: 50,
-                      borderRadius: 3,
-                      backgroundColor: '#37de8d',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                      mr: { xs: 2, sm: 4 },
-                    }}
-                  >
-                    <img src={joinusIcon1} alt="" style={{ width: 34, height: 34 }} />
-                  </Box>
-
-                  <Typography
-                    sx={{
-                      fontWeight: 600,
-                      color: '#fff',
-                      fontSize: {
-                        xs: '20px',
-                        sm: '24px',
-                        md: '28px',
-                        lg: '32px',
-                      },
-                      flexGrow: 1,
-                    }}
-                  >
-                    {item.title}
-                  </Typography>
-                </AccordionSummary>
-
-                <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)', mx: 3 }} />
-
-                <AccordionDetails sx={{ color: '#bbb', px: 3, py: 2 }}>
-                  {item.content}
-                </AccordionDetails>
-              </Accordion>
-            </Box>
-
-          ))}
-        </Box>
 
       </Container>
 

@@ -353,7 +353,7 @@ const Careers = () => {
                     maxWidth={false}
                     sx={{
                         py: 6,
-                        maxWidth: "1300px",
+                        maxWidth: "1330px",
                         position: "relative",
                         overflow: "hidden",
                     }}
@@ -390,36 +390,65 @@ const Careers = () => {
                     </Typography>
 
                     <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 4, md: 6 }}>
-
                         {/* Sidebar */}
-                        <Box sx={{ minWidth: { xs: '100%', md: 180 }, backgroundColor: "#15171E", height: "250px", padding: "24px", width: "300px", gap: '8px'}}>
-                            {techStacks.map((tech) => (
-                                <Typography
-                                    key={tech}
-                                    variant="body1"
-                                    fontWeight={selectedStack === tech ? 700 : 500}
-                                    sx={{
-                                        color: selectedStack === tech ? '#17E1F7' : '#A3AAC1',
-                                        cursor: 'pointer',
-                                        mb: 1.5,
-                                        height: '39px',
-                                        alignSelf: 'stretch',
-                                        flexGrow: 0,
-                                        fontFamily: 'Inter',
-                                        fontSize: { xs: '20px', sm: '24px', md: '32px' },
-                                        fontWeight: 'bold',
-                                        textAlign: 'left',
-                                        gap: "16px" 
-                                    }}
-                                    onClick={() => setSelectedStack(tech)}
-                                >
-                                    {tech} &gt;
-                                </Typography>
-                            ))}
+                        <Box
+                            sx={{
+                                minWidth: { xs: '100%', md: 180 },
+                                padding: "16px",
+                                width: "350px",
+                                display: 'flex',
+                                flexDirection: 'column',
+                            }}
+                        >
+                            {[...techStacks].map((tech) => {
+                                const isActive = selectedStack === tech;
+
+                                return (
+                                    <Box
+                                        key={tech}
+                                        sx={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            position: 'relative',
+                                            cursor: 'pointer',
+                                            pl: '12px',
+                                            borderLeft: isActive ? '2px solid #17E1F7' : '2px solid transparent',
+                                            backgroundColor: isActive ? 'transparent' : '#15171E',
+                                            '&:hover': {
+                                                backgroundColor: '#1F2230',
+                                            },
+                                        }}
+                                        onClick={() => setSelectedStack(tech)}
+                                    >
+                                        <Typography
+                                            variant="body1"
+                                            sx={{
+                                                color: isActive ? '#17E1F7' : '#A3AAC1',
+                                                fontFamily: 'Inter',
+                                                fontSize: '28px',
+                                                fontWeight: 700,
+                                                flex: 1,
+                                                textAlign: 'left',
+                                                py: 1.9
+                                            }}
+                                        >
+                                            {tech}
+                                        </Typography>
+                                        {isActive && (
+                                            <Typography
+                                                component="span"
+                                                sx={{ color: '#17E1F7', marginRight: '193px', fontWeight: 600, fontSize: "20px" }}
+                                            >
+                                                &gt;
+                                            </Typography>
+                                        )}
+                                    </Box>
+                                );
+                            })}
                         </Box>
 
                         {/* Job Listings */}
-                        <Stack spacing={1} sx={{ flexGrow: 1, minWidth: 0, maxWidth: "790px", margin: 0 }}>
+                        <Stack spacing={1} sx={{ flexGrow: 1, minWidth: 0, maxWidth: "830px", margin: 0 }}>
                             {filteredJobs.map((job, idx) => (
                                 <Box
                                     key={idx}
@@ -514,7 +543,12 @@ const Careers = () => {
                                                         padding: "2px",
                                                         borderRadius: "16px",
                                                         background: "linear-gradient(90deg, #07B9CE, #3969E7, #7D2AE7)",
-                                                        cursor: "pointer"
+                                                        cursor: "pointer",
+                                                        transition: 'transform 0.3s, box-shadow 0.3s',
+                                                        '&:hover': {
+                                                            transform: 'scale(1.05)',
+                                                            boxShadow: '0 0 12px rgba(77, 7, 206, 0.6)',
+                                                        },
                                                     }}
                                                 >
                                                     <Box
