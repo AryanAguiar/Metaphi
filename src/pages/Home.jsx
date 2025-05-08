@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, Divider, useTheme, useMediaQuery, Tab, Tabs } from "@mui/material";
+import { Container, Box, Button, Typography, Card, CardContent, IconButton, Modal, CardMedia, TextField, Divider, useTheme, useMediaQuery, Tab, Tabs, Stack, Avatar } from "@mui/material";
+import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import { gsap } from "gsap";
 
 
@@ -10,7 +11,7 @@ import heroImg3 from "../images/Blockchain.webp";
 import partner1 from "../images/partner-2.png";
 
 import "./Home.css";
-
+ 
 //swiper and countup 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -44,8 +45,8 @@ import clutchlogo from "../images/clutchlogo.png";
 //industries we serve
 
 import food from "../images/industryimg.png";
-import elearning from  "../images/industryimg.png";
-import elearning2 from  "../images/industryimg.png";
+import elearning from "../images/industryimg.png";
+import elearning2 from "../images/industryimg.png";
 
 //our development process
 const steps = [
@@ -63,6 +64,9 @@ import contactimg from "../images/Website Creator-bro 1.png";
 //form components unused
 import { FastField, Formik, Form, } from "formik";
 import * as Yup from "yup";
+
+//tech stack
+import techstackimg from "../images/techstackimg.png";
 
 const slides = [
   {
@@ -207,7 +211,53 @@ const industries = [
   },
 ];
 
+//tech stacks
+const techCategories = [
+  {
+    title: 'Programming Language',
+    tools: ['JavaScript', 'Python', 'Java', 'CSS', 'SQL', 'TypeScript', 'PHP', 'HTML', 'Kotlin', 'Swift'],
+    img: techstackimg
+  },
+  {
+    title: 'Web Framework',
+    tools: ['React', 'Angular', 'Vue.js', 'Next.js', 'Nuxt.js'],
+  },
+  {
+    title: 'Other Framework',
+    tools: ['Node.js', 'Express', 'Django', 'Spring Boot'],
+  },
+  {
+    title: 'Database',
+    tools: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis'],
+  },
+  {
+    title: 'Platforms',
+    tools: ['AWS', 'Azure', 'Google Cloud', 'Firebase'],
+  },
+  {
+    title: 'Tools',
+    tools: ['Docker', 'Kubernetes', 'GitHub', 'Jenkins'],
+  },
+];
 
+//our development process
+const itemsTop = [
+  { type: "card" },
+  { type: "number", value: 2 },
+  { type: "card" },
+  { type: "number", value: 4 },
+  { type: "card" },
+  { type: "number", value: 6 },
+];
+
+const itemsBottom = [
+  { type: "number", value: 1 },
+  { type: "card" },
+  { type: "number", value: 3 },
+  { type: "card" },
+  { type: "number", value: 5 },
+  { type: "card" },
+];
 
 
 const Home = () => {
@@ -357,6 +407,11 @@ const Home = () => {
   const handleTabChange = (event, newValue) => {
     setActiveIndex(newValue);
   };
+
+  //tech stacks
+  const [selectedStack, setSelectedStack] = useState(techCategories[0].title);
+
+  const activeCategory = techCategories.find((cat) => cat.title === selectedStack);
 
 
   //accordion function
@@ -537,7 +592,7 @@ const Home = () => {
               display: 'flex',
               alignItems: 'center',
               gap: { xs: 2, sm: 3 },
-              justifyContent: {xs: "center", md: "flex-start"}
+              justifyContent: { xs: "center", md: "flex-start" }
             }}>
 
               <Link to="/contact" sx={{ marginLeft: { xs: "0", md: "20px" }, }}>
@@ -989,7 +1044,17 @@ const Home = () => {
       </Container>
 
       {/* industries we serve */}
-      <Container maxWidth={false} disableGutters sx={{ px: 6, py: 7, position: "relative", width: "100%", overflow: "hidden" }}>
+      <Container
+        maxWidth={false}
+        disableGutters
+        sx={{
+          px: { xs: 2, sm: 4, md: 6 },
+          py: { xs: 4, sm: 5, md: 7 },
+          position: "relative",
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
         {/* ellipse */}
         <Box
           sx={{
@@ -1006,6 +1071,8 @@ const Home = () => {
             zIndex: 1,
           }}
         />
+
+        {/* Heading */}
         <Typography
           ref={headerRef}
           variant="h4"
@@ -1018,61 +1085,315 @@ const Home = () => {
             WebkitTextFillColor: "transparent",
             fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "40px" },
             padding: "20px",
-            textAlign: "left"
+            textAlign: "left",
           }}
         >
-          Our Services
+          Industries we serve
         </Typography>
 
-        <Tabs
-          value={activeIndex}
-          onChange={handleTabChange}
-          textColor="white"
-          indicatorColor="primary"
-          sx={{
-            mb: 3,
-            maxWidth: '1100px',
-            width: '100%',
-            ml: 3,
-            '& .MuiTab-root': {
-              minWidth: 'auto', 
-              marginRight: "24px",   
-            },
-          }}
-        >
-          {industries.map((industry, index) => (
-            <Tab key={index} label={industry.title} sx={{
-              fontSize: "24px",
-              fontWeight: "600",
-              color: "#A3AAC1"
-            }} />
-          ))}
-        </Tabs>
+        <Box>
+          {/* Desktop & Tablet: Scrollable Tabs */}
+          <Tabs
+            value={activeIndex}
+            onChange={handleTabChange}
+            textColor="white"
+            indicatorColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            allowScrollButtonsMobile
+            sx={{
+              mb: 3,
+              width: '100%',
+              pl: { sm: 2, md: 3 },
+              display: { xs: 'none', sm: 'flex' },
+              '& .MuiTabs-scroller': {
+                overflowX: 'auto',
+              },
+              '& .MuiTab-root': {
+                minWidth: 'auto',
+                marginRight: { sm: '28px', md: '32px', lg: '36px' },
+                fontSize: { sm: '16px', md: '20px', lg: '24px' },
+                fontWeight: 600,
+                textTransform: 'none',
+                whiteSpace: 'nowrap',
+                px: { sm: 1.5, md: 2 },
+              },
+            }}
+          >
+            {industries.map((industry, index) => (
+              <Tab
+                key={index}
+                label={industry.title}
+                sx={{
+                  color: "#A3AAC1",
+                }}
+              />
+            ))}
+          </Tabs>
 
+          {/* Mobile: Stacked Buttons */}
+          <Stack
+            direction="column"
+            spacing={1.5}
+            sx={{
+              display: { xs: 'flex', sm: 'none' },
+              mb: 3,
+            }}
+          >
+            {industries.map((industry, index) => (
+              <Box
+                key={index}
+                onClick={() => handleTabChange(null, index)}
+                sx={{
+                  px: 2,
+                  py: 1.5,
+                  borderRadius: 1,
+                  backgroundColor: activeIndex === index ? '#1F2230' : '#15171E',
+                  color: activeIndex === index ? '#17E1F7' : '#A3AAC1',
+                  fontWeight: activeIndex === index ? 700 : 500,
+                  fontSize: '16px',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  transition: 'background-color 0.3s',
+                  '&:hover': {
+                    backgroundColor: '#1F2230',
+                  },
+                }}
+              >
+                {industry.title}
+              </Box>
+            ))}
+          </Stack>
+        </Box>
+
+        {/* Content Block */}
         <Box
           sx={{
             maxWidth: "1210px",
             margin: "0 auto",
+            pt: 2,
             display: "flex",
-            gap: 15
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: { xs: 4, sm: 6, md: 8, lg: 10, xl: 15 },
+            alignItems: { xs: 'center', md: "flex-start" },
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 3 }}>
-            <Box sx={{ flex: 1, maxWidth: "492px", maxHeight: "479px" }}>
-              <Typography variant="h6" gutterBottom sx={{color: '#A3AAC1', fontSize: "28px", fontWeight: "700"}}>
-                {industries[activeIndex].title}
-              </Typography>
-              <Typography variant="body1" sx={{color: "#A3AAC1", fontSize: "16px", fontWeight: "400"}}>{industries[activeIndex].description}</Typography>
-            </Box>
+          {/* Text Section */}
+          <Box sx={{ flex: 1, maxWidth: { xs: '100%', md: '492px' } }}>
+            <Typography
+              variant="h6"
+              gutterBottom
+              sx={{
+                color: '#A3AAC1',
+                fontSize: { xs: "22px", sm: "24px", md: "28px" },
+                fontWeight: "700",
+              }}
+            >
+              {industries[activeIndex].title}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                color: "#A3AAC1",
+                fontSize: { xs: "14px", sm: "15px", md: "16px" },
+                fontWeight: "400",
+              }}
+            >
+              {industries[activeIndex].description}
+            </Typography>
           </Box>
 
+          {/* Image Section */}
           <Box
             component="img"
             src={industries[activeIndex].image}
             alt={industries[activeIndex].title}
-            sx={{ maxWidth: '580px', maxHeight: '479px'}}
+            sx={{
+              width: { xs: '100%', sm: '80%', md: '580px' },
+              maxWidth: '100%',
+              height: 'auto',
+              maxHeight: '479px',
+            }}
           />
         </Box>
+      </Container>
+
+      {/* Tech stack */}
+      <Container
+        maxWidth={false}
+        disableGutters
+        sx={{
+          px: { xs: 2, sm: 4, md: 6 },
+          py: { xs: 4, sm: 5, md: 7 },
+          position: "relative",
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
+        {/* ellipse */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "-100px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "min(600px, 80vw)",
+            height: "min(300px, 30vh)",
+            background: "rgba(80, 124, 236, 0.7)",
+            filter: "blur(180px)",
+            borderRadius: "50%",
+            pointerEvents: "none",
+            zIndex: 1,
+          }}
+        />
+
+        {/* Heading */}
+        <Typography
+          ref={headerRef}
+          variant="h4"
+          className="heading"
+          sx={{
+            fontWeight: "800",
+            mb: 2,
+            background: "#F3F4F7",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            fontSize: { xs: "20px", sm: "24px", md: "29px", lg: "36px", xl: "40px" },
+            padding: "20px",
+            textAlign: "left",
+          }}
+        >
+          Tech Stack
+        </Typography>
+
+        {/* Description */}
+        <Typography
+          sx={{
+            fontSize: { xs: '14px', sm: '16px' },
+            color: '#A3AAC1',
+            mb: 4,
+            maxWidth: '1200px',
+          }}
+        >
+          We don’t just build software—we craft scalable, future-ready digital ecosystems. Our robust tech stack is a testament to our commitment to versatility, performance, and innovation.
+          We work with a wide array of modern programming languages, frameworks, and tools to ensure we deliver tailored solutions that match the unique needs of every project. From backend architecture to sleek user interfaces, we use the right tools for the job—no bloat, no fluff.
+        </Typography>
+
+        {/* Stack Layout */}
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          spacing={{ xs: 2, md: 4 }}
+        >
+          {/* Sidebar */}
+          <Box
+            sx={{
+              minWidth: { xs: '100%', md: 180 },
+              width: { xs: '100%' },
+              maxWidth: "437px",
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            {techCategories.map((category) => {
+              const isActive = selectedStack === category.title;
+              return (
+                <Box
+                  key={category.title}
+                  onClick={() => setSelectedStack(category.title)}
+                  sx={{
+                    cursor: 'pointer',
+                    pl: 2,
+                    alignItems: "center",
+                    py: 1.5,
+                    display: "flex",
+                    borderLeft: isActive ? '2px solid #17E1F7' : '2px solid transparent',
+                    backgroundColor: isActive ? 'transparent' : '#15171E',
+                    '&:hover': {
+                      backgroundColor: '#1F2230',
+                    },
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: isActive ? '#17E1F7' : '#A3AAC1',
+                      fontSize: '28px',
+                      fontWeight: isActive ? 700 : 500,
+                    }}
+                  >
+                    {category.title}
+                  </Typography>
+                  {isActive && (
+                    <Typography
+                      component="span"
+                      sx={{ color: '#17E1F7', fontWeight: 600, fontSize: "20px", px: 2 }}
+                    >
+                      &gt;
+                    </Typography>
+                  )}
+                </Box>
+              );
+            })}
+          </Box>
+
+
+          {/* Tool Grid */}
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: {
+                xs: 'repeat(2, 1fr)',
+                sm: 'repeat(3, 1fr)',
+                md: 'repeat(4, 1fr)',
+              },
+              gap: { xs: 2, sm: 3, md: 4 },
+              rowGap: { xs: 3, sm: 4, md: 5 },
+              gridAutoRows: 'min-content',
+              flex: 1,
+              alignItems: 'start',
+            }}
+          >
+            {activeCategory?.tools.map((tool, index) => (
+              <Box
+                key={index}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Box
+                  sx={{
+                    backgroundColor: '#161A26',
+                    borderRadius: 2,
+                    width: '80px',
+                    height: '80px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'transform 0.3s, box-shadow 0.3s',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                      boxShadow: '0 0 12px rgba(23, 225, 247, 0.6)',
+                    },
+                  }}
+                >
+                  <img
+                    src={techstackimg}
+                    alt={tool}
+                    style={{
+                      maxWidth: '60%',
+                      maxHeight: '60%',
+                      objectFit: 'contain',
+                    }}
+                  />
+                </Box>
+                <Typography sx={{ fontSize: '18px', mt: 1, color: '#A3AAC1', textAlign: 'center' }}>
+                  {tool}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </Stack>
       </Container>
 
       {/* Projects section */}
@@ -1262,7 +1583,17 @@ const Home = () => {
       </Container> */}
 
       {/* Our Developemnt process */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 9, position: "relative", width: "100%", position: "relative", overflow: "hidden", }}>
+      <Container
+        maxWidth={false}
+        disableGutters
+        sx={{
+          px: 0,
+          py: 9,
+          position: "relative",
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
         {/* ellipse */}
         <Box
           sx={{
@@ -1290,20 +1621,146 @@ const Home = () => {
             WebkitBackgroundClip: "text",
             color: "#F3F4F7",
             fontWeight: 800,
-            fontSize: { xs: "20px", sm: "24px", md: "39px", lg: "46px", xl: "64px" },
+            fontSize: {
+              xs: "20px",
+              sm: "24px",
+              md: "39px",
+              lg: "46px",
+              xl: "64px",
+            },
             padding: "20px",
-            textAlign: "center"
+            textAlign: "center",
           }}
         >
           Our Development Process
         </Typography>
 
+        <Box display="flex" flexDirection="column" alignItems="center" gap={4} p={4}>
+          {/* Top Row */}
+          <Box display="flex" justifyContent="center" alignItems="center" sx={{ marginLeft: "-25px" }}>
+            {itemsTop.map((item, index) =>
+              item.type === "card" ? (
+                <Card
+                  key={`top-${index}`} // Corrected key syntax
+                  sx={{
+                    width: 200,
+                    height: 200,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    bgcolor: "grey.900",
+                    color: "white",
+                    borderRadius: 2,
+                    mx: 1,
+                  }}
+                >
+                  <CardContent sx={{ textAlign: "center" }}>
+                    <Avatar
+                      sx={{
+                        bgcolor: "purple",
+                        width: 56,
+                        height: 56,
+                        mx: "auto",
+                        mb: 2,
+                      }}
+                    >
+                      <EmojiObjectsIcon />
+                    </Avatar>
+                    <Typography variant="subtitle1" fontWeight="bold">
+                      Discovery
+                    </Typography>
+                    <Typography variant="body2">
+                      Understand the problem and define clear requirements.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ) : (
+                <Box
+                  key={`top-${index}`} // Corrected key syntax
+                  sx={{
+                    width: 150,
+                    height: 200,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "white",
+                    borderRadius: 2,
+                    mx: 1,
+                  }}
+                >
+                  <Typography variant="h1" fontWeight="bold" fontSize={120}>
+                    {item.value}
+                  </Typography>
+                </Box>
+              )
+            )}
+          </Box>
 
-
+          {/* Bottom Row */}
+          <Box display="flex" justifyContent="center" alignItems="center" sx={{ marginRight: "-25px" }}>
+            {itemsBottom.map((item, index) =>
+              item.type === "card" ? (
+                <Card
+                  key={`bottom-${index}`} // Corrected key syntax
+                  sx={{
+                    width: 200,
+                    height: 200,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    bgcolor: "grey.900",
+                    color: "white",
+                    borderRadius: 2,
+                    mx: 1,
+                  }}
+                >
+                  <CardContent sx={{ textAlign: "center" }}>
+                    <Avatar
+                      sx={{
+                        bgcolor: "purple",
+                        width: 56,
+                        height: 56,
+                        mx: "auto",
+                        mb: 2,
+                      }}
+                    >
+                      <EmojiObjectsIcon />
+                    </Avatar>
+                    <Typography variant="subtitle1" fontWeight="bold">
+                      Discovery
+                    </Typography>
+                    <Typography variant="body2">
+                      Understand the problem and define clear requirements.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ) : (
+                <Box
+                  key={`bottom-${index}`} // Corrected key syntax
+                  sx={{
+                    width: 150,
+                    height: 200,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "white",
+                    borderRadius: 2,
+                    mx: 1,
+                  }}
+                >
+                  <Typography variant="h1" fontWeight="bold" fontSize={120}>
+                    {item.value}
+                  </Typography>
+                </Box>
+              )
+            )}
+          </Box>
+        </Box>
       </Container>
 
+
       {/* Testimonials section */}
-      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 20, position: "relative", width: "100%" }}>
+      <Container maxWidth={false} disableGutters sx={{ px: 0, py: 10, position: "relative", width: "100%" }}>
         <Typography
           ref={headerRef}
           variant="h4"
@@ -1343,37 +1800,36 @@ const Home = () => {
           maxWidth: "none",
           minHeight: "100%",
           padding: "20px",
-          background: "#F3F4F7",
+          background: 'linear-gradient(to bottom, #00000000 0%, #000000 40%, #194CCD 70%, #6087EC 90%, #EDF1FD 100%)',
           mt: 12
         }}
       >
         <Box sx={{
           display: "flex",
-          flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
           margin: "auto",
           maxWidth: "1255px",
           paddingTop: 7,
         }}>
-          {/* Left Side - Text Content */}
-          <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" }, padding: "15px", maxWidth: "602px" }}>
+
+          <Box sx={{ flex: 1, textAlign: 'center', padding: "15px", maxWidth: "702px", }}>
             <Typography
               className="heading"
               sx={{
                 fontWeight: "800",
                 mb: 2,
-                color: "#0A0C10",
+                color: "white",
                 fontSize: { xs: "27px", sm: "34px", md: "35px", lg: "56px", xl: "64px" },
               }}
             >
-              Let’s Build Something Great Together
+              Let’s <span style={{ color: "#194CCD" }}>Build</span> Something <span style={{ color: "#194CCD" }}>Great</span> Together
             </Typography>
 
             <Box sx={{
               mt: { xs: 4, md: 4, lg: 5 },
               display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
+              justifyContent: 'center',
               alignItems: 'center',
               gap: { xs: 2, sm: 3 },
             }}>
@@ -1382,9 +1838,9 @@ const Home = () => {
                   variant="contained"
                   sx={{
                     fontSize: { xs: '12px', sm: '13px', lg: '16px' },
-                    background: "#15171E",
-                    color: "white",
-                    borderRadius: "999px",
+                    background: "#F9FAFB",
+                    color: "black",
+                    borderRadius: "10px",
                     fontWeight: 600,
                     textTransform: "none",
                     px: { xs: 2, sm: 3, lg: 5 },
@@ -1397,73 +1853,12 @@ const Home = () => {
                     },
                   }}
                 >
-                  Contact Us
+                  Get Your Project Started
                 </Button>
               </Link>
-
-              <Link to="/contact" sx={{ marginLeft: { xs: "0", md: "20px" } }}>
-                <Button
-                  variant="contained"
-                  sx={{
-                    fontSize: { xs: '12px', sm: '13px', lg: '16px' },
-                    background: "#15171E",
-                    color: "white",
-                    borderRadius: "999px",
-                    fontWeight: 600,
-                    textTransform: "none",
-                    px: { xs: 2, sm: 3, lg: 5 },
-                    py: 1,
-                    transition: "all 0.3s ease",
-                    width: { xs: '100%', sm: 'auto' },
-                    "&:hover": {
-                      boxShadow: "0px 6px 24px rgba(143, 145, 144, 0.5)",
-                      transform: "translateY(-1px)",
-                    },
-                  }}
-                >
-                  Explore More
-                </Button>
-              </Link>
-            </Box>
-
-
-          </Box>
-
-          {/* Right Side */}
-          <Box
-            sx={{
-              flex: 1,
-              display: "flex",
-              justifyContent: { xs: "center", md: "flex-end" },
-              alignItems: "center",
-
-            }}
-          >
-            <Box
-              sx={{
-                width: { xs: "300px", sm: "400px", md: "500px", lg: "600px" },
-                height: { xs: "300px", sm: "350px", md: "400px", lg: "450px" },
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: 2,
-              }}
-            >
-              <Box
-                component="img"
-                src={contactimg}
-                alt="Slide Image"
-                sx={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "contain",
-                  display: "block",
-                }}
-              />
             </Box>
           </Box>
         </Box>
-
       </Container>
 
       {/* <Container ref={containerRef} maxWidth={false} disableGutters sx={{ px: 0, py: 0, position: "relative", width: "100%" }}>
